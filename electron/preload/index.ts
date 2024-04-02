@@ -2,8 +2,8 @@ import { ipcRenderer, contextBridge } from "electron";
 
 // --------- Expose some API to the Renderer process ---------
 contextBridge.exposeInMainWorld("ipcRenderer", {
-  addPost: (post) => ipcRenderer.send("add-post", post),
-  getPosts: () => ipcRenderer.invoke("get-posts"),
+  addWorkflow: (workflow) => ipcRenderer.send("add-workflow", workflow),
+  getWorkflows: () => ipcRenderer.invoke("get-workflows"),
   on(...args: Parameters<typeof ipcRenderer.on>) {
     const [channel, listener] = args;
     return ipcRenderer.on(channel, (event, ...args) =>

@@ -1,17 +1,42 @@
 import { useState } from "react";
 import UpdateElectron from "@/components/update";
-import logoVite from "./assets/logo-vite.svg";
-import logoElectron from "./assets/logo-electron.svg";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+
 import "./App.css";
 import "../app/globals.css";
 import { Dashboard } from "./views/Dashboard";
+import Workflow from "./views/Workflow";
+import Flow from "./views/Flow";
 
+// const router = createBrowserRouter([
+//   {
+//     path: "/",
+//     element: <App />,
+//     // errorElement: <ErrorPage />,
+//     children: [
+//       {
+//         path: "flow-edit",
+//         element: <Flow />,
+//       },
+//     ],
+//   },
+// ]);
 function App() {
   const [count, setCount] = useState(0);
   return (
+    // <BrowserRouter>
     <div className="flex">
-      <Dashboard />
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Dashboard />}>
+            <Route index element={<Workflow />} />
+            <Route path="/workflow-edit" element={<Flow />} />
+          </Route>
+        </Routes>
+      </BrowserRouter>
+      {/* <UpdateElectron /> */}
     </div>
+    // </BrowserRouter>
   );
   // return (
   //   <div className='App'>

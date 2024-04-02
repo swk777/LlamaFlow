@@ -46,18 +46,51 @@ let win: BrowserWindow | null = null;
 const preload = join(__dirname, "../preload/index.mjs");
 const url = process.env.VITE_DEV_SERVER_URL;
 const indexHtml = join(process.env.DIST, "index.html");
-const defaultData = { posts: [{ a: 1 }] };
-JSONFilePreset("db.json", defaultData)
+const defaultData = {
+  workflows: [
+    {
+      id: "1",
+      name: "hello world",
+      category: "draft",
+      lastModified: "2023-07-12 10:42 AM",
+    },
+    {
+      id: "2",
+      name: "hello world",
+      category: "draft",
+      lastModified: "2023-07-12 10:42 AM",
+    },
+    {
+      id: "3",
+      name: "hello world",
+      category: "draft",
+      lastModified: "2023-07-12 10:42 AM",
+    },
+    {
+      id: "4",
+      name: "hello world",
+      category: "draft",
+      lastModified: "2023-07-12 10:42 AM",
+    },
+    {
+      id: "5",
+      name: "hello world",
+      category: "draft",
+      lastModified: "2023-07-12 10:42 AM",
+    },
+  ],
+};
+JSONFilePreset("test.json", defaultData)
   .then((db) => {
-    ipcMain.on("add-post", async (event, post) => {
+    ipcMain.on("add-workflow", async (event, post) => {
       await db.read();
-      db.data.posts.push(post);
+      db.data.workflows.push(post);
       await db.write();
     });
 
-    ipcMain.handle("get-posts", async () => {
+    ipcMain.handle("get-workflows", async () => {
       await db.read();
-      return db.data.posts;
+      return db.data.workflows;
     });
   })
   .catch(console.log);
