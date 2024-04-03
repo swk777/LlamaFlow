@@ -6,7 +6,7 @@ import "./App.css";
 import "../app/globals.css";
 import { Dashboard } from "./views/Dashboard";
 import Workflow from "./views/Workflow";
-import Flow from "./views/Flow";
+import FlowEdit from "./views/FlowEdit";
 
 // const router = createBrowserRouter([
 //   {
@@ -30,7 +30,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Dashboard />}>
             <Route index element={<Workflow />} />
-            <Route path="/workflow-edit" element={<Flow />} />
+            <Route path="/workflow-edit" element={<FlowEdit />} />
           </Route>
         </Routes>
       </BrowserRouter>

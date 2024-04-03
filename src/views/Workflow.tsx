@@ -13,16 +13,15 @@ import React from "react";
 import { Card, CardContent, CardFooter } from "@/components/ui/card";
 import WorkflowList from "./WorkflowList";
 import { createBrowserRouter, useNavigate } from "react-router-dom";
-import Flow from "./Flow";
 
 type Props = {};
 
 export default function Workflow({}: Props) {
   let navigate = useNavigate();
   return (
-    <main className="grid flex-1 items-start gap-4 p-4 sm:px-6 sm:py-0 md:gap-8">
+    <main className="flex-1 items-start gap-4 p-4 sm:px-6 sm:py-0 md:gap-8">
       <div className="flex items-center">
-        <div className="ml-auto flex items-center gap-2">
+        <div className="ml-auto flex items-center gap-2 mt-4">
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <Button variant="outline" size="sm" className="h-7 gap-1">
@@ -60,7 +59,7 @@ export default function Workflow({}: Props) {
           </Button>
         </div>
       </div>
-      <Card className="p-4">
+      <Card className="p-4 mt-10">
         <CardContent>
           <WorkflowList />
         </CardContent>
