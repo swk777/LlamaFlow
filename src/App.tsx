@@ -7,6 +7,8 @@ import "../app/globals.css";
 import { Dashboard } from "./views/Dashboard";
 import Workflow from "./views/Workflow";
 import FlowEdit from "./views/FlowEdit";
+import { DndProvider } from "react-dnd";
+import { HTML5Backend } from "react-dnd-html5-backend";
 
 // const router = createBrowserRouter([
 //   {
@@ -22,20 +24,22 @@ import FlowEdit from "./views/FlowEdit";
 //   },
 // ]);
 function App() {
-  const [count, setCount] = useState(0);
   return (
     // <BrowserRouter>
     <div className="flex">
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Dashboard />}>
-            <Route index element={<Workflow />} />
-            <Route path="/workflow-edit" element={<FlowEdit />} />
-          </Route>
-        </Routes>
-      </BrowserRouter>
-      {/* <UpdateElectron /> */}
+      <DndProvider backend={HTML5Backend}>
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<Dashboard />}>
+              <Route index element={<Workflow />} />
+              <Route path="/workflow-edit" element={<FlowEdit />} />
+            </Route>
+          </Routes>
+        </BrowserRouter>
+        {/* <UpdateElectron /> */}
+      </DndProvider>
     </div>
+
     // </BrowserRouter>
   );
   // return (

@@ -1,0 +1,9 @@
+.container {
+    overflow: hidden;
+    .header {
+        border-bottom:1px solid var(--color-grey-400);
+    }
+    .body {
+        flex-wrap: wrap;
+    }
+}

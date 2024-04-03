@@ -1,0 +1,5 @@
+:global {
+    .ant-select .ant-select-selection--multiple::before {
+        display: none;
+    }
+}

@@ -1,8 +1,12 @@
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
+import { useDrag, DndProvider, useDrop } from "react-dnd";
+// import { HTML5Backend } from "react-dnd-html5-backend";
+
+// import CFGContext from "@/node/cfg/CFGContext";
+import Configuration from "@/node/cfg/Configuration";
 import { IconDeviceFloppy } from "@tabler/icons-react";
-import { PlusCircle } from "lucide-react";
-import { useCallback, useEffect } from "react";
+import { useCallback, useContext, useEffect, useState } from "react";
 import ReactFlow, {
   MiniMap,
   Controls,
@@ -13,10 +17,11 @@ import ReactFlow, {
 } from "reactflow";
 
 import "reactflow/dist/style.css";
+import Nodelet, { ItemTypes } from "./Nodelet";
 
 const initialNodes = [
-  { id: "1", position: { x: 0, y: 0 }, data: { label: "1" } },
-  { id: "2", position: { x: 0, y: 100 }, data: { label: "2" } },
+  { id: "1", position: { x: 20, y: 20 }, data: { label: "1" } },
+  { id: "2", position: { x: 20, y: 100 }, data: { label: "2" } },
 ];
 
 const initialEdges = [{ id: "e1-2", source: "1", target: "2" }];
@@ -24,16 +29,27 @@ const initialEdges = [{ id: "e1-2", source: "1", target: "2" }];
 function FlowEdit() {
   const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
   const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);
-  // useEffect(() => {
-  //   setTimeout(() => {
-  //     window.ipcRenderer.runNodeCode("这是传给Node.js的参数");
-  //   }, 1000);
-  // }, []);
+  const [nodelets, setNodelets] = useState([]);
+  useEffect(() => {
+    window.ipcRenderer.getNodelets().then(setNodelets);
+  }, []);
+  const [{ isOver }, drop] = useDrop(
+    () => ({
+      accept: ItemTypes.KNIGHT,
+      drop: () => {
+        console.log("drop");
+      },
+      collect: (monitor) => ({
+        isOver: !!monitor.isOver(),
+      }),
+    })
+    // [x, y]
+  );
   const onConnect = useCallback(
     (params) => setEdges((eds) => addEdge(params, eds)),
     [setEdges]
   );
-
+  // const { getTargetCFGClass } = useContext(CFGContext);
   return (
     <div className="flex flex-col flex-1">
       <div className="flex flex-row justify-between mx-10 my-2">
@@ -50,10 +66,14 @@ function FlowEdit() {
         </Button>
       </div>
       <Separator className=" " />
-      <div className="flex flex-1">
-        <aside className="w-28 py-4">sdads</aside>
-        <Separator orientation="vertical" className="ml-6" />
-        <div className="relative flex flex-1">
+      <div className="flex flex-1 relative">
+        <aside className="w-36 py-4 flex flex-col ">
+          {nodelets.map((nodelet) => (
+            <Nodelet nodelet={nodelet} key={nodelet.id} />
+          ))}
+        </aside>
+        <Separator orientation="vertical" />
+        <div className="relative flex flex-1" ref={drop}>
           <ReactFlow
             nodes={nodes}
             edges={edges}
@@ -66,6 +86,37 @@ function FlowEdit() {
             <Controls />
             <Background />
           </ReactFlow>
+        </div>
+        <div
+          style={{
+            // height: "100%",
+            // width: "90%",
+            // margin: "0 auto",
+            minWidth: 300,
+            display: "none",
+          }}
+          className="absolute bottom-0 top-0 right-0 bg-white p-4  border-t"
+        >
+          <Configuration
+            key={1}
+            definitions={[
+              {
+                label: "string",
+                type: "LABEL",
+                placeholder: "string",
+                name: "12",
+              },
+              {
+                name: "23",
+                fieldName: "string",
+                label: "string",
+                type: "STRING",
+                placeholder: "string",
+              },
+            ]}
+            style={{ padding: "20px 0" }}
+            // getCustomCFGClass={getTargetCFGClass}
+          />
         </div>
       </div>
     </div>
