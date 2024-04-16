@@ -9,7 +9,7 @@ export default function useDynamicSource(
   const { getValue } = useContext(NamespaceContext);
   // 1. 在定义里声明了 from 同时未声明 labels，说明需要动态获取
   // 2. 如果在 model 里定义了 labels，则不需要使用动态值，from 可以作为其他作用使用
-  if (defModel.from && !defModel.labels)
-    return getValue(defModel.from) || empty;
+  // if (defModel.from && !defModel.labels)
+  //   return getValue(defModel.from) || empty;
   return defModel;
 }

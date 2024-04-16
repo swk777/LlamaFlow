@@ -6,9 +6,9 @@ import React, {
   useState,
   useRef,
 } from "react";
-// import { Input, Message } from '@guandata/design'
+import { Input } from "@mantine/core";
 import DefContext, { DISABLED_FIELDS_PATH } from "../DefContext";
-import NamespaceContext from "../NamespaceContext";
+// import NamespaceContext from "../NamespaceContext";
 import useDef, { useDependOnMap } from "../useDef";
 
 // import { getNodeText } from "../../../constants/resource";
@@ -17,7 +17,7 @@ import {
   ICFGDefinitionBase,
   ICFGDependOnMap,
 } from "@/type/cfgDefinition";
-import { Input } from "@/components/ui/input";
+// import { Input } from "@/components/ui/input";
 
 interface ICFGString extends ICFGDefinitionBase {
   model?: {
@@ -43,42 +43,47 @@ function CFGString({
   const [inputValue, setInputValue] = useState(fv);
 
   const { getFieldValue, config } = useContext(DefContext);
-  const {
-    outside: { allTasks = {} },
-  } = useContext(NamespaceContext);
+  // const {
+  //   outside: { allTasks = {} },
+  // } = useContext(NamespaceContext);
 
   const disableFields = getFieldValue(DISABLED_FIELDS_PATH) || [];
   const disable = disableFields.includes(def.fieldName);
 
-  const { unit, disabledOnMap, clearOnDisabled, maxLength, checkDuplicated } =
-    def.model || {};
+  const { unit, disabledOnMap, clearOnDisabled, maxLength } = def.model || {};
   let formatter = null;
   if (unit) {
     formatter = (v): string => `${v}${unit}`;
   }
   const onChange = useCallback(
     (e): void => {
-      if (checkDuplicated !== true) updateFv(e.target.value);
+      updateFv(e.currentTarget.value);
       setInputValue(e.target.value);
     },
-    [updateFv, checkDuplicated]
+    [updateFv]
   );
   const onBlur = useCallback(
     (e) => {
-      if (checkDuplicated !== true) return;
-      if (e.target.value === "") {
+      // if (checkDuplicated !== true) return;
+      console.log(def);
+      console.log(e.target.value === "", def.required);
+      if (e.target.value === "" && def.required) {
+        // notifications.show({
+        //   title: "Check Fail",
+        //   message: `${def.placeholder} can not be empty`,
+        // });
         // Message.warning(`${getNodeText(config.type)}名称为空`);
         return;
       }
-      if (
-        allTasks.some((t) => t.id !== config.id && t.name === e.target.value)
-      ) {
-        // Message.warning(`${getNodeText(config.type)}名称不能重复！`);
-        return;
-      }
+      // if (
+      //   allTasks.some((t) => t.id !== config.id && t.name === e.target.value)
+      // ) {
+      //   // Message.warning(`${getNodeText(config.type)}名称不能重复！`);
+      //   return;
+      // }
       updateFv(e.target.value);
     },
-    [updateFv, checkDuplicated, allTasks, config]
+    [updateFv, config]
   );
   const [hasDisabledOn, fullfilled] = useDependOnMap(disabledOnMap);
   const disabled = hasDisabledOn && fullfilled;

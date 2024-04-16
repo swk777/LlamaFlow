@@ -1,16 +1,16 @@
 import { ConfigurationType } from "../cfg-type";
 
 import CFGString from "./CFGString";
-// import CFGNumber from "./CFGNumber";
+import CFGNumber from "./CFGNumber";
 // import CFGSwitch from "./CFGSwitch";
-// import CFGCheckbox from "./CFGCheckbox";
+import CFGCheckbox from "./CFGCheckbox";
 // import CFGCheckboxGroup from "./CFGCheckboxGroup";
 // import CFGRadioGroup from "./CFGRadioGroup";
 // import CFGList from "./CFGList";
 // import CFGMap from "./CFGMap";
-// import CFGValueChooser from "./CFGValueChooser";
+import CFGValueChooser from "./CFGValueChooser";
 // import CFGMultipleValueChooser from "./CFGMultipleValueChooser";
-// import CFGText from "./CFGText";
+import CFGTextarea from "./CFGTextarea";
 // import CFGTextCode from "./CFGTextCode";
 // import CFGDivider from "./CFGDivider";
 // import CFGListBean from "./CFGListBean";
@@ -31,10 +31,12 @@ export function getTargetCFGClass(def) {
       return CFGString;
     case ConfigurationType.LABEL:
       return CFGLabel;
-    // case ConfigurationType.NUMBER:
-    //   return CFGNumber;
-    // case ConfigurationType.BOOLEAN:
-    //   return CFGCheckbox;
+    case ConfigurationType.VALUE_CHOOSER:
+      return CFGValueChooser;
+    case ConfigurationType.NUMBER:
+      return CFGNumber;
+    case ConfigurationType.BOOLEAN:
+      return CFGCheckbox;
     // case ConfigurationType.BOOLEAN_SWITCH:
     //   return CFGSwitch;
     // case ConfigurationType.DEBOUNCE_STRING:
@@ -45,8 +47,6 @@ export function getTargetCFGClass(def) {
     //       return CFGRadioGroup;
     //     case ConfigurationType.CHECKBOX_GROUP:
     //       return CFGCheckboxGroup;
-    //     case ConfigurationType.VALUE_CHOOSER:
-    //       return CFGValueChooser;
     //     case ConfigurationType.MULTIPLE_VALUE_CHOOSER:
     //       return CFGMultipleValueChooser;
     //     case ConfigurationType.LIST:
@@ -72,8 +72,8 @@ export function getTargetCFGClass(def) {
     //   return CFGList;
     // case ConfigurationType.MAP:
     //   return CFGMap;
-    // case ConfigurationType.TEXT:
-    //   return CFGText;
+    case ConfigurationType.TEXT_AREA:
+      return CFGTextarea;
     // case ConfigurationType.TEXT_CODE:
     //   return CFGTextCode;
     // case ConfigurationType.SQL:

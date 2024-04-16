@@ -63,10 +63,9 @@ export function removeRedundantConfig(
   if (!definitions || definitions.length === 0) {
     return config;
   }
-  const [needKeepDefs = [], needRemoveDefs = []] = rPartition(
-    (def) => isDefVisibleOnConfig(def, config),
-    definitions
-  );
+  const [needKeepDefs = [], needRemoveDefs = []] = rPartition((def) => {
+    return isDefVisibleOnConfig(def, config);
+  }, definitions);
   return getNewState(config, (draft) => {
     needRemoveDefs.forEach((def) => {
       if (
@@ -115,7 +114,9 @@ export function genDefContextValue(
   };
   return {
     config,
-    isDefVisible: (def): boolean => isDefVisibleOnConfig(def, config),
+    isDefVisible: (def): boolean => {
+      return isDefVisibleOnConfig(def, config);
+    },
     getFieldValue: (fieldName): TSFixMe => _get(config, fieldName),
     updateConfig: (fieldName, value): void =>
       batchUpdateConfig([fieldName], [value]),

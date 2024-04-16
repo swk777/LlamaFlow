@@ -4,71 +4,52 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import "./App.css";
 import "../app/globals.css";
+import "@mantine/core/styles.css";
+import "@mantine/notifications/styles.css";
 import { Dashboard } from "./views/Dashboard";
 import Workflow from "./views/Workflow";
 import FlowEdit from "./views/FlowEdit";
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
+import { createTheme, MantineProvider } from "@mantine/core";
+import { AppContextProvider } from "@/context/AppContext";
+import { ReactFlowProvider } from "reactflow";
+import ChatWorkflow from "./views/ChatWorkflow";
+import { Notifications } from "@mantine/notifications";
 
-// const router = createBrowserRouter([
-//   {
-//     path: "/",
-//     element: <App />,
-//     // errorElement: <ErrorPage />,
-//     children: [
-//       {
-//         path: "flow-edit",
-//         element: <Flow />,
-//       },
-//     ],
-//   },
-// ]);
+const theme = createTheme({
+  /** Put your mantine theme override here */
+});
+
 function App() {
   return (
-    // <BrowserRouter>
-    <div className="flex">
-      <DndProvider backend={HTML5Backend}>
-        <BrowserRouter>
-          <Routes>
-            <Route path="/" element={<Dashboard />}>
-              <Route index element={<Workflow />} />
-              <Route path="/workflow-edit" element={<FlowEdit />} />
-            </Route>
-          </Routes>
-        </BrowserRouter>
-        {/* <UpdateElectron /> */}
-      </DndProvider>
-    </div>
-
-    // </BrowserRouter>
+    <MantineProvider theme={theme}>
+      <div className="flex">
+        <AppContextProvider>
+          <DndProvider backend={HTML5Backend}>
+            <BrowserRouter>
+              <Routes>
+                <Route path="/" element={<Dashboard />}>
+                  <Route index element={<Workflow />} />
+                  <Route
+                    path="/workflow-edit/:workflowId"
+                    element={
+                      <ReactFlowProvider>
+                        <FlowEdit />
+                      </ReactFlowProvider>
+                    }
+                  />
+                  <Route path="/chat/:workflowId" element={<ChatWorkflow />} />
+                </Route>
+              </Routes>
+            </BrowserRouter>
+            {/* <UpdateElectron /> */}
+          </DndProvider>
+        </AppContextProvider>
+      </div>
+      <Notifications position="top-right" />
+    </MantineProvider>
   );
-  // return (
-  //   <div className='App'>
-  //     <div className='logo-box'>
-  //       <a href='https://github.com/electron-vite/electron-vite-react' target='_blank'>
-  //         <img src={logoVite} className='logo vite' alt='Electron + Vite logo' />
-  //         <img src={logoElectron} className='logo electron' alt='Electron + Vite logo' />
-  //       </a>
-  //     </div>
-  //     <h1>Electron + Vite + React</h1>
-  //     <div className='card'>
-  //       <button onClick={() => setCount((count) => count + 1)}>
-  //         count is {count}
-  //       </button>
-  //       <p>
-  //         Edit <code>src/App.tsx</code> and save to test HMR
-  //       </p>
-  //     </div>
-  //     <p className='read-the-docs'>
-  //       Click on the Electron + Vite logo to learn more
-  //     </p>
-  //     <div className='flex-center'>
-  //       Place static files into the<code>/public</code> folder <img style={{ width: '5em' }} src='./node.svg' alt='Node logo' />
-  //     </div>
-
-  //     <UpdateElectron />
-  //   </div>
-  // )
 }
 
 export default App;

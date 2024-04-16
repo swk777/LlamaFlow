@@ -1,12 +1,14 @@
-import R from "ramda";
+import * as R from "ramda";
 import _set from "lodash/set";
 import _get from "lodash/get";
 import { ConfigurationType as CT } from "./cfg-type";
 
-import { IConnect, ITaskStatus, ITask } from "../../components/react-dag/type";
-import { PROCESS_TYPE } from "../../constants/tasks/task";
 import { getNewState } from "@/utils/state";
 import { ICFGDefinitionBase, ICFGModelLogicSwitch } from "@/type/cfgDefinition";
+import { IConnect, ITask, ITaskStatus } from "@/type/dag";
+import { PROCESS_TYPE } from "@/constants/dag";
+import { InternalNodeLets } from "@/constants/initialData";
+import { Nodelet } from "@/type/nodelet";
 
 const concatPath =
   (prefix: string) =>
@@ -94,7 +96,7 @@ export function configValueArrayToMap(config) {
 export function configValueMapToArray(task) {
   if (
     task &&
-    (task.type === "PLUGIN" || task.type === PROCESS_TYPE.AI_PLUGIN)
+    (task.type === "PLUGIN" || task.type === PROCESS_TYPe.AI_PLUGIN)
   ) {
     return getNewState(task, (draft) => {
       const mapV = _get(draft, pluginConfigPath);
@@ -206,3 +208,14 @@ export function updatePreTaskScheduleTypes(
   }
   return finalTaskStatus;
 }
+
+// const getNodeTypes = () => {
+//   const nodeTypes = {}
+//   InternalNodeLets.forEach(nodelet => {
+//     nodeTypes[nodelet.id] =
+//   })
+// }
+
+export const getFlowNodeAttr = (node: Nodelet) => {
+  // const nodelets =
+};

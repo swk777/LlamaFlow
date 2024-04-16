@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import {
   Card,
   CardContent,
@@ -32,13 +32,14 @@ import {
   IconPencil,
   IconPlayerPlay,
 } from "@tabler/icons-react";
+import { AppContext } from "@/context/AppContext";
+import { useNavigate } from "react-router-dom";
+
 type Props = {};
 
 export default function WorkflowList({}: Props) {
-  const [workflows, setWorkflows] = useState([]);
-  useEffect(() => {
-    window.ipcRenderer.getWorkflows().then(setWorkflows);
-  }, []);
+  const { workflows } = useContext(AppContext);
+  const navigate = useNavigate();
   return (
     <Table>
       <TableHeader>
@@ -83,6 +84,7 @@ export default function WorkflowList({}: Props) {
                 <IconPlayerPlay
                   size={16}
                   className="text-primary cursor-pointer"
+                  onClick={() => navigate("/chat/1")}
                 />
                 <IconPencil size={16} className="text-primary cursor-pointer" />
                 <DropdownMenu>
