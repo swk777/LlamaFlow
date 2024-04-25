@@ -2,7 +2,7 @@ import R from "ramda";
 import _get from "lodash/get";
 // import Logger from "../../../core/logger";
 import { ConfigurationType as CT } from "../cfg-type";
-import { isDefVisibleOnConfig } from "../DefContext";
+import { isFieldVisibleInConfig } from "../ConfigContext";
 
 const logInvalid = (defs) => defs.length > 0;
 const needCheck = R.propEq("required", true);
@@ -10,7 +10,7 @@ const getRequired = R.filter(needCheck);
 const getOptional = R.reject(needCheck);
 
 export function shouldValidate(definition, config) {
-  return definition.required && isDefVisibleOnConfig(definition, config);
+  return definition.required && isFieldVisibleInConfig(definition, config);
 }
 
 /**

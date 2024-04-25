@@ -1,11 +1,11 @@
-export enum WorkflowStatus {
+export enum IWorkflowStatus {
   Draft = "Draft",
   Published = "Published",
 }
-export interface Workflow {
+export interface IWorkflow {
   id: string;
   name: string;
-  category: WorkflowStatus;
+  category: IWorkflowStatus;
   lastModified: string;
   data?: any;
 }

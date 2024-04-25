@@ -5,11 +5,21 @@ contextBridge.exposeInMainWorld("ipcRenderer", {
   addWorkflow: (workflow) => ipcRenderer.send("add-workflow", workflow),
   getWorkflows: () => ipcRenderer.invoke("get-workflows"),
   getNodelets: () => ipcRenderer.invoke("get-nodelets"),
+  getKnowledgeBases: () => ipcRenderer.invoke("get-knowledgeBases"),
   getConversationById: (id) => ipcRenderer.invoke("get-conversation", { id }),
   saveWorkflows: (workflowIdx, workflow) =>
-    ipcRenderer.send("save-workflows", { workflowIdx, workflow }),
-  chat: (sessionId, workflowId, query) =>
-    ipcRenderer.invoke("chat", { sessionId, workflowId, query }),
+    ipcRenderer.invoke("save-workflows", { workflowIdx, workflow }),
+  addKnowledgeBase: (name, description, model, files) =>
+    ipcRenderer.invoke("add-knowledgeBase", {
+      files,
+      name,
+      description,
+      model,
+    }),
+  addDocuments: (files: File[], id: string) =>
+    ipcRenderer.invoke("add-documents", { files, id }),
+  chat: (sessionId, workflowId, query, workflow) =>
+    ipcRenderer.invoke("chat", { sessionId, workflowId, query, workflow }),
   on(...args: Parameters<typeof ipcRenderer.on>) {
     const [channel, listener] = args;
     return ipcRenderer.on(channel, (event, ...args) =>

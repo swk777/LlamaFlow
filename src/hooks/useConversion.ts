@@ -1,6 +1,6 @@
-import { Workflow } from "@/type/workflow";
+import { IWorkflow } from "@/type/workflow";
 
-export default function useConversation(workflow: Workflow) {
+export default function useConversation(workflow: IWorkflow) {
   // const [version, setVersion] = useState(0);
   // const upgrade = useCallback(
   //   () => setVersion(Math.random() * 100),

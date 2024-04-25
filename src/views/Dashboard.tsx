@@ -9,7 +9,7 @@ export function Dashboard() {
     <TooltipProvider>
       <div className="flex min-h-screen flex-col bg-muted/40 flex-1">
         <NavBar />
-        <div className="flex flex-col sm:gap-4 sm:pt-4 sm:pl-14 sm:pt-6 h-screen">
+        <div className="flex flex-col sm:gap-4  sm:pl-14  h-screen">
           <Outlet />
         </div>
       </div>

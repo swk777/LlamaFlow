@@ -8,6 +8,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { v4 as uuidv4 } from "uuid";
 import { File, ListFilter, PlusCircle } from "lucide-react";
 import React from "react";
 import { Card, CardContent, CardFooter } from "@/components/ui/card";
@@ -50,7 +51,7 @@ export default function Workflow({}: Props) {
           <Button
             size="sm"
             className="h-7 gap-1"
-            onClick={() => navigate("/workflow-edit/1")}
+            onClick={() => navigate(`/workflow-edit/${uuidv4()}`)}
           >
             <PlusCircle className="h-3.5 w-3.5" />
             <span className="sr-only sm:not-sr-only sm:whitespace-nowrap">

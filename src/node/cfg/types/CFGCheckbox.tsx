@@ -4,9 +4,9 @@ import PropTypes from "prop-types";
 import useDef from "../useDef";
 
 function CFGCheckbox({ definition: def }) {
-  const [fv, updateFv, readonly] = useDef(def);
+  const [fieldValue, updateFv, readonly] = useDef(def);
   const onChange = (e) => updateFv(e.target.checked);
-  const checked = fv !== undefined ? fv : !!def.defaultValue;
+  const checked = fieldValue !== undefined ? fieldValue : !!def.defaultValue;
   return (
     <div className="row-flex-center">
       <Checkbox checked={checked} onChange={onChange} disabled={readonly}>

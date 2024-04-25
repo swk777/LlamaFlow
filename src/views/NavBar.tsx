@@ -41,7 +41,7 @@ export default function NavBar({}: Props) {
         </Tooltip>
         <Tooltip>
           <TooltipTrigger asChild>
-            <Link to="/">
+            <Link to="/knowledgeBaseBoard">
               <ShoppingCart className="h-5 w-5" />
               <span className="sr-only">Orders</span>
             </Link>

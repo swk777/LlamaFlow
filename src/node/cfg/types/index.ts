@@ -1,3 +1,4 @@
+import { KnowledgeBases } from "./../../../constants/knowledge-base";
 import { ConfigurationType } from "../cfg-type";
 
 import CFGString from "./CFGString";
@@ -22,6 +23,7 @@ import CFGTextarea from "./CFGTextarea";
 // import CFGAsyncTables from "./CFGAsyncTables";
 // // import CFGAsyncTableColumns from './CFGAsyncTableColumns'
 import CFGLabel from "./CFGLabel";
+import CFGKnowledgeBase from "./CFGKnowledgeBase";
 // import CFGSql from "./CFGSql";
 
 export function getTargetCFGClass(def) {
@@ -37,6 +39,8 @@ export function getTargetCFGClass(def) {
       return CFGNumber;
     case ConfigurationType.BOOLEAN:
       return CFGCheckbox;
+    case ConfigurationType.KNOWLEDGE_BASE:
+      return CFGKnowledgeBase;
     // case ConfigurationType.BOOLEAN_SWITCH:
     //   return CFGSwitch;
     // case ConfigurationType.DEBOUNCE_STRING:

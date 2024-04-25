@@ -19,7 +19,7 @@ function CFGNumber({
   definition: def,
   style,
 }: ICFGBaseProps<ICFGNumber>): ReactElement {
-  const [fv, updateFv, readonly] = useDef(def);
+  const [fieldValue, updateFv, readonly] = useDef(def);
   const { prefix, suffix } = def;
   const { unit, min = 0, max } = def.model || {};
   //   let formatter = null;
@@ -34,7 +34,7 @@ function CFGNumber({
         </span>
       )}
       <NumberInput
-        value={fv}
+        value={fieldValue}
         onChange={(v): void => updateFv(v || min)}
         // formatter={formatter}
         style={{ minWidth: 60, ...style }}

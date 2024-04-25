@@ -1,30 +1,23 @@
 import React from "react";
-import { useDrag } from "react-dnd";
 
 type Props = {};
-export const ItemTypes = {
-  KNIGHT: "knight",
-};
+
 export default function Nodelet({ nodelet }: Props) {
-  const [{ opacity }, dragRef] = useDrag(
-    () => ({
-      type: ItemTypes.KNIGHT,
-      item: { text: "12" },
-      collect: (monitor) => ({
-        opacity: monitor.isDragging() ? 0.5 : 1,
-      }),
-    }),
-    []
-  );
+  const onDragStart = (event, nodeId) => {
+    event.dataTransfer.setData("application/reactflow", nodeId);
+    event.dataTransfer.effectAllowed = "move";
+  };
   return (
     <div
       key={nodelet.id}
-      ref={dragRef}
-      style={{ opacity }}
+      onDragStart={(event) => onDragStart(event, nodelet.id)}
+      draggable
       className="h-12 flex-row  flex items-center px-3 border-b hover:bg-gray-200 cursor-pointer select-none"
     >
       <img src={nodelet.image} className="w-6 h-6" />
-      <div className="font-medium pl-3">{nodelet.name}</div>
+      <div className="font-medium pl-3 text-ellipsis overflow-x-hidden">
+        {nodelet.name}
+      </div>
     </div>
   );
 }

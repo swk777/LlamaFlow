@@ -7,6 +7,7 @@ import { fileURLToPath } from "node:url";
 import { update } from "./update";
 import { DefaultData } from "@/constants/initialData";
 import { chat } from "./workflow/chat";
+import { addDocuments, createKnowledgeBase } from "./knowledgeBase";
 globalThis.__filename = fileURLToPath(import.meta.url);
 globalThis.__dirname = dirname(__filename);
 
@@ -48,7 +49,7 @@ const preload = join(__dirname, "../preload/index.mjs");
 const url = process.env.VITE_DEV_SERVER_URL;
 const indexHtml = join(process.env.DIST, "index.html");
 
-JSONFilePreset("default10.json", DefaultData)
+JSONFilePreset("default22.json", DefaultData)
   .then((db) => {
     ipcMain.on("add-workflow", async (event, post) => {
       await db.read();
@@ -64,12 +65,28 @@ JSONFilePreset("default10.json", DefaultData)
       await db.read();
       return db.data.workflows;
     });
+    ipcMain.handle("get-knowledgeBases", async () => {
+      await db.read();
+      return db.data.knowledgeBases;
+    });
+    ipcMain.handle("add-knowledgeBase", async (event, post) => {
+      await db.read();
+      const newKnowledgeBase = createKnowledgeBase(db, post);
+      await db.write();
+      return newKnowledgeBase;
+    });
+    ipcMain.handle("add-documents", async (event, post) => {
+      await db.read();
+      const { files, id } = post;
+      await addDocuments(files, id, db);
+      await db.write();
+      // return newKnowledgeBase;
+    });
     ipcMain.handle("get-conversation", async (event, post) => {
       await db.read();
-      console.log(db.data.conversations);
       return db.data.conversations[post.id];
     });
-    ipcMain.on("save-workflows", async (event, post) => {
+    ipcMain.handle("save-workflows", async (event, post) => {
       await db.read();
       const { workflowIdx, workflow } = post;
       // const workflowIdx = db.data.workflows.findIndex(
@@ -81,14 +98,20 @@ JSONFilePreset("default10.json", DefaultData)
       //   ...db.data.workflows.slice(workflowIdx + 1),
       // ];
       await db.update(({ workflows }) => (workflows[workflowIdx] = workflow));
+      await db.read();
+      return db.data.workflows;
       // await db.write();
     });
     ipcMain.handle("chat", async (event, post) => {
       await db.read();
-      const { sessionId, workflowId, query } = post;
-      const conversation = await chat(sessionId, workflowId, query, db);
-      console.log(conversation?.globalContext.currentResult);
-      console.log(conversation?.globalContext.messages);
+      const { sessionId, workflowId, query, workflow } = post;
+      const conversation = await chat(
+        sessionId,
+        workflowId,
+        query,
+        workflow,
+        db
+      );
       return conversation?.globalContext.messages;
       // await db.update(({ workflows }) => (workflows[workflowIdx] = workflow));
     });
@@ -102,6 +125,8 @@ async function createWindow() {
   win = new BrowserWindow({
     title: "Main window",
     icon: join(process.env.VITE_PUBLIC, "favicon.ico"),
+    width: 1000, // 设置窗口的默认宽度
+    height: 700, // 设置窗口的默认高度
     webPreferences: {
       preload,
       // Warning: Enable nodeIntegration and disable contextIsolation is not secure in production

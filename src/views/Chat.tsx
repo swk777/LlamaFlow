@@ -23,10 +23,11 @@ export default function Chat({ messages, onSendMessage }: Props) {
             <IconUserCircle style={{ width: rem(16), height: rem(16) }} />
           </ThemeIcon>
         }
-        // withPadding
       >
         {messages.map((message) => (
-          <List.Item style={{ textAlignment: "left" }}>{message} </List.Item>
+          <List.Item key={message} style={{ textAlignment: "left" }}>
+            {message}{" "}
+          </List.Item>
         ))}
       </List>
       <Input value={query} onChange={(e) => setQuery(e.target.value)} />

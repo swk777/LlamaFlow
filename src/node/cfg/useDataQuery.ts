@@ -2,7 +2,7 @@
 import { useEffect, useContext, useMemo, useState } from "react";
 // import { useFetch, INVALID_PARAMS } from "@guandata/hooks";
 // import { queryDBTables, queryDBTableColumns } from "../../services/dataquery";
-import DefContext from "./DefContext";
+import DefContext from "./ConfigContext";
 
 // import { IParamsProps } from "../../types/schedule";
 

@@ -7,7 +7,7 @@ import React, {
   useRef,
 } from "react";
 import { Input } from "@mantine/core";
-import DefContext, { DISABLED_FIELDS_PATH } from "../DefContext";
+import DefContext from "../ConfigContext";
 // import NamespaceContext from "../NamespaceContext";
 import useDef, { useDependOnMap } from "../useDef";
 
@@ -38,17 +38,14 @@ function CFGString({
   definition: def,
   style,
 }: ICFGBaseProps<ICFGString>): ReactElement {
-  const [fv, updateFv, readonly] = useDef(def);
-  const prevFv = useRef(fv);
-  const [inputValue, setInputValue] = useState(fv);
+  const [fieldValue, updateFv, readonly] = useDef(def);
+  const prevFv = useRef(fieldValue);
+  const [inputValue, setInputValue] = useState(fieldValue);
 
   const { getFieldValue, config } = useContext(DefContext);
   // const {
   //   outside: { allTasks = {} },
   // } = useContext(NamespaceContext);
-
-  const disableFields = getFieldValue(DISABLED_FIELDS_PATH) || [];
-  const disable = disableFields.includes(def.fieldName);
 
   const { unit, disabledOnMap, clearOnDisabled, maxLength } = def.model || {};
   let formatter = null;
@@ -88,14 +85,14 @@ function CFGString({
   const [hasDisabledOn, fullfilled] = useDependOnMap(disabledOnMap);
   const disabled = hasDisabledOn && fullfilled;
   useEffect(() => {
-    if (fv !== undefined && disabled && clearOnDisabled) {
+    if (fieldValue !== undefined && disabled && clearOnDisabled) {
       updateFv(undefined);
     }
-    if (prevFv.current !== fv) {
-      prevFv.current = fv;
-      setInputValue(fv);
+    if (prevFv.current !== fieldValue) {
+      prevFv.current = fieldValue;
+      setInputValue(fieldValue);
     }
-  }, [fv, updateFv, disabled, clearOnDisabled]);
+  }, [fieldValue, updateFv, disabled, clearOnDisabled]);
 
   return (
     <Input
@@ -104,7 +101,7 @@ function CFGString({
       onBlur={onBlur}
       placeholder={labelRequired(def.placeholder, def.required)}
       maxLength={maxLength}
-      disabled={readonly || disabled || disable}
+      disabled={readonly || disabled}
       //   formatter={formatter}
       style={style}
     />

@@ -76,7 +76,7 @@ export function useSelectCheck(
           <TooltipContent>
             <IconExclamationCircle
               name="toast-warn"
-              style={{ color: "yelow", marginRight: 4 }}
+              style={{ color: "yellow", marginRight: 4 }}
             />
           </TooltipContent>
         </Tooltip>
@@ -89,7 +89,6 @@ export function useSelectCheck(
 }
 
 function CFGValueChooser(props: IProps): ReactElement {
-  //   useStyles(s);
   const {
     definition,
     mode,
@@ -99,7 +98,7 @@ function CFGValueChooser(props: IProps): ReactElement {
     onSearch,
     ...others
   } = props;
-  const [fv, updateFv, readonly] = useDef(definition);
+  const [fieldValue, updateFv, readonly] = useDef(definition);
   const { from } = definition.model || {};
   const { getValue } = useContext(NamespaceContext);
   const disableSelect = useMemo(
@@ -111,10 +110,10 @@ function CFGValueChooser(props: IProps): ReactElement {
   const { values = [] } = definition.model;
   const disabled = (hasDepends && fullfilled) || disableSelect;
   useEffect(() => {
-    if (fv === undefined && definition.defaultValue !== undefined) {
+    if (fieldValue === undefined && definition.defaultValue !== undefined) {
       updateFv(definition.defaultValue);
     }
-  }, [fv, updateFv, definition]);
+  }, [fieldValue, updateFv, definition]);
   useEffect(() => {
     if (
       definition.defaultValue !== undefined &&
@@ -123,12 +122,12 @@ function CFGValueChooser(props: IProps): ReactElement {
       updateFv(definition.defaultValue);
     }
   }, [hasDepends, fullfilled, updateFv, definition, disableSelect]);
-  const items = values;
+  // const items = values;
   // const items = useMemo(
   //   () => zipFunc(labels, values),
   //   [labels, values]
   // ) as ILabelValue[];
-  let renderFunc = null;
+  // let renderFunc = null;
   //   if (icons.length > 0) {
   //     items.forEach((item, i) => {
   //       item.icon = icons[i];
@@ -147,13 +146,15 @@ function CFGValueChooser(props: IProps): ReactElement {
   //   const findIsMissField = (field) =>
   //     field !== undefined && items.findIndex(R.propEq("value", field)) === -1;
   const findIsMissField = (field) => field !== undefined;
-  const missFields = mode === "multiple" && (fv || []).filter(findIsMissField);
-  const isMissing = (): boolean => mode !== "multiple" && findIsMissField(fv);
+  const missFields =
+    mode === "multiple" && (fieldValue || []).filter(findIsMissField);
+  const isMissing = (): boolean =>
+    mode !== "multiple" && findIsMissField(fieldValue);
 
-  const [v, ph] = useSelectCheck(fv, definition, isMissing, fv);
+  const [v, ph] = useSelectCheck(fieldValue, definition, isMissing, fieldValue);
   return (
     <TooltipProvider>
-      <div className="flex1 row-flex-center">
+      <div className="flex-1 row-flex-center">
         {mode === "multiple" && missFields.length > 0 && (
           <Tooltip>
             <TooltipTrigger>{`存在丢失字段：${missFields.join(
@@ -162,18 +163,17 @@ function CFGValueChooser(props: IProps): ReactElement {
             <TooltipContent>
               <IconExclamationCircle
                 name="toast-warn"
-                style={{ color: "yelow", marginRight: 4 }}
+                style={{ color: "yellow", marginRight: 4 }}
               />
             </TooltipContent>
           </Tooltip>
         )}
-
         <Select
-          // showsearch
-          value={fv}
+          label={definition.label}
+          value={fieldValue}
           onChange={updateFv}
           onSearch={onSearch}
-          data={items}
+          data={values}
           // renderFunc={renderFunc}
           disabled={disabled || readonly}
           className={className}

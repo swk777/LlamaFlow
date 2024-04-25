@@ -14,26 +14,26 @@
       "nodeContext": {
         "1": {
           "outputs": {
-            "output": "what was the author worked on Before college "
+            "output": "what was the author working on Before college"
           }
         },
         "2": {
           "outputs": {
-            "o1": "Before college, the author worked on writing short stories and programming on an IBM 1401 computer at their school."
+            "o1": "Before college, the author was interested in programming and took philosophy courses, but found them boring."
           }
         },
         "1.5": {
           "outputs": {
             "context": [
-              "What I Worked On\n\nFebruary 2021\n\nBefore college the two main things I worked on, outside of school, were writing and programming. I didn't write essays. I wrote what beginning writers were supposed to write then, and probably still are: short stories. My stories were awful. They had hardly any plot, just characters with strong feelings, which I imagined made them deep.\n\nThe first programs I tried writing were on the IBM 1401 that our school district used for what was then called \"data processing.\" This was in 9th grade, so I was 13 or 14. The school district's 1401 happened to be in the basement of our junior high school, and my friend Rich Draves and I got permission to use it. It was like a mini Bond villain's lair down there, with all these alien-looking machines — CPU, disk drives, printer, card reader — sitting up on a raised floor under bright fluorescent lights.",
-              "In the print era, the channel for publishing essays had been vanishingly small. Except for a few officially anointed thinkers who went to the right parties in New York, the only people allowed to publish essays were specialists writing about their specialties. There were so many essays that had never been written, because there had been no way to publish them. Now they could be, and I was going to write them. [12]\n\nI've worked on several different things, but to the extent there was a turning point where I figured out what to work on, it was when I started publishing essays online. From then on I knew that whatever else I did, I'd always write essays too.\n\nI knew that online essays would be a marginal medium at first. Socially they'd seem more like rants posted by nutjobs on their GeoCities sites than the genteel and beautifully typeset compositions published in The New Yorker. But by this point I knew enough to find that encouraging instead of discouraging.",
-              "Over the next several years I wrote lots of essays about all kinds of different topics. O'Reilly reprinted a collection of them as a book, called Hackers & Painters after one of the essays in it. I also worked on spam filters, and did some more painting. I used to have dinners for a group of friends every thursday night, which taught me how to cook for groups. And I bought another building in Cambridge, a former candy factory (and later, twas said, porn studio), to use as an office.\n\nOne night in October 2003 there was a big party at my house. It was a clever idea of my friend Maria Daniels, who was one of the thursday diners. Three separate hosts would all invite their friends to one party. So for every guest, two thirds of the other guests would be people they didn't know but would probably like. One of the guests was someone I didn't know but would turn out to like a lot: a woman called Jessica Livingston. A couple days later I asked her out."
+              "Though I liked programming, I didn't plan to study it in college. In college I was going to study philosophy, which sounded much more powerful. It seemed, to my naive high school self, to be the study of the ultimate truths, compared to which the things studied in other fields would be mere domain knowledge. What I discovered when I got to college was that the other fields took up so much of the space of ideas that there wasn't much left for these supposed ultimate truths. All that seemed left for philosophy were edge cases that people in other fields felt could safely be ignored.\n\nI couldn't have put this into words when I was 18. All I knew at the time was that I kept taking philosophy courses and they kept being boring. So I decided to switch to AI.",
+              "I had always liked looking at paintings. Could I make them? I had no idea. I'd never imagined it was even possible. I knew intellectually that people made art — that it didn't just appear spontaneously — but it was as if the people who made it were a different species. They either lived long ago or were mysterious geniuses doing strange things in profiles in Life magazine. The idea of actually being able to make art, to put that verb before that noun, seemed almost miraculous.\n\nThat fall I started taking art classes at Harvard. Grad students could take classes in any department, and my advisor, Tom Cheatham, was very easy going. If he even knew about the strange classes I was taking, he never said anything.\n\nSo now I was in a PhD program in computer science, yet planning to be an artist, yet also genuinely in love with Lisp hacking and working away at On Lisp. In other words, like many a grad student, I was working energetically on multiple projects that were not my thesis.",
+              "So I looked around to see what I could salvage from the wreckage of my plans, and there was Lisp. I knew from experience that Lisp was interesting for its own sake and not just for its association with AI, even though that was the main reason people cared about it at the time. So I decided to focus on Lisp. In fact, I decided to write a book about Lisp hacking. It's scary to think how little I knew about Lisp hacking when I started writing that book. But there's nothing like writing a book about something to help you learn it. The book, On Lisp, wasn't published till 1993, but I wrote much of it in grad school.\n\nComputer Science is an uneasy alliance between two halves, theory and systems. The theory people prove things, and the systems people build things. I wanted to build things. I had plenty of respect for theory — indeed, a sneaking suspicion that it was the more admirable of the two halves — but building things seemed so much more exciting."
             ]
           }
         }
       },
       "globalContext": {
-        "currentMessage": "what was the author worked on Before college ",
+        "currentMessage": "what was the author working on Before college",
         "messages": [
           "2",
           "What is your question or how can I assist you?",
@@ -44,9 +44,21 @@
           "What did the author do growing up?",
           "The author worked on writing short stories and programming in high school. In college, they continued writing essays on various topics, worked on spam filters, did some painting, hosted dinner parties, and bought a building in Cambridge to use as an office. They also threw a big party at their house where they met a woman named Jessica Livingston, whom they later asked out. After becoming rich in New York, the author resumed their old lifestyle but with newfound opportunities and experiences. This included improving their painting skills and experimenting with a new painting technique.",
           "what was the author worked on Before college ",
-          "Before college, the author worked on writing short stories and programming on an IBM 1401 computer at their school."
+          "Before college, the author worked on writing short stories and programming on an IBM 1401 computer at their school.",
+          "what was the author worked on Before college",
+          "Before college, the author worked on writing and programming. They wrote short stories and worked on programming on the IBM 1401 in 9th grade. They also worked intensively on a project called Bel and later moved to England where they continued working on it. Additionally, the author wrote a book on Lisp and spent time painting.",
+          "who is the author",
+          "The author is likely someone who is a writer and has been involved in building the infrastructure of the web, has written a book on Lisp, and has taken painting classes with Idelle Weber at Harvard.",
+          "who is the author",
+          "The author is Paul Graham.",
+          "1",
+          "What inspired the author to realize the potential of publishing on the web and start writing more?",
+          "who is the author",
+          "The author is someone who got into a program at Cornell, where they chose \"Artificial Intelligence\" as their major. They were inspired by a novel by Heinlein and a PBS documentary featuring Terry Winograd using SHRDLU. The author also mentions reverse-engineering SHRDLU for their undergraduate thesis.",
+          "what was the author working on Before college",
+          "Before college, the author was interested in programming and took philosophy courses, but found them boring."
         ],
-        "currentResult": "Before college, the author worked on writing short stories and programming on an IBM 1401 computer at their school."
+        "currentResult": "Before college, the author was interested in programming and took philosophy courses, but found them boring."
       }
     }
   },

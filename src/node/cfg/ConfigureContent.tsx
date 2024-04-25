@@ -1,18 +1,18 @@
 import React, { useContext } from "react";
 import { getTargetCFGClass } from "./types";
-import DefContext from "./DefContext";
+import ConfigContext from "./ConfigContext";
 
 type Props = {};
 
 export default function ConfigureContent({ definitions, style }: Props) {
-  const { isDefVisible } = useContext(DefContext);
+  const { isFieldVisible } = useContext(ConfigContext);
 
   return (
     <div className={"column-flex"} style={style}>
       {definitions &&
         definitions.map((def) => {
           const TargetDef = getTargetCFGClass(def);
-          if (TargetDef && isDefVisible(def)) {
+          if (TargetDef && isFieldVisible(def)) {
             const rowStyle = { marginTop: 10 };
             // if (hasUnifyTitle(TargetDef)) {
             //   return (

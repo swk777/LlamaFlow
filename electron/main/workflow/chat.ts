@@ -1,12 +1,12 @@
+import { KnowledgeBases } from "./../../../src/constants/knowledge-base";
 import { Nodelet } from "@/type/nodelet";
 import { Conversation } from "./../../../src/type/conversation";
-import { Workflow } from "@/type/workflow";
-import OpenAI from "openai";
+import { IWorkflow } from "@/type/workflow";
 import { HttpsProxyAgent } from "https-proxy-agent";
 import { HNSWLib } from "@langchain/community/vectorstores/hnswlib";
-import { OpenAIEmbeddings } from "@langchain/openai";
 import { TextLoader } from "langchain/document_loaders/fs/text";
-
+import ollama from "ollama";
+import _cloneDeep from "lodash/cloneDeep";
 import {
   Document,
   MetadataMode,
@@ -19,16 +19,12 @@ import {
 } from "llamaindex";
 const httpsAgent = new HttpsProxyAgent("http://127.0.0.1:7890");
 import essay from "../../../examples/essay";
+import { WorkspacePath, getEmbeddingModel } from "../knowledgeBase";
+import { IKnowledgeBase } from "@/type/knowledgeBase";
+import { getNodeInputObj } from "./utils";
+import { InternalNodeletExecutor } from "./internal";
+// import { executeOpenAI, executeOllama } from "./internal";
 
-const getContextPrompt = (
-  contextStr: string,
-  queryStr: string
-) => `Context information is below. \n
-  --------------------- 
-  ${contextStr} 
-  \n---------------------\n 
-  Given the context information and not prior knowledge, 
-  answer the question: ${queryStr}\n`;
 Settings.embedModel = new OpenAIEmbedding({
   model: "text-embedding-ada-002",
   session: new OpenAISession({ httpAgent: httpsAgent }),
@@ -50,6 +46,7 @@ export const chat = async (
   sessionId: string,
   workflowId: string,
   message: string,
+  workflow: IWorkflow,
   db: any
 ) => {
   await db.read();
@@ -57,21 +54,26 @@ export const chat = async (
     workflows,
     nodelets,
     conversations,
+    knowledgeBases,
   }: {
-    workflows: Workflow[];
+    workflows: IWorkflow[];
     nodelets: Nodelet[];
+    knowledgeBases: IKnowledgeBase[];
     conversations: { [sessionId: string]: Conversation };
   } = db.data;
-  const workflow = workflows.find((w) => w.id === workflowId);
-  if (!workflow) return;
+  const currentWorkflow =
+    workflow ?? workflows.find((w) => w.id === workflowId);
+  if (!currentWorkflow) return;
   if (!conversations[sessionId]) {
     conversations[sessionId] = getInitialConversation(sessionId, message);
   } else {
     conversations[sessionId].globalContext.currentMessage = message;
   }
-  const { nodes = [], edges = [] } = workflow?.data || {};
+  const { nodes = [], edges = [] } = currentWorkflow?.data || {};
   if (!nodes.length) return;
-  await executeDAG(workflow.data, nodelets, conversations[sessionId]);
+  await executeDAG(currentWorkflow.data, nodelets, conversations[sessionId], {
+    knowledgeBases,
+  });
   await db.write();
   return conversations[sessionId];
 };
@@ -103,7 +105,7 @@ function linkNodes(nodeMap, edges) {
   });
 }
 
-async function executeDAG(dagData, nodelets, conversation) {
+async function executeDAG(dagData, nodelets, conversation, context) {
   const nodeMap = createNodeMap(dagData.nodes);
   linkNodes(nodeMap, dagData.edges);
   //   console.log(nodeMap);
@@ -119,7 +121,7 @@ async function executeDAG(dagData, nodelets, conversation) {
 
   while (queue.length > 0) {
     const currentNode = queue.shift();
-    await executeNode(currentNode, nodelets, conversation);
+    await executeNode(currentNode, nodelets, conversation, context);
 
     currentNode.nextNodes.forEach((nextNode) => {
       const inDegree = inDegrees.get(nextNode.id) - 1;
@@ -131,125 +133,110 @@ async function executeDAG(dagData, nodelets, conversation) {
   }
 }
 
-async function executeNode(node, nodelets, conversation: Conversation) {
+async function executeNode(
+  node,
+  nodelets,
+  conversation: Conversation,
+  context
+) {
   const nodelet = nodelets.find((nl) => nl.id === node.data.nodeletId);
-  switch (nodelet?.id) {
-    case "input1": {
-      console.log(
-        `executing node ${node.id}, current message: ${conversation.globalContext?.currentMessage}`
-      );
-      conversation.nodeContext[node.id] = {
-        outputs: { output: conversation.globalContext?.currentMessage },
-      };
-      conversation.globalContext.messages.push(
-        conversation.globalContext?.currentMessage
-      );
-      break;
-    }
-    case "openai": {
-      console.log(`executing node openai ${node.id}`);
-      const {
-        sourceHandle: qsourceHandle,
-        targetHandle: qtargetHandle,
-        id: qsourceId,
-      } = node.sourceNodes[0]; // todo
-      const {
-        sourceHandle: ksourceHandle,
-        targetHandle: ktargetHandle,
-        id: ksourceId,
-      } = node.sourceNodes[1]; // todo
-      const query = conversation.nodeContext[qsourceId].outputs[qsourceHandle];
-      console.log(query);
-      // console.log(node.sourceNodes);
-      const context =
-        conversation.nodeContext[ksourceId].outputs[ksourceHandle];
-      // console.log(context);
-      const openai = new OpenAI({
-        apiKey: "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", // This is the default and can be omitted
-        // baseURL: "https://api.smartdeck.ai/proxy",
-        httpAgent: httpsAgent,
-      });
-      const chatCompletion = await openai.chat.completions.create({
-        messages: [
-          { role: "user", content: getContextPrompt(context.join(""), query) },
-        ],
-        model: "gpt-3.5-turbo",
-      });
-      console.log(chatCompletion.choices[0].message.content);
-      const result =
-        "I am a language model and do not have real-time capabilities. Please check the date on your device for the current date.";
-      conversation.nodeContext[node.id] = {
-        outputs: { o1: chatCompletion.choices[0].message.content },
-      };
-      break;
-    }
-    case "knowledgeBase": {
-      console.log(`executing node knowledgeBase ${node.id}`);
-      // const loader = new TextLoader(
-      //   "/Users/larryyu/Documents/workspace/electron/VisionFlow/examples/essay.txt"
-      // );
-      // const docs = await loader.loadAndSplit();
-
-      // // Load the docs into the vector store
-      // const vectorStore = await HNSWLib.fromDocuments(
-      //   docs,
-      //   new OpenAIEmbeddings({ configuration: { httpAgent: httpsAgent } })
-      // );
-      // await vectorStore.save(
-      //   "/Users/larryyu/Documents/workspace/electron/VisionFlow/examples"
-      // );
-      const { sourceHandle, targetHandle, id: sourceId } = node.sourceNodes[0];
-      const query = conversation.nodeContext[sourceId].outputs[sourceHandle];
-      const loadedVectorStore = await HNSWLib.load(
-        "/Users/larryyu/Documents/workspace/electron/VisionFlow/examples/",
-        new OpenAIEmbeddings({ configuration: { httpAgent: httpsAgent } })
-      );
-
-      // vectorStore and loadedVectorStore are identical
-
-      const result = await loadedVectorStore.similaritySearch(query, 3);
-      console.log(result);
-      conversation.nodeContext[node.id] = {
-        outputs: { context: result.map((r) => r.pageContent) },
-      };
-      // const document = new Document({ text: essay, id_: "essay" });
-
-      // const storageContext = await storageContextFromDefaults({
-      //   persistDir:
-      //     "/Users/larryyu/Documents/workspace/electron/VisionFlow/examples",
-      // });
-      // const index = await VectorStoreIndex.fromDocuments([document], {
-      //   storageContext,
-      // });
-      // const secondStorageContext = await storageContextFromDefaults({
-      //   persistDir:
-      //     "/Users/larryyu/Documents/workspace/electron/VisionFlow/examples",
-      // });
-      // const loadedIndex = await VectorStoreIndex.init({
-      //   storageContext: secondStorageContext,
-      // });
-      // const retriever = loadedIndex.asRetriever();
-      // retriever.similarityTopK = 3;
-      // const nodes = await retriever.retrieve({
-      //   query: "What did the author do growing up?",
-      // });
-      // console.log(nodes.map((n) => n.node.getContent(MetadataMode.NONE)));
-
-      // const loadedQueryEngine = loadedIndex.asQueryEngine();
-      // const loadedQueryEngine = loadedIndex.asQueryEngine();
-      // const loadedResponse = await loadedQueryEngine.query({
-      //   query: "What did the author do growing up?",
-      // });
-      // console.log(loadedResponse.toString());
-      break;
-    }
-    case "ChatOutput": {
-      const { sourceHandle, targetHandle, id: sourceId } = node.sourceNodes[0]; // todo
-      console.log(sourceId);
-      const res = conversation.nodeContext[sourceId].outputs[sourceHandle];
-      conversation.globalContext.currentResult = res;
-      conversation.globalContext.messages.push(res);
-    }
+  const nodeInputsObj = getNodeInputObj(node, nodelet, conversation);
+  const setNodeContext = (nodeId, nodeContext) => {
+    conversation.nodeContext[nodeId] = nodeContext;
+  };
+  const setGlobalContext = (globalContext) =>
+    (conversation.globalContext = globalContext);
+  const executorContext = [
+    node,
+    nodeInputsObj,
+    _cloneDeep(conversation.globalContext),
+    setNodeContext,
+    setGlobalContext,
+  ];
+  console.log(nodelet?.id);
+  if (InternalNodeletExecutor[nodelet?.id]?.isAsync) {
+    await InternalNodeletExecutor[nodelet?.id]?.executor(...executorContext);
+  } else {
+    InternalNodeletExecutor[nodelet?.id]?.executor(...executorContext);
   }
-  // 根据node.data.attr.category等属性实现具体逻辑
+  // switch (nodelet?.id) {
+  //   case "user-input": {
+  //     console.log(
+  //       `executing node ${node.id}, current message: ${conversation.globalContext?.currentMessage}`
+  //     );
+  //     conversation.nodeContext[node.id] = {
+  //       outputs: { query: conversation.globalContext?.currentMessage },
+  //     };
+  //     conversation.globalContext.messages.push(
+  //       conversation.globalContext?.currentMessage
+  //     );
+  //     break;
+  //   }
+  //   case "OpenAI": {
+  //     await executeOpenAI(
+  //       node,
+  //       nodeInputsObj,
+  //       _cloneDeep(conversation.globalContext),
+  //       setNodeContext
+  //     );
+  //     break;
+  //   }
+  //   case "ollama": {
+  //     await executeOllama(
+  //       node,
+  //       nodeInputsObj,
+  //       _cloneDeep(conversation.globalContext),
+  //       setNodeContext
+  //     );
+
+  //     // console.log(`executing node ollama ${node.id}`);
+  //     // const { context = [], query = "" } = nodeInputsObj;
+  //     // const response = await ollama.chat({
+  //     //   model: "llama2",
+  //     //   messages: [
+  //     //     { role: "user", content: getContextPrompt(context.join(""), query) },
+  //     //   ],
+  //     // });
+  //     // console.log(response.message.content);
+  //     // conversation.nodeContext[node.id] = {
+  //     //   outputs: { answer: response.message.content },
+  //     // };
+  //     break;
+  //   }
+  //   case "knowledgeBase": {
+  //     console.log(`executing node knowledgeBase ${node.id}`);
+  //     const {
+  //       sourceHandle,
+  //       targetHandle,
+  //       id: sourceId,
+  //     } = node.sourceNodes.find((n) => n.targetHandle === "query");
+  //     console.log(node);
+  //     const knowledgeBaseId = node?.data?.attr?.knowledgeBase?.value;
+  //     const { knowledgeBases } = context;
+  //     const knowledgeBase = knowledgeBases.find(
+  //       (kb: IKnowledgeBase) => kb.id === knowledgeBaseId
+  //     );
+  //     const query = conversation.nodeContext[sourceId].outputs[sourceHandle];
+  //     const embeddingModel = getEmbeddingModel(knowledgeBase?.model);
+  //     const loadedVectorStore = await HNSWLib.load(
+  //       `${WorkspacePath}/${knowledgeBase.id}/embeddings`,
+  //       // new OpenAIEmbeddings({ configuration: { httpAgent: httpsAgent } })
+  //       embeddingModel
+  //     );
+
+  //     const result = await loadedVectorStore.similaritySearch(query, 3);
+  //     console.log(result);
+  //     conversation.nodeContext[node.id] = {
+  //       outputs: { ["RelativeContent"]: result.map((r) => r.pageContent) },
+  //     };
+  //     break;
+  //   }
+  //   case "ChatOutput": {
+  //     const { sourceHandle, targetHandle, id: sourceId } = node.sourceNodes[0]; // todo
+  //     const { output } = nodeInputsObj;
+  //     // const res = conversation.nodeContext[sourceId].outputs[sourceHandle];
+  //     conversation.globalContext.latestMessage = output;
+  //     conversation.globalContext.messages.push(output);
+  //   }
+  // }
 }

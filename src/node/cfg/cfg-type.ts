@@ -48,6 +48,7 @@ export enum ConfigurationType {
   // 定制化异步请求
   ASYNC_TABLES = "ASYNC_TABLES",
   ASYNC_TABLE_COLUMNS = "ASYNC_TABLE_COLUMNS",
+  KNOWLEDGE_BASE = "KNOWLEDGE_BASE",
 }
 
 export enum PanelType {

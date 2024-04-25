@@ -71,7 +71,7 @@ export default function WorkflowList({}: Props) {
               {idx + 1}.
             </TableCell>
             <TableCell className="font-medium w-1/3 text-left">
-              {name}-{idx}
+              {name}
             </TableCell>
             <TableCell>
               <Badge variant="outline">{category}</Badge>
@@ -86,7 +86,13 @@ export default function WorkflowList({}: Props) {
                   className="text-primary cursor-pointer"
                   onClick={() => navigate("/chat/1")}
                 />
-                <IconPencil size={16} className="text-primary cursor-pointer" />
+                <IconPencil
+                  size={16}
+                  onClick={() => {
+                    navigate(`/workflow-edit/${id}`);
+                  }}
+                  className="text-primary cursor-pointer"
+                />
                 <DropdownMenu>
                   <DropdownMenuTrigger asChild>
                     <IconDotsVertical size={16} className="cursor-pointer" />

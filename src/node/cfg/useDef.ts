@@ -1,14 +1,14 @@
 import { useContext, useMemo } from "react";
-import DefContext from "./DefContext";
+import DefContext from "./ConfigContext";
 import { ICFGDefinitionBase, ICFGDependOnMap } from "@/type/cfgDefinition";
 
 export default function useDef(
   def: ICFGDefinitionBase
 ): [TSFixMe, IFuncVoid<TSFixMe>, boolean] {
   const { fieldName } = def;
-  const { getFieldValue, updateConfig, readonly } = useContext(DefContext);
+  const { getFieldValue, updateField, readonly } = useContext(DefContext);
   const fieldValue = getFieldValue(fieldName);
-  const updateFieldValue = (v): void => updateConfig(fieldName, v);
+  const updateFieldValue = (v): void => updateField(fieldName, v);
   return [fieldValue, updateFieldValue, readonly];
 }
 

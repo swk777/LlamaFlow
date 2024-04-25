@@ -4,22 +4,18 @@ import PropTypes from "prop-types";
 import { labelRequired } from "./CFGString";
 import { ConfigurationType as CT } from "../cfg-type";
 import useDef from "../useDef";
-import DefContext, { DISABLED_FIELDS_PATH } from "../DefContext";
+import DefContext from "../ConfigContext";
 
 function CFGTextarea(props) {
   const { definition: def, className, style } = props;
-  const [fv, updateFv, readonly] = useDef(def);
+  const [fieldValue, updateFv, readonly] = useDef(def);
   const { placeholder, required, type } = def;
   const { getFieldValue } = useContext(DefContext);
 
-  const disableFields = (getFieldValue(DISABLED_FIELDS_PATH) || []).includes(
-    def.fieldName
-  );
-
   return (
     <Textarea
-      disabled={readonly || disableFields}
-      value={fv}
+      disabled={readonly}
+      value={fieldValue}
       onChange={(e) => updateFv(e.target.value)}
       placeholder={labelRequired(placeholder, required)}
       autosize

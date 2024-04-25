@@ -6,51 +6,84 @@ import {
   useCallback,
 } from "react";
 import { DefaultData } from "../constants/initialData";
-import { Workflow } from "../type/workflow";
+import { IWorkflow } from "../type/workflow";
 import { Nodelet } from "../type/nodelet";
+import { IKnowledgeBase } from "@/type/knowledgeBase";
 
 interface IProviderProps {
   children: ReactElement;
 }
 
 interface IAppContext {
-  workflows: Workflow[];
+  workflows: IWorkflow[];
   nodelets: Nodelet[];
-  setWorkflows?: (newData: Workflow[]) => void;
+  knowledgeBases: IKnowledgeBase[];
+  setWorkflows?: (newData: IWorkflow[]) => void;
   setNodelets?: (newData: Nodelet[]) => void;
-  updateWorkflow?: (workflowId: string, newData: Workflow) => void;
+  setKnowledgeBases?: (newData: IKnowledgeBase[]) => void;
+  updateWorkflow?: (workflowId: string, newData: IWorkflow) => void;
+  refreshKnowledgeBase: () => void;
+  refreshWorkflow: () => void;
 }
 export const AppContext = createContext<IAppContext>({
   workflows: DefaultData.workflows,
   nodelets: DefaultData.nodelets,
+  knowledgeBases: DefaultData.knowledgeBases,
 });
 
 export function AppContextProvider(props: IProviderProps): ReactElement {
   const [workflows, setWorkflows] = useState(
-    DefaultData.workflows as Workflow[]
+    DefaultData.workflows as IWorkflow[]
+  );
+  const [knowledgeBases, setKnowledgeBases] = useState(
+    DefaultData.knowledgeBases as IKnowledgeBase[]
   );
   const [nodelets, setNodelets] = useState(DefaultData.nodelets as Nodelet[]);
   const { children } = props;
   const updateWorkflow = useCallback(
-    (workflowId: string, newData: Workflow) => {
+    async (workflowId: string, newData: IWorkflow) => {
+      console.log(workflows);
       const workflowIdx = workflows.findIndex((wf) => wf.id === workflowId);
-      const newWorkflows = [
-        ...workflows.slice(0, workflowIdx),
-        newData,
-        ...workflows.slice(workflowIdx + 1),
-      ];
-      setWorkflows(newWorkflows);
-      window.ipcRenderer.saveWorkflows(workflowIdx, newData);
+      console.log(workflowIdx);
+      if (workflowIdx === -1) {
+        await window.ipcRenderer.addWorkflow(newData);
+        await refreshWorkflow();
+      } else {
+        const workflows = await window.ipcRenderer.saveWorkflows(
+          workflowIdx,
+          newData
+        );
+        console.log(workflows);
+        setWorkflows(workflows);
+        // await refreshWorkflow();
+      }
     },
-    []
+    [workflows]
   );
+  const refreshKnowledgeBase = useCallback(() => {
+    window.ipcRenderer.getKnowledgeBases().then(setKnowledgeBases);
+  }, []);
+  const refreshWorkflow = async () => {
+    setWorkflows(await window.ipcRenderer.getWorkflows());
+  };
   useEffect(() => {
     window.ipcRenderer.getNodelets().then(setNodelets);
-    window.ipcRenderer.getWorkflows().then(setWorkflows);
+    refreshWorkflow();
+    refreshKnowledgeBase();
   }, []);
   return (
     <AppContext.Provider
-      value={{ workflows, nodelets, setWorkflows, setNodelets, updateWorkflow }}
+      value={{
+        workflows,
+        nodelets,
+        knowledgeBases,
+        setWorkflows,
+        setNodelets,
+        setKnowledgeBases,
+        refreshWorkflow,
+        updateWorkflow,
+        refreshKnowledgeBase,
+      }}
     >
       {children}
     </AppContext.Provider>
