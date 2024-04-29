@@ -1,3 +1,6 @@
+import { defineConfig } from "vite";
+import { Nodelet } from "@/type/nodelet";
+
 export const getNodeInputObj = (node, nodelet, conversation) => {
   const inputsObj = {};
   if ((nodelet?.inputs || []).length === 0) return {};

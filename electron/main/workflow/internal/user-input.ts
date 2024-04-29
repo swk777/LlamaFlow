@@ -1,14 +1,13 @@
-export async function executeUserInput(
-  node,
-  nodeInputs,
+export async function executeUserInput({
+  nodeId,
   globalContext,
   setNodeContext,
-  setGlobalContext
-) {
+  setGlobalContext,
+}) {
   console.log(
-    `executing node ${node.id}, current message: ${globalContext?.currentMessage}`
+    `executing node ${nodeId}, current message: ${globalContext?.currentMessage}`
   );
-  setNodeContext(node.id, {
+  setNodeContext(nodeId, {
     outputs: { query: globalContext?.currentMessage },
   });
   setGlobalContext({

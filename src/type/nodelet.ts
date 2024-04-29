@@ -27,4 +27,5 @@ export interface Nodelet {
   image: string;
   inputs: NodeletInput[];
   outputs: NodeletOutput[];
+  configDefinitions: any;
 }

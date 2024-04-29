@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 
 import CodeEditor from "../../codeEditor/CodeEditor";
 
-import { getFuncs } from "../plugins";
+// import { getFuncs } from "../plugins";
 import NamespaceContext from "../NamespaceContext";
 import useDef from "../useDef";
 import { isJson } from "../../../core/utils";

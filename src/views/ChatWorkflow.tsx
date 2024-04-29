@@ -13,8 +13,7 @@ export default function ChatWorkflow({ workflowId, workflow }: Props) {
   // const { nodelets, workflows, updateWorkflow } = useContext(AppContext);
   // const workflow = workflows.find((w) => w.id === workflowId);
   useEffect(() => {
-    window.ipcRenderer.getConversationById("11234").then((res) => {
-      console.log(res);
+    window.ipcRenderer.getConversationById("22323").then((res) => {
       setMessages(res?.globalContext?.messages || []);
     });
   }, []);
@@ -24,7 +23,7 @@ export default function ChatWorkflow({ workflowId, workflow }: Props) {
         messages={messages}
         onSendMessage={(query) => {
           window.ipcRenderer
-            .chat("11234", workflowId, query, workflow)
+            .chat("22323", workflowId, query, workflow)
             .then((res) => {
               setMessages(res);
             });
@@ -33,3 +32,4 @@ export default function ChatWorkflow({ workflowId, workflow }: Props) {
     </Flex>
   );
 }
+

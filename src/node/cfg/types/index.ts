@@ -2,6 +2,7 @@ import { KnowledgeBases } from "./../../../constants/knowledge-base";
 import { ConfigurationType } from "../cfg-type";
 
 import CFGString from "./CFGString";
+import ConfigTags from "./ConfigTags";
 import CFGNumber from "./CFGNumber";
 // import CFGSwitch from "./CFGSwitch";
 import CFGCheckbox from "./CFGCheckbox";
@@ -31,6 +32,8 @@ export function getTargetCFGClass(def) {
   switch (type) {
     case ConfigurationType.STRING:
       return CFGString;
+    case ConfigurationType.TAGS:
+      return ConfigTags;
     case ConfigurationType.LABEL:
       return CFGLabel;
     case ConfigurationType.VALUE_CHOOSER:

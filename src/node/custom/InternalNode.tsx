@@ -1,11 +1,13 @@
 import { AppContext } from "@/context/AppContext";
-import { Flex, Text } from "@mantine/core";
+import { ActionIcon, Flex, LoadingOverlay, Text } from "@mantine/core";
 import React, { useContext } from "react";
 import _get from "lodash/get";
+import { useHover } from "@mantine/hooks";
 
 import { Handle, Position } from "reactflow";
+import { IconSettings } from "@tabler/icons-react";
 type Props = { data: any };
-function getRandomColor() {
+export function getRandomColor() {
   // 生成0-255之间的随机整数
   function getRandom() {
     return Math.floor(Math.random() * 256);
@@ -24,16 +26,19 @@ function getRandomColor() {
   // 拼接为完整的十六进制颜色代码
   return `#${red}${green}${blue}`;
 }
-export default function InternalNode({ data }: Props) {
+export default function InternalNode({ data, ...others }: Props) {
+  console.log(others);
   const { nodelets } = useContext(AppContext);
+  const { hovered, ref } = useHover();
   const nodelet = nodelets.find((nodelet) => nodelet.id === data?.nodeletId);
-  const displayAttr = nodelet?.attrDefinitions.find(
+  const hasConfiguration = !!(nodelet?.configDefinitions || []).length;
+  const displayAttr = nodelet?.configDefinitions.find(
     (definition) => definition.isDisplayed
   );
   const displayContent =
     displayAttr &&
     _get(
-      data?.attr,
+      data?.config,
       `${displayAttr.fieldName}${
         displayAttr.displayPath ? "." + displayAttr.displayPath : ""
       }`
@@ -46,18 +51,43 @@ export default function InternalNode({ data }: Props) {
         direction={"column"}
         align={"center"}
         justify={"start"}
+        ref={ref}
       >
         <div
           className="w-full h-3 shrink-0"
           style={{ backgroundColor: getRandomColor() }}
         ></div>
+        {/* <div
+          className="absolute w-2 h-2 rounded-full top-1 right-1"
+          style={{ backgroundColor: getRandomColor() }}
+        ></div> */}
         <Flex
           direction={"column"}
           className="flex-1 overflow-hidden"
           align={"center"}
           justify={"center"}
+          pos="relative"
         >
+          <LoadingOverlay
+            visible={hovered && hasConfiguration}
+            loaderProps={{
+              children: (
+                <ActionIcon
+                  variant="subtle"
+                  aria-label="Settings"
+                  className="border-none"
+                >
+                  <IconSettings className="w-8 h-8 text-primary" />
+                </ActionIcon>
+              ),
+            }}
+            overlayProps={{ blur: 4 }}
+          />
+          {/* {hovered ? (
+            <IconSettings className="w-6 h-6 mb-1 font-semibold" />
+          ) : ( */}
           <img src={nodelet?.image} className="w-6 h-6 mb-1" />
+          {/* )} */}
           {displayContent && (
             <Text
               fz={13}
@@ -72,7 +102,7 @@ export default function InternalNode({ data }: Props) {
           fz={14}
           fw={600}
           mx={4}
-          className="absolute"
+          className="absolute max-w-40 truncate"
           style={{ bottom: -26 }}
         >
           {nodelet?.name}

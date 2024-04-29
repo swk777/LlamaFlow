@@ -49,7 +49,7 @@ const preload = join(__dirname, "../preload/index.mjs");
 const url = process.env.VITE_DEV_SERVER_URL;
 const indexHtml = join(process.env.DIST, "index.html");
 
-JSONFilePreset("default22.json", DefaultData)
+JSONFilePreset("default29.json", DefaultData)
   .then((db) => {
     ipcMain.on("add-workflow", async (event, post) => {
       await db.read();
@@ -69,6 +69,11 @@ JSONFilePreset("default22.json", DefaultData)
       await db.read();
       return db.data.knowledgeBases;
     });
+    ipcMain.handle("get-integrations", async () => {
+      await db.read();
+      return db.data.integrations;
+    });
+
     ipcMain.handle("add-knowledgeBase", async (event, post) => {
       await db.read();
       const newKnowledgeBase = createKnowledgeBase(db, post);
@@ -89,18 +94,18 @@ JSONFilePreset("default22.json", DefaultData)
     ipcMain.handle("save-workflows", async (event, post) => {
       await db.read();
       const { workflowIdx, workflow } = post;
-      // const workflowIdx = db.data.workflows.findIndex(
-      //   (wf) => wf.id === workflowId
-      // );
-      // const newWorkflows = [
-      //   ...db.data.workflows.slice(0, workflowIdx),
-      //   newWorkflow,
-      //   ...db.data.workflows.slice(workflowIdx + 1),
-      // ];
       await db.update(({ workflows }) => (workflows[workflowIdx] = workflow));
       await db.read();
       return db.data.workflows;
-      // await db.write();
+    });
+    ipcMain.handle("save-integrations", async (event, post) => {
+      await db.read();
+      const { integrationIdx, integration } = post;
+      await db.update(
+        ({ integrations }) => (integrations[integrationIdx] = integration)
+      );
+      await db.read();
+      return db.data.integrations;
     });
     ipcMain.handle("chat", async (event, post) => {
       await db.read();

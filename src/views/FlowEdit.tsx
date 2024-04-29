@@ -30,11 +30,12 @@ import { useParams } from "react-router-dom";
 import { Drawer, Flex } from "@mantine/core";
 import ChatWorkflow from "./ChatWorkflow";
 import { getInitialWorkflow } from "@/constants/workflow";
+import { buildDefaultConfig } from "@/utils/utils";
 
 const nodeTypes = { internalNodelet: InternalNode };
 
 function FlowEdit() {
-  let { workflowId = "" } = useParams();
+  const { workflowId = "" } = useParams();
   console.log(workflowId);
   const [configOpened, setConfigOpened] = useState(false);
   const [chatOpened, setChatOpened] = useState(false);
@@ -54,7 +55,6 @@ function FlowEdit() {
   const onDrop = useCallback(
     (event) => {
       event.preventDefault();
-
       const nodeletId = event.dataTransfer.getData("application/reactflow");
       // // check if the dropped element is valid
       if (typeof nodeletId === "undefined" || !nodeletId) {
@@ -77,7 +77,11 @@ function FlowEdit() {
         id: uuidv4(),
         type: "node",
         position,
-        data: { label: nodelet.id, nodeletId },
+        data: {
+          label: nodelet.id,
+          nodeletId,
+          config: buildDefaultConfig(nodelet),
+        },
       };
       console.log(newNode);
       setNodes((nds) => nds.concat(newNode));
@@ -108,7 +112,7 @@ function FlowEdit() {
     setSelectedNode(node);
   }, []);
   useEffect(() => {
-    if (!configOpened && (selectedNodelet?.attrDefinitions || []).length) {
+    if (!configOpened && (selectedNodelet?.configDefinitions || []).length) {
       setConfigOpened(true);
     } else {
       setConfigOpened(false);
@@ -232,8 +236,8 @@ function FlowEdit() {
         >
           <Configuration
             key={1}
-            definitions={selectedNodelet?.attrDefinitions || []}
-            config={selectedNode?.data.attr || {}}
+            definitions={selectedNodelet?.configDefinitions || []}
+            config={selectedNode?.data.config || {}}
             style={{ padding: "20px 0" }}
             onChange={(config) => {
               const selectedNodeIndex = nodes.findIndex(
@@ -243,7 +247,7 @@ function FlowEdit() {
                 ...nodes.slice(0, selectedNodeIndex),
                 {
                   ...selectedNode,
-                  data: { ...selectedNode.data, attr: config },
+                  data: { ...selectedNode.data, config },
                 },
                 ...nodes.slice(selectedNodeIndex + 1),
               ]);

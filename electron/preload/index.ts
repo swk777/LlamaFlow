@@ -4,11 +4,14 @@ import { ipcRenderer, contextBridge } from "electron";
 contextBridge.exposeInMainWorld("ipcRenderer", {
   addWorkflow: (workflow) => ipcRenderer.send("add-workflow", workflow),
   getWorkflows: () => ipcRenderer.invoke("get-workflows"),
+  getIntegrations: () => ipcRenderer.invoke("get-integrations"),
   getNodelets: () => ipcRenderer.invoke("get-nodelets"),
   getKnowledgeBases: () => ipcRenderer.invoke("get-knowledgeBases"),
   getConversationById: (id) => ipcRenderer.invoke("get-conversation", { id }),
   saveWorkflows: (workflowIdx, workflow) =>
     ipcRenderer.invoke("save-workflows", { workflowIdx, workflow }),
+  saveIntegration: (integrationIdx, integration) =>
+    ipcRenderer.invoke("save-integrations", { integrationIdx, integration }),
   addKnowledgeBase: (name, description, model, files) =>
     ipcRenderer.invoke("add-knowledgeBase", {
       files,

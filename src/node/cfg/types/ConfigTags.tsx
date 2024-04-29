@@ -6,7 +6,7 @@ import React, {
   useState,
   useRef,
 } from "react";
-import { Input } from "@mantine/core";
+import { Input, TagsInput } from "@mantine/core";
 import DefContext from "../ConfigContext";
 // import NamespaceContext from "../NamespaceContext";
 import useDef, { useDependOnMap } from "../useDef";
@@ -19,7 +19,7 @@ import {
 } from "@/type/cfgDefinition";
 // import { Input } from "@/components/ui/input";
 
-interface ICFGString extends ICFGDefinitionBase {
+interface IConfigTags extends ICFGDefinitionBase {
   model?: {
     unit?: string;
     disabledOnMap?: ICFGDependOnMap;
@@ -34,10 +34,10 @@ export const labelRequired = (ph: string, required: boolean): string => {
   return `${ph}`;
 };
 
-function CFGString({
+function ConfigTags({
   definition,
   style,
-}: ICFGBaseProps<ICFGString>): ReactElement {
+}: ICFGBaseProps<IConfigTags>): ReactElement {
   const [fieldValue, updateFv, readonly] = useDef(definition);
   const prevFv = useRef(fieldValue);
   const [inputValue, setInputValue] = useState(fieldValue);
@@ -54,9 +54,9 @@ function CFGString({
     formatter = (v): string => `${v}${unit}`;
   }
   const onChange = useCallback(
-    (e): void => {
-      updateFv(e.currentTarget.value);
-      setInputValue(e.target.value);
+    (value): void => {
+      updateFv(value);
+      setInputValue(value);
     },
     [updateFv]
   );
@@ -96,23 +96,22 @@ function CFGString({
   return (
     <Input.Wrapper
       label={definition?.label}
-      className="text-left"
       description={definition?.description}
       withAsterisk={definition.required}
+      className="text-left"
     >
-      <Input
+      <TagsInput
+        data={[]}
         value={inputValue}
         onChange={onChange}
-        onBlur={onBlur}
         placeholder={labelRequired(definition.placeholder, definition.required)}
         maxLength={maxLength}
         disabled={readonly || disabled}
-        //   formatter={formatter}
         style={style}
       />
     </Input.Wrapper>
   );
 }
 
-const Default = React.memo(CFGString);
+const Default = React.memo(ConfigTags);
 export default Default;

@@ -78,3 +78,8 @@
   top: 0;
   left: 0;
 }
+button:focus,
+button:active {
+  outline: none !important;
+  border-color: transparent !important;
+}

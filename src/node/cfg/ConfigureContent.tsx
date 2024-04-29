@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import { getTargetCFGClass } from "./types";
 import ConfigContext from "./ConfigContext";
+import { Flex } from "@mantine/core";
 
 type Props = {};
 
@@ -8,24 +9,12 @@ export default function ConfigureContent({ definitions, style }: Props) {
   const { isFieldVisible } = useContext(ConfigContext);
 
   return (
-    <div className={"column-flex"} style={style}>
+    <Flex style={style} gap="xs" direction={"column"}>
       {definitions &&
         definitions.map((def) => {
           const TargetDef = getTargetCFGClass(def);
           if (TargetDef && isFieldVisible(def)) {
             const rowStyle = { marginTop: 10 };
-            // if (hasUnifyTitle(TargetDef)) {
-            //   return (
-            //     <div
-            //       key={def.name || def.label}
-            //       className="row-flex-baseline"
-            //       style={rowStyle}
-            //     >
-            //       <TitleClass def={def} />
-            //       <TargetDef definition={def} className="flex1" />
-            //     </div>
-            //   );
-            // }
             return (
               <TargetDef
                 key={def.name || def.label}
@@ -36,6 +25,6 @@ export default function ConfigureContent({ definitions, style }: Props) {
           }
           return null;
         })}
-    </div>
+    </Flex>
   );
 }

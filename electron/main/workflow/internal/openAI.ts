@@ -4,30 +4,40 @@ import { getContextPrompt } from "../utils";
 
 const httpsAgent = new HttpsProxyAgent("http://127.0.0.1:7890");
 
-export async function executeOpenAI(
-  node,
+export async function executeOpenAI({
+  nodeId,
+  nodeContext = {},
+  nodeConfig,
   nodeInputs,
-  globalContext,
-  setNodeContext
-) {
+  setNodeContext,
+}) {
   const { context = [], query = "" } = nodeInputs;
+  const { model, systemPrompt, temperature, contextCount } = nodeConfig;
+  const { messages = [] } = nodeContext;
+  messages.push({
+    role: "user",
+    content: context.length ? getContextPrompt(context.join(""), query) : query,
+  });
   const openai = new OpenAI({
     apiKey: "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", // This is the default and can be omitted
     httpAgent: httpsAgent,
   });
+  const completeMessages = messages
+    .filter((message) => message.role !== "system")
+    .slice(-(parseInt(contextCount) * 2 + 1));
+  (systemPrompt || "").trim() &&
+    completeMessages.unshift({ role: "system", content: systemPrompt });
+  console.log(completeMessages);
   const chatCompletion = await openai.chat.completions.create({
-    messages: [
-      {
-        role: "user",
-        content: context.length
-          ? getContextPrompt(context.join(""), query)
-          : query,
-      },
-    ],
-    model: "gpt-3.5-turbo",
+    messages: completeMessages,
+    model,
+    temperature: parseFloat(temperature),
   });
-  console.log(chatCompletion.choices[0].message.content);
-  setNodeContext(node?.id, {
-    outputs: { answer: chatCompletion.choices[0].message.content },
+  const returnMessage = chatCompletion.choices[0].message;
+  completeMessages.push(returnMessage);
+  setNodeContext(nodeId, {
+    ...nodeContext,
+    messages: completeMessages,
+    outputs: { answer: returnMessage?.content || "" },
   });
 }

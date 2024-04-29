@@ -1,8 +1,10 @@
 import { IWorkflowStatus } from "@/type/workflow";
 import { Nodelets } from "./nodelets";
 import { KnowledgeBases } from "./knowledge-base";
+import { Integrations } from "./integrations";
 
 export const DefaultData = {
+  integrations: Integrations,
   knowledgeBases: KnowledgeBases,
   conversations: {},
   workflows: [
@@ -19,7 +21,7 @@ export const DefaultData = {
             data: {
               nodeletId: "input1",
               label: "Input",
-              attr: { category: "INPUT", config: { type: "UserInput" } },
+              config: { category: "INPUT", config: { type: "UserInput" } },
             },
           },
           {
@@ -28,7 +30,7 @@ export const DefaultData = {
             data: {
               nodeletId: "knowledgeBase",
               label: "Knowledge Base",
-              attr: { knowledgeBaseId: "2222" },
+              config: { knowledgeBaseId: "2222" },
             },
           },
           {
@@ -37,7 +39,7 @@ export const DefaultData = {
             data: {
               nodeletId: "openai",
               label: "OpenAI",
-              attr: {
+              config: {
                 category: "PROCESSOR",
                 subCategory: "LLM",
                 config: { type: "OpenAI", model: "gpt-4-turbo-preview" },
@@ -50,7 +52,7 @@ export const DefaultData = {
             data: {
               nodeletId: "ChatOutput",
               label: "ChatBot",
-              attr: {},
+              config: {},
             },
           },
         ],
@@ -99,7 +101,7 @@ export const DefaultData = {
             data: {
               nodeletId: "input1",
               label: "Input",
-              attr: { category: "INPUT", config: { type: "UserInput" } },
+              config: { category: "INPUT", config: { type: "UserInput" } },
             },
           },
           {
@@ -108,7 +110,7 @@ export const DefaultData = {
             data: {
               nodeletId: "knowledgeBase",
               label: "Knowledge Base",
-              attr: { knowledgeBaseId: "2222" },
+              config: { knowledgeBaseId: "2222" },
             },
           },
           {
@@ -117,7 +119,7 @@ export const DefaultData = {
             data: {
               nodeletId: "ollama",
               label: "Ollama",
-              attr: {
+              config: {
                 category: "PROCESSOR",
                 subCategory: "LLM",
                 config: { type: "OpenAI", model: "gpt-4-turbo-preview" },
@@ -130,7 +132,7 @@ export const DefaultData = {
             data: {
               nodeletId: "ChatOutput",
               label: "ChatBot",
-              attr: {},
+              config: {},
             },
           },
         ],

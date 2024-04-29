@@ -1,7 +1,7 @@
 import React, { useMemo, useEffect, useContext, ReactElement } from "react";
 // import { Icon, Select, Tooltip, ISelectProps } from "@guandata/design";
 // import cn from "classnames";
-import { Select } from "@mantine/core";
+import { MultiSelect, Select } from "@mantine/core";
 import PropTypes from "prop-types";
 // import useStyles from "isomorphic-style-loader/useStyles";
 // import R from "ramda";
@@ -89,16 +89,10 @@ export function useSelectCheck(
 }
 
 function CFGValueChooser(props: IProps): ReactElement {
-  const {
-    definition,
-    mode,
-    style,
-    className,
-    allowClear,
-    onSearch,
-    ...others
-  } = props;
+  const { definition, style, className, allowClear, onSearch, ...others } =
+    props;
   const [fieldValue, updateFv, readonly] = useDef(definition);
+  console.log(fieldValue);
   const { from } = definition.model || {};
   const { getValue } = useContext(NamespaceContext);
   const disableSelect = useMemo(
@@ -147,15 +141,18 @@ function CFGValueChooser(props: IProps): ReactElement {
   //     field !== undefined && items.findIndex(R.propEq("value", field)) === -1;
   const findIsMissField = (field) => field !== undefined;
   const missFields =
-    mode === "multiple" && (fieldValue || []).filter(findIsMissField);
+    definition?.mode === "multiple" &&
+    (fieldValue || []).filter(findIsMissField);
   const isMissing = (): boolean =>
-    mode !== "multiple" && findIsMissField(fieldValue);
+    definition?.mode !== "multiple" && findIsMissField(fieldValue);
 
   const [v, ph] = useSelectCheck(fieldValue, definition, isMissing, fieldValue);
+  const SelectComponent =
+    definition?.mode === "multiple" ? MultiSelect : Select;
   return (
     <TooltipProvider>
       <div className="flex-1 row-flex-center">
-        {mode === "multiple" && missFields.length > 0 && (
+        {/* {definition?.mode === "multiple" && missFields.length > 0 && (
           <Tooltip>
             <TooltipTrigger>{`存在丢失字段：${missFields.join(
               "、"
@@ -167,9 +164,11 @@ function CFGValueChooser(props: IProps): ReactElement {
               />
             </TooltipContent>
           </Tooltip>
-        )}
-        <Select
+        )} */}
+        <SelectComponent
+          withAsterisk={definition.required}
           label={definition.label}
+          description={definition?.description}
           value={fieldValue}
           onChange={updateFv}
           onSearch={onSearch}
@@ -178,7 +177,7 @@ function CFGValueChooser(props: IProps): ReactElement {
           disabled={disabled || readonly}
           className={className}
           style={style}
-          mode={mode}
+          // mode={definition?.mode}
           placeholder={ph}
           clearable={allowClear || definition.model.allowClear}
           {...others}

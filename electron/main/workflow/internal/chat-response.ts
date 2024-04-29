@@ -1,10 +1,8 @@
-export async function executeChatResponse(
-  node,
+export async function executeChatResponse({
   nodeInputs,
   globalContext,
-  setNodeContext,
-  setGlobalContext
-) {
+  setGlobalContext,
+}) {
   const { output } = nodeInputs;
   setGlobalContext({
     ...globalContext,

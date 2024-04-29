@@ -9,6 +9,7 @@ export enum TextMode {
 
 export enum ConfigurationType {
   STRING = "STRING",
+  TAGS = "TAGS",
   DEBOUNCE_STRING = "DEBOUNCE_STRING",
   NUMBER = "NUMBER",
   BOOLEAN = "BOOLEAN",

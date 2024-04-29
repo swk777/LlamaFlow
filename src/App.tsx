@@ -16,6 +16,7 @@ import ChatWorkflow from "./views/ChatWorkflow";
 import { Notifications } from "@mantine/notifications";
 import KnowledgeBaseBoard from "./views/KnowledgeBaseBoard";
 import KnowledgeBase from "./views/KnowledgeBase";
+import { Integration } from "./views/Integration";
 
 const theme = createTheme({
   /** Put your mantine theme override here */
@@ -38,6 +39,12 @@ function App() {
                     </ReactFlowProvider>
                   }
                 />
+                <Route
+                  path="/integration/:integrationId?"
+                  element={<Integration />}
+                >
+                  {/* <Route index element={<IntegrationConfig />} /> */}
+                </Route>
                 <Route path="/chat/:workflowId" element={<ChatWorkflow />} />
                 <Route path="/knowledge-base/:id" element={<KnowledgeBase />} />
                 <Route
