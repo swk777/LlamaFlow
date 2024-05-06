@@ -19,12 +19,15 @@ interface IAppContext {
   workflows: IWorkflow[];
   nodelets: Nodelet[];
   knowledgeBases: IKnowledgeBase[];
+  conversations: any[];
+  setConversations?: (newData: any[]) => void;
   setWorkflows?: (newData: IWorkflow[]) => void;
   setNodelets?: (newData: Nodelet[]) => void;
   setKnowledgeBases?: (newData: IKnowledgeBase[]) => void;
   updateWorkflow?: (workflowId: string, newData: IWorkflow) => void;
   updateIntegration?: (integrationId: string, newData: any) => void;
   refreshKnowledgeBase: () => void;
+  refreshConversations: () => void;
   refreshWorkflow: () => void;
 }
 export const AppContext = createContext<IAppContext>({
@@ -45,6 +48,8 @@ export function AppContextProvider(props: IProviderProps): ReactElement {
     DefaultData.integrations as any[]
   );
   const [nodelets, setNodelets] = useState(DefaultData.nodelets as Nodelet[]);
+  const [conversations, setConversations] = useState(DefaultData.conversations);
+
   const { children } = props;
   const updateWorkflow = useCallback(
     async (workflowId: string, newData: IWorkflow) => {
@@ -93,11 +98,15 @@ export function AppContextProvider(props: IProviderProps): ReactElement {
   const refreshIntegrations = async () => {
     setIntegrations(await window.ipcRenderer.getIntegrations());
   };
+  const refreshConversations = async () => {
+    setConversations(await window.ipcRenderer.getConversations());
+  };
   useEffect(() => {
     window.ipcRenderer.getNodelets().then(setNodelets);
     refreshWorkflow();
     refreshKnowledgeBase();
     refreshIntegrations();
+    refreshConversations();
   }, []);
   return (
     <AppContext.Provider
@@ -106,10 +115,13 @@ export function AppContextProvider(props: IProviderProps): ReactElement {
         workflows,
         nodelets,
         knowledgeBases,
+        conversations,
+        setConversations,
         setWorkflows,
         setNodelets,
         setKnowledgeBases,
         refreshWorkflow,
+        refreshConversations,
         updateWorkflow,
         updateIntegration,
         refreshKnowledgeBase,

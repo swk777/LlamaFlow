@@ -1,5 +1,3 @@
-import { useState } from "react";
-import UpdateElectron from "@/components/update";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import "./App.css";
@@ -12,11 +10,12 @@ import FlowEdit from "./views/FlowEdit";
 import { createTheme, MantineProvider } from "@mantine/core";
 import { AppContextProvider } from "@/context/AppContext";
 import { ReactFlowProvider } from "reactflow";
-import ChatWorkflow from "./views/ChatWorkflow";
 import { Notifications } from "@mantine/notifications";
 import KnowledgeBaseBoard from "./views/KnowledgeBaseBoard";
 import KnowledgeBase from "./views/KnowledgeBase";
 import { Integration } from "./views/Integration";
+import Conversations from "./views/Conversations";
+import ChatConversation from "./views/ChatConversation";
 
 const theme = createTheme({
   /** Put your mantine theme override here */
@@ -45,7 +44,13 @@ function App() {
                 >
                   {/* <Route index element={<IntegrationConfig />} /> */}
                 </Route>
-                <Route path="/chat/:workflowId" element={<ChatWorkflow />} />
+
+                <Route path="/chat" element={<Conversations />}>
+                  <Route
+                    path="/chat/:conversationId"
+                    element={<ChatConversation />}
+                  />
+                </Route>
                 <Route path="/knowledge-base/:id" element={<KnowledgeBase />} />
                 <Route
                   path="/knowledgeBaseBoard"

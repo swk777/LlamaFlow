@@ -3,6 +3,7 @@ import { ConfigurationType } from "@/node/cfg/cfg-type";
 export const Integrations = [
   {
     id: "OpenAI",
+    label: "OpenAI",
     configDefinitions: [
       {
         label: "API Key:",
@@ -16,6 +17,7 @@ export const Integrations = [
   },
   {
     id: "Ollama",
+    label: "Ollama",
     configDefinitions: [
       {
         label: "Base URL:",

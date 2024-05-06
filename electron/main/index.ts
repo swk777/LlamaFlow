@@ -6,7 +6,7 @@ import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 import { update } from "./update";
 import { DefaultData } from "@/constants/initialData";
-import { chat } from "./workflow/chat";
+import { chat, newConversation } from "./workflow/chat";
 import { addDocuments, createKnowledgeBase } from "./knowledgeBase";
 globalThis.__filename = fileURLToPath(import.meta.url);
 globalThis.__dirname = dirname(__filename);
@@ -49,7 +49,7 @@ const preload = join(__dirname, "../preload/index.mjs");
 const url = process.env.VITE_DEV_SERVER_URL;
 const indexHtml = join(process.env.DIST, "index.html");
 
-JSONFilePreset("default29.json", DefaultData)
+JSONFilePreset("default1.json", DefaultData)
   .then((db) => {
     ipcMain.on("add-workflow", async (event, post) => {
       await db.read();
@@ -73,7 +73,10 @@ JSONFilePreset("default29.json", DefaultData)
       await db.read();
       return db.data.integrations;
     });
-
+    ipcMain.handle("get-conversations", async () => {
+      await db.read();
+      return db.data.conversations;
+    });
     ipcMain.handle("add-knowledgeBase", async (event, post) => {
       await db.read();
       const newKnowledgeBase = createKnowledgeBase(db, post);
@@ -91,6 +94,7 @@ JSONFilePreset("default29.json", DefaultData)
       await db.read();
       return db.data.conversations[post.id];
     });
+
     ipcMain.handle("save-workflows", async (event, post) => {
       await db.read();
       const { workflowIdx, workflow } = post;
@@ -118,7 +122,11 @@ JSONFilePreset("default29.json", DefaultData)
         db
       );
       return conversation?.globalContext.messages;
-      // await db.update(({ workflows }) => (workflows[workflowIdx] = workflow));
+    });
+    ipcMain.handle("new-conversation", async (event, post) => {
+      await db.read();
+      const { workflowId, query = "" } = post;
+      await newConversation(workflowId, query, db);
     });
   })
   .catch(console.log);

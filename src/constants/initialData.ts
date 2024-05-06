@@ -6,7 +6,7 @@ import { Integrations } from "./integrations";
 export const DefaultData = {
   integrations: Integrations,
   knowledgeBases: KnowledgeBases,
-  conversations: {},
+  conversations: [],
   workflows: [
     {
       id: "1",

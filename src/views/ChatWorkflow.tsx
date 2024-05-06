@@ -1,20 +1,28 @@
 import { AppContext } from "@/context/AppContext";
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useMemo, useState } from "react";
 import { useParams } from "react-router-dom";
 import Chat from "./Chat";
 import { Flex } from "@mantine/core";
 import { IWorkflow } from "@/type/workflow";
+import { v4 as uuidv4 } from "uuid";
+import { Conversation } from "@/type/conversation";
 
-type Props = { workflowId: string; workflow?: IWorkflow };
+type Props = {
+  workflow?: IWorkflow;
+  conversation?: Conversation;
+};
 
-export default function ChatWorkflow({ workflowId, workflow }: Props) {
-  // let { workflowId = "" } = useParams();
-  const [messages, setMessages] = useState([]);
-  // const { nodelets, workflows, updateWorkflow } = useContext(AppContext);
-  // const workflow = workflows.find((w) => w.id === workflowId);
+export default function ChatWorkflow({ workflow, conversation }: Props) {
+  const { refreshConversations } = useContext(AppContext);
+  const messages = useMemo(() => {
+    return conversation?.globalContext?.messages ?? [];
+  }, [conversation]);
+  console.log(workflow);
+  const id = conversation?.sessionId ?? `temp-${workflow?.id}-${uuidv4()}`;
   useEffect(() => {
-    window.ipcRenderer.getConversationById("22323").then((res) => {
-      setMessages(res?.globalContext?.messages || []);
+    window.ipcRenderer.getConversationById(id).then((res) => {
+      refreshConversations();
+      // setMessages(res?.globalContext?.messages || []);
     });
   }, []);
   return (
@@ -23,13 +31,14 @@ export default function ChatWorkflow({ workflowId, workflow }: Props) {
         messages={messages}
         onSendMessage={(query) => {
           window.ipcRenderer
-            .chat("22323", workflowId, query, workflow)
+            .chat(id, workflow?.id, query, workflow)
             .then((res) => {
-              setMessages(res);
+              console.log(res);
+              refreshConversations();
+              // setMessages(res);
             });
         }}
       />
     </Flex>
   );
 }
-

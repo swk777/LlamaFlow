@@ -17,7 +17,6 @@ import {
   ICFGDefinitionBase,
   ICFGDependOnMap,
 } from "@/type/cfgDefinition";
-// import { Input } from "@/components/ui/input";
 
 interface IConfigTags extends ICFGDefinitionBase {
   model?: {

@@ -29,7 +29,7 @@ function CFGNumber({
   return (
     <div className="row-flex-center">
       {prefix && (
-        <span className="no-shrink" style={{ marginRight: 10 }}>
+        <span className="shrink-0" style={{ marginRight: 10 }}>
           {prefix}
         </span>
       )}
@@ -43,7 +43,7 @@ function CFGNumber({
         max={max}
         suffix={unit}
       />
-      {suffix && <span className="no-shrink ml-10">{suffix}</span>}
+      {suffix && <span className="shrink-0 ml-10">{suffix}</span>}
     </div>
   );
 }

@@ -15,45 +15,26 @@ import classes from "./Integration.module.css";
 import { LinksGroup } from "./components/LinksGroup";
 import { Outlet, useLocation, useParams } from "react-router-dom";
 import IntegrationConfig from "./IntegrationConfig";
+import { useContext } from "react";
+import { AppContext } from "@/context/AppContext";
 
-const mockdata = [
-  { label: "Dashboard", icon: IconGauge },
+const getIntegrationsLinksData = (integrations) => [
   {
     label: "AI Models",
     icon: IconNotes,
     initiallyOpened: true,
-    links: [
-      { label: "OpenAI", link: "/integration/OpenAI" },
-      { label: "Ollama", link: "/integration/Ollama" },
-    ],
+    links: integrations.map((integration) => ({
+      label: integration.label,
+      link: `/integration/${integration.id}`,
+    })),
   },
-  // {
-  //   label: "Releases",
-  //   icon: IconCalendarStats,
-  //   links: [
-  //     { label: "Upcoming releases", link: "/" },
-  //     { label: "Previous releases", link: "/" },
-  //     { label: "Releases schedule", link: "/" },
-  //   ],
-  // },
-  // { label: "Analytics", icon: IconPresentationAnalytics },
-  // { label: "Contracts", icon: IconFileAnalytics },
-  // { label: "Settings", icon: IconAdjustments },
-  // {
-  //   label: "Security",
-  //   icon: IconLock,
-  //   links: [
-  //     { label: "Enable 2FA", link: "/" },
-  //     { label: "Change password", link: "/" },
-  //     { label: "Recovery codes", link: "/" },
-  //   ],
-  // },
 ];
 
 export function Integration() {
   const location = useLocation();
   const { integrationId } = useParams();
-  const links = mockdata.map((item) => (
+  const { integrations } = useContext(AppContext);
+  const links = getIntegrationsLinksData(integrations).map((item) => (
     <LinksGroup {...item} key={item.label} />
   ));
   console.log(location);

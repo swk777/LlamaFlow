@@ -3,12 +3,6 @@ import React, { useContext, useEffect, useMemo } from "react";
 import useDef, { useDependOnMap } from "../useDef";
 import NamespaceContext from "../NamespaceContext";
 import { useSelectCheck } from "./CFGValueChooser";
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger,
-} from "@/components/ui/tooltip";
 import { IconExclamationCircle } from "@tabler/icons-react";
 import { AppContext } from "@/context/AppContext";
 
@@ -63,9 +57,8 @@ export default function CFGKnowledgeBase(props: Props) {
 
   const [v, ph] = useSelectCheck(fieldValue, definition, isMissing, fieldValue);
   return (
-    <TooltipProvider>
-      <div className="flex1 row-flex-center">
-        {mode === "multiple" && missFields.length > 0 && (
+    <div className="flex1 row-flex-center">
+      {/* {mode === "multiple" && missFields.length > 0 && (
           <Tooltip>
             <TooltipTrigger>{`存在丢失字段：${missFields.join(
               "、"
@@ -77,25 +70,24 @@ export default function CFGKnowledgeBase(props: Props) {
               />
             </TooltipContent>
           </Tooltip>
-        )}
+        )} */}
 
-        <Select
-          value={fieldValue?.id}
-          onChange={(_, item) => {
-            updateFv({ id: item.value, name: item.label });
-          }}
-          onSearch={onSearch}
-          data={items}
-          // renderFunc={renderFunc}
-          disabled={disabled || readonly}
-          className={className}
-          style={style}
-          mode={mode}
-          placeholder={ph}
-          clearable={allowClear || definition?.model?.allowClear}
-          {...others}
-        />
-      </div>
-    </TooltipProvider>
+      <Select
+        value={fieldValue?.id}
+        onChange={(_, item) => {
+          updateFv({ id: item.value, name: item.label });
+        }}
+        onSearch={onSearch}
+        data={items}
+        // renderFunc={renderFunc}
+        disabled={disabled || readonly}
+        className={className}
+        style={style}
+        mode={mode}
+        placeholder={ph}
+        clearable={allowClear || definition?.model?.allowClear}
+        {...others}
+      />
+    </div>
   );
 }

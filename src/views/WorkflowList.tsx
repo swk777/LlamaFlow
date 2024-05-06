@@ -1,30 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@/components/ui/table";
-import { Badge } from "@/components/ui/badge";
-import {
-  DropdownMenu,
-  DropdownMenuCheckboxItem,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
+
 import {
   IconDots,
   IconDotsVertical,
@@ -34,6 +9,7 @@ import {
 } from "@tabler/icons-react";
 import { AppContext } from "@/context/AppContext";
 import { useNavigate } from "react-router-dom";
+import { Badge, Table } from "@mantine/core";
 
 type Props = {};
 
@@ -42,49 +18,45 @@ export default function WorkflowList({}: Props) {
   const navigate = useNavigate();
   return (
     <Table>
-      <TableHeader>
-        <TableRow>
-          <TableHead className="hidden w-[100px] sm:table-cell">
+      <Table.Thead>
+        <Table.Tr>
+          <Table.Th className="hidden w-[100px] sm:table-cell">
             <span className="sr-only">Image</span>
-          </TableHead>
-          <TableHead>Name</TableHead>
-          <TableHead className="text-center">Category</TableHead>
+          </Table.Th>
+          <Table.Th>Name</Table.Th>
+          <Table.Th className="text-center">Category</Table.Th>
           {/* <TableHead>Price</TableHead>
                       <TableHead className="hidden md:table-cell">
                         Total Sales
                       </TableHead> */}
-          <TableHead className="hidden md:table-cell text-center">
+          <Table.Th className="hidden md:table-cell text-center">
             Last modified
-          </TableHead>
-          <TableHead>
+          </Table.Th>
+          <Table.Th>
             <span className="sr-only">Actions</span>
-          </TableHead>
-        </TableRow>
-      </TableHeader>
-      <TableBody>
+          </Table.Th>
+        </Table.Tr>
+      </Table.Thead>
+      <Table.Tbody>
         {(workflows || []).map(({ id, name, category, lastModified }, idx) => (
-          <TableRow key={id}>
-            <TableCell
+          <Table.Tr key={id}>
+            <Table.Td
               className="font-medium hidden sm:table-cell w-1/15"
               height={50}
             >
               {idx + 1}.
-            </TableCell>
-            <TableCell className="font-medium w-1/3 text-left">
-              {name}
-            </TableCell>
-            <TableCell>
+            </Table.Td>
+            <Table.Td className="font-medium w-1/3 text-left">{name}</Table.Td>
+            <Table.Td>
               <Badge variant="outline">{category}</Badge>
-            </TableCell>
-            <TableCell className="hidden md:table-cell">
-              {lastModified}
-            </TableCell>
-            <TableCell>
+            </Table.Td>
+            <Table.Td className="hidden md:table-cell">{lastModified}</Table.Td>
+            <Table.Td>
               <div className="flex flex-row justify-between">
                 <IconPlayerPlay
                   size={16}
                   className="text-primary cursor-pointer"
-                  onClick={() => navigate("/chat/1")}
+                  // onClick={() => navigate("/chat/1")}
                 />
                 <IconPencil
                   size={16}
@@ -93,7 +65,7 @@ export default function WorkflowList({}: Props) {
                   }}
                   className="text-primary cursor-pointer"
                 />
-                <DropdownMenu>
+                {/* <DropdownMenu>
                   <DropdownMenuTrigger asChild>
                     <IconDotsVertical size={16} className="cursor-pointer" />
                   </DropdownMenuTrigger>
@@ -102,12 +74,12 @@ export default function WorkflowList({}: Props) {
                     <DropdownMenuItem>Edit</DropdownMenuItem>
                     <DropdownMenuItem>Delete</DropdownMenuItem>
                   </DropdownMenuContent>
-                </DropdownMenu>
+                </DropdownMenu> */}
               </div>
-            </TableCell>
-          </TableRow>
+            </Table.Td>
+          </Table.Tr>
         ))}
-      </TableBody>
+      </Table.Tbody>
     </Table>
   );
 }

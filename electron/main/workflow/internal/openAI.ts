@@ -8,6 +8,7 @@ export async function executeOpenAI({
   nodeId,
   nodeContext = {},
   nodeConfig,
+  integrationConfig,
   nodeInputs,
   setNodeContext,
 }) {
@@ -19,7 +20,7 @@ export async function executeOpenAI({
     content: context.length ? getContextPrompt(context.join(""), query) : query,
   });
   const openai = new OpenAI({
-    apiKey: "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", // This is the default and can be omitted
+    apiKey: integrationConfig.apiKey, // This is the default and can be omitted
     httpAgent: httpsAgent,
   });
   const completeMessages = messages

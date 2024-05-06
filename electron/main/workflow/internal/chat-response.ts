@@ -4,6 +4,8 @@ export async function executeChatResponse({
   setGlobalContext,
 }) {
   const { output } = nodeInputs;
+  console.log("output");
+  console.log(output);
   setGlobalContext({
     ...globalContext,
     latestMessage: output,

@@ -6,26 +6,9 @@ import { useHover } from "@mantine/hooks";
 
 import { Handle, Position } from "reactflow";
 import { IconSettings } from "@tabler/icons-react";
+import { getRandomColor } from "@/utils/utils";
 type Props = { data: any };
-export function getRandomColor() {
-  // 生成0-255之间的随机整数
-  function getRandom() {
-    return Math.floor(Math.random() * 256);
-  }
 
-  // 将数字转换为十六进制字符串，确保结果是两位数
-  function toHex(n) {
-    return n.toString(16).padStart(2, "0");
-  }
-
-  // 生成三个分量（红、绿、蓝）
-  const red = toHex(getRandom());
-  const green = toHex(getRandom());
-  const blue = toHex(getRandom());
-
-  // 拼接为完整的十六进制颜色代码
-  return `#${red}${green}${blue}`;
-}
 export default function InternalNode({ data, ...others }: Props) {
   console.log(others);
   const { nodelets } = useContext(AppContext);
@@ -55,7 +38,7 @@ export default function InternalNode({ data, ...others }: Props) {
       >
         <div
           className="w-full h-3 shrink-0"
-          style={{ backgroundColor: getRandomColor() }}
+          style={{ backgroundColor: getRandomColor(nodelet.id) }}
         ></div>
         {/* <div
           className="absolute w-2 h-2 rounded-full top-1 right-1"

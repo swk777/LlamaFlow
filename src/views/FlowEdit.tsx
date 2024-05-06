@@ -1,5 +1,3 @@
-import { Button } from "@/components/ui/button";
-import { Separator } from "@/components/ui/separator";
 import Configuration from "@/node/cfg/Configuration";
 import { IconBrandHipchat, IconDeviceFloppy } from "@tabler/icons-react";
 import {
@@ -27,7 +25,7 @@ import Nodelet from "./Nodelet";
 import InternalNode from "@/node/custom/InternalNode";
 import { AppContext } from "@/context/AppContext";
 import { useParams } from "react-router-dom";
-import { Drawer, Flex } from "@mantine/core";
+import { Button, Divider, Drawer, Flex } from "@mantine/core";
 import ChatWorkflow from "./ChatWorkflow";
 import { getInitialWorkflow } from "@/constants/workflow";
 import { buildDefaultConfig } from "@/utils/utils";
@@ -119,16 +117,14 @@ function FlowEdit() {
     }
   }, [selectedNode]);
   return (
-    <div className="flex flex-col flex-1">
-      <div className="flex flex-row justify-between mx-10 my-5 align-middle">
+    <Flex className="flex-col flex-1">
+      <Flex className="flex-row justify-between mx-10 my-5 align-middle">
         <div>{workflow.name}</div>
         <Flex direction={"row"} gap="md">
           <Button
             size="sm"
             className="h-7 gap-1"
             onClick={() => {
-              console.log(reactFlowInstance.toObject());
-              // console.log(workflowId);
               updateWorkflow &&
                 updateWorkflow(workflowId, {
                   ...workflow,
@@ -156,15 +152,15 @@ function FlowEdit() {
             </span>
           </Button>
         </Flex>
-      </div>
-      <Separator className=" " />
+      </Flex>
+      <Divider />
       <div className="flex flex-1 relative">
         <aside className="w-38 py-4 flex flex-col ">
           {nodelets.map((nodelet) => (
             <Nodelet nodelet={nodelet} key={nodelet.id} />
           ))}
         </aside>
-        <Separator orientation="vertical" />
+        <Divider orientation="vertical" />
         <div
           className="relative flex flex-1 reactflow-wrapper"
           ref={reactFlowWrapper}
@@ -252,12 +248,11 @@ function FlowEdit() {
                 ...nodes.slice(selectedNodeIndex + 1),
               ]);
             }}
-            // getCustomCFGClass={getTargetCFGClass}
           />
         </Drawer>
         {/* </div> */}
       </div>
-    </div>
+    </Flex>
   );
 }
 

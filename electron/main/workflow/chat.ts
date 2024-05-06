@@ -5,17 +5,35 @@ import _cloneDeep from "lodash/cloneDeep";
 import { IKnowledgeBase } from "@/type/knowledgeBase";
 import { getNodeInputObj } from "./utils";
 import { InternalNodeletExecutor } from "./internal";
+import { v4 as uuidv4 } from "uuid";
 
 const getInitialConversation = (
   sessionId: string,
+  workflowId: string,
   message: string
 ): Conversation => ({
   sessionId,
+  workflowId,
   createDate: new Date().toLocaleString(),
   updateDate: new Date().toLocaleString(),
   nodeContext: {},
   globalContext: { currentMessage: message, messages: [] },
 });
+export const newConversation = async (workflowId, message, db) => {
+  const {
+    conversations,
+  }: {
+    conversations: Conversation[];
+  } = db.data;
+  const conversation = getInitialConversation(
+    `${workflowId}-${uuidv4()}`,
+    workflowId,
+    message
+  );
+  conversations.push(conversation);
+  db.data.conversations = conversations;
+  await db.write();
+};
 export const chat = async (
   sessionId: string,
   workflowId: string,
@@ -28,28 +46,34 @@ export const chat = async (
     workflows,
     nodelets,
     conversations,
+    integrations,
     knowledgeBases,
   }: {
     workflows: IWorkflow[];
     nodelets: Nodelet[];
     knowledgeBases: IKnowledgeBase[];
-    conversations: { [sessionId: string]: Conversation };
+    conversations: Conversation[];
+    integrations: any[];
   } = db.data;
+  console.log(workflowId);
   const currentWorkflow =
     workflow ?? workflows.find((w) => w.id === workflowId);
   if (!currentWorkflow) return;
-  if (!conversations[sessionId]) {
-    conversations[sessionId] = getInitialConversation(sessionId, message);
+  let conversation = conversations.find((c) => c.sessionId === sessionId);
+  if (!conversation) {
+    conversation = getInitialConversation(sessionId, workflowId, message);
+    conversations.push(conversation);
   } else {
-    conversations[sessionId].globalContext.currentMessage = message;
+    conversation.globalContext.currentMessage = message;
   }
   const { nodes = [], edges = [] } = currentWorkflow?.data || {};
   if (!nodes.length) return;
-  await executeDAG(currentWorkflow.data, nodelets, conversations[sessionId], {
+  await executeDAG(currentWorkflow.data, nodelets, integrations, conversation, {
     knowledgeBases,
   });
+  db.data.conversations = conversations;
   await db.write();
-  return conversations[sessionId];
+  return conversation;
 };
 
 function createNodeMap(nodes) {
@@ -79,10 +103,15 @@ function linkNodes(nodeMap, edges) {
   });
 }
 
-async function executeDAG(dagData, nodelets, conversation, context) {
+async function executeDAG(
+  dagData,
+  nodelets,
+  integrations,
+  conversation,
+  context
+) {
   const nodeMap = createNodeMap(dagData.nodes);
   linkNodes(nodeMap, dagData.edges);
-  //   console.log(nodeMap);
   const inDegrees = new Map(
     Array.from(nodeMap.values()).map((node) => [node.id, 0])
   );
@@ -96,9 +125,15 @@ async function executeDAG(dagData, nodelets, conversation, context) {
   while (queue.length > 0) {
     const currentNode = queue.shift();
     try {
-      await executeNode(currentNode, nodelets, conversation, context);
+      await executeNode(
+        currentNode,
+        nodelets,
+        integrations,
+        conversation,
+        context
+      );
     } catch (e) {
-      console.log(e)
+      console.log(e);
     }
 
     currentNode.nextNodes.forEach((nextNode) => {
@@ -114,10 +149,14 @@ async function executeDAG(dagData, nodelets, conversation, context) {
 async function executeNode(
   node,
   nodelets,
+  integrations,
   conversation: Conversation,
   context
 ) {
   const nodelet = nodelets.find((nl) => nl.id === node.data.nodeletId);
+  const integration = integrations.find(
+    (integration) => integration === nodelet.id
+  );
   const nodeInputs = getNodeInputObj(node, nodelet, conversation);
   const setNodeContext = (nodeId, nodeContext) => {
     conversation.nodeContext[nodeId] = nodeContext;
@@ -129,6 +168,7 @@ async function executeNode(
     nodeConfig: _cloneDeep(node.data?.config),
     nodeInputs,
     nodeContext: _cloneDeep(conversation.nodeContext[node.id] || {}),
+    integrationConfig: integration?.config || {},
     globalContext: _cloneDeep(conversation.globalContext),
     setNodeContext,
     setGlobalContext,

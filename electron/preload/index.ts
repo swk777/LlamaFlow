@@ -8,6 +8,7 @@ contextBridge.exposeInMainWorld("ipcRenderer", {
   getNodelets: () => ipcRenderer.invoke("get-nodelets"),
   getKnowledgeBases: () => ipcRenderer.invoke("get-knowledgeBases"),
   getConversationById: (id) => ipcRenderer.invoke("get-conversation", { id }),
+  getConversations: () => ipcRenderer.invoke("get-conversations"),
   saveWorkflows: (workflowIdx, workflow) =>
     ipcRenderer.invoke("save-workflows", { workflowIdx, workflow }),
   saveIntegration: (integrationIdx, integration) =>
@@ -23,6 +24,8 @@ contextBridge.exposeInMainWorld("ipcRenderer", {
     ipcRenderer.invoke("add-documents", { files, id }),
   chat: (sessionId, workflowId, query, workflow) =>
     ipcRenderer.invoke("chat", { sessionId, workflowId, query, workflow }),
+  newConversation: (workflowId) =>
+    ipcRenderer.invoke("new-conversation", { workflowId }),
   on(...args: Parameters<typeof ipcRenderer.on>) {
     const [channel, listener] = args;
     return ipcRenderer.on(channel, (event, ...args) =>

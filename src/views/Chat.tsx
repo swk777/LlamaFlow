@@ -14,6 +14,7 @@ type Props = { messages: string[]; onSendMessage: (message: string) => void };
 
 export default function Chat({ messages, onSendMessage }: Props) {
   const [query, setQuery] = useState("");
+  console.log(messages);
   return (
     <Flex
       className=" flex-1  overflow-y-hidden p-5"
@@ -32,8 +33,8 @@ export default function Chat({ messages, onSendMessage }: Props) {
           </ThemeIcon>
         }
       >
-        {messages.map((message) => (
-          <List.Item key={message} style={{ textAlignment: "left" }}>
+        {messages.map((message, index) => (
+          <List.Item key={message + index} style={{ textAlignment: "left" }}>
             <Paper>{message} </Paper>
           </List.Item>
         ))}

@@ -1,7 +1,7 @@
 import React, { useMemo, useEffect, useContext, ReactElement } from "react";
 // import { Icon, Select, Tooltip, ISelectProps } from "@guandata/design";
 // import cn from "classnames";
-import { MultiSelect, Select } from "@mantine/core";
+import { MultiSelect, Select, Tooltip } from "@mantine/core";
 import PropTypes from "prop-types";
 // import useStyles from "isomorphic-style-loader/useStyles";
 // import R from "ramda";
@@ -13,12 +13,6 @@ import NamespaceContext from "../NamespaceContext";
 import useDynamicSource from "../useDynamicSource";
 import s from "./CFGValueChooser.scss";
 import { ICFGBaseProps, ICFGDefinitionBase } from "@/type/cfgDefinition";
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger,
-} from "@/components/ui/tooltip";
 import { IconExclamationCircle } from "@tabler/icons-react";
 // import fm from "../../../core/i18n";
 
@@ -69,21 +63,21 @@ export function useSelectCheck(
   const icon = _get(definition, "model.tableIcon");
   if (isMissing()) {
     v = undefined;
-    ph = (
-      <div className={"row-flex-center content-h-full"}>
-        <Tooltip>
-          <TooltipTrigger>{definition.errorPlaceholder}</TooltipTrigger>
-          <TooltipContent>
-            <IconExclamationCircle
-              name="toast-warn"
-              style={{ color: "yellow", marginRight: 4 }}
-            />
-          </TooltipContent>
-        </Tooltip>
-        {/* {icon && <Icon name={icon} style={{ marginRight: 4 }} />} */}
-        {missingName}
-      </div>
-    );
+    // ph = (
+    //   <div className={"row-flex-center content-h-full"}>
+    //     <Tooltip>
+    //       <TooltipTrigger>{definition.errorPlaceholder}</TooltipTrigger>
+    //       <TooltipContent>
+    //         <IconExclamationCircle
+    //           name="toast-warn"
+    //           style={{ color: "yellow", marginRight: 4 }}
+    //         />
+    //       </TooltipContent>
+    //     </Tooltip>
+    //     {/* {icon && <Icon name={icon} style={{ marginRight: 4 }} />} */}
+    //     {missingName}
+    //   </div>
+    // );
   }
   return [v, ph];
 }
