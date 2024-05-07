@@ -1,33 +1,21 @@
-export interface IConfigModelBase {
-  modelType?: string;
-}
-
 export interface IConfigDependOnMap {
   [vPath: string]: (string | number | boolean)[];
 }
 
-export interface IConfigModelLogicSwitch {
-  switchDefinitions: Array<{
-    name: string;
-    hiddenOnMap?: IConfigDependOnMap;
-    dependsOnMap?: IConfigDependOnMap;
-    definitions: IConfigDefinitionBase[];
-  }>;
-}
-
 export interface IConfigDefinitionBase {
   fieldName: string;
-  aliasFieldName?: string; // 输入输出节点使用
   label: string;
   name?: string;
   placeholder?: string;
   required?: boolean;
+  description?: string;
   dependsOnMap?: IConfigDependOnMap;
+  disabledOnMap?: IConfigDependOnMap;
   hiddenOnMap?: IConfigDependOnMap;
   type: string;
-  model?: any;
   defaultValue?: number | string | boolean | any[];
   style?: any;
+  misc?: any;
 }
 
 export interface IConfigBaseProps<

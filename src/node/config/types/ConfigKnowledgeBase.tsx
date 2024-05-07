@@ -19,7 +19,7 @@ export default function ConfigKnowledgeBase(props: Props) {
     ...others
   } = props;
   const [fieldValue, updateFv, readonly] = useDef(definition);
-  const { from } = definition.model || {};
+  const { from } = definition.misc || {};
   const { getValue } = useContext(NamespaceContext);
   const disableSelect = useMemo(
     () => getValue(from || { ns: "", fieldName: "" }) === true,
@@ -27,7 +27,6 @@ export default function ConfigKnowledgeBase(props: Props) {
   );
   const { disabledOnMap } = definition;
   const [hasDepends, fullfilled] = useDependOnMap(disabledOnMap);
-  //   const { values = [] } = definition.model;
   const disabled = (hasDepends && fullfilled) || disableSelect;
   useEffect(() => {
     if (fieldValue === undefined && definition.defaultValue !== undefined) {
@@ -49,13 +48,12 @@ export default function ConfigKnowledgeBase(props: Props) {
     value: kb.id,
   }));
 
-  const findIsMissField = (field) => field !== undefined;
-  const missFields =
-    mode === "multiple" && (fieldValue || []).filter(findIsMissField);
-  const isMissing = (): boolean =>
-    mode !== "multiple" && findIsMissField(fieldValue);
-
-  const [v, ph] = useSelectCheck(fieldValue, definition, isMissing, fieldValue);
+  const [v, placeholder] = useSelectCheck(
+    fieldValue,
+    definition,
+    false,
+    fieldValue
+  );
   return (
     <div className="flex1 row-flex-center">
       {/* {mode === "multiple" && missFields.length > 0 && (
@@ -84,8 +82,8 @@ export default function ConfigKnowledgeBase(props: Props) {
         className={className}
         style={style}
         mode={mode}
-        placeholder={ph}
-        clearable={allowClear || definition?.model?.allowClear}
+        placeholder={placeholder}
+        clearable={allowClear || definition?.misc?.allowClear}
         {...others}
       />
     </div>

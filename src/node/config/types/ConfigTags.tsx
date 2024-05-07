@@ -16,22 +16,16 @@ import {
   IConfigBaseProps,
   IConfigDefinitionBase,
   IConfigDependOnMap,
-} from "@/type/cfgDefinition";
+} from "@/type/configDefinition";
 
 interface IConfigTags extends IConfigDefinitionBase {
-  model?: {
+  misc?: {
     unit?: string;
-    disabledOnMap?: IConfigDependOnMap;
     clearOnDisabled?: boolean;
     maxLength?: number;
     checkDuplicated?: boolean;
   };
 }
-
-export const labelRequired = (ph: string, required: boolean): string => {
-  if (!ph || !required) return ph;
-  return `${ph}`;
-};
 
 function ConfigTags({
   definition,
@@ -46,8 +40,7 @@ function ConfigTags({
   //   outside: { allTasks = {} },
   // } = useContext(NamespaceContext);
 
-  const { unit, disabledOnMap, clearOnDisabled, maxLength } =
-    definition.model || {};
+  const { unit, clearOnDisabled, maxLength } = definition.misc || {};
   let formatter = null;
   if (unit) {
     formatter = (v): string => `${v}${unit}`;
@@ -80,7 +73,7 @@ function ConfigTags({
     },
     [updateFv, config]
   );
-  const [hasDisabledOn, fullfilled] = useDependOnMap(disabledOnMap);
+  const [hasDisabledOn, fullfilled] = useDependOnMap(definition?.disabledOnMap);
   const disabled = hasDisabledOn && fullfilled;
   useEffect(() => {
     if (fieldValue !== undefined && disabled && clearOnDisabled) {
@@ -96,14 +89,14 @@ function ConfigTags({
     <Input.Wrapper
       label={definition?.label}
       description={definition?.description}
-      withAsterisk={definition.required}
+      required={definition.required}
       className="text-left"
     >
       <TagsInput
         data={[]}
         value={inputValue}
         onChange={onChange}
-        placeholder={labelRequired(definition.placeholder, definition.required)}
+        placeholder={definition.placeholder}
         maxLength={maxLength}
         disabled={readonly || disabled}
         style={style}

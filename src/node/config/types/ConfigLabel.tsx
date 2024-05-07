@@ -1,8 +1,11 @@
-import { IConfigBaseProps, IConfigDefinitionBase } from "@/type/cfgDefinition";
+import {
+  IConfigBaseProps,
+  IConfigDefinitionBase,
+} from "@/type/configDefinition";
 import React from "react";
 
 interface IConfigLabel extends IConfigDefinitionBase {
-  model?: {
+  misc?: {
     label?: string;
   };
 }

@@ -1,11 +1,11 @@
 import React, { useMemo, ReactElement, useCallback } from "react";
 import { partition } from "ramda";
 import { set, get } from "lodash";
-import {
-  IConfigDependOnMap,
-  IConfigDefinitionBase,
-} from "../../type/ConfigDefinition";
 import { getNewState } from "@/utils/state";
+import {
+  IConfigDefinitionBase,
+  IConfigDependOnMap,
+} from "@/type/configDefinition";
 
 interface ConfigContext {
   config: any;
@@ -56,14 +56,13 @@ export function cleanupConfig(
   );
 
   return getNewState(config, (draft) => {
-    hiddenDefinitions.forEach(({ fieldName, aliasFieldName }) => {
+    hiddenDefinitions.forEach(({ fieldName }) => {
       if (
         !get(draft, fieldName) &&
         visibleDefinitions.some((d) => d.fieldName === fieldName)
       )
         return;
       set(draft, fieldName, undefined);
-      if (aliasFieldName) set(draft, aliasFieldName, undefined);
     });
 
     visibleDefinitions.forEach(({ fieldName, defaultValue }) => {

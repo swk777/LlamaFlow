@@ -1,6 +1,6 @@
-import { ConfigurationType } from "../config-type";
+import { ConfigurationType } from "../configType";
 
-import ConfigString from "./ConfigString";
+import ConfigInput from "./ConfigInput";
 import ConfigTags from "./ConfigTags";
 import ConfigNumber from "./ConfigNumber";
 import ConfigCheckbox from "./ConfigCheckbox";
@@ -12,8 +12,8 @@ import ConfigKnowledgeBase from "./ConfigKnowledgeBase";
 export function getTargetConfigClass(def) {
   const { type } = def;
   switch (type) {
-    case ConfigurationType.STRING:
-      return ConfigString;
+    case ConfigurationType.INPUT:
+      return ConfigInput;
     case ConfigurationType.TAGS:
       return ConfigTags;
     case ConfigurationType.LABEL:

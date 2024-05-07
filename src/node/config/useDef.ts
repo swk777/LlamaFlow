@@ -3,7 +3,7 @@ import DefContext from "./ConfigContext";
 import {
   IConfigDefinitionBase,
   IConfigDependOnMap,
-} from "@/type/cfgDefinition";
+} from "@/type/configDefinition";
 
 export default function useDef(
   def: IConfigDefinitionBase

@@ -1,4 +1,4 @@
-import { KnowledgeBases } from "./../../src/constants/knowledge-base";
+import { KnowledgeBases } from "../../src/constants/knowledgeBase";
 import { IKnowledgeBase } from "@/type/knowledgeBase";
 import { v4 as uuidv4 } from "uuid";
 import fs from "node:fs";
@@ -73,8 +73,6 @@ export async function addDocuments(files, id, db) {
   );
 
   await db.update(({ knowledgeBases }) => {
-    // console.log(knowledgeBaseIndex);
-    // console.log(knowledgeBases[knowledgeBaseIndex]);
     knowledgeBases[knowledgeBaseIndex].fileList =
       knowledgeBases[knowledgeBaseIndex].fileList.concat(files);
   });

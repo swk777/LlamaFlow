@@ -1,6 +1,6 @@
 import { IWorkflowStatus } from "@/type/workflow";
 import { Nodelets } from "./nodelets";
-import { KnowledgeBases } from "./knowledge-base";
+import { KnowledgeBases } from "./knowledgeBase";
 import { Integrations } from "./integrations";
 
 export const DefaultData = {
@@ -195,99 +195,3 @@ export const DefaultData = {
   ],
   nodelets: Nodelets,
 };
-// export const InternalNodeLets = [
-//   {
-//     id: "input",
-//     category: "INPUT",
-//     inputs: [],
-//     outputs: [
-//       {
-//         id: "output",
-//         type: "STRING",
-//       },
-//     ],
-//     attrDefinitions: [
-//       {
-//         name: "233",
-//         fieldName: "string1",
-//         label: "stringd",
-//         type: "VALUE_CHOOSER",
-//         placeholder: "string",
-//         model: {
-//           values: [
-//             { value: "jack", label: "Jack" },
-//             { value: "lucy", label: "Lucy" },
-//             { value: "Yiminghe", label: "yiminghe" },
-//           ],
-//         },
-//       },
-//       {
-//         name: "23",
-//         fieldName: "string",
-//         label: "string",
-//         type: "STRING",
-//         placeholder: "string",
-//         required: true,
-//         model: {
-//           disabledOnMap: {
-//             string1: "jack",
-//           },
-//         },
-//       },
-//     ],
-//   },
-//   {
-//     id: "openai",
-//     category: "PROCESSOR",
-//     subCategory: "LLM",
-//     inputs: [
-//       {
-//         id: "i1",
-//         name: "i1",
-//         // fieldName: "string",
-//         label: "string",
-//         type: "STRING",
-//       },
-//       {
-//         id: "i2",
-//         name: "i2",
-//         // fieldName: "string",
-//         label: "string",
-//         type: "STRING",
-//       },
-//     ],
-//     outputs: [
-//       {
-//         id: "o1",
-//         type: "STRING",
-//       },
-//       {
-//         id: "o2",
-//         type: "STRING",
-//       },
-//     ],
-//     attrDefinitions: [
-//       {
-//         name: "openai1",
-//         fieldName: "temp",
-//         label: "string",
-//         type: "STRING",
-//         placeholder: "string",
-//       },
-//       {
-//         name: "model",
-//         fieldName: "model",
-//         label: "model",
-//         type: "VALUE_CHOOSER",
-//         placeholder: "openai model",
-//         model: {
-//           values: [
-//             { value: "gpt-3.5", label: "gpt-3.5" },
-//             { value: "gpt-4", label: "gpt-4" },
-//             // { value: "Yiminghe", label: "yiminghe" },
-//           ],
-//         },
-//       },
-//     ],
-//   },
-// ];

@@ -17,12 +17,11 @@ import ReactFlow, {
   useNodesState,
   useEdgesState,
   addEdge,
-  useOnSelectionChange,
 } from "reactflow";
 
 import "reactflow/dist/style.css";
 import Nodelet from "./Nodelet";
-import InternalNode from "@/node/custom/InternalNode";
+import InternalNode from "@/node/InternalNode";
 import { AppContext } from "@/context/AppContext";
 import { useParams } from "react-router-dom";
 import { Button, Divider, Drawer, Flex } from "@mantine/core";

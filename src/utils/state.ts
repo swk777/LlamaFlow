@@ -1,12 +1,5 @@
 /* eslint-disable no-throw-literal */
 import { produce, enableES5, setUseProxies, setAutoFreeze } from "immer";
-import { isIE } from "./browser";
-
-if (isIE()) {
-  // 虽然针对IE使用了GoogleChrome/proxy-polyfill，但immer使用了polyfill不支持的traps，故IE时不使用immer的Proxy实现
-  setUseProxies(false);
-  enableES5();
-}
 
 setAutoFreeze(false);
 

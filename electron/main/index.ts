@@ -49,7 +49,7 @@ const preload = join(__dirname, "../preload/index.mjs");
 const url = process.env.VITE_DEV_SERVER_URL;
 const indexHtml = join(process.env.DIST, "index.html");
 
-JSONFilePreset("default1.json", DefaultData)
+JSONFilePreset("default4.json", DefaultData)
   .then((db) => {
     ipcMain.on("add-workflow", async (event, post) => {
       await db.read();

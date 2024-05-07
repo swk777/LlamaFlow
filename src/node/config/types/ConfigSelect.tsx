@@ -6,7 +6,10 @@ import zipWith from "ramda/src/zipWith";
 import _get from "lodash/get";
 import useDef, { useDependOnMap } from "../useDef";
 import NamespaceContext from "../NamespaceContext";
-import { IConfigBaseProps, IConfigDefinitionBase } from "@/type/cfgDefinition";
+import {
+  IConfigBaseProps,
+  IConfigDefinitionBase,
+} from "@/type/configDefinition";
 interface ILabelValue {
   value: string | number;
   label: string;
@@ -16,7 +19,8 @@ interface ILabelValue {
 }
 interface IConfigValueChooser extends IConfigDefinitionBase {
   disabledOnMap?: any;
-  model: {
+  misc: {
+    mode?: "single" | "multiple" | "default";
     from?: { ns: string; fieldName: string };
     labels?: string[];
     values?: string[];
@@ -45,11 +49,11 @@ export function useSelectCheck(
   missingName?: string,
   cls?: string
 ): [string, ReactElement | string] {
-  let [v, ph] = [value, definition.placeholder];
-  const icon = _get(definition, "model.tableIcon");
+  let [v, placeholder] = [value, definition.placeholder];
+  const icon = _get(definition, "misc.tableIcon");
   if (isMissing()) {
     v = undefined;
-    // ph = (
+    // placeholder = (
     //   <div className={"row-flex-center content-h-full"}>
     //     <Tooltip>
     //       <TooltipTrigger>{definition.errorPlaceholder}</TooltipTrigger>
@@ -65,7 +69,7 @@ export function useSelectCheck(
     //   </div>
     // );
   }
-  return [v, ph];
+  return [v, placeholder];
 }
 
 function ConfigSelect(props: IProps): ReactElement {
@@ -73,7 +77,7 @@ function ConfigSelect(props: IProps): ReactElement {
     props;
   const [fieldValue, updateFv, readonly] = useDef(definition);
   console.log(fieldValue);
-  const { from } = definition.model || {};
+  const { from } = definition.misc || {};
   const { getValue } = useContext(NamespaceContext);
   const disableSelect = useMemo(
     () => getValue(from || { ns: "", fieldName: "" }) === true,
@@ -81,7 +85,7 @@ function ConfigSelect(props: IProps): ReactElement {
   );
   const { disabledOnMap } = definition;
   const [hasDepends, fullfilled] = useDependOnMap(disabledOnMap);
-  const { values = [] } = definition.model;
+  const { values = [] } = definition.misc;
   const disabled = (hasDepends && fullfilled) || disableSelect;
   useEffect(() => {
     if (fieldValue === undefined && definition.defaultValue !== undefined) {
@@ -121,14 +125,19 @@ function ConfigSelect(props: IProps): ReactElement {
   //     field !== undefined && items.findIndex(R.propEq("value", field)) === -1;
   const findIsMissField = (field) => field !== undefined;
   const missFields =
-    definition?.mode === "multiple" &&
+    definition?.misc?.mode === "multiple" &&
     (fieldValue || []).filter(findIsMissField);
   const isMissing = (): boolean =>
-    definition?.mode !== "multiple" && findIsMissField(fieldValue);
+    definition?.misc?.mode !== "multiple" && findIsMissField(fieldValue);
 
-  const [v, ph] = useSelectCheck(fieldValue, definition, isMissing, fieldValue);
+  const [v, placeholder] = useSelectCheck(
+    fieldValue,
+    definition,
+    isMissing,
+    fieldValue
+  );
   const SelectComponent =
-    definition?.mode === "multiple" ? MultiSelect : Select;
+    definition?.misc?.mode === "multiple" ? MultiSelect : Select;
   return (
     <div className="flex-1 row-flex-center">
       {/* {definition?.mode === "multiple" && missFields.length > 0 && (
@@ -145,20 +154,18 @@ function ConfigSelect(props: IProps): ReactElement {
           </Tooltip>
         )} */}
       <SelectComponent
-        withAsterisk={definition.required}
+        required={definition.required}
         label={definition.label}
         description={definition?.description}
         value={fieldValue}
         onChange={updateFv}
         onSearch={onSearch}
         data={values}
-        // renderFunc={renderFunc}
         disabled={disabled || readonly}
         className={className}
         style={style}
-        // mode={definition?.mode}
-        placeholder={ph}
-        clearable={allowClear || definition.model.allowClear}
+        placeholder={placeholder}
+        clearable={allowClear || definition.misc.allowClear}
         {...others}
       />
     </div>

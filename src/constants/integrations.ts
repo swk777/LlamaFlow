@@ -1,4 +1,4 @@
-import { ConfigurationType } from "@/node/config/config-type";
+import { ConfigurationType } from "@/node/config/configType";
 
 export const Integrations = [
   {
@@ -8,7 +8,7 @@ export const Integrations = [
       {
         label: "API Key:",
         fieldName: "apiKey",
-        type: ConfigurationType.STRING,
+        type: ConfigurationType.INPUT,
         placeholder: "sk-xxxx",
         required: true,
       },
@@ -22,7 +22,7 @@ export const Integrations = [
       {
         label: "Base URL:",
         fieldName: "baseUrl",
-        type: ConfigurationType.STRING,
+        type: ConfigurationType.INPUT,
         placeholder: "http://localhost:11434",
         required: true,
       },

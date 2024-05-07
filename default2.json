@@ -13,7 +13,7 @@
         }
       ],
       "config": {
-        "apiKey": "sdsd"
+        "apiKey": "sd"
       }
     },
     {
@@ -96,56 +96,10 @@
   ],
   "conversations": [
     {
-      "sessionId": "2f3a232c-1ba2-44a0-9b11-4796b358f81f-fbfc3e59-7412-4046-a4cd-d170ba25e35c",
-      "workflowId": "2f3a232c-1ba2-44a0-9b11-4796b358f81f",
-      "createDate": "5/6/2024, 10:21:50 AM",
-      "updateDate": "5/6/2024, 10:21:50 AM",
-      "nodeContext": {
-        "60176b8b-8ce3-4dfb-a6eb-a8ebf98531a8": {
-          "outputs": {
-            "query": "2"
-          }
-        }
-      },
-      "globalContext": {
-        "currentMessage": "2",
-        "messages": [
-          "1",
-          "1",
-          "3",
-          "3",
-          "2",
-          "2"
-        ],
-        "latestMessage": "2"
-      }
-    },
-    {
-      "sessionId": "2f3a232c-1ba2-44a0-9b11-4796b358f81f-12b3ced3-3f8e-4eec-aa83-d3efc624e74c",
-      "workflowId": "2f3a232c-1ba2-44a0-9b11-4796b358f81f",
-      "createDate": "5/6/2024, 10:33:46 AM",
-      "updateDate": "5/6/2024, 10:33:46 AM",
-      "nodeContext": {
-        "60176b8b-8ce3-4dfb-a6eb-a8ebf98531a8": {
-          "outputs": {
-            "query": "2"
-          }
-        }
-      },
-      "globalContext": {
-        "currentMessage": "2",
-        "messages": [
-          "2",
-          "2"
-        ],
-        "latestMessage": "2"
-      }
-    },
-    {
-      "sessionId": "2f3a232c-1ba2-44a0-9b11-4796b358f81f-9aab3ffa-3b8b-4cc6-bb2f-8eed789e767c",
-      "workflowId": "2f3a232c-1ba2-44a0-9b11-4796b358f81f",
-      "createDate": "5/6/2024, 4:52:19 PM",
-      "updateDate": "5/6/2024, 4:52:19 PM",
+      "sessionId": "1-c88810ae-cbee-4be0-8632-7d46a685ebac",
+      "workflowId": "1",
+      "createDate": "5/7/2024, 11:37:45 AM",
+      "updateDate": "5/7/2024, 11:37:45 AM",
       "nodeContext": {},
       "globalContext": {
         "currentMessage": "",
@@ -153,85 +107,10 @@
       }
     },
     {
-      "sessionId": "2f3a232c-1ba2-44a0-9b11-4796b358f81f-10a79ab3-ab39-4e9d-bafd-d4110ab2012c",
-      "workflowId": "2f3a232c-1ba2-44a0-9b11-4796b358f81f",
-      "createDate": "5/6/2024, 4:52:47 PM",
-      "updateDate": "5/6/2024, 4:52:47 PM",
-      "nodeContext": {},
-      "globalContext": {
-        "currentMessage": "",
-        "messages": []
-      }
-    },
-    {
-      "sessionId": "2f3a232c-1ba2-44a0-9b11-4796b358f81f-64cdf7d7-93fa-445b-abd2-78c50a87a65b",
-      "workflowId": "2f3a232c-1ba2-44a0-9b11-4796b358f81f",
-      "createDate": "5/6/2024, 4:53:22 PM",
-      "updateDate": "5/6/2024, 4:53:22 PM",
-      "nodeContext": {},
-      "globalContext": {
-        "currentMessage": "",
-        "messages": []
-      }
-    },
-    {
-      "sessionId": "2f3a232c-1ba2-44a0-9b11-4796b358f81f-34e5df74-074b-47d7-9af1-18fea2ab00f0",
-      "workflowId": "2f3a232c-1ba2-44a0-9b11-4796b358f81f",
-      "createDate": "5/6/2024, 4:54:12 PM",
-      "updateDate": "5/6/2024, 4:54:12 PM",
-      "nodeContext": {
-        "60176b8b-8ce3-4dfb-a6eb-a8ebf98531a8": {
-          "outputs": {
-            "query": "hello"
-          }
-        }
-      },
-      "globalContext": {
-        "currentMessage": "hello",
-        "messages": [
-          "hello",
-          "hello"
-        ],
-        "latestMessage": "hello"
-      }
-    },
-    {
-      "sessionId": "2f3a232c-1ba2-44a0-9b11-4796b358f81f-afeda31f-2547-4588-97a7-8f470868baaf",
-      "workflowId": "2f3a232c-1ba2-44a0-9b11-4796b358f81f",
-      "createDate": "5/7/2024, 10:42:22 AM",
-      "updateDate": "5/7/2024, 10:42:22 AM",
-      "nodeContext": {
-        "60176b8b-8ce3-4dfb-a6eb-a8ebf98531a8": {
-          "outputs": {
-            "query": "122"
-          }
-        }
-      },
-      "globalContext": {
-        "currentMessage": "122",
-        "messages": [
-          "122",
-          "122"
-        ],
-        "latestMessage": "122"
-      }
-    },
-    {
-      "sessionId": "2f3a232c-1ba2-44a0-9b11-4796b358f81f-2e4220ef-f0c2-40ad-95aa-6a3ec7414d07",
-      "workflowId": "2f3a232c-1ba2-44a0-9b11-4796b358f81f",
-      "createDate": "5/7/2024, 11:14:45 AM",
-      "updateDate": "5/7/2024, 11:14:45 AM",
-      "nodeContext": {},
-      "globalContext": {
-        "currentMessage": "",
-        "messages": []
-      }
-    },
-    {
-      "sessionId": "2f3a232c-1ba2-44a0-9b11-4796b358f81f-bd4d7922-f827-45a4-9f90-e7785c15e10d",
-      "workflowId": "2f3a232c-1ba2-44a0-9b11-4796b358f81f",
-      "createDate": "5/7/2024, 11:14:50 AM",
-      "updateDate": "5/7/2024, 11:14:50 AM",
+      "sessionId": "5-105ed235-c6b7-4348-9605-71ab73926b15",
+      "workflowId": "5",
+      "createDate": "5/7/2024, 11:37:50 AM",
+      "updateDate": "5/7/2024, 11:37:50 AM",
       "nodeContext": {},
       "globalContext": {
         "currentMessage": "",
@@ -467,68 +346,6 @@
       "name": "hello world",
       "category": "Draft",
       "lastModified": "2023-07-12 10:42 AM"
-    },
-    {
-      "id": "2f3a232c-1ba2-44a0-9b11-4796b358f81f",
-      "name": "New Workflow0.6247618608675845",
-      "category": "Draft",
-      "lastModified": "2023-07-12 10:42 AM",
-      "data": {
-        "nodes": [
-          {
-            "id": "60176b8b-8ce3-4dfb-a6eb-a8ebf98531a8",
-            "type": "internalNodelet",
-            "position": {
-              "x": 46.4453125,
-              "y": 127
-            },
-            "data": {
-              "label": "UserInput",
-              "nodeletId": "UserInput",
-              "config": {}
-            },
-            "width": 96,
-            "height": 80,
-            "positionAbsolute": {
-              "x": 46.4453125,
-              "y": 127
-            }
-          },
-          {
-            "id": "b6270f21-74e5-4d90-87ab-a9878a18c73c",
-            "type": "internalNodelet",
-            "position": {
-              "x": 367.4453125,
-              "y": 215
-            },
-            "data": {
-              "label": "ChatResponse",
-              "nodeletId": "ChatResponse",
-              "config": {}
-            },
-            "width": 96,
-            "height": 80,
-            "positionAbsolute": {
-              "x": 367.4453125,
-              "y": 215
-            }
-          }
-        ],
-        "edges": [
-          {
-            "source": "60176b8b-8ce3-4dfb-a6eb-a8ebf98531a8",
-            "sourceHandle": "query",
-            "target": "b6270f21-74e5-4d90-87ab-a9878a18c73c",
-            "targetHandle": "output",
-            "id": "reactflow__edge-60176b8b-8ce3-4dfb-a6eb-a8ebf98531a8query-b6270f21-74e5-4d90-87ab-a9878a18c73coutput"
-          }
-        ],
-        "viewport": {
-          "x": 0,
-          "y": 0,
-          "zoom": 1
-        }
-      }
     }
   ],
   "nodelets": [
@@ -621,7 +438,7 @@
           "name": "model",
           "fieldName": "model",
           "label": "Model:",
-          "type": "VALUE_CHOOSER",
+          "type": "SELECT",
           "placeholder": "openai model",
           "isDisplayed": true,
           "defaultValue": "gpt-3.5-turbo",
@@ -658,7 +475,7 @@
           "name": "temperature",
           "fieldName": "temperature",
           "label": "Temperature:",
-          "type": "VALUE_CHOOSER",
+          "type": "SELECT",
           "placeholder": "Temperature",
           "defaultValue": "0.7",
           "model": {
@@ -710,7 +527,7 @@
           "name": "contextCount",
           "fieldName": "contextCount",
           "label": "Context Count:",
-          "type": "VALUE_CHOOSER",
+          "type": "SELECT",
           "placeholder": "Context Count",
           "defaultValue": "1",
           "model": {
@@ -817,7 +634,7 @@
           "name": "model",
           "fieldName": "model",
           "label": "Model:",
-          "type": "VALUE_CHOOSER",
+          "type": "SELECT",
           "placeholder": "openai model",
           "model": {
             "values": [
@@ -836,7 +653,7 @@
           "name": "temperature",
           "fieldName": "temperature",
           "label": "Temperature:",
-          "type": "VALUE_CHOOSER",
+          "type": "SELECT",
           "placeholder": "Temperature",
           "model": {
             "values": [
@@ -887,7 +704,7 @@
           "name": "contextCount",
           "fieldName": "contextCount",
           "label": "Context Count",
-          "type": "VALUE_CHOOSER",
+          "type": "SELECT",
           "placeholder": "Context Count",
           "model": {
             "values": [

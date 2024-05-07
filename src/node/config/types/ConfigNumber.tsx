@@ -1,12 +1,15 @@
 import React, { ReactElement } from "react";
 import { NumberInput } from "@mantine/core";
 import useDef from "../useDef";
-import { IConfigBaseProps, IConfigDefinitionBase } from "@/type/cfgDefinition";
+import {
+  IConfigBaseProps,
+  IConfigDefinitionBase,
+} from "@/type/configDefinition";
 
 // const { InputNumber } = Input;
 
 interface IConfigNumber extends IConfigDefinitionBase {
-  model?: {
+  misc?: {
     unit?: string;
     min?: number;
     max?: number;
@@ -21,7 +24,7 @@ function ConfigNumber({
 }: IConfigBaseProps<IConfigNumber>): ReactElement {
   const [fieldValue, updateFv, readonly] = useDef(def);
   const { prefix, suffix } = def;
-  const { unit, min = 0, max } = def.model || {};
+  const { unit, min = 0, max } = def.misc || {};
   //   let formatter = null;
   //   if (unit) {
   //     formatter = (v): string => `${v}${unit}`;

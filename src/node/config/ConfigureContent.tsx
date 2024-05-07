@@ -7,7 +7,6 @@ type Props = {};
 
 export default function ConfigureContent({ definitions, style }: Props) {
   const { isFieldVisible } = useContext(ConfigContext);
-  console.log(isFieldVisible);
   return (
     <Flex style={style} gap="xs" direction={"column"}>
       {definitions &&

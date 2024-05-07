@@ -1,17 +1,11 @@
 import * as R from "ramda";
 import _set from "lodash/set";
 import _get from "lodash/get";
-import { ConfigurationType as CT } from "./config-type";
+import { ConfigurationType as CT } from "./configType";
 
 import { getNewState } from "@/utils/state";
-import {
-  IConfigDefinitionBase,
-  IConfigModelLogicSwitch,
-} from "@/type/cfgDefinition";
-import { IConnect, ITask, ITaskStatus } from "@/type/dag";
-import { PROCESS_TYPE } from "@/constants/dag";
-import { InternalNodeLets } from "@/constants/initialData";
-import { Nodelet } from "@/type/nodelet";
+
+import { IConfigDefinitionBase } from "@/type/configDefinition";
 
 const concatPath =
   (prefix: string) =>
@@ -50,69 +44,9 @@ export function createInputMapping(name) {
 export function generateInitConfigFromDefinitions(cfgDefinitions, fromConfig) {
   const config = fromConfig || { params: {} };
   cfgDefinitions.forEach((def) => {
-    if (def.model && def.model.modelType === "ROW_GROUP") {
-      generateInitConfigFromDefinitions(def.model.configDefinitions, config);
-    } else if (def.type === CT.LOGIC_SWITCH) {
-      const model: IConfigModelLogicSwitch = def.model;
-      if (model && model.switchDefinitions) {
-        const allDefs = model.switchDefinitions.reduce(
-          (arr, cur) => arr.concat(cur.definitions),
-          []
-        );
-        generateInitConfigFromDefinitions(allDefs, config);
-      }
-    } else if (def.defaultValue !== undefined && def.fieldName) {
-      _set(config, def.fieldName, def.defaultValue);
-    }
+    _set(config, def.fieldName, def.defaultValue);
   });
   return config;
-}
-
-/* ======= 数据兼容 =======*/
-const pluginConfigPath = "params.stageConfig.configValue";
-
-/**
- * 为了方便 PLUGIN configValue的展示, 会对configValue进行类型转换: 从Array到Map
- */
-export function configValueArrayToMap(config) {
-  if (
-    config &&
-    (config.type === "PLUGIN" || config.type === PROCESS_TYPE.AI_PLUGIN)
-  ) {
-    return getNewState(config, (draft) => {
-      const arrayV = _get(draft, pluginConfigPath);
-      if (arrayV && Array.isArray(arrayV)) {
-        const mapV = arrayV.reduce(
-          (res, item) => ({ ...res, [item.name]: item.value }),
-          {}
-        );
-        _set(draft, pluginConfigPath, mapV);
-      }
-    });
-  }
-  return config;
-}
-
-/**
- * PLUGIN的configValue需要从Map转成Array
- */
-export function configValueMapToArray(task) {
-  if (
-    task &&
-    (task.type === "PLUGIN" || task.type === PROCESS_TYPe.AI_PLUGIN)
-  ) {
-    return getNewState(task, (draft) => {
-      const mapV = _get(draft, pluginConfigPath);
-      if (mapV) {
-        const arrayV = Object.keys(mapV).map((name) => ({
-          name,
-          value: mapV[name],
-        }));
-        _set(draft, pluginConfigPath, arrayV);
-      }
-    });
-  }
-  return task;
 }
 
 export function getSyncDefs(defs: any[]) {
@@ -148,77 +82,3 @@ export function applyFieldSync(defs, config, sourceInputs?) {
   }
   return config;
 }
-
-/**
- * 配置的预处理:
- *  1. 根据 LogicSwitch 动态展开 子分组
- */
-export function preProcessDefinitions(
-  definitions: IConfigDefinitionBase[]
-): IConfigDefinitionBase[] {
-  let defs: IConfigDefinitionBase[] = [];
-  definitions.forEach((def) => {
-    switch (def.type) {
-      case CT.LOGIC_SWITCH: {
-        const model: IConfigModelLogicSwitch = def.model;
-        if (model && model.switchDefinitions) {
-          model.switchDefinitions.forEach((switchDef) => {
-            const subDefs = switchDef.definitions.map((d) => ({
-              ...d,
-              hiddenOnMap: {
-                ...d.hiddenOnMap,
-                ...switchDef.hiddenOnMap,
-                ...def.hiddenOnMap,
-              },
-              dependsOnMap: {
-                ...d.dependsOnMap,
-                ...switchDef.dependsOnMap,
-                ...def.dependsOnMap,
-              },
-            }));
-            defs = defs.concat(preProcessDefinitions(subDefs));
-          });
-        }
-        break;
-      }
-      default:
-        defs.push(def);
-    }
-  });
-  return defs;
-}
-
-/**
- * 根据connection更新task里面的preTaskScheduleTypes,并加上name(preTaskScheduleTypes存的是节点的调度类型  成功调度 or 失败调度 or 顺序调度)
- */
-export function updatePreTaskScheduleTypes(
-  tasks: ITask[],
-  task: ITask,
-  connections: IConnect[] = []
-): ITaskStatus[] {
-  const finalTaskStatus = [];
-  const taskStatus = task.preTaskScheduleTypes || [];
-  for (let i = 0; i < taskStatus.length; i += 1) {
-    const connectExist = connections.some(
-      (c) =>
-        c.endPointTargetId === task.id &&
-        c.endPointSourceId === taskStatus[i].id
-    );
-    const name = tasks.find((t) => t.id === taskStatus[i].id)?.name;
-    if (connectExist && name) {
-      finalTaskStatus.push({ ...taskStatus[i], name });
-    }
-  }
-  return finalTaskStatus;
-}
-
-// const getNodeTypes = () => {
-//   const nodeTypes = {}
-//   InternalNodeLets.forEach(nodelet => {
-//     nodeTypes[nodelet.id] =
-//   })
-// }
-
-export const getFlowNodeAttr = (node: Nodelet) => {
-  // const nodelets =
-};
