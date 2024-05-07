@@ -138,6 +138,103 @@
         ],
         "latestMessage": "2"
       }
+    },
+    {
+      "sessionId": "2f3a232c-1ba2-44a0-9b11-4796b358f81f-9aab3ffa-3b8b-4cc6-bb2f-8eed789e767c",
+      "workflowId": "2f3a232c-1ba2-44a0-9b11-4796b358f81f",
+      "createDate": "5/6/2024, 4:52:19 PM",
+      "updateDate": "5/6/2024, 4:52:19 PM",
+      "nodeContext": {},
+      "globalContext": {
+        "currentMessage": "",
+        "messages": []
+      }
+    },
+    {
+      "sessionId": "2f3a232c-1ba2-44a0-9b11-4796b358f81f-10a79ab3-ab39-4e9d-bafd-d4110ab2012c",
+      "workflowId": "2f3a232c-1ba2-44a0-9b11-4796b358f81f",
+      "createDate": "5/6/2024, 4:52:47 PM",
+      "updateDate": "5/6/2024, 4:52:47 PM",
+      "nodeContext": {},
+      "globalContext": {
+        "currentMessage": "",
+        "messages": []
+      }
+    },
+    {
+      "sessionId": "2f3a232c-1ba2-44a0-9b11-4796b358f81f-64cdf7d7-93fa-445b-abd2-78c50a87a65b",
+      "workflowId": "2f3a232c-1ba2-44a0-9b11-4796b358f81f",
+      "createDate": "5/6/2024, 4:53:22 PM",
+      "updateDate": "5/6/2024, 4:53:22 PM",
+      "nodeContext": {},
+      "globalContext": {
+        "currentMessage": "",
+        "messages": []
+      }
+    },
+    {
+      "sessionId": "2f3a232c-1ba2-44a0-9b11-4796b358f81f-34e5df74-074b-47d7-9af1-18fea2ab00f0",
+      "workflowId": "2f3a232c-1ba2-44a0-9b11-4796b358f81f",
+      "createDate": "5/6/2024, 4:54:12 PM",
+      "updateDate": "5/6/2024, 4:54:12 PM",
+      "nodeContext": {
+        "60176b8b-8ce3-4dfb-a6eb-a8ebf98531a8": {
+          "outputs": {
+            "query": "hello"
+          }
+        }
+      },
+      "globalContext": {
+        "currentMessage": "hello",
+        "messages": [
+          "hello",
+          "hello"
+        ],
+        "latestMessage": "hello"
+      }
+    },
+    {
+      "sessionId": "2f3a232c-1ba2-44a0-9b11-4796b358f81f-afeda31f-2547-4588-97a7-8f470868baaf",
+      "workflowId": "2f3a232c-1ba2-44a0-9b11-4796b358f81f",
+      "createDate": "5/7/2024, 10:42:22 AM",
+      "updateDate": "5/7/2024, 10:42:22 AM",
+      "nodeContext": {
+        "60176b8b-8ce3-4dfb-a6eb-a8ebf98531a8": {
+          "outputs": {
+            "query": "122"
+          }
+        }
+      },
+      "globalContext": {
+        "currentMessage": "122",
+        "messages": [
+          "122",
+          "122"
+        ],
+        "latestMessage": "122"
+      }
+    },
+    {
+      "sessionId": "2f3a232c-1ba2-44a0-9b11-4796b358f81f-2e4220ef-f0c2-40ad-95aa-6a3ec7414d07",
+      "workflowId": "2f3a232c-1ba2-44a0-9b11-4796b358f81f",
+      "createDate": "5/7/2024, 11:14:45 AM",
+      "updateDate": "5/7/2024, 11:14:45 AM",
+      "nodeContext": {},
+      "globalContext": {
+        "currentMessage": "",
+        "messages": []
+      }
+    },
+    {
+      "sessionId": "2f3a232c-1ba2-44a0-9b11-4796b358f81f-bd4d7922-f827-45a4-9f90-e7785c15e10d",
+      "workflowId": "2f3a232c-1ba2-44a0-9b11-4796b358f81f",
+      "createDate": "5/7/2024, 11:14:50 AM",
+      "updateDate": "5/7/2024, 11:14:50 AM",
+      "nodeContext": {},
+      "globalContext": {
+        "currentMessage": "",
+        "messages": []
+      }
     }
   ],
   "workflows": [

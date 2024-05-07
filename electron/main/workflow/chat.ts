@@ -33,6 +33,7 @@ export const newConversation = async (workflowId, message, db) => {
   conversations.push(conversation);
   db.data.conversations = conversations;
   await db.write();
+  return conversation;
 };
 export const chat = async (
   sessionId: string,

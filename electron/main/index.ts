@@ -126,7 +126,7 @@ JSONFilePreset("default1.json", DefaultData)
     ipcMain.handle("new-conversation", async (event, post) => {
       await db.read();
       const { workflowId, query = "" } = post;
-      await newConversation(workflowId, query, db);
+      return await newConversation(workflowId, query, db);
     });
   })
   .catch(console.log);

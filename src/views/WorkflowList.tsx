@@ -9,7 +9,8 @@ import {
 } from "@tabler/icons-react";
 import { AppContext } from "@/context/AppContext";
 import { useNavigate } from "react-router-dom";
-import { Badge, Table } from "@mantine/core";
+import { Badge, Divider, Flex, Table } from "@mantine/core";
+import { c } from "vite/dist/node/types.d-aGj9QkWt";
 
 type Props = {};
 
@@ -25,10 +26,6 @@ export default function WorkflowList({}: Props) {
           </Table.Th>
           <Table.Th>Name</Table.Th>
           <Table.Th className="text-center">Category</Table.Th>
-          {/* <TableHead>Price</TableHead>
-                      <TableHead className="hidden md:table-cell">
-                        Total Sales
-                      </TableHead> */}
           <Table.Th className="hidden md:table-cell text-center">
             Last modified
           </Table.Th>
@@ -52,11 +49,17 @@ export default function WorkflowList({}: Props) {
             </Table.Td>
             <Table.Td className="hidden md:table-cell">{lastModified}</Table.Td>
             <Table.Td>
-              <div className="flex flex-row justify-between">
+              <Flex className="flex-row" gap="md">
                 <IconPlayerPlay
                   size={16}
                   className="text-primary cursor-pointer"
-                  // onClick={() => navigate("/chat/1")}
+                  onClick={async () => {
+                    console.log(id);
+                    const conversation =
+                      await window.ipcRenderer.newConversation(id);
+                    console.log(conversation);
+                    navigate(`/chat/${conversation?.sessionId}`);
+                  }}
                 />
                 <IconPencil
                   size={16}
@@ -65,17 +68,7 @@ export default function WorkflowList({}: Props) {
                   }}
                   className="text-primary cursor-pointer"
                 />
-                {/* <DropdownMenu>
-                  <DropdownMenuTrigger asChild>
-                    <IconDotsVertical size={16} className="cursor-pointer" />
-                  </DropdownMenuTrigger>
-                  <DropdownMenuContent align="end">
-                    <DropdownMenuLabel>Actions</DropdownMenuLabel>
-                    <DropdownMenuItem>Edit</DropdownMenuItem>
-                    <DropdownMenuItem>Delete</DropdownMenuItem>
-                  </DropdownMenuContent>
-                </DropdownMenu> */}
-              </div>
+              </Flex>
             </Table.Td>
           </Table.Tr>
         ))}

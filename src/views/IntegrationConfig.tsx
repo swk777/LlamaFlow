@@ -1,5 +1,5 @@
 import { AppContext } from "@/context/AppContext";
-import Configuration from "@/node/cfg/Configuration";
+import Configuration from "@/node/config/Configuration";
 import { Button, Flex } from "@mantine/core";
 import React, { useContext, useState } from "react";
 import { notifications } from "@mantine/notifications";

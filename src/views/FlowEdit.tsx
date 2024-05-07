@@ -1,4 +1,4 @@
-import Configuration from "@/node/cfg/Configuration";
+import Configuration from "@/node/config/Configuration";
 import { IconBrandHipchat, IconDeviceFloppy } from "@tabler/icons-react";
 import {
   useCallback,
@@ -34,7 +34,6 @@ const nodeTypes = { internalNodelet: InternalNode };
 
 function FlowEdit() {
   const { workflowId = "" } = useParams();
-  console.log(workflowId);
   const [configOpened, setConfigOpened] = useState(false);
   const [chatOpened, setChatOpened] = useState(false);
   const { nodelets, workflows, updateWorkflow } = useContext(AppContext);

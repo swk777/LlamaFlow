@@ -1,4 +1,4 @@
-import { ConfigurationType } from "@/node/cfg/cfg-type";
+import { ConfigurationType } from "@/node/config/config-type";
 
 export const Integrations = [
   {

@@ -44,7 +44,7 @@ export interface ITaskParams {
   InsertParameters: { mode: number; primaryKeys: string[] };
   type: string;
   inputMappings: [{ name: string }];
-  localParams: TSFixMe;
+  localParams: any;
   sql: string;
   preStatements: string[];
   postStatements: string[];
@@ -52,7 +52,7 @@ export interface ITaskParams {
   logMoreInfoType: string;
   runTimeParams: string[];
   datasource: number;
-  outputAliasMap: TSFixMe;
+  outputAliasMap: any;
 }
 
 export enum IScheduleType {
@@ -89,7 +89,7 @@ export interface IEdge {
   sourceNode: INode;
   targetNode: INode;
   offset: number;
-  onClickConnection: (conn: IConnect, e: TSFixMe) => void;
+  onClickConnection: (conn: IConnect, e: any) => void;
   connection: IConnect;
   sourceNodeIOSpec?: IOSpecType;
   targetNodeIOSpec?: IOSpecType;
@@ -99,9 +99,9 @@ export interface IEdge {
 
 export interface INodePoint {
   IOSpec: IOSpecType;
-  onMouseDownRightAnchor: (e: TSFixMe, sourceIndex: number) => void;
+  onMouseDownRightAnchor: (e: any, sourceIndex: number) => void;
   onMouseDownLeftAnchor: () => void;
-  onMouseUpLeftAnchor: (e: TSFixMe, targetIndex: number) => void;
+  onMouseUpLeftAnchor: (e: any, targetIndex: number) => void;
 }
 
 export interface IAnnotationItemProps {
@@ -122,7 +122,7 @@ export interface IDagProps {
   nodesMap: { id?: INode };
   connections: IConnect[];
   tasks: ITask[];
-  stageConfigMap: TSFixMe;
+  stageConfigMap: any;
   // event
   onAddNode: (params: {
     type: string;
@@ -132,7 +132,7 @@ export interface IDagProps {
     y: number;
     task: ITask;
   }) => void;
-  onDeleteNode: TSFixMe;
+  onDeleteNode: any;
   onBatchDeleteNode: (ids: string[]) => void;
   onBatchCopyNode: (ids: string[]) => string[];
   onAddConnection: (
@@ -153,16 +153,16 @@ export interface IDagProps {
     x: number;
     y: number;
   }) => void;
-  onAutoPosition: TSFixMe;
-  onUndo: TSFixMe;
+  onAutoPosition: any;
+  onUndo: any;
   onInStack: () => void;
   // custom render
-  renderEdge?: (TSFixMe) => ReactElement;
+  renderEdge?: (any) => ReactElement;
   renderNodeContent?: (task: ITask) => ReactElement;
   renderNodePoint?: () => ReactElement;
-  renderCustomNode?: IFunc<TSFixMe, ReactElement>;
-  renderUnderLayer?: IFunc<TSFixMe, ReactElement>;
-  renderUpperLayer?: IFunc<TSFixMe, ReactElement>;
+  renderCustomNode?: IFunc<any, ReactElement>;
+  renderUnderLayer?: IFunc<any, ReactElement>;
+  renderUpperLayer?: IFunc<any, ReactElement>;
   // other
   renderConfig?: (
     currentTask: ITask,
