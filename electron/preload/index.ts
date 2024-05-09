@@ -3,7 +3,6 @@ import {
   OpenAIEmbeddingModels,
 } from "@/constants/models";
 import { IIntegration } from "@/type/integration";
-import { IRendererApi } from "@/type/ipc";
 import { IWorkflow } from "@/type/workflow";
 import { ipcRenderer, contextBridge } from "electron";
 
@@ -62,7 +61,7 @@ contextBridge.exposeInMainWorld("ipcRenderer", {
     const [channel, ...omit] = args;
     return ipcRenderer.invoke(channel, ...omit);
   },
-} as IRendererApi);
+});
 
 // --------- Preload scripts loading ---------
 function domReady(
