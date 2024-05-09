@@ -35,7 +35,8 @@ function FlowEdit() {
   const { workflowId = "" } = useParams();
   const [configOpened, setConfigOpened] = useState(false);
   const [chatOpened, setChatOpened] = useState(false);
-  const { nodelets, workflows, updateWorkflow } = useContext(AppContext);
+  const { nodelets, workflows, updateWorkflow, integrations } =
+    useContext(AppContext);
   const [reactFlowInstance, setReactFlowInstance] = useState(null);
   const reactFlowWrapper = useRef(null);
   const workflow =
@@ -48,6 +49,10 @@ function FlowEdit() {
     workflow?.data?.edges || []
   );
   const [selectedNode, setSelectedNode] = useState();
+  const integration = integrations.find(
+    (intgn) => intgn.id === selectedNode?.data.nodeletId
+  );
+
   const onDrop = useCallback(
     (event) => {
       event.preventDefault();
@@ -92,12 +97,6 @@ function FlowEdit() {
     (params) => setEdges((eds) => addEdge(params, eds)),
     [setEdges]
   );
-  console.log(nodes);
-  // const selectedNode = useMemo(
-  //   () => nodes.findLast((node) => node.selected),
-  //   [nodes]
-  // );
-
   const selectedNodelet = useMemo(
     () =>
       nodelets.find((nodelet) => nodelet.id === selectedNode?.data.nodeletId),
@@ -229,9 +228,10 @@ function FlowEdit() {
           // scrollAreaComponent={ScrollArea.Autosize}
         >
           <Configuration
-            key={1}
+            key={selectedNodelet?.id}
             definitions={selectedNodelet?.configDefinitions || []}
             config={selectedNode?.data.config || {}}
+            integrationConfig={integration?.config}
             style={{ padding: "20px 0" }}
             onChange={(config) => {
               const selectedNodeIndex = nodes.findIndex(

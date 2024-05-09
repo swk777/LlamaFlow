@@ -12,7 +12,7 @@ export interface IConfigDefinitionBase {
   dependsOnMap?: IConfigDependOnMap;
   disabledOnMap?: IConfigDependOnMap;
   hiddenOnMap?: IConfigDependOnMap;
-  type: string;
+  isDisplayed?: boolean;
   defaultValue?: number | string | boolean | any[];
   style?: any;
   misc?: any;
@@ -25,3 +25,6 @@ export interface IConfigBaseProps<
   className?: string;
   style?: { [key: string]: any };
 }
+export type IConfigBaseExtend<
+  T extends IConfigDefinitionBase = IConfigDefinitionBase,
+> = T;

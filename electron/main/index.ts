@@ -49,7 +49,7 @@ const preload = join(__dirname, "../preload/index.mjs");
 const url = process.env.VITE_DEV_SERVER_URL;
 const indexHtml = join(process.env.DIST, "index.html");
 
-JSONFilePreset("default4.json", DefaultData)
+JSONFilePreset("default8.json", DefaultData)
   .then((db) => {
     ipcMain.on("add-workflow", async (event, post) => {
       await db.read();
@@ -88,7 +88,6 @@ JSONFilePreset("default4.json", DefaultData)
       const { files, id } = post;
       await addDocuments(files, id, db);
       await db.write();
-      // return newKnowledgeBase;
     });
     ipcMain.handle("get-conversation", async (event, post) => {
       await db.read();

@@ -1,24 +1,29 @@
-import React from "react";
+import { ChangeEvent } from "react";
 import { Checkbox } from "@mantine/core";
-import PropTypes from "prop-types";
 import useDef from "../useDef";
+import {
+  IConfigBaseProps,
+  IConfigDefinitionBase,
+} from "@/type/configDefinition";
 
-function ConfigCheckbox({ definition: def }) {
-  const [fieldValue, updateFv, readonly] = useDef(def);
-  const onChange = (e) => updateFv(e.target.checked);
-  const checked = fieldValue !== undefined ? fieldValue : !!def.defaultValue;
+function ConfigCheckbox({
+  definition,
+}: IConfigBaseProps<IConfigDefinitionBase>) {
+  const [fieldValue, updateFv, readonly] = useDef(definition);
+  const onChange = (e: ChangeEvent<HTMLInputElement>) =>
+    updateFv(e.target.checked);
+  const checked =
+    fieldValue !== undefined ? fieldValue : !!definition.defaultValue;
   return (
-    <div className="row-flex-center">
-      <Checkbox checked={checked} onChange={onChange} disabled={readonly}>
-        {def.text}
-      </Checkbox>
-    </div>
+    <Checkbox
+      checked={checked}
+      onChange={onChange}
+      disabled={readonly}
+      required={definition.required}
+    >
+      {definition.label}
+    </Checkbox>
   );
 }
 
-ConfigCheckbox.propTypes = {
-  definition: PropTypes.object,
-};
-
-const Default = React.memo(ConfigCheckbox);
-export default Default;
+export default ConfigCheckbox;

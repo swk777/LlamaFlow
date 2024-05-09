@@ -1,3 +1,5 @@
+import { IConfigBaseExtend } from "./configDefinition";
+
 export enum NodeletCategory {
   Input = "Input",
   Processor = "Processor",
@@ -13,10 +15,12 @@ export enum NodeletOutputType {
 }
 export interface NodeletInput {
   id: string;
+  name: string;
   type: NodeletInputType;
 }
 export interface NodeletOutput {
   id: string;
+  name: string;
   type: NodeletOutputType;
 }
 export interface Nodelet {
@@ -24,8 +28,9 @@ export interface Nodelet {
   category: NodeletCategory;
   name: string;
   internal: boolean;
+  integration?: boolean;
   image: string;
   inputs: NodeletInput[];
   outputs: NodeletOutput[];
-  configDefinitions: any;
+  configDefinitions: IConfigBaseExtend<any>;
 }

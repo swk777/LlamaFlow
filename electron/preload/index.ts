@@ -1,19 +1,33 @@
+import {
+  OllamaEmbeddingModels,
+  OpenAIEmbeddingModels,
+} from "@/constants/models";
+import { IIntegration } from "@/type/integration";
+import { IRendererApi } from "@/type/ipc";
+import { IWorkflow } from "@/type/workflow";
 import { ipcRenderer, contextBridge } from "electron";
 
 // --------- Expose some API to the Renderer process ---------
 contextBridge.exposeInMainWorld("ipcRenderer", {
-  addWorkflow: (workflow) => ipcRenderer.send("add-workflow", workflow),
+  addWorkflow: (workflow: IWorkflow) =>
+    ipcRenderer.send("add-workflow", workflow),
   getWorkflows: () => ipcRenderer.invoke("get-workflows"),
   getIntegrations: () => ipcRenderer.invoke("get-integrations"),
   getNodelets: () => ipcRenderer.invoke("get-nodelets"),
   getKnowledgeBases: () => ipcRenderer.invoke("get-knowledgeBases"),
-  getConversationById: (id) => ipcRenderer.invoke("get-conversation", { id }),
+  getConversationById: (id: string) =>
+    ipcRenderer.invoke("get-conversation", { id }),
   getConversations: () => ipcRenderer.invoke("get-conversations"),
-  saveWorkflows: (workflowIdx, workflow) =>
+  saveWorkflows: (workflowIdx: number, workflow: IWorkflow) =>
     ipcRenderer.invoke("save-workflows", { workflowIdx, workflow }),
-  saveIntegration: (integrationIdx, integration) =>
+  saveIntegration: (integrationIdx: number, integration: IIntegration) =>
     ipcRenderer.invoke("save-integrations", { integrationIdx, integration }),
-  addKnowledgeBase: (name, description, model, files) =>
+  addKnowledgeBase: (
+    name: string,
+    description: string,
+    model: OllamaEmbeddingModels | OpenAIEmbeddingModels,
+    files: File[]
+  ) =>
     ipcRenderer.invoke("add-knowledgeBase", {
       files,
       name,
@@ -22,9 +36,13 @@ contextBridge.exposeInMainWorld("ipcRenderer", {
     }),
   addDocuments: (files: File[], id: string) =>
     ipcRenderer.invoke("add-documents", { files, id }),
-  chat: (sessionId, workflowId, query, workflow) =>
-    ipcRenderer.invoke("chat", { sessionId, workflowId, query, workflow }),
-  newConversation: (workflowId) =>
+  chat: (
+    sessionId: string,
+    workflowId: string,
+    query: string,
+    workflow: IWorkflow
+  ) => ipcRenderer.invoke("chat", { sessionId, workflowId, query, workflow }),
+  newConversation: (workflowId: string) =>
     ipcRenderer.invoke("new-conversation", { workflowId }),
   on(...args: Parameters<typeof ipcRenderer.on>) {
     const [channel, listener] = args;
@@ -44,10 +62,7 @@ contextBridge.exposeInMainWorld("ipcRenderer", {
     const [channel, ...omit] = args;
     return ipcRenderer.invoke(channel, ...omit);
   },
-
-  // You can expose other APTs you need here.
-  // ...
-});
+} as IRendererApi);
 
 // --------- Preload scripts loading ---------
 function domReady(

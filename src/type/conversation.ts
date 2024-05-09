@@ -1,4 +1,4 @@
-export interface Conversation {
+export interface IConversation {
   sessionId: string;
   createDate: string;
   updateDate: string;

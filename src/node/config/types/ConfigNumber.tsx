@@ -1,55 +1,56 @@
-import React, { ReactElement } from "react";
-import { NumberInput } from "@mantine/core";
+import React, { ChangeEvent, ReactElement, useCallback, useState } from "react";
+import { Input, NumberInput, Text } from "@mantine/core";
 import useDef from "../useDef";
 import {
   IConfigBaseProps,
   IConfigDefinitionBase,
 } from "@/type/configDefinition";
 
-// const { InputNumber } = Input;
-
 interface IConfigNumber extends IConfigDefinitionBase {
   misc?: {
     unit?: string;
     min?: number;
     max?: number;
+    prefix?: string;
+    suffix?: string;
   };
-  prefix?: string;
-  suffix?: string;
 }
 
 function ConfigNumber({
-  definition: def,
+  definition,
   style,
 }: IConfigBaseProps<IConfigNumber>): ReactElement {
-  const [fieldValue, updateFv, readonly] = useDef(def);
-  const { prefix, suffix } = def;
-  const { unit, min = 0, max } = def.misc || {};
-  //   let formatter = null;
-  //   if (unit) {
-  //     formatter = (v): string => `${v}${unit}`;
-  //   }
+  const [fieldValue, updateFv, readonly] = useDef(definition);
+  const [error, setError] = useState<String>();
+  const { unit, min = 0, max, prefix, suffix } = definition.misc || {};
+  const onBlur = useCallback(() => {
+    if (fieldValue === undefined && definition.required) {
+      setError("Required");
+      return;
+    }
+  }, [updateFv]);
   return (
-    <div className="row-flex-center">
-      {prefix && (
-        <span className="shrink-0" style={{ marginRight: 10 }}>
-          {prefix}
-        </span>
-      )}
+    <Input.Wrapper
+      label={definition?.label}
+      className="text-left"
+      description={definition?.description}
+      required={definition.required}
+    >
       <NumberInput
         value={fieldValue}
         onChange={(v): void => updateFv(v || min)}
-        // formatter={formatter}
+        rightSection={<Text fz="sm">{unit}</Text>}
         style={{ minWidth: 60, ...style }}
         disabled={readonly}
         min={min}
         max={max}
-        suffix={unit}
+        suffix={suffix}
+        prefix={prefix}
+        onBlur={onBlur}
+        error={error}
       />
-      {suffix && <span className="shrink-0 ml-10">{suffix}</span>}
-    </div>
+    </Input.Wrapper>
   );
 }
 
-const Default = React.memo(ConfigNumber);
-export default Default;
+export default ConfigNumber;

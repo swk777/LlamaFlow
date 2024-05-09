@@ -2,14 +2,21 @@ import React, { useContext, useCallback, useState } from "react";
 import PropTypes from "prop-types";
 // import cn from "classnames";
 
-import DefContext, { ConfigContextProvider } from "./ConfigContext";
+import ConfigContext, { ConfigContextProvider } from "./ConfigContext";
 import { applyFieldSync } from "./utils";
 import useVersion from "@/hooks/useVersion";
 import ConfigureContent from "./ConfigureContent";
 
 function Configuration(props) {
-  const { definitions, className, style, onChange, config: nodeConfig } = props;
-  const { isFieldVisible } = useContext(DefContext);
+  const {
+    definitions,
+    className,
+    style,
+    onChange,
+    config: nodeConfig,
+    integrationConfig,
+  } = props;
+  const { isFieldVisible } = useContext(ConfigContext);
   const [config, setConfig] = useState(nodeConfig);
   const [version, update] = useVersion();
 
@@ -17,9 +24,7 @@ function Configuration(props) {
     (newConfig, sourceInputs) => {
       const nextConfig = applyFieldSync(definitions, newConfig, sourceInputs);
       setConfig(nextConfig);
-      onChange &&
-        // onChange(nextConfig, validate(definitions, nextConfig).length === 0);
-        onChange(nextConfig);
+      onChange && onChange(nextConfig);
     },
     [definitions, onChange]
   );
@@ -27,6 +32,7 @@ function Configuration(props) {
     <ConfigContextProvider
       definitions={definitions}
       config={config}
+      integrationConfig={integrationConfig}
       onChange={updateConfig}
       refresh={update}
       key={version}

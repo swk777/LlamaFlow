@@ -9,32 +9,35 @@ import { DefaultData } from "../constants/initialData";
 import { IWorkflow } from "../type/workflow";
 import { Nodelet } from "../type/nodelet";
 import { IKnowledgeBase } from "@/type/knowledgeBase";
+import { IIntegration } from "@/type/integration";
+import { IConversation } from "@/type/conversation";
 
 interface IProviderProps {
   children: ReactElement;
 }
 
 interface IAppContext {
-  integrations: any[];
+  integrations: IIntegration[];
   workflows: IWorkflow[];
   nodelets: Nodelet[];
   knowledgeBases: IKnowledgeBase[];
-  conversations: any[];
+  conversations: IConversation[];
   setConversations?: (newData: any[]) => void;
   setWorkflows?: (newData: IWorkflow[]) => void;
   setNodelets?: (newData: Nodelet[]) => void;
   setKnowledgeBases?: (newData: IKnowledgeBase[]) => void;
   updateWorkflow?: (workflowId: string, newData: IWorkflow) => void;
   updateIntegration?: (integrationId: string, newData: any) => void;
-  refreshKnowledgeBase: () => void;
-  refreshConversations: () => void;
-  refreshWorkflow: () => void;
+  refreshKnowledgeBase?: () => void;
+  refreshConversations?: () => void;
+  refreshWorkflow?: () => void;
 }
 export const AppContext = createContext<IAppContext>({
   integrations: DefaultData.integrations,
   workflows: DefaultData.workflows,
   nodelets: DefaultData.nodelets,
   knowledgeBases: DefaultData.knowledgeBases,
+  conversations: [],
 });
 
 export function AppContextProvider(props: IProviderProps): ReactElement {
@@ -65,7 +68,6 @@ export function AppContextProvider(props: IProviderProps): ReactElement {
           newData
         );
         setWorkflows(workflows);
-        // await refreshWorkflow();
       }
     },
     [workflows]
@@ -75,17 +77,11 @@ export function AppContextProvider(props: IProviderProps): ReactElement {
       const IntegrationIdx = integrations.findIndex(
         (wf) => wf.id === integrationId
       );
-      // if (IntegrationIdx === -1) {
-      //   await window.ipcRenderer.addWorkflow(newData);
-      //   await refreshWorkflow();
-      // } else {
       const newIntegrations = await window.ipcRenderer.saveIntegration(
         IntegrationIdx,
         newData
       );
       setIntegrations(newIntegrations);
-      // await refreshWorkflow();
-      // }
     },
     [workflows]
   );

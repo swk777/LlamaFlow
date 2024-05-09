@@ -1,3 +1,5 @@
+import { IRendererApi } from "./ipc";
+
 type IValue = string | boolean;
 type IFuncValueChange = (value: IValue, event: any) => void;
 
@@ -9,4 +11,8 @@ interface IMDItem {
   value: string | number;
   label?: string;
   icon?: string;
+}
+
+interface Window {
+  ipcRenderer: IRendererApi;
 }

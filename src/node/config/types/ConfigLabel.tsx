@@ -11,10 +11,10 @@ interface IConfigLabel extends IConfigDefinitionBase {
 }
 
 export default function ConfigLabel({
-  definition: def,
+  definition,
 }: IConfigBaseProps<IConfigLabel>): React.ReactElement {
-  if (def.label) {
-    return <>{def.label}</>;
+  if (definition.label) {
+    return <>{definition.label}</>;
   }
   return <></>;
 }

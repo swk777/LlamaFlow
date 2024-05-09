@@ -59,7 +59,6 @@ export const createKnowledgeBase = async (db, newKnowledgeBase) => {
   // Load the docs into the vector store
   const vectorStore = await HNSWLib.fromDocuments(
     docs,
-    // new OpenAIEmbeddings({ configuration: { httpAgent: httpsAgent } })
     getEmbeddingModel(newKnowledgeBase.model)
   );
   await vectorStore.save(`${WorkspacePath}/${knowledgeBase.id}/embeddings`);
@@ -87,7 +86,6 @@ export async function addDocuments(files, id, db) {
   console.log(db.data.knowledgeBases[knowledgeBaseIndex].model);
   const loadedVectorStore = await HNSWLib.load(
     `${WorkspacePath}/${id}/embeddings`,
-    // new OpenAIEmbeddings({ configuration: { httpAgent: httpsAgent } })
     getEmbeddingModel(db.data.knowledgeBases[knowledgeBaseIndex].model)
   );
   await loadedVectorStore.addDocuments(docs);

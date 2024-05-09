@@ -5,9 +5,10 @@ import React, {
   useContext,
   useState,
   useRef,
+  ChangeEvent,
 } from "react";
-import { Input } from "@mantine/core";
-import DefContext from "../ConfigContext";
+import { Input, Text } from "@mantine/core";
+import ConfigContext from "../ConfigContext";
 import useDef, { useDependOnMap } from "../useDef";
 
 import {
@@ -27,25 +28,21 @@ function ConfigInput({
   style,
 }: IConfigBaseProps<IConfigInput>): ReactElement {
   const [fieldValue, updateFv, readonly] = useDef(definition);
+  const { config } = useContext(ConfigContext);
   const prevFv = useRef(fieldValue);
   const [inputValue, setInputValue] = useState(fieldValue);
   const [error, setError] = useState<String>();
-  const { config } = useContext(DefContext);
   const { disabledOnMap = {} } = definition;
   const { unit, maxLength } = definition.misc || {};
-  let formatter = null;
-  if (unit) {
-    formatter = (v): string => `${v}${unit}`;
-  }
   const onChange = useCallback(
-    (e): void => {
+    (e: ChangeEvent<HTMLInputElement>): void => {
       updateFv(e.currentTarget.value);
       setInputValue(e.target.value);
     },
     [updateFv]
   );
   const onBlur = useCallback(
-    (e) => {
+    (e: ChangeEvent<HTMLInputElement>) => {
       if (e.target.value === "" && definition.required) {
         setError("Required");
         return;
@@ -81,11 +78,11 @@ function ConfigInput({
         maxLength={maxLength}
         disabled={readonly || disabled}
         error={error}
+        rightSection={<Text fz="sm">{unit}</Text>}
         style={style}
       />
     </Input.Wrapper>
   );
 }
 
-const Default = React.memo(ConfigInput);
-export default Default;
+export default ConfigInput;

@@ -1,6 +1,5 @@
 import { ConfigurationType } from "../configType";
 
-import ConfigInput from "./ConfigInput";
 import ConfigTags from "./ConfigTags";
 import ConfigNumber from "./ConfigNumber";
 import ConfigCheckbox from "./ConfigCheckbox";
@@ -8,8 +7,10 @@ import ConfigSelect from "./ConfigSelect";
 import ConfigTextarea from "./ConfigTextarea";
 import ConfigLabel from "./ConfigLabel";
 import ConfigKnowledgeBase from "./ConfigKnowledgeBase";
+import ConfigInput from "./ConfigInput";
+import { IConfigBaseExtend } from "@/type/configDefinition";
 
-export function getTargetConfigClass(def) {
+export function getTargetConfigClass(def: IConfigBaseExtend<any>) {
   const { type } = def;
   switch (type) {
     case ConfigurationType.INPUT:
@@ -32,12 +33,3 @@ export function getTargetConfigClass(def) {
       return null;
   }
 }
-
-// const list = [ConfigTextCode, ConfigList, ConfigMap, ConfigDivider];
-
-// export const hasUnifyTitle = (ConfigClass) => {
-//   if (ConfigClass.hasUnifyTitle !== undefined) {
-//     return ConfigClass.hasUnifyTitle;
-//   }
-//   return list.indexOf(ConfigClass) === -1;
-// };

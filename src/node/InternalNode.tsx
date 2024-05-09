@@ -38,7 +38,7 @@ export default function InternalNode({ data, ...others }: Props) {
       >
         <div
           className="w-full h-3 shrink-0"
-          style={{ backgroundColor: getRandomColor(nodelet.id) }}
+          style={{ backgroundColor: getRandomColor(nodelet?.id ?? "") }}
         ></div>
         {/* <div
           className="absolute w-2 h-2 rounded-full top-1 right-1"

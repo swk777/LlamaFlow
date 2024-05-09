@@ -1,5 +1,5 @@
 import { Nodelet } from "@/type/nodelet";
-import { Conversation } from "./../../../src/type/conversation";
+import { IConversation } from "./../../../src/type/conversation";
 import { IWorkflow } from "@/type/workflow";
 import _cloneDeep from "lodash/cloneDeep";
 import { IKnowledgeBase } from "@/type/knowledgeBase";
@@ -11,7 +11,7 @@ const getInitialConversation = (
   sessionId: string,
   workflowId: string,
   message: string
-): Conversation => ({
+): IConversation => ({
   sessionId,
   workflowId,
   createDate: new Date().toLocaleString(),
@@ -23,7 +23,7 @@ export const newConversation = async (workflowId, message, db) => {
   const {
     conversations,
   }: {
-    conversations: Conversation[];
+    conversations: IConversation[];
   } = db.data;
   const conversation = getInitialConversation(
     `${workflowId}-${uuidv4()}`,
@@ -53,7 +53,7 @@ export const chat = async (
     workflows: IWorkflow[];
     nodelets: Nodelet[];
     knowledgeBases: IKnowledgeBase[];
-    conversations: Conversation[];
+    conversations: IConversation[];
     integrations: any[];
   } = db.data;
   console.log(workflowId);
@@ -151,7 +151,7 @@ async function executeNode(
   node,
   nodelets,
   integrations,
-  conversation: Conversation,
+  conversation: IConversation,
   context
 ) {
   const nodelet = nodelets.find((nl) => nl.id === node.data.nodeletId);

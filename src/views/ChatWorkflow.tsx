@@ -5,11 +5,11 @@ import Chat from "./Chat";
 import { Flex } from "@mantine/core";
 import { IWorkflow } from "@/type/workflow";
 import { v4 as uuidv4 } from "uuid";
-import { Conversation } from "@/type/conversation";
+import { IConversation } from "@/type/conversation";
 
 type Props = {
   workflow?: IWorkflow;
-  conversation?: Conversation;
+  conversation?: IConversation;
 };
 
 export default function ChatWorkflow({ workflow, conversation }: Props) {
@@ -22,7 +22,6 @@ export default function ChatWorkflow({ workflow, conversation }: Props) {
   useEffect(() => {
     window.ipcRenderer.getConversationById(id).then((res) => {
       refreshConversations();
-      // setMessages(res?.globalContext?.messages || []);
     });
   }, []);
   return (

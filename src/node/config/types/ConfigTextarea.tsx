@@ -2,14 +2,23 @@ import React, { useCallback, useContext, useState } from "react";
 import { Input, Textarea } from "@mantine/core";
 import PropTypes from "prop-types";
 import useDef from "../useDef";
-import DefContext from "../ConfigContext";
+import ConfigContext from "../ConfigContext";
+import {
+  IConfigBaseProps,
+  IConfigDefinitionBase,
+} from "@/type/configDefinition";
+interface IConfigTextarea extends IConfigDefinitionBase {
+  misc?: {
+    maxLength?: number;
+  };
+}
 
-function ConfigTextarea(props) {
+function ConfigTextarea(props: IConfigBaseProps<IConfigTextarea>) {
   const { definition, className, style } = props;
   const [error, setError] = useState<String>();
   const [fieldValue, updateFv, readonly] = useDef(definition);
   const { placeholder, required } = definition;
-  const { config } = useContext(DefContext);
+  const { config } = useContext(ConfigContext);
   const onBlur = useCallback(
     (e) => {
       if (e.target.value === "" && definition.required) {

@@ -9,20 +9,22 @@ import {
 
 interface ConfigContext {
   config: any;
+  integrationConfig: any;
   updateField: (field: string, value: any) => void;
   batchUpdateFields: (fields: string[], values: any[]) => void;
   isFieldVisible: IFunc<any, boolean>;
   getFieldValue: (field: string) => any;
+  getIntegrationValue: (field: string) => any;
   upstreamStages?: any[];
   readonly: boolean;
   refresh: () => void;
 }
 
 export const isDependencyMet = (
-  dependencyMap: IConfigDependOnMap,
+  dependencyMap: IConfigDependOnMap = {},
   config: any
 ): boolean => {
-  const fields = Object.keys(dependencyMap || {});
+  const fields = Object.keys(dependencyMap);
   if (!fields.length) return true;
   return fields.every((field) =>
     dependencyMap[field]?.includes(get(config, field))
@@ -30,10 +32,10 @@ export const isDependencyMet = (
 };
 
 function isExclusionMet(
-  exclusionMap: IConfigDependOnMap,
+  exclusionMap: IConfigDependOnMap = {},
   config: any
 ): boolean {
-  return Object.keys(exclusionMap || {}).some((field) =>
+  return Object.keys(exclusionMap).some((field) =>
     exclusionMap[field]?.includes(get(config, field))
   );
 }
@@ -75,10 +77,12 @@ export function cleanupConfig(
 
 const defaultConfigContext: ConfigContext = {
   config: {},
+  integrationConfig: {},
   updateField: () => {},
   batchUpdateFields: () => {},
   isFieldVisible: () => true,
   getFieldValue: () => {},
+  getIntegrationValue: () => {},
   upstreamStages: [],
   readonly: false,
   refresh: () => {},
@@ -86,11 +90,12 @@ const defaultConfigContext: ConfigContext = {
 
 export function createConfigContext(
   config: any,
-  onChange,
-  readonly,
-  refresh
+  integrationConfig: any,
+  onChange: (state: any) => void,
+  readonly: boolean,
+  refresh: () => void
 ): ConfigContext {
-  const batchUpdateFields = (fields, values) => {
+  const batchUpdateFields = (fields: string[], values: any[]) => {
     if (fields.every((field, index) => get(config, field) === values[index]))
       return;
     onChange(
@@ -104,8 +109,10 @@ export function createConfigContext(
 
   return {
     config,
+    integrationConfig,
     isFieldVisible: (definition) => isFieldVisibleInConfig(definition, config),
     getFieldValue: (field) => get(config, field),
+    getIntegrationValue: (field) => get(integrationConfig, field),
     updateField: (field, value) => batchUpdateFields([field], [value]),
     batchUpdateFields,
     readonly,
@@ -118,6 +125,7 @@ export default ConfigContext;
 
 interface ProviderProps {
   config: any;
+  integrationConfig: any;
   definitions: IConfigDefinitionBase[];
   onChange: (newConfig: any) => void;
   refresh: () => void;
@@ -127,6 +135,7 @@ interface ProviderProps {
 
 export function ConfigContextProvider({
   config,
+  integrationConfig,
   definitions,
   onChange,
   refresh,
@@ -134,12 +143,19 @@ export function ConfigContextProvider({
   children,
 }: ProviderProps): ReactElement {
   const handleConfigChange = useCallback(
-    (newConfig) => onChange(cleanupConfig(newConfig, definitions)),
+    (newConfig: any) => onChange(cleanupConfig(newConfig, definitions)),
     [onChange, definitions]
   );
 
   const value = useMemo(
-    () => createConfigContext(config, handleConfigChange, readonly, refresh),
+    () =>
+      createConfigContext(
+        config,
+        integrationConfig,
+        handleConfigChange,
+        readonly,
+        refresh
+      ),
     [config, handleConfigChange, readonly, refresh]
   );
 

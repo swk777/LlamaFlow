@@ -1,5 +1,5 @@
 import { useContext, useMemo } from "react";
-import DefContext from "./ConfigContext";
+import ConfigContext from "./ConfigContext";
 import {
   IConfigDefinitionBase,
   IConfigDependOnMap,
@@ -9,14 +9,14 @@ export default function useDef(
   def: IConfigDefinitionBase
 ): [any, IFuncVoid<any>, boolean] {
   const { fieldName } = def;
-  const { getFieldValue, updateField, readonly } = useContext(DefContext);
+  const { getFieldValue, updateField, readonly } = useContext(ConfigContext);
   const fieldValue = getFieldValue(fieldName);
   const updateFieldValue = (v: any): void => updateField(fieldName, v);
   return [fieldValue, updateFieldValue, readonly];
 }
 
 export function useDependOnMap(onMap: IConfigDependOnMap): [boolean, boolean] {
-  const { getFieldValue } = useContext(DefContext);
+  const { getFieldValue } = useContext(ConfigContext);
   const onKeys = useMemo(() => Object.keys(onMap || {}), [onMap]);
   const hasDepends = onKeys.length !== 0;
   const fullfilled = useMemo(() => {
