@@ -1,5 +1,5 @@
 import { AppContext } from '@/context/AppContext';
-import { Box, Button, Divider, FileButton, Flex, LoadingOverlay } from '@mantine/core';
+import { Button, Divider, FileButton, Flex, LoadingOverlay } from '@mantine/core';
 import { IconChevronLeft } from '@tabler/icons-react';
 import pick from 'ramda/src/pick';
 import { useContext, useState } from 'react';
@@ -29,12 +29,14 @@ export default function KnowledgeBase({}: Props) {
 								id,
 							)
 							.then(() => {
-								console.log('finish');
 								refreshKnowledgeBase();
+								setLoading(false);
+							})
+							.catch(() => {
 								setLoading(false);
 							});
 					}}
-					accept=".pdf"
+					accept=".pdf,.md,.txt,.json,.html,.csv,.doc,.docx,.ppt,.pptx"
 					multiple
 				>
 					{(props) => <Button {...props}>Add Documents</Button>}
@@ -42,16 +44,9 @@ export default function KnowledgeBase({}: Props) {
 			</Flex>
 			<Divider />
 			<Flex className="flex-1 p-10">
-				<Box pos="relative">
-					<LoadingOverlay
-						visible={loading}
-						zIndex={1000}
-						// overlayProps={{ blur: 1 }}
-					/>
-					<FileTable files={fileList} />
-				</Box>
+				<LoadingOverlay visible={loading} zIndex={1000} />
+				<FileTable files={fileList} />
 			</Flex>
 		</Flex>
 	);
-	// return <div>{fileList.map((file) => file.name)}</div>;
 }

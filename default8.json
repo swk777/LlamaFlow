@@ -37,16 +37,847 @@
         }
       ],
       "config": {
+        "baseUrl": "http://localhost:11434",
         "model": [
-          "llama3",
-          "llama2"
-        ],
-        "baseUrl": "http://localhost:11434"
+          "llama2",
+          "llama3"
+        ]
       }
     }
   ],
-  "knowledgeBases": [],
-  "conversations": [],
+  "knowledgeBases": [
+    {
+      "id": "302e91eb-6684-4e68-b68b-ee6fa5c44a36",
+      "name": "hll",
+      "description": "sd",
+      "workspaceId": "1",
+      "fileList": [
+        {
+          "name": "软件定制开发报价单 (1).pdf",
+          "path": "/Users/larryyu/Downloads/软件定制开发报价单 (1).pdf",
+          "type": "application/pdf",
+          "lastModified": 1714474197473
+        }
+      ],
+      "model": "mxbai-embed-large"
+    },
+    {
+      "id": "340fd2a7-9b6d-445a-89c1-457e28b3dfff",
+      "name": "sd",
+      "description": "ds",
+      "workspaceId": "1",
+      "fileList": [
+        {
+          "name": "销售明细模板.json",
+          "path": "/Users/larryyu/Downloads/销售明细模板.json",
+          "type": "application/json",
+          "lastModified": 1653635057589
+        }
+      ],
+      "model": "mxbai-embed-large"
+    },
+    {
+      "id": "f3181ece-38af-419f-8bae-a3f2cb0b0a94",
+      "name": "sdsss",
+      "description": "sdsss",
+      "workspaceId": "1",
+      "fileList": [
+        {
+          "name": "【高级前端开发工程师 _ 杭州20-35K】张理健 5年.pdf",
+          "path": "/Users/larryyu/Downloads/【高级前端开发工程师 _ 杭州20-35K】张理健 5年.pdf",
+          "type": "application/pdf",
+          "lastModified": 1614579145125
+        }
+      ],
+      "model": "text-embedding-3-small"
+    },
+    {
+      "id": "2378a7d8-8fcf-4bab-b534-03775b581d12",
+      "name": "sdaaa",
+      "description": "sds",
+      "workspaceId": "1",
+      "fileList": [
+        {
+          "name": "【web前端_杭州】叶斌 5年.pdf",
+          "path": "/Users/larryyu/Downloads/【web前端_杭州】叶斌 5年.pdf",
+          "type": "application/pdf",
+          "lastModified": 1650613490656
+        },
+        {
+          "name": "Echarts vs Highcharts 6bed376bb61b4ea993917968cf176d93.html",
+          "path": "/Users/larryyu/Downloads/Echarts vs Highcharts 6bed376bb61b4ea993917968cf176d93.html",
+          "type": "text/html",
+          "lastModified": 1623093778000
+        }
+      ],
+      "model": "mxbai-embed-large"
+    },
+    {
+      "id": "c465badb-bee3-4280-80e1-3ac8e7fb8f7f",
+      "name": "ds",
+      "description": "sddssd",
+      "workspaceId": "1",
+      "fileList": [
+        {
+          "name": "导入导出复现.json",
+          "path": "/Users/larryyu/Downloads/导入导出复现.json",
+          "type": "application/json",
+          "lastModified": 1618625389108
+        }
+      ],
+      "model": "mxbai-embed-large"
+    },
+    {
+      "id": "6ca7c003-32a8-4e79-9226-811658c36f5a",
+      "name": "wwqw",
+      "description": "wewew",
+      "workspaceId": "1",
+      "fileList": [
+        {
+          "name": "关联度分析ETL - 人工实现.json",
+          "path": "/Users/larryyu/Downloads/关联度分析ETL - 人工实现.json",
+          "type": "application/json",
+          "lastModified": 1611838239725
+        }
+      ],
+      "model": "mxbai-embed-large"
+    },
+    {
+      "id": "424e92e5-5929-44f7-9ccf-ce38980cd5e5",
+      "name": "kk",
+      "description": "jnj",
+      "workspaceId": "1",
+      "fileList": [
+        {
+          "name": "dm_ads订单商品明细表.json",
+          "path": "/Users/larryyu/Downloads/dm_ads订单商品明细表.json",
+          "type": "application/json",
+          "lastModified": 1626244765096
+        }
+      ],
+      "model": "mxbai-embed-large"
+    },
+    {
+      "id": "29fa9ac2-aa43-4706-9671-e0612c79dd0d",
+      "name": "kk",
+      "description": "jnj",
+      "workspaceId": "1",
+      "fileList": [
+        {
+          "name": "dm_ads订单商品明细表.json",
+          "path": "/Users/larryyu/Downloads/dm_ads订单商品明细表.json",
+          "type": "application/json",
+          "lastModified": 1626244765096
+        }
+      ],
+      "model": "mxbai-embed-large"
+    },
+    {
+      "id": "c381b9e5-1b54-436e-9ce3-2c8bf404ab37",
+      "name": "kk",
+      "description": "jnj",
+      "workspaceId": "1",
+      "fileList": [
+        {
+          "name": "temp.txt",
+          "path": "/Users/larryyu/Documents/temp.txt",
+          "type": "text/plain",
+          "lastModified": 1689309651311
+        },
+        {
+          "name": "mayday.sh",
+          "path": "/Users/larryyu/Documents/mayday.sh",
+          "type": "text/x-sh",
+          "lastModified": 1689309645895
+        },
+        {
+          "name": "logseq插件机制分析.md",
+          "path": "/Users/larryyu/Documents/myNotes/pages/logseq插件机制分析.md",
+          "type": "text/markdown",
+          "lastModified": 1657499996440
+        },
+        {
+          "name": "俞孙皓-前端工程师-18668189816_1681968691846_0.pdf",
+          "path": "/Users/larryyu/Documents/myNotes/assets/俞孙皓-前端工程师-18668189816_1681968691846_0.pdf",
+          "type": "application/pdf",
+          "lastModified": 1681968691850
+        },
+        {
+          "name": "extend.js",
+          "path": "/Users/larryyu/Desktop/extend.js",
+          "type": "text/javascript",
+          "lastModified": 1629808137645
+        },
+        {
+          "name": "AppDetail.scss",
+          "path": "/Users/larryyu/Desktop/AppDetail.scss",
+          "type": "",
+          "lastModified": 1608985657482
+        },
+        {
+          "name": "马钰坤.pdf",
+          "path": "/Users/larryyu/Desktop/马钰坤.pdf",
+          "type": "application/pdf",
+          "lastModified": 1614740166258
+        },
+        {
+          "name": "forecast-hc.json",
+          "path": "/Users/larryyu/Downloads/forecast-hc.json",
+          "type": "application/json",
+          "lastModified": 1611728967878
+        }
+      ],
+      "model": "mxbai-embed-large"
+    },
+    {
+      "id": "1cdda573-c921-4585-a497-9361a96ef9e6",
+      "name": "ddfd",
+      "description": "dfdfd",
+      "workspaceId": "1",
+      "fileList": [
+        {
+          "name": "merge.py",
+          "path": "/Users/larryyu/Downloads/merge.py",
+          "type": "text/x-python-script",
+          "lastModified": 1694144471436
+        }
+      ],
+      "model": "text-embedding-3-small"
+    },
+    {
+      "id": "ebb82dc9-fad3-4734-a3a0-0c0bb3eb6b27",
+      "name": "ddfd",
+      "description": "dfdfd",
+      "workspaceId": "1",
+      "fileList": [
+        {
+          "name": "merge.py",
+          "path": "/Users/larryyu/Downloads/merge.py",
+          "type": "text/x-python-script",
+          "lastModified": 1694144471436
+        }
+      ],
+      "model": "mxbai-embed-large"
+    },
+    {
+      "id": "f89fe019-7f87-46a2-a4e2-b4ef02e8f232",
+      "name": "ddfdsdds",
+      "description": "dfdfdsdds",
+      "workspaceId": "1",
+      "fileList": [
+        {
+          "name": "导入导出复现.json",
+          "path": "/Users/larryyu/Downloads/导入导出复现.json",
+          "type": "application/json",
+          "lastModified": 1618625389108
+        }
+      ],
+      "model": "mxbai-embed-large"
+    },
+    {
+      "id": "1c7b6825-25ee-4058-871d-5ba1a6901ee8",
+      "name": "json",
+      "description": "jkson",
+      "workspaceId": "1",
+      "fileList": [
+        {
+          "name": "forecast-hc.json",
+          "path": "/Users/larryyu/Downloads/forecast-hc.json",
+          "type": "application/json",
+          "lastModified": 1611728967878
+        }
+      ],
+      "model": "mxbai-embed-large"
+    },
+    {
+      "id": "37964f8c-ec4a-49b2-af7e-5662ff38dd72",
+      "name": "sd",
+      "description": "sd",
+      "workspaceId": "1",
+      "fileList": [
+        {
+          "name": "Building a Blueprint c4b488f056a94bc89fccb1292ce21452.md",
+          "path": "/Users/larryyu/Downloads/Building a Blueprint c4b488f056a94bc89fccb1292ce21452.md",
+          "type": "text/markdown",
+          "lastModified": 1687214694000
+        }
+      ],
+      "model": "mxbai-embed-large"
+    },
+    {
+      "id": "ce7b3536-0912-48b9-b22c-0539b3aa7587",
+      "name": "sd",
+      "description": "sd",
+      "workspaceId": "1",
+      "fileList": [
+        {
+          "name": "Building a Blueprint c4b488f056a94bc89fccb1292ce21452.md",
+          "path": "/Users/larryyu/Downloads/Building a Blueprint c4b488f056a94bc89fccb1292ce21452.md",
+          "type": "text/markdown",
+          "lastModified": 1687214694000
+        }
+      ],
+      "model": "mxbai-embed-large"
+    },
+    {
+      "id": "de663640-3e7e-4aa9-bd76-ef5610abfa42",
+      "name": "sd",
+      "description": "sd",
+      "workspaceId": "1",
+      "fileList": [
+        {
+          "name": "feedback.json",
+          "path": "/Users/larryyu/Downloads/feedback.json",
+          "type": "application/json",
+          "lastModified": 1706436608000
+        },
+        {
+          "name": "叶斌的简历.pdf",
+          "path": "/Users/larryyu/Downloads/叶斌的简历.pdf",
+          "type": "application/pdf",
+          "lastModified": 1650953936120
+        }
+      ],
+      "model": "mxbai-embed-large"
+    },
+    {
+      "id": "11798f32-d8f1-4a6c-b40a-b5b5d1564734",
+      "name": "sdds",
+      "description": "nd",
+      "workspaceId": "1",
+      "fileList": [
+        {
+          "name": "Echarts vs Highcharts 6bed376bb61b4ea993917968cf176d93.md",
+          "path": "/Users/larryyu/Downloads/Echarts vs Highcharts 6bed376bb61b4ea993917968cf176d93.md",
+          "type": "text/markdown",
+          "lastModified": 1623093546000
+        }
+      ],
+      "model": "mxbai-embed-large"
+    },
+    {
+      "id": "f3ca226f-3979-4bde-ba21-377d9ebac9a0",
+      "name": "csc",
+      "description": "sdsd",
+      "workspaceId": "1",
+      "fileList": [
+        {
+          "name": "airtravel.csv",
+          "path": "/Users/larryyu/Downloads/airtravel.csv",
+          "type": "text/csv",
+          "lastModified": 1684400554249
+        }
+      ],
+      "model": "mxbai-embed-large"
+    },
+    {
+      "id": "eb78550b-de9b-496f-85ed-2cb1965b3c19",
+      "name": "sd",
+      "description": "sd",
+      "workspaceId": "1",
+      "fileList": [
+        {
+          "name": "T7639.csv",
+          "path": "/Users/larryyu/Downloads/T7639.csv",
+          "type": "text/csv",
+          "lastModified": 1619423495237
+        }
+      ],
+      "model": "mxbai-embed-large"
+    },
+    {
+      "id": "1cadfaab-1954-49cd-adbe-ae915a25209d",
+      "name": "t",
+      "description": "f",
+      "workspaceId": "1",
+      "fileList": [
+        {
+          "name": "gQH8upTtR6.html",
+          "path": "/Users/larryyu/Downloads/gQH8upTtR6.html",
+          "type": "text/html",
+          "lastModified": 1703730830484
+        }
+      ],
+      "model": "mxbai-embed-large"
+    },
+    {
+      "id": "c1bb7287-de66-4c73-8713-b25f030411db",
+      "name": "t",
+      "description": "fsd",
+      "workspaceId": "1",
+      "fileList": [
+        {
+          "name": "guanIndex更新.csv",
+          "path": "/Users/larryyu/Downloads/guanIndex更新.csv",
+          "type": "text/csv",
+          "lastModified": 1612234191585
+        }
+      ],
+      "model": "mxbai-embed-large"
+    },
+    {
+      "id": "f4d25658-3802-48c7-8f8a-d16765af9553",
+      "name": "dco",
+      "description": "doc",
+      "workspaceId": "1",
+      "fileList": [
+        {
+          "name": "猫姐设计事务所设计需求问卷（新）.docx",
+          "path": "/Users/larryyu/Documents/猫姐设计事务所设计需求问卷（新）.docx",
+          "type": "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+          "lastModified": 1623253772359
+        }
+      ],
+      "model": "mxbai-embed-large"
+    },
+    {
+      "id": "b9d288c5-5adc-4d0b-afa2-c555b5c837e2",
+      "name": "maojie",
+      "description": "",
+      "workspaceId": "1",
+      "fileList": [
+        {
+          "name": "猫姐设计事务所设计需求问卷（新）.docx",
+          "path": "/Users/larryyu/Documents/猫姐设计事务所设计需求问卷（新）.docx",
+          "type": "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+          "lastModified": 1623253772359
+        }
+      ],
+      "model": "mxbai-embed-large"
+    }
+  ],
+  "conversations": [
+    {
+      "sessionId": "temp-b6d821f8-a4d6-4d15-9e61-ec63c7192d21-eeb81b63-7135-4a8d-9ee3-2271e1483f1f",
+      "workflowId": "b6d821f8-a4d6-4d15-9e61-ec63c7192d21",
+      "createDate": "5/11/2024, 2:43:37 PM",
+      "updateDate": "5/11/2024, 2:43:37 PM",
+      "nodeContext": {
+        "b5925368-d7e4-40e2-8611-f8a665ba0982": {
+          "outputs": {
+            "query": "who is larry"
+          }
+        },
+        "5158a87f-39c4-4c08-91f7-335ffcad76a3": {
+          "messages": [
+            {
+              "role": "user",
+              "content": "who is larry"
+            },
+            "\nI apologize, but I'm a large language model, I don't have access to personal information or the identity of individuals. Therefore, I cannot provide you with the personal details of a person named Larry.\n\nHowever, if you are looking for information on a public figure or celebrity named Larry, there may be many options to choose from. Some notable people with the name Larry include:\n\n1. Larry Bird - former American basketball player and coach\n2. Larry David - American comedian, actor, writer, and producer\n3. Larry King - American television and radio host\n4. Larry Page - American computer scientist and businessman (co-founder of Google)\n5. Larry Ellison - American businessman and entrepreneur (co-founder of Oracle Corporation)\n6. Larry Graham - American bassist and songwriter (known for his work with Sly and the Family Stone)\n7. Larry Gagosian - American art dealer and gallery owner\n8. Larry Hagman - American actor (best known for his role as J.R. Ewing in the television series Dallas)\n9. Larry Hall - American computer scientist and engineer (known for his work on the development of the ARPANET)\n10. Larry Hoppenstein - American businessman and entrepreneur (co-founder of McAfee)\n\nPlease let me know if you have any other questions or if there is anything else I can help you with!"
+          ],
+          "outputs": {
+            "answer": "\nI apologize, but I'm a large language model, I don't have access to personal information or the identity of individuals. Therefore, I cannot provide you with the personal details of a person named Larry.\n\nHowever, if you are looking for information on a public figure or celebrity named Larry, there may be many options to choose from. Some notable people with the name Larry include:\n\n1. Larry Bird - former American basketball player and coach\n2. Larry David - American comedian, actor, writer, and producer\n3. Larry King - American television and radio host\n4. Larry Page - American computer scientist and businessman (co-founder of Google)\n5. Larry Ellison - American businessman and entrepreneur (co-founder of Oracle Corporation)\n6. Larry Graham - American bassist and songwriter (known for his work with Sly and the Family Stone)\n7. Larry Gagosian - American art dealer and gallery owner\n8. Larry Hagman - American actor (best known for his role as J.R. Ewing in the television series Dallas)\n9. Larry Hall - American computer scientist and engineer (known for his work on the development of the ARPANET)\n10. Larry Hoppenstein - American businessman and entrepreneur (co-founder of McAfee)\n\nPlease let me know if you have any other questions or if there is anything else I can help you with!"
+          }
+        }
+      },
+      "globalContext": {
+        "currentMessage": "who is larry",
+        "messages": [
+          "who is larry",
+          "\nI apologize, but I'm a large language model, I don't have access to personal information or the identity of individuals. Therefore, I cannot provide you with the personal details of a person named Larry.\n\nHowever, if you are looking for information on a public figure or celebrity named Larry, there may be many options to choose from. Some notable people with the name Larry include:\n\n1. Larry Bird - former American basketball player and coach\n2. Larry David - American comedian, actor, writer, and producer\n3. Larry King - American television and radio host\n4. Larry Page - American computer scientist and businessman (co-founder of Google)\n5. Larry Ellison - American businessman and entrepreneur (co-founder of Oracle Corporation)\n6. Larry Graham - American bassist and songwriter (known for his work with Sly and the Family Stone)\n7. Larry Gagosian - American art dealer and gallery owner\n8. Larry Hagman - American actor (best known for his role as J.R. Ewing in the television series Dallas)\n9. Larry Hall - American computer scientist and engineer (known for his work on the development of the ARPANET)\n10. Larry Hoppenstein - American businessman and entrepreneur (co-founder of McAfee)\n\nPlease let me know if you have any other questions or if there is anything else I can help you with!"
+        ],
+        "latestMessage": "\nI apologize, but I'm a large language model, I don't have access to personal information or the identity of individuals. Therefore, I cannot provide you with the personal details of a person named Larry.\n\nHowever, if you are looking for information on a public figure or celebrity named Larry, there may be many options to choose from. Some notable people with the name Larry include:\n\n1. Larry Bird - former American basketball player and coach\n2. Larry David - American comedian, actor, writer, and producer\n3. Larry King - American television and radio host\n4. Larry Page - American computer scientist and businessman (co-founder of Google)\n5. Larry Ellison - American businessman and entrepreneur (co-founder of Oracle Corporation)\n6. Larry Graham - American bassist and songwriter (known for his work with Sly and the Family Stone)\n7. Larry Gagosian - American art dealer and gallery owner\n8. Larry Hagman - American actor (best known for his role as J.R. Ewing in the television series Dallas)\n9. Larry Hall - American computer scientist and engineer (known for his work on the development of the ARPANET)\n10. Larry Hoppenstein - American businessman and entrepreneur (co-founder of McAfee)\n\nPlease let me know if you have any other questions or if there is anything else I can help you with!"
+      }
+    },
+    {
+      "sessionId": "b6d821f8-a4d6-4d15-9e61-ec63c7192d21-7cdbabd5-53a9-4746-95d8-5a20f39ca53e",
+      "workflowId": "b6d821f8-a4d6-4d15-9e61-ec63c7192d21",
+      "createDate": "5/11/2024, 2:45:34 PM",
+      "updateDate": "5/11/2024, 2:45:34 PM",
+      "nodeContext": {
+        "b5925368-d7e4-40e2-8611-f8a665ba0982": {
+          "outputs": {
+            "query": "hello"
+          }
+        }
+      },
+      "globalContext": {
+        "currentMessage": "hello",
+        "messages": [
+          "hello",
+          null
+        ]
+      }
+    },
+    {
+      "sessionId": "temp-b6d821f8-a4d6-4d15-9e61-ec63c7192d21-0ecb2cf3-1637-4191-985e-d9ed5364f55b",
+      "workflowId": "b6d821f8-a4d6-4d15-9e61-ec63c7192d21",
+      "createDate": "5/11/2024, 2:46:40 PM",
+      "updateDate": "5/11/2024, 2:46:40 PM",
+      "nodeContext": {
+        "b5925368-d7e4-40e2-8611-f8a665ba0982": {
+          "outputs": {
+            "query": "who is  猫姐"
+          }
+        }
+      },
+      "globalContext": {
+        "currentMessage": "who is  猫姐",
+        "messages": [
+          "who is  猫姐",
+          null
+        ]
+      }
+    },
+    {
+      "sessionId": "temp-b6d821f8-a4d6-4d15-9e61-ec63c7192d21-dc1ecbe8-68fe-46ec-8e60-42251d25b42b",
+      "workflowId": "b6d821f8-a4d6-4d15-9e61-ec63c7192d21",
+      "createDate": "5/11/2024, 2:47:20 PM",
+      "updateDate": "5/11/2024, 2:47:20 PM",
+      "nodeContext": {
+        "b5925368-d7e4-40e2-8611-f8a665ba0982": {
+          "outputs": {
+            "query": "who is 猫姐"
+          }
+        },
+        "5158a87f-39c4-4c08-91f7-335ffcad76a3": {
+          "messages": [
+            {
+              "role": "user",
+              "content": "who is 猫姐"
+            },
+            "\n猫姐 (Māo Jiǎ) is a popular Chinese internet celebrity and social media influencer. Her real name is Wang Xiaobo, and she was born in 1995 in Shenzhen, Guangdong Province, China.\n\n猫姐 initially gained fame on the Chinese video-sharing app Douyin (also known as TikTok) through her dance and lip-sync videos. Her content quickly went viral, and she amassed a huge following of over 50 million fans on Douyin alone. She has since expanded her online presence to other social media platforms such as Instagram, Twitter, and YouTube.\n\n猫姐 is known for her cute and playful personality, as well as her impressive dance skills. She often performs elaborate choreographed dances to popular music, and has collaborated with other Chinese internet celebrities on various projects.\n\nIn addition to her online fame, 猫姐 has also appeared in various TV shows and commercials, and has released her own line of merchandise such as stickers and clothing. She has become a cultural phenomenon in China and has gained recognition globally for her influence on social media and popular culture."
+          ],
+          "outputs": {
+            "answer": "\n猫姐 (Māo Jiǎ) is a popular Chinese internet celebrity and social media influencer. Her real name is Wang Xiaobo, and she was born in 1995 in Shenzhen, Guangdong Province, China.\n\n猫姐 initially gained fame on the Chinese video-sharing app Douyin (also known as TikTok) through her dance and lip-sync videos. Her content quickly went viral, and she amassed a huge following of over 50 million fans on Douyin alone. She has since expanded her online presence to other social media platforms such as Instagram, Twitter, and YouTube.\n\n猫姐 is known for her cute and playful personality, as well as her impressive dance skills. She often performs elaborate choreographed dances to popular music, and has collaborated with other Chinese internet celebrities on various projects.\n\nIn addition to her online fame, 猫姐 has also appeared in various TV shows and commercials, and has released her own line of merchandise such as stickers and clothing. She has become a cultural phenomenon in China and has gained recognition globally for her influence on social media and popular culture."
+          }
+        }
+      },
+      "globalContext": {
+        "currentMessage": "who is 猫姐",
+        "messages": [
+          "who is 猫姐",
+          "\n猫姐 (Māo Jiǎ) is a popular Chinese internet celebrity and social media influencer. Her real name is Wang Xiaobo, and she was born in 1995 in Shenzhen, Guangdong Province, China.\n\n猫姐 initially gained fame on the Chinese video-sharing app Douyin (also known as TikTok) through her dance and lip-sync videos. Her content quickly went viral, and she amassed a huge following of over 50 million fans on Douyin alone. She has since expanded her online presence to other social media platforms such as Instagram, Twitter, and YouTube.\n\n猫姐 is known for her cute and playful personality, as well as her impressive dance skills. She often performs elaborate choreographed dances to popular music, and has collaborated with other Chinese internet celebrities on various projects.\n\nIn addition to her online fame, 猫姐 has also appeared in various TV shows and commercials, and has released her own line of merchandise such as stickers and clothing. She has become a cultural phenomenon in China and has gained recognition globally for her influence on social media and popular culture."
+        ],
+        "latestMessage": "\n猫姐 (Māo Jiǎ) is a popular Chinese internet celebrity and social media influencer. Her real name is Wang Xiaobo, and she was born in 1995 in Shenzhen, Guangdong Province, China.\n\n猫姐 initially gained fame on the Chinese video-sharing app Douyin (also known as TikTok) through her dance and lip-sync videos. Her content quickly went viral, and she amassed a huge following of over 50 million fans on Douyin alone. She has since expanded her online presence to other social media platforms such as Instagram, Twitter, and YouTube.\n\n猫姐 is known for her cute and playful personality, as well as her impressive dance skills. She often performs elaborate choreographed dances to popular music, and has collaborated with other Chinese internet celebrities on various projects.\n\nIn addition to her online fame, 猫姐 has also appeared in various TV shows and commercials, and has released her own line of merchandise such as stickers and clothing. She has become a cultural phenomenon in China and has gained recognition globally for her influence on social media and popular culture."
+      }
+    },
+    {
+      "sessionId": "b6d821f8-a4d6-4d15-9e61-ec63c7192d21-09a5d2a6-d1e4-476d-ba32-262706fb9927",
+      "workflowId": "b6d821f8-a4d6-4d15-9e61-ec63c7192d21",
+      "createDate": "5/11/2024, 2:49:33 PM",
+      "updateDate": "5/11/2024, 2:49:33 PM",
+      "nodeContext": {
+        "b5925368-d7e4-40e2-8611-f8a665ba0982": {
+          "outputs": {
+            "query": "who is maojie"
+          }
+        },
+        "5158a87f-39c4-4c08-91f7-335ffcad76a3": {
+          "messages": [
+            {
+              "role": "user",
+              "content": "who is maojie"
+            },
+            "\nI apologize, but I couldn't find any information on a person named \"Maojie\" through my normal search channels. It's possible that the name is misspelled or not well-known. Can you provide more context or details about who Maojie is?"
+          ],
+          "outputs": {
+            "answer": "\nI apologize, but I couldn't find any information on a person named \"Maojie\" through my normal search channels. It's possible that the name is misspelled or not well-known. Can you provide more context or details about who Maojie is?"
+          }
+        }
+      },
+      "globalContext": {
+        "currentMessage": "who is maojie",
+        "messages": [
+          "who is maojie",
+          "\nI apologize, but I couldn't find any information on a person named \"Maojie\" through my normal search channels. It's possible that the name is misspelled or not well-known. Can you provide more context or details about who Maojie is?"
+        ],
+        "latestMessage": "\nI apologize, but I couldn't find any information on a person named \"Maojie\" through my normal search channels. It's possible that the name is misspelled or not well-known. Can you provide more context or details about who Maojie is?"
+      }
+    },
+    {
+      "sessionId": "temp-b6d821f8-a4d6-4d15-9e61-ec63c7192d21-513e3d44-5e6f-4bf4-9dcb-7f6fca44feb7",
+      "workflowId": "b6d821f8-a4d6-4d15-9e61-ec63c7192d21",
+      "createDate": "5/11/2024, 2:50:04 PM",
+      "updateDate": "5/11/2024, 2:50:04 PM",
+      "nodeContext": {
+        "b5925368-d7e4-40e2-8611-f8a665ba0982": {
+          "outputs": {
+            "query": "who is 猫姐"
+          }
+        },
+        "5158a87f-39c4-4c08-91f7-335ffcad76a3": {
+          "messages": [
+            {
+              "role": "user",
+              "content": "who is 猫姐"
+            },
+            "\n猫姐 (Māo Jiǎo) is a popular Chinese internet celebrity and cat lady. She was born in 1986 in Shanghai, China, and gained fame on social media platforms such as Douyin (Chinese TikTok) and Instagram for her eccentric and entertaining videos featuring her cats.\n\n猫姐's real name is Li Jiaqi (李佳霭), and she is a former influencer and content creator who has been active on social media since 2014. She initially gained popularity on Douyin by posting funny and creative videos of her cats, often incorporating props, costumes, and other elements to make the content more engaging.\n\nAs her following grew, 猫姐 began to gain attention from mainstream media outlets in China, and she was featured on several popular television shows and magazines. She has since become a household name in China and has collaborated with numerous brands and companies, including cat food brands, clothing lines, and more.\n\n猫姐's rise to fame is often attributed to her unique and entertaining content, as well as her relatable personality and humor. Many fans appreciate her ability to poke fun at herself and the quirks of cat ownership, while also showcasing the affection and love she has for her feline companions.\n\nIn addition to her social media channels, 猫姐 has also launched a line of merchandise, including cat-themed clothing and accessories, and has written a book about her experiences as a cat lady. She continues to be a beloved figure in Chinese popular culture and is widely recognized for her contributions to the country's social media landscape."
+          ],
+          "outputs": {
+            "answer": "\n猫姐 (Māo Jiǎo) is a popular Chinese internet celebrity and cat lady. She was born in 1986 in Shanghai, China, and gained fame on social media platforms such as Douyin (Chinese TikTok) and Instagram for her eccentric and entertaining videos featuring her cats.\n\n猫姐's real name is Li Jiaqi (李佳霭), and she is a former influencer and content creator who has been active on social media since 2014. She initially gained popularity on Douyin by posting funny and creative videos of her cats, often incorporating props, costumes, and other elements to make the content more engaging.\n\nAs her following grew, 猫姐 began to gain attention from mainstream media outlets in China, and she was featured on several popular television shows and magazines. She has since become a household name in China and has collaborated with numerous brands and companies, including cat food brands, clothing lines, and more.\n\n猫姐's rise to fame is often attributed to her unique and entertaining content, as well as her relatable personality and humor. Many fans appreciate her ability to poke fun at herself and the quirks of cat ownership, while also showcasing the affection and love she has for her feline companions.\n\nIn addition to her social media channels, 猫姐 has also launched a line of merchandise, including cat-themed clothing and accessories, and has written a book about her experiences as a cat lady. She continues to be a beloved figure in Chinese popular culture and is widely recognized for her contributions to the country's social media landscape."
+          }
+        }
+      },
+      "globalContext": {
+        "currentMessage": "who is 猫姐",
+        "messages": [
+          "who is 猫姐",
+          "\n猫姐 (Māo Jiǎo) is a popular Chinese internet celebrity and cat lady. She was born in 1986 in Shanghai, China, and gained fame on social media platforms such as Douyin (Chinese TikTok) and Instagram for her eccentric and entertaining videos featuring her cats.\n\n猫姐's real name is Li Jiaqi (李佳霭), and she is a former influencer and content creator who has been active on social media since 2014. She initially gained popularity on Douyin by posting funny and creative videos of her cats, often incorporating props, costumes, and other elements to make the content more engaging.\n\nAs her following grew, 猫姐 began to gain attention from mainstream media outlets in China, and she was featured on several popular television shows and magazines. She has since become a household name in China and has collaborated with numerous brands and companies, including cat food brands, clothing lines, and more.\n\n猫姐's rise to fame is often attributed to her unique and entertaining content, as well as her relatable personality and humor. Many fans appreciate her ability to poke fun at herself and the quirks of cat ownership, while also showcasing the affection and love she has for her feline companions.\n\nIn addition to her social media channels, 猫姐 has also launched a line of merchandise, including cat-themed clothing and accessories, and has written a book about her experiences as a cat lady. She continues to be a beloved figure in Chinese popular culture and is widely recognized for her contributions to the country's social media landscape."
+        ],
+        "latestMessage": "\n猫姐 (Māo Jiǎo) is a popular Chinese internet celebrity and cat lady. She was born in 1986 in Shanghai, China, and gained fame on social media platforms such as Douyin (Chinese TikTok) and Instagram for her eccentric and entertaining videos featuring her cats.\n\n猫姐's real name is Li Jiaqi (李佳霭), and she is a former influencer and content creator who has been active on social media since 2014. She initially gained popularity on Douyin by posting funny and creative videos of her cats, often incorporating props, costumes, and other elements to make the content more engaging.\n\nAs her following grew, 猫姐 began to gain attention from mainstream media outlets in China, and she was featured on several popular television shows and magazines. She has since become a household name in China and has collaborated with numerous brands and companies, including cat food brands, clothing lines, and more.\n\n猫姐's rise to fame is often attributed to her unique and entertaining content, as well as her relatable personality and humor. Many fans appreciate her ability to poke fun at herself and the quirks of cat ownership, while also showcasing the affection and love she has for her feline companions.\n\nIn addition to her social media channels, 猫姐 has also launched a line of merchandise, including cat-themed clothing and accessories, and has written a book about her experiences as a cat lady. She continues to be a beloved figure in Chinese popular culture and is widely recognized for her contributions to the country's social media landscape."
+      }
+    },
+    {
+      "sessionId": "temp-b6d821f8-a4d6-4d15-9e61-ec63c7192d21-d7d998cc-e563-4d37-a130-2008365a41cf",
+      "workflowId": "b6d821f8-a4d6-4d15-9e61-ec63c7192d21",
+      "createDate": "5/11/2024, 2:51:44 PM",
+      "updateDate": "5/11/2024, 2:51:44 PM",
+      "nodeContext": {
+        "b5925368-d7e4-40e2-8611-f8a665ba0982": {
+          "outputs": {
+            "query": "hello"
+          }
+        },
+        "5158a87f-39c4-4c08-91f7-335ffcad76a3": {
+          "messages": [
+            {
+              "role": "user",
+              "content": "hello"
+            },
+            "Hello! It's nice to meet you. Is there something I can help you with or would you like to chat?"
+          ],
+          "outputs": {
+            "answer": "Hello! It's nice to meet you. Is there something I can help you with or would you like to chat?"
+          }
+        }
+      },
+      "globalContext": {
+        "currentMessage": "hello",
+        "messages": [
+          "hello",
+          "Hello! It's nice to meet you. Is there something I can help you with or would you like to chat?"
+        ],
+        "latestMessage": "Hello! It's nice to meet you. Is there something I can help you with or would you like to chat?"
+      }
+    },
+    {
+      "sessionId": "temp-b6d821f8-a4d6-4d15-9e61-ec63c7192d21-199075cd-6db6-499a-a8f4-b4ccad31d829",
+      "workflowId": "b6d821f8-a4d6-4d15-9e61-ec63c7192d21",
+      "createDate": "5/11/2024, 2:52:51 PM",
+      "updateDate": "5/11/2024, 2:52:51 PM",
+      "nodeContext": {
+        "b5925368-d7e4-40e2-8611-f8a665ba0982": {
+          "outputs": {
+            "query": "hello"
+          }
+        },
+        "5158a87f-39c4-4c08-91f7-335ffcad76a3": {
+          "messages": [
+            {
+              "role": "user",
+              "content": "hello"
+            },
+            "Hello! It's nice to meet you. Is there something I can help you with or would you like to chat?"
+          ],
+          "outputs": {
+            "answer": "Hello! It's nice to meet you. Is there something I can help you with or would you like to chat?"
+          }
+        }
+      },
+      "globalContext": {
+        "currentMessage": "hello",
+        "messages": [
+          "hello",
+          "Hello! It's nice to meet you. Is there something I can help you with or would you like to chat?"
+        ],
+        "latestMessage": "Hello! It's nice to meet you. Is there something I can help you with or would you like to chat?"
+      }
+    },
+    {
+      "sessionId": "temp-b6d821f8-a4d6-4d15-9e61-ec63c7192d21-7dc49ae0-7d40-41bd-8f20-1ebaf7c931e8",
+      "workflowId": "b6d821f8-a4d6-4d15-9e61-ec63c7192d21",
+      "createDate": "5/11/2024, 2:53:12 PM",
+      "updateDate": "5/11/2024, 2:53:12 PM",
+      "nodeContext": {
+        "b5925368-d7e4-40e2-8611-f8a665ba0982": {
+          "outputs": {
+            "query": "hello"
+          }
+        },
+        "5158a87f-39c4-4c08-91f7-335ffcad76a3": {
+          "messages": [
+            {
+              "role": "user",
+              "content": "hello"
+            },
+            "Hello! It's nice to meet you. Is there something I can help you with or would you like to chat?"
+          ],
+          "outputs": {
+            "answer": "Hello! It's nice to meet you. Is there something I can help you with or would you like to chat?"
+          }
+        }
+      },
+      "globalContext": {
+        "currentMessage": "hello",
+        "messages": [
+          "hello",
+          "Hello! It's nice to meet you. Is there something I can help you with or would you like to chat?"
+        ],
+        "latestMessage": "Hello! It's nice to meet you. Is there something I can help you with or would you like to chat?"
+      }
+    },
+    {
+      "sessionId": "temp-b6d821f8-a4d6-4d15-9e61-ec63c7192d21-c627e78d-660c-4c21-8cda-3be9e4806add",
+      "workflowId": "b6d821f8-a4d6-4d15-9e61-ec63c7192d21",
+      "createDate": "5/11/2024, 2:53:36 PM",
+      "updateDate": "5/11/2024, 2:53:36 PM",
+      "nodeContext": {
+        "b5925368-d7e4-40e2-8611-f8a665ba0982": {
+          "outputs": {
+            "query": "hello"
+          }
+        },
+        "5158a87f-39c4-4c08-91f7-335ffcad76a3": {
+          "messages": [
+            {
+              "role": "user",
+              "content": "hello"
+            },
+            "Hello! It's nice to meet you. Is there something I can help you with or would you like to chat?"
+          ],
+          "outputs": {
+            "answer": "Hello! It's nice to meet you. Is there something I can help you with or would you like to chat?"
+          }
+        }
+      },
+      "globalContext": {
+        "currentMessage": "hello",
+        "messages": [
+          "hello",
+          "Hello! It's nice to meet you. Is there something I can help you with or would you like to chat?"
+        ],
+        "latestMessage": "Hello! It's nice to meet you. Is there something I can help you with or would you like to chat?"
+      }
+    },
+    {
+      "sessionId": "temp-b6d821f8-a4d6-4d15-9e61-ec63c7192d21-569fa689-ed53-4f10-b1a3-68a210547337",
+      "workflowId": "b6d821f8-a4d6-4d15-9e61-ec63c7192d21",
+      "createDate": "5/11/2024, 2:56:33 PM",
+      "updateDate": "5/11/2024, 2:56:33 PM",
+      "nodeContext": {
+        "b5925368-d7e4-40e2-8611-f8a665ba0982": {
+          "outputs": {
+            "query": "who is 猫姐"
+          }
+        },
+        "7511ac86-0e61-4d37-a4f5-1c3c816a7d4e": {
+          "outputs": {
+            "RelativeContent": [
+              "衣帽间是否男女主人分开挂放衣物？\n\n否\n\n您对以前房屋的设计及装修有何遗憾？\n\n\n\n对设计师的一些期望和要求？\n\n\n\n告诉我们您对户型不满意的地方或改动想法\n\n客厅采光区域不大，希望可以亮一点\n\n以下功能哪些是您想实现的\n\n□独立书房 □书架 □书桌 □衣帽间 ☑晾晒区 ☑浴缸 □茶室 \n\n□亲子休闲区  ☑投影仪  □娱乐区  □健身区   □电竞区  \n\n☑家庭影院 □酒窖   ☑独立阅读室\n\n其他:\n\n宠物情况\n\n暂无\n\n家中是否经常做饭？平时几人用餐？\n\n2\n\n喜欢的厨房类型1.中式  2.西式  3.开放式  4.封闭式 5、中西餐结合\n\n2\n\n冰箱的形式1.单门冰箱  2.双门冰箱 3.冰柜 4、迷你冰柜\n\n2\n\n烹饪方式：中式或者西式？一般厨房是容纳几人同时操作？\n\n中式，2人\n\n厨房使用频率每周几次？想要厨房具有那些功能？\n\n5次\n\n主厨是谁\n\n女主人\n\n主厨身高\n\n165\n\n全屋收纳需求？\n\n\n\n有无特殊体型/身高\n\n无\n\n是否考虑卫生间干湿分离？是否需要蹲便器？是否需要浴缸？\n\n干湿分离+\n\n浴缸\n\n家中成员兴趣爱好？\n\n电影，游戏，看书\n\n有无较大的游戏设备？比如：投篮框，飞镖盘，吊椅，麻将桌，\n\n无\n\n在污染释放期，会添加什么设备1.空气净化器  2.空气净化剂（活性炭）  3.新风系统   4.绿色植物  5.不买，就每天开窗\n\n1\n\n您是否考虑二胎或二胎以上？宝宝性别？宝宝的兴趣爱好？\n\n不考虑\n\n\t宝宝的衣物有多少？玩具有多少？宝宝需要独立衣柜？写字桌吗？\n\n暂无\n\n基装预算\n\n\n\n整装预算\n\n20-25\n\n是否考虑安装以下硬件设备\n\n□中央空调  □地暖 □新风系统 □风管机□智能灯控  □智能家居\n\n□暖气片 □净水系统 □软水系统 ☑垃圾处理器 □洗碗机 ☑烘干机 □背景音乐☑智能马桶 □壁挂式马桶 ☑家庭影院    其他：\n\n施工方式及装修主责人\n\n\n\n□考察满意后交给设计师一起做更有保障 □另找施工\n\n☑尚在考虑中 □朋友推荐施工 □自己负责 \t□父母负责 □自己和父母一起负责\n\n设计需求备注：\n\n1入住后未来几年功能要求？\n\n\n\n2房子入住年限？\n\n\n\n\n\n猫姐设计事务所感谢您的支持！！！",
+              "猫姐设计事务所设计需求问卷\n\n客户姓名\n\n俞孙皓\n\n☑先生\n\n□女士\n\n联系方式\n\n18668189816\n\n职业\n\n程序员\n\n所在城市\n\n杭州\n\n户型面积和楼盘名字\n\n\n\n宗教信仰：      1.无   2.佛教  3.道教  4.基督教  5.天主教  6.伊斯兰教  7.其他\n\n无\n\n您的工作状态：   1.清闲  2.游刃有余  3.按上下班完成工作  4.偶尔加班  5.经常加班   6.不出差   7.偶尔出差  8.经常出差\n\n经常加班\n\n房屋状态：\n\n1.清水毛坯房             2.二手清水房    3.旧房改造       4.精装房\n\n保存option\n\n旧房改造\n\n房屋类型：\n\n1.联排别墅或者 独栋别墅. \n\n2.跃层 复式 LOFT公寓 \n\n3.平层 \n\n4.其他\n\n平层\n\n房屋居住楼层\n\n12\n\n房屋总楼层\n\n18\n\n是否收房\n\n是\n\n常住人口\n\n2\n\n您的居室成员：\n\n1.父母         2.夫（妻）      3.女儿         4.儿子        5.孙子        6.孙女        7.保姆        8.其他\n\n2\n\n喜欢什么装修风格？喜欢什么文化？生活（可多种）1.现代简约风格  2.北欧风格     3.日式风格     4.新中式风格   5.轻奢风格     6.欧式古典风格  7.欧式田园风格 8.美式风格\n\n法式风格\n\n港式风格\n\n其他或者混搭 \n\n3\n\n喜欢那些材质元素？比如：金属.木头.植物.布艺.石材.皮革\n\n木头\n\n居家饰品主要以男主人还是女主人的意见为主？\n\n男主人\n\n喜欢简洁的装饰风格？还是复杂，装饰性强一点的？\n\n简洁一些\n\n需要在卧室看书或上网或办公吗？卧室需要电视剧或投影吗？\n\n卧室看书，需要电视\n\n对地面材料的选择：1.大理石  2.地砖  3.地板   4.自流平5\n\n其他\n\n地板\n\n对灯具材料的选择：1.水晶灯  2.造型吸顶灯 3.普通吸顶灯  5.灯带   6.日光灯 7、其他 \n\n客厅无主灯，其他吸顶灯\n\n对墙面材料的选择：1.乳胶漆  2.墙纸  3.布料  4.饰面石材  5.饰面木材6、其他\n\n\n\n对沙发的选择：   1.布艺沙发  2.真皮沙发 3.按摩沙发  4.实木沙发   5.藤艺沙发6、其他  \n\n布艺沙发",
+              "其他\n\n地板\n\n对灯具材料的选择：1.水晶灯  2.造型吸顶灯 3.普通吸顶灯  5.灯带   6.日光灯 7、其他 \n\n客厅无主灯，其他吸顶灯\n\n对墙面材料的选择：1.乳胶漆  2.墙纸  3.布料  4.饰面石材  5.饰面木材6、其他\n\n\n\n对沙发的选择：   1.布艺沙发  2.真皮沙发 3.按摩沙发  4.实木沙发   5.藤艺沙发6、其他  \n\n布艺沙发\n\n卧室需要梳妆台吗？需要更衣镜吗？\n\n需要梳妆台\n\n对于卧室的采光及私密性要求高吗？\n\n高\n\n家庭成员喜欢的色彩？讨厌绝对不能出现的颜色？\n\n饱和度低一些，耐看\n\n软装配饰是否一起添置购买？还是硬装做好慢慢添置？\n\n一起购买\n\n本次装修后的大概换房周期多少年\n\n5\n\n有无旧家具或特殊物品的安置\n\n\n\n您平时喜欢的饮品：茶 咖啡 红酒 白酒 洋酒 啤酒 奶茶 白开水 其他类别\n\n红酒白酒\n\n您的用餐习惯：\n\n1.经常家里用餐   \n\n2.经常外面用餐或者外卖          \n\n3.以上都有\n\n3\n\n喜欢的旅行地点：1.国内   2.东南亚  3.欧洲  4.非洲  5.美洲  6.其它 \n\n大洋洲\n\n最喜欢的旅游地点：\n\n新西兰\n\n是否有在家吸烟的需求：1.有  2.没有  3.有朋友来会\n\n2\n\n在什么地方吸烟：1.厨房  2.卫生间 3.客厅  4阳台  5.卧室\n\n3\n\n您的作息时间:\n\n1.正常  \n\n2.早睡早起  \n\n3.晚睡晚起  \n\n4.早起晚睡\n\n1\n\n您喜欢的陈设摆列产品？摆设类：1.雕塑   2.玩具     3.酒杯     4.花瓶      5.乐高\n\n壁饰类：1.工艺美术品    2.各类书画作品   3.图片摄影  4.其他\n\n摆设：2，5\n\n壁饰：1，3\n\n房屋朝向及采光\n\n\n\n打算何时动工、入住\n\n\n\n男女主人需要挂放，叠放的衣物大概多少？比如：大衣，西服，裙子，裤装多少？\n\n\n\n衣帽间是否男女主人分开挂放衣物？\n\n否\n\n您对以前房屋的设计及装修有何遗憾？\n\n\n\n对设计师的一些期望和要求？\n\n\n\n告诉我们您对户型不满意的地方或改动想法\n\n客厅采光区域不大，希望可以亮一点\n\n以下功能哪些是您想实现的\n\n□独立书房 □书架 □书桌 □衣帽间 ☑晾晒区 ☑浴缸 □茶室 \n\n□亲子休闲区  ☑投影仪  □娱乐区  □健身区   □电竞区"
+            ]
+          }
+        },
+        "5158a87f-39c4-4c08-91f7-335ffcad76a3": {
+          "messages": [
+            {
+              "role": "user",
+              "content": "Context information is below. \n\n    --------------------- \n    衣帽间是否男女主人分开挂放衣物？\n\n否\n\n您对以前房屋的设计及装修有何遗憾？\n\n\n\n对设计师的一些期望和要求？\n\n\n\n告诉我们您对户型不满意的地方或改动想法\n\n客厅采光区域不大，希望可以亮一点\n\n以下功能哪些是您想实现的\n\n□独立书房 □书架 □书桌 □衣帽间 ☑晾晒区 ☑浴缸 □茶室 \n\n□亲子休闲区  ☑投影仪  □娱乐区  □健身区   □电竞区  \n\n☑家庭影院 □酒窖   ☑独立阅读室\n\n其他:\n\n宠物情况\n\n暂无\n\n家中是否经常做饭？平时几人用餐？\n\n2\n\n喜欢的厨房类型1.中式  2.西式  3.开放式  4.封闭式 5、中西餐结合\n\n2\n\n冰箱的形式1.单门冰箱  2.双门冰箱 3.冰柜 4、迷你冰柜\n\n2\n\n烹饪方式：中式或者西式？一般厨房是容纳几人同时操作？\n\n中式，2人\n\n厨房使用频率每周几次？想要厨房具有那些功能？\n\n5次\n\n主厨是谁\n\n女主人\n\n主厨身高\n\n165\n\n全屋收纳需求？\n\n\n\n有无特殊体型/身高\n\n无\n\n是否考虑卫生间干湿分离？是否需要蹲便器？是否需要浴缸？\n\n干湿分离+\n\n浴缸\n\n家中成员兴趣爱好？\n\n电影，游戏，看书\n\n有无较大的游戏设备？比如：投篮框，飞镖盘，吊椅，麻将桌，\n\n无\n\n在污染释放期，会添加什么设备1.空气净化器  2.空气净化剂（活性炭）  3.新风系统   4.绿色植物  5.不买，就每天开窗\n\n1\n\n您是否考虑二胎或二胎以上？宝宝性别？宝宝的兴趣爱好？\n\n不考虑\n\n\t宝宝的衣物有多少？玩具有多少？宝宝需要独立衣柜？写字桌吗？\n\n暂无\n\n基装预算\n\n\n\n整装预算\n\n20-25\n\n是否考虑安装以下硬件设备\n\n□中央空调  □地暖 □新风系统 □风管机□智能灯控  □智能家居\n\n□暖气片 □净水系统 □软水系统 ☑垃圾处理器 □洗碗机 ☑烘干机 □背景音乐☑智能马桶 □壁挂式马桶 ☑家庭影院    其他：\n\n施工方式及装修主责人\n\n\n\n□考察满意后交给设计师一起做更有保障 □另找施工\n\n☑尚在考虑中 □朋友推荐施工 □自己负责 \t□父母负责 □自己和父母一起负责\n\n设计需求备注：\n\n1入住后未来几年功能要求？\n\n\n\n2房子入住年限？\n\n\n\n\n\n猫姐设计事务所感谢您的支持！！！猫姐设计事务所设计需求问卷\n\n客户姓名\n\n俞孙皓\n\n☑先生\n\n□女士\n\n联系方式\n\n18668189816\n\n职业\n\n程序员\n\n所在城市\n\n杭州\n\n户型面积和楼盘名字\n\n\n\n宗教信仰：      1.无   2.佛教  3.道教  4.基督教  5.天主教  6.伊斯兰教  7.其他\n\n无\n\n您的工作状态：   1.清闲  2.游刃有余  3.按上下班完成工作  4.偶尔加班  5.经常加班   6.不出差   7.偶尔出差  8.经常出差\n\n经常加班\n\n房屋状态：\n\n1.清水毛坯房             2.二手清水房    3.旧房改造       4.精装房\n\n保存option\n\n旧房改造\n\n房屋类型：\n\n1.联排别墅或者 独栋别墅. \n\n2.跃层 复式 LOFT公寓 \n\n3.平层 \n\n4.其他\n\n平层\n\n房屋居住楼层\n\n12\n\n房屋总楼层\n\n18\n\n是否收房\n\n是\n\n常住人口\n\n2\n\n您的居室成员：\n\n1.父母         2.夫（妻）      3.女儿         4.儿子        5.孙子        6.孙女        7.保姆        8.其他\n\n2\n\n喜欢什么装修风格？喜欢什么文化？生活（可多种）1.现代简约风格  2.北欧风格     3.日式风格     4.新中式风格   5.轻奢风格     6.欧式古典风格  7.欧式田园风格 8.美式风格\n\n法式风格\n\n港式风格\n\n其他或者混搭 \n\n3\n\n喜欢那些材质元素？比如：金属.木头.植物.布艺.石材.皮革\n\n木头\n\n居家饰品主要以男主人还是女主人的意见为主？\n\n男主人\n\n喜欢简洁的装饰风格？还是复杂，装饰性强一点的？\n\n简洁一些\n\n需要在卧室看书或上网或办公吗？卧室需要电视剧或投影吗？\n\n卧室看书，需要电视\n\n对地面材料的选择：1.大理石  2.地砖  3.地板   4.自流平5\n\n其他\n\n地板\n\n对灯具材料的选择：1.水晶灯  2.造型吸顶灯 3.普通吸顶灯  5.灯带   6.日光灯 7、其他 \n\n客厅无主灯，其他吸顶灯\n\n对墙面材料的选择：1.乳胶漆  2.墙纸  3.布料  4.饰面石材  5.饰面木材6、其他\n\n\n\n对沙发的选择：   1.布艺沙发  2.真皮沙发 3.按摩沙发  4.实木沙发   5.藤艺沙发6、其他  \n\n布艺沙发其他\n\n地板\n\n对灯具材料的选择：1.水晶灯  2.造型吸顶灯 3.普通吸顶灯  5.灯带   6.日光灯 7、其他 \n\n客厅无主灯，其他吸顶灯\n\n对墙面材料的选择：1.乳胶漆  2.墙纸  3.布料  4.饰面石材  5.饰面木材6、其他\n\n\n\n对沙发的选择：   1.布艺沙发  2.真皮沙发 3.按摩沙发  4.实木沙发   5.藤艺沙发6、其他  \n\n布艺沙发\n\n卧室需要梳妆台吗？需要更衣镜吗？\n\n需要梳妆台\n\n对于卧室的采光及私密性要求高吗？\n\n高\n\n家庭成员喜欢的色彩？讨厌绝对不能出现的颜色？\n\n饱和度低一些，耐看\n\n软装配饰是否一起添置购买？还是硬装做好慢慢添置？\n\n一起购买\n\n本次装修后的大概换房周期多少年\n\n5\n\n有无旧家具或特殊物品的安置\n\n\n\n您平时喜欢的饮品：茶 咖啡 红酒 白酒 洋酒 啤酒 奶茶 白开水 其他类别\n\n红酒白酒\n\n您的用餐习惯：\n\n1.经常家里用餐   \n\n2.经常外面用餐或者外卖          \n\n3.以上都有\n\n3\n\n喜欢的旅行地点：1.国内   2.东南亚  3.欧洲  4.非洲  5.美洲  6.其它 \n\n大洋洲\n\n最喜欢的旅游地点：\n\n新西兰\n\n是否有在家吸烟的需求：1.有  2.没有  3.有朋友来会\n\n2\n\n在什么地方吸烟：1.厨房  2.卫生间 3.客厅  4阳台  5.卧室\n\n3\n\n您的作息时间:\n\n1.正常  \n\n2.早睡早起  \n\n3.晚睡晚起  \n\n4.早起晚睡\n\n1\n\n您喜欢的陈设摆列产品？摆设类：1.雕塑   2.玩具     3.酒杯     4.花瓶      5.乐高\n\n壁饰类：1.工艺美术品    2.各类书画作品   3.图片摄影  4.其他\n\n摆设：2，5\n\n壁饰：1，3\n\n房屋朝向及采光\n\n\n\n打算何时动工、入住\n\n\n\n男女主人需要挂放，叠放的衣物大概多少？比如：大衣，西服，裙子，裤装多少？\n\n\n\n衣帽间是否男女主人分开挂放衣物？\n\n否\n\n您对以前房屋的设计及装修有何遗憾？\n\n\n\n对设计师的一些期望和要求？\n\n\n\n告诉我们您对户型不满意的地方或改动想法\n\n客厅采光区域不大，希望可以亮一点\n\n以下功能哪些是您想实现的\n\n□独立书房 □书架 □书桌 □衣帽间 ☑晾晒区 ☑浴缸 □茶室 \n\n□亲子休闲区  ☑投影仪  □娱乐区  □健身区   □电竞区 \n    \n---------------------\n \n    Given the context information and not prior knowledge, \n    answer the question: who is 猫姐\n"
+            },
+            " Based on the provided information, it seems that 猫姐 (Mao Shixiong) is a designer or interior architect who is responsible for creating the layout and design of a house. The information provided includes details about the house's location, size, and functional areas, as well as the homeowner's preferences and requirements for the design.\n\nFrom the information given, it can be inferred that 猫姐 is a professional in the field of interior design, and is working closely with the homeowner to create a personalized and comfortable living space. The homeowner seems to have a clear idea of what they want, including the use of certain materials and colors, as well as the layout and placement of furniture and decorative elements.\n\n猫姐's role is to bring the homeowner's vision to life, by creating a functional and visually appealing design that meets the homeowner's needs and preferences. The information provided does not reveal any specific design decisions or challenges that 猫姐 faced during the design process, but it does provide a comprehensive picture of the house's layout and design requirements."
+          ],
+          "outputs": {
+            "answer": " Based on the provided information, it seems that 猫姐 (Mao Shixiong) is a designer or interior architect who is responsible for creating the layout and design of a house. The information provided includes details about the house's location, size, and functional areas, as well as the homeowner's preferences and requirements for the design.\n\nFrom the information given, it can be inferred that 猫姐 is a professional in the field of interior design, and is working closely with the homeowner to create a personalized and comfortable living space. The homeowner seems to have a clear idea of what they want, including the use of certain materials and colors, as well as the layout and placement of furniture and decorative elements.\n\n猫姐's role is to bring the homeowner's vision to life, by creating a functional and visually appealing design that meets the homeowner's needs and preferences. The information provided does not reveal any specific design decisions or challenges that 猫姐 faced during the design process, but it does provide a comprehensive picture of the house's layout and design requirements."
+          }
+        }
+      },
+      "globalContext": {
+        "currentMessage": "who is 猫姐",
+        "messages": [
+          "who is 猫姐",
+          " Based on the provided information, it seems that 猫姐 (Mao Shixiong) is a designer or interior architect who is responsible for creating the layout and design of a house. The information provided includes details about the house's location, size, and functional areas, as well as the homeowner's preferences and requirements for the design.\n\nFrom the information given, it can be inferred that 猫姐 is a professional in the field of interior design, and is working closely with the homeowner to create a personalized and comfortable living space. The homeowner seems to have a clear idea of what they want, including the use of certain materials and colors, as well as the layout and placement of furniture and decorative elements.\n\n猫姐's role is to bring the homeowner's vision to life, by creating a functional and visually appealing design that meets the homeowner's needs and preferences. The information provided does not reveal any specific design decisions or challenges that 猫姐 faced during the design process, but it does provide a comprehensive picture of the house's layout and design requirements."
+        ],
+        "latestMessage": " Based on the provided information, it seems that 猫姐 (Mao Shixiong) is a designer or interior architect who is responsible for creating the layout and design of a house. The information provided includes details about the house's location, size, and functional areas, as well as the homeowner's preferences and requirements for the design.\n\nFrom the information given, it can be inferred that 猫姐 is a professional in the field of interior design, and is working closely with the homeowner to create a personalized and comfortable living space. The homeowner seems to have a clear idea of what they want, including the use of certain materials and colors, as well as the layout and placement of furniture and decorative elements.\n\n猫姐's role is to bring the homeowner's vision to life, by creating a functional and visually appealing design that meets the homeowner's needs and preferences. The information provided does not reveal any specific design decisions or challenges that 猫姐 faced during the design process, but it does provide a comprehensive picture of the house's layout and design requirements."
+      }
+    },
+    {
+      "sessionId": "temp-b6d821f8-a4d6-4d15-9e61-ec63c7192d21-d8c3750b-6033-4b50-859b-76b0205d57d5",
+      "workflowId": "b6d821f8-a4d6-4d15-9e61-ec63c7192d21",
+      "createDate": "5/11/2024, 3:21:23 PM",
+      "updateDate": "5/11/2024, 3:21:23 PM",
+      "nodeContext": {
+        "b5925368-d7e4-40e2-8611-f8a665ba0982": {
+          "outputs": {
+            "query": "hello"
+          }
+        },
+        "7511ac86-0e61-4d37-a4f5-1c3c816a7d4e": {
+          "outputs": {
+            "RelativeContent": [
+              "衣帽间是否男女主人分开挂放衣物？\n\n否\n\n您对以前房屋的设计及装修有何遗憾？\n\n\n\n对设计师的一些期望和要求？\n\n\n\n告诉我们您对户型不满意的地方或改动想法\n\n客厅采光区域不大，希望可以亮一点\n\n以下功能哪些是您想实现的\n\n□独立书房 □书架 □书桌 □衣帽间 ☑晾晒区 ☑浴缸 □茶室 \n\n□亲子休闲区  ☑投影仪  □娱乐区  □健身区   □电竞区  \n\n☑家庭影院 □酒窖   ☑独立阅读室\n\n其他:\n\n宠物情况\n\n暂无\n\n家中是否经常做饭？平时几人用餐？\n\n2\n\n喜欢的厨房类型1.中式  2.西式  3.开放式  4.封闭式 5、中西餐结合\n\n2\n\n冰箱的形式1.单门冰箱  2.双门冰箱 3.冰柜 4、迷你冰柜\n\n2\n\n烹饪方式：中式或者西式？一般厨房是容纳几人同时操作？\n\n中式，2人\n\n厨房使用频率每周几次？想要厨房具有那些功能？\n\n5次\n\n主厨是谁\n\n女主人\n\n主厨身高\n\n165\n\n全屋收纳需求？\n\n\n\n有无特殊体型/身高\n\n无\n\n是否考虑卫生间干湿分离？是否需要蹲便器？是否需要浴缸？\n\n干湿分离+\n\n浴缸\n\n家中成员兴趣爱好？\n\n电影，游戏，看书\n\n有无较大的游戏设备？比如：投篮框，飞镖盘，吊椅，麻将桌，\n\n无\n\n在污染释放期，会添加什么设备1.空气净化器  2.空气净化剂（活性炭）  3.新风系统   4.绿色植物  5.不买，就每天开窗\n\n1\n\n您是否考虑二胎或二胎以上？宝宝性别？宝宝的兴趣爱好？\n\n不考虑\n\n\t宝宝的衣物有多少？玩具有多少？宝宝需要独立衣柜？写字桌吗？\n\n暂无\n\n基装预算\n\n\n\n整装预算\n\n20-25\n\n是否考虑安装以下硬件设备\n\n□中央空调  □地暖 □新风系统 □风管机□智能灯控  □智能家居\n\n□暖气片 □净水系统 □软水系统 ☑垃圾处理器 □洗碗机 ☑烘干机 □背景音乐☑智能马桶 □壁挂式马桶 ☑家庭影院    其他：\n\n施工方式及装修主责人\n\n\n\n□考察满意后交给设计师一起做更有保障 □另找施工\n\n☑尚在考虑中 □朋友推荐施工 □自己负责 \t□父母负责 □自己和父母一起负责\n\n设计需求备注：\n\n1入住后未来几年功能要求？\n\n\n\n2房子入住年限？\n\n\n\n\n\n猫姐设计事务所感谢您的支持！！！",
+              "猫姐设计事务所设计需求问卷\n\n客户姓名\n\n俞孙皓\n\n☑先生\n\n□女士\n\n联系方式\n\n18668189816\n\n职业\n\n程序员\n\n所在城市\n\n杭州\n\n户型面积和楼盘名字\n\n\n\n宗教信仰：      1.无   2.佛教  3.道教  4.基督教  5.天主教  6.伊斯兰教  7.其他\n\n无\n\n您的工作状态：   1.清闲  2.游刃有余  3.按上下班完成工作  4.偶尔加班  5.经常加班   6.不出差   7.偶尔出差  8.经常出差\n\n经常加班\n\n房屋状态：\n\n1.清水毛坯房             2.二手清水房    3.旧房改造       4.精装房\n\n保存option\n\n旧房改造\n\n房屋类型：\n\n1.联排别墅或者 独栋别墅. \n\n2.跃层 复式 LOFT公寓 \n\n3.平层 \n\n4.其他\n\n平层\n\n房屋居住楼层\n\n12\n\n房屋总楼层\n\n18\n\n是否收房\n\n是\n\n常住人口\n\n2\n\n您的居室成员：\n\n1.父母         2.夫（妻）      3.女儿         4.儿子        5.孙子        6.孙女        7.保姆        8.其他\n\n2\n\n喜欢什么装修风格？喜欢什么文化？生活（可多种）1.现代简约风格  2.北欧风格     3.日式风格     4.新中式风格   5.轻奢风格     6.欧式古典风格  7.欧式田园风格 8.美式风格\n\n法式风格\n\n港式风格\n\n其他或者混搭 \n\n3\n\n喜欢那些材质元素？比如：金属.木头.植物.布艺.石材.皮革\n\n木头\n\n居家饰品主要以男主人还是女主人的意见为主？\n\n男主人\n\n喜欢简洁的装饰风格？还是复杂，装饰性强一点的？\n\n简洁一些\n\n需要在卧室看书或上网或办公吗？卧室需要电视剧或投影吗？\n\n卧室看书，需要电视\n\n对地面材料的选择：1.大理石  2.地砖  3.地板   4.自流平5\n\n其他\n\n地板\n\n对灯具材料的选择：1.水晶灯  2.造型吸顶灯 3.普通吸顶灯  5.灯带   6.日光灯 7、其他 \n\n客厅无主灯，其他吸顶灯\n\n对墙面材料的选择：1.乳胶漆  2.墙纸  3.布料  4.饰面石材  5.饰面木材6、其他\n\n\n\n对沙发的选择：   1.布艺沙发  2.真皮沙发 3.按摩沙发  4.实木沙发   5.藤艺沙发6、其他  \n\n布艺沙发",
+              "其他\n\n地板\n\n对灯具材料的选择：1.水晶灯  2.造型吸顶灯 3.普通吸顶灯  5.灯带   6.日光灯 7、其他 \n\n客厅无主灯，其他吸顶灯\n\n对墙面材料的选择：1.乳胶漆  2.墙纸  3.布料  4.饰面石材  5.饰面木材6、其他\n\n\n\n对沙发的选择：   1.布艺沙发  2.真皮沙发 3.按摩沙发  4.实木沙发   5.藤艺沙发6、其他  \n\n布艺沙发\n\n卧室需要梳妆台吗？需要更衣镜吗？\n\n需要梳妆台\n\n对于卧室的采光及私密性要求高吗？\n\n高\n\n家庭成员喜欢的色彩？讨厌绝对不能出现的颜色？\n\n饱和度低一些，耐看\n\n软装配饰是否一起添置购买？还是硬装做好慢慢添置？\n\n一起购买\n\n本次装修后的大概换房周期多少年\n\n5\n\n有无旧家具或特殊物品的安置\n\n\n\n您平时喜欢的饮品：茶 咖啡 红酒 白酒 洋酒 啤酒 奶茶 白开水 其他类别\n\n红酒白酒\n\n您的用餐习惯：\n\n1.经常家里用餐   \n\n2.经常外面用餐或者外卖          \n\n3.以上都有\n\n3\n\n喜欢的旅行地点：1.国内   2.东南亚  3.欧洲  4.非洲  5.美洲  6.其它 \n\n大洋洲\n\n最喜欢的旅游地点：\n\n新西兰\n\n是否有在家吸烟的需求：1.有  2.没有  3.有朋友来会\n\n2\n\n在什么地方吸烟：1.厨房  2.卫生间 3.客厅  4阳台  5.卧室\n\n3\n\n您的作息时间:\n\n1.正常  \n\n2.早睡早起  \n\n3.晚睡晚起  \n\n4.早起晚睡\n\n1\n\n您喜欢的陈设摆列产品？摆设类：1.雕塑   2.玩具     3.酒杯     4.花瓶      5.乐高\n\n壁饰类：1.工艺美术品    2.各类书画作品   3.图片摄影  4.其他\n\n摆设：2，5\n\n壁饰：1，3\n\n房屋朝向及采光\n\n\n\n打算何时动工、入住\n\n\n\n男女主人需要挂放，叠放的衣物大概多少？比如：大衣，西服，裙子，裤装多少？\n\n\n\n衣帽间是否男女主人分开挂放衣物？\n\n否\n\n您对以前房屋的设计及装修有何遗憾？\n\n\n\n对设计师的一些期望和要求？\n\n\n\n告诉我们您对户型不满意的地方或改动想法\n\n客厅采光区域不大，希望可以亮一点\n\n以下功能哪些是您想实现的\n\n□独立书房 □书架 □书桌 □衣帽间 ☑晾晒区 ☑浴缸 □茶室 \n\n□亲子休闲区  ☑投影仪  □娱乐区  □健身区   □电竞区"
+            ]
+          }
+        },
+        "5158a87f-39c4-4c08-91f7-335ffcad76a3": {
+          "messages": [
+            {
+              "role": "user",
+              "content": "Context information is below. \n\n    --------------------- \n    衣帽间是否男女主人分开挂放衣物？\n\n否\n\n您对以前房屋的设计及装修有何遗憾？\n\n\n\n对设计师的一些期望和要求？\n\n\n\n告诉我们您对户型不满意的地方或改动想法\n\n客厅采光区域不大，希望可以亮一点\n\n以下功能哪些是您想实现的\n\n□独立书房 □书架 □书桌 □衣帽间 ☑晾晒区 ☑浴缸 □茶室 \n\n□亲子休闲区  ☑投影仪  □娱乐区  □健身区   □电竞区  \n\n☑家庭影院 □酒窖   ☑独立阅读室\n\n其他:\n\n宠物情况\n\n暂无\n\n家中是否经常做饭？平时几人用餐？\n\n2\n\n喜欢的厨房类型1.中式  2.西式  3.开放式  4.封闭式 5、中西餐结合\n\n2\n\n冰箱的形式1.单门冰箱  2.双门冰箱 3.冰柜 4、迷你冰柜\n\n2\n\n烹饪方式：中式或者西式？一般厨房是容纳几人同时操作？\n\n中式，2人\n\n厨房使用频率每周几次？想要厨房具有那些功能？\n\n5次\n\n主厨是谁\n\n女主人\n\n主厨身高\n\n165\n\n全屋收纳需求？\n\n\n\n有无特殊体型/身高\n\n无\n\n是否考虑卫生间干湿分离？是否需要蹲便器？是否需要浴缸？\n\n干湿分离+\n\n浴缸\n\n家中成员兴趣爱好？\n\n电影，游戏，看书\n\n有无较大的游戏设备？比如：投篮框，飞镖盘，吊椅，麻将桌，\n\n无\n\n在污染释放期，会添加什么设备1.空气净化器  2.空气净化剂（活性炭）  3.新风系统   4.绿色植物  5.不买，就每天开窗\n\n1\n\n您是否考虑二胎或二胎以上？宝宝性别？宝宝的兴趣爱好？\n\n不考虑\n\n\t宝宝的衣物有多少？玩具有多少？宝宝需要独立衣柜？写字桌吗？\n\n暂无\n\n基装预算\n\n\n\n整装预算\n\n20-25\n\n是否考虑安装以下硬件设备\n\n□中央空调  □地暖 □新风系统 □风管机□智能灯控  □智能家居\n\n□暖气片 □净水系统 □软水系统 ☑垃圾处理器 □洗碗机 ☑烘干机 □背景音乐☑智能马桶 □壁挂式马桶 ☑家庭影院    其他：\n\n施工方式及装修主责人\n\n\n\n□考察满意后交给设计师一起做更有保障 □另找施工\n\n☑尚在考虑中 □朋友推荐施工 □自己负责 \t□父母负责 □自己和父母一起负责\n\n设计需求备注：\n\n1入住后未来几年功能要求？\n\n\n\n2房子入住年限？\n\n\n\n\n\n猫姐设计事务所感谢您的支持！！！猫姐设计事务所设计需求问卷\n\n客户姓名\n\n俞孙皓\n\n☑先生\n\n□女士\n\n联系方式\n\n18668189816\n\n职业\n\n程序员\n\n所在城市\n\n杭州\n\n户型面积和楼盘名字\n\n\n\n宗教信仰：      1.无   2.佛教  3.道教  4.基督教  5.天主教  6.伊斯兰教  7.其他\n\n无\n\n您的工作状态：   1.清闲  2.游刃有余  3.按上下班完成工作  4.偶尔加班  5.经常加班   6.不出差   7.偶尔出差  8.经常出差\n\n经常加班\n\n房屋状态：\n\n1.清水毛坯房             2.二手清水房    3.旧房改造       4.精装房\n\n保存option\n\n旧房改造\n\n房屋类型：\n\n1.联排别墅或者 独栋别墅. \n\n2.跃层 复式 LOFT公寓 \n\n3.平层 \n\n4.其他\n\n平层\n\n房屋居住楼层\n\n12\n\n房屋总楼层\n\n18\n\n是否收房\n\n是\n\n常住人口\n\n2\n\n您的居室成员：\n\n1.父母         2.夫（妻）      3.女儿         4.儿子        5.孙子        6.孙女        7.保姆        8.其他\n\n2\n\n喜欢什么装修风格？喜欢什么文化？生活（可多种）1.现代简约风格  2.北欧风格     3.日式风格     4.新中式风格   5.轻奢风格     6.欧式古典风格  7.欧式田园风格 8.美式风格\n\n法式风格\n\n港式风格\n\n其他或者混搭 \n\n3\n\n喜欢那些材质元素？比如：金属.木头.植物.布艺.石材.皮革\n\n木头\n\n居家饰品主要以男主人还是女主人的意见为主？\n\n男主人\n\n喜欢简洁的装饰风格？还是复杂，装饰性强一点的？\n\n简洁一些\n\n需要在卧室看书或上网或办公吗？卧室需要电视剧或投影吗？\n\n卧室看书，需要电视\n\n对地面材料的选择：1.大理石  2.地砖  3.地板   4.自流平5\n\n其他\n\n地板\n\n对灯具材料的选择：1.水晶灯  2.造型吸顶灯 3.普通吸顶灯  5.灯带   6.日光灯 7、其他 \n\n客厅无主灯，其他吸顶灯\n\n对墙面材料的选择：1.乳胶漆  2.墙纸  3.布料  4.饰面石材  5.饰面木材6、其他\n\n\n\n对沙发的选择：   1.布艺沙发  2.真皮沙发 3.按摩沙发  4.实木沙发   5.藤艺沙发6、其他  \n\n布艺沙发其他\n\n地板\n\n对灯具材料的选择：1.水晶灯  2.造型吸顶灯 3.普通吸顶灯  5.灯带   6.日光灯 7、其他 \n\n客厅无主灯，其他吸顶灯\n\n对墙面材料的选择：1.乳胶漆  2.墙纸  3.布料  4.饰面石材  5.饰面木材6、其他\n\n\n\n对沙发的选择：   1.布艺沙发  2.真皮沙发 3.按摩沙发  4.实木沙发   5.藤艺沙发6、其他  \n\n布艺沙发\n\n卧室需要梳妆台吗？需要更衣镜吗？\n\n需要梳妆台\n\n对于卧室的采光及私密性要求高吗？\n\n高\n\n家庭成员喜欢的色彩？讨厌绝对不能出现的颜色？\n\n饱和度低一些，耐看\n\n软装配饰是否一起添置购买？还是硬装做好慢慢添置？\n\n一起购买\n\n本次装修后的大概换房周期多少年\n\n5\n\n有无旧家具或特殊物品的安置\n\n\n\n您平时喜欢的饮品：茶 咖啡 红酒 白酒 洋酒 啤酒 奶茶 白开水 其他类别\n\n红酒白酒\n\n您的用餐习惯：\n\n1.经常家里用餐   \n\n2.经常外面用餐或者外卖          \n\n3.以上都有\n\n3\n\n喜欢的旅行地点：1.国内   2.东南亚  3.欧洲  4.非洲  5.美洲  6.其它 \n\n大洋洲\n\n最喜欢的旅游地点：\n\n新西兰\n\n是否有在家吸烟的需求：1.有  2.没有  3.有朋友来会\n\n2\n\n在什么地方吸烟：1.厨房  2.卫生间 3.客厅  4阳台  5.卧室\n\n3\n\n您的作息时间:\n\n1.正常  \n\n2.早睡早起  \n\n3.晚睡晚起  \n\n4.早起晚睡\n\n1\n\n您喜欢的陈设摆列产品？摆设类：1.雕塑   2.玩具     3.酒杯     4.花瓶      5.乐高\n\n壁饰类：1.工艺美术品    2.各类书画作品   3.图片摄影  4.其他\n\n摆设：2，5\n\n壁饰：1，3\n\n房屋朝向及采光\n\n\n\n打算何时动工、入住\n\n\n\n男女主人需要挂放，叠放的衣物大概多少？比如：大衣，西服，裙子，裤装多少？\n\n\n\n衣帽间是否男女主人分开挂放衣物？\n\n否\n\n您对以前房屋的设计及装修有何遗憾？\n\n\n\n对设计师的一些期望和要求？\n\n\n\n告诉我们您对户型不满意的地方或改动想法\n\n客厅采光区域不大，希望可以亮一点\n\n以下功能哪些是您想实现的\n\n□独立书房 □书架 □书桌 □衣帽间 ☑晾晒区 ☑浴缸 □茶室 \n\n□亲子休闲区  ☑投影仪  □娱乐区  □健身区   □电竞区 \n    \n---------------------\n \n    Given the context information and not prior knowledge, \n    answer the question: hello\n"
+            },
+            "Hello! Based on the provided information, it seems like you are a homeowner who is looking to renovate your house. You have provided some details about your preferences and requirements for the renovation, including the materials you want to use, the color scheme, and the functional areas you want to prioritize.\n\nHere are some potential suggestions based on your input:\n\n1. For the flooring, you may consider using a combination of wooden and stone elements to create a warm and natural ambiance. Wooden floors can be used in the living room, dining room, and bedrooms, while stone tiles can be used in the bathroom and kitchen.\n2. For the walls, you can use a combination of smooth and textured finishes to create a visually interesting and dynamic space. The smooth finish can be used for the living room and bedrooms, while the textured finish can be used in the dining room and kitchen.\n3. For the ceiling, you can use a high-gloss finish to reflect light and create a sense of openness. This can be particularly effective in the living room and bedrooms.\n4. For the color scheme, you may want to consider a neutral palette with accents of dark blue or green to create a sense of calmness and serenity. This can be achieved by using a combination of light gray, beige, and off-white tones for the walls, floors, and ceilings.\n5. For the functional areas, you may want to prioritize a dedicated home office or workspace, as well as a cozy reading nook or a comfortable media room. These areas can be designed to meet your specific needs and preferences.\n6. For the lighting, you may want to consider using a combination of overhead lighting, table lamps, and floor lamps to create a warm and inviting ambiance. You may also want to use dimmable lights to adjust the brightness level based on your mood and preferences.\n7. For the furniture, you may want to choose pieces that are comfortable, functional, and visually appealing. Consider using a combination of leather, fabric, and wood finishes to create a warm and inviting space.\n8. For the decor, you may want to choose items that reflect your personal style and interests, such as artwork, sculptures, and plants. You can also use textiles, rugs, and wall hangings to add color, texture, and visual interest to the space.\n\nI hope these suggestions are helpful in planning your home renovation project! If you have any further questions or would like to discuss more details, please feel free to ask."
+          ],
+          "outputs": {
+            "answer": "Hello! Based on the provided information, it seems like you are a homeowner who is looking to renovate your house. You have provided some details about your preferences and requirements for the renovation, including the materials you want to use, the color scheme, and the functional areas you want to prioritize.\n\nHere are some potential suggestions based on your input:\n\n1. For the flooring, you may consider using a combination of wooden and stone elements to create a warm and natural ambiance. Wooden floors can be used in the living room, dining room, and bedrooms, while stone tiles can be used in the bathroom and kitchen.\n2. For the walls, you can use a combination of smooth and textured finishes to create a visually interesting and dynamic space. The smooth finish can be used for the living room and bedrooms, while the textured finish can be used in the dining room and kitchen.\n3. For the ceiling, you can use a high-gloss finish to reflect light and create a sense of openness. This can be particularly effective in the living room and bedrooms.\n4. For the color scheme, you may want to consider a neutral palette with accents of dark blue or green to create a sense of calmness and serenity. This can be achieved by using a combination of light gray, beige, and off-white tones for the walls, floors, and ceilings.\n5. For the functional areas, you may want to prioritize a dedicated home office or workspace, as well as a cozy reading nook or a comfortable media room. These areas can be designed to meet your specific needs and preferences.\n6. For the lighting, you may want to consider using a combination of overhead lighting, table lamps, and floor lamps to create a warm and inviting ambiance. You may also want to use dimmable lights to adjust the brightness level based on your mood and preferences.\n7. For the furniture, you may want to choose pieces that are comfortable, functional, and visually appealing. Consider using a combination of leather, fabric, and wood finishes to create a warm and inviting space.\n8. For the decor, you may want to choose items that reflect your personal style and interests, such as artwork, sculptures, and plants. You can also use textiles, rugs, and wall hangings to add color, texture, and visual interest to the space.\n\nI hope these suggestions are helpful in planning your home renovation project! If you have any further questions or would like to discuss more details, please feel free to ask."
+          }
+        }
+      },
+      "globalContext": {
+        "currentMessage": "hello",
+        "messages": [
+          "hello",
+          "Hello! Based on the provided information, it seems like you are a homeowner who is looking to renovate your house. You have provided some details about your preferences and requirements for the renovation, including the materials you want to use, the color scheme, and the functional areas you want to prioritize.\n\nHere are some potential suggestions based on your input:\n\n1. For the flooring, you may consider using a combination of wooden and stone elements to create a warm and natural ambiance. Wooden floors can be used in the living room, dining room, and bedrooms, while stone tiles can be used in the bathroom and kitchen.\n2. For the walls, you can use a combination of smooth and textured finishes to create a visually interesting and dynamic space. The smooth finish can be used for the living room and bedrooms, while the textured finish can be used in the dining room and kitchen.\n3. For the ceiling, you can use a high-gloss finish to reflect light and create a sense of openness. This can be particularly effective in the living room and bedrooms.\n4. For the color scheme, you may want to consider a neutral palette with accents of dark blue or green to create a sense of calmness and serenity. This can be achieved by using a combination of light gray, beige, and off-white tones for the walls, floors, and ceilings.\n5. For the functional areas, you may want to prioritize a dedicated home office or workspace, as well as a cozy reading nook or a comfortable media room. These areas can be designed to meet your specific needs and preferences.\n6. For the lighting, you may want to consider using a combination of overhead lighting, table lamps, and floor lamps to create a warm and inviting ambiance. You may also want to use dimmable lights to adjust the brightness level based on your mood and preferences.\n7. For the furniture, you may want to choose pieces that are comfortable, functional, and visually appealing. Consider using a combination of leather, fabric, and wood finishes to create a warm and inviting space.\n8. For the decor, you may want to choose items that reflect your personal style and interests, such as artwork, sculptures, and plants. You can also use textiles, rugs, and wall hangings to add color, texture, and visual interest to the space.\n\nI hope these suggestions are helpful in planning your home renovation project! If you have any further questions or would like to discuss more details, please feel free to ask."
+        ],
+        "latestMessage": "Hello! Based on the provided information, it seems like you are a homeowner who is looking to renovate your house. You have provided some details about your preferences and requirements for the renovation, including the materials you want to use, the color scheme, and the functional areas you want to prioritize.\n\nHere are some potential suggestions based on your input:\n\n1. For the flooring, you may consider using a combination of wooden and stone elements to create a warm and natural ambiance. Wooden floors can be used in the living room, dining room, and bedrooms, while stone tiles can be used in the bathroom and kitchen.\n2. For the walls, you can use a combination of smooth and textured finishes to create a visually interesting and dynamic space. The smooth finish can be used for the living room and bedrooms, while the textured finish can be used in the dining room and kitchen.\n3. For the ceiling, you can use a high-gloss finish to reflect light and create a sense of openness. This can be particularly effective in the living room and bedrooms.\n4. For the color scheme, you may want to consider a neutral palette with accents of dark blue or green to create a sense of calmness and serenity. This can be achieved by using a combination of light gray, beige, and off-white tones for the walls, floors, and ceilings.\n5. For the functional areas, you may want to prioritize a dedicated home office or workspace, as well as a cozy reading nook or a comfortable media room. These areas can be designed to meet your specific needs and preferences.\n6. For the lighting, you may want to consider using a combination of overhead lighting, table lamps, and floor lamps to create a warm and inviting ambiance. You may also want to use dimmable lights to adjust the brightness level based on your mood and preferences.\n7. For the furniture, you may want to choose pieces that are comfortable, functional, and visually appealing. Consider using a combination of leather, fabric, and wood finishes to create a warm and inviting space.\n8. For the decor, you may want to choose items that reflect your personal style and interests, such as artwork, sculptures, and plants. You can also use textiles, rugs, and wall hangings to add color, texture, and visual interest to the space.\n\nI hope these suggestions are helpful in planning your home renovation project! If you have any further questions or would like to discuss more details, please feel free to ask."
+      }
+    },
+    {
+      "sessionId": "temp-b6d821f8-a4d6-4d15-9e61-ec63c7192d21-af43958f-12e9-46b9-84eb-3763dfc8870a",
+      "workflowId": "b6d821f8-a4d6-4d15-9e61-ec63c7192d21",
+      "createDate": "5/11/2024, 3:26:01 PM",
+      "updateDate": "5/11/2024, 3:26:01 PM",
+      "nodeContext": {
+        "b5925368-d7e4-40e2-8611-f8a665ba0982": {
+          "outputs": {
+            "query": "hello"
+          }
+        },
+        "7511ac86-0e61-4d37-a4f5-1c3c816a7d4e": {
+          "outputs": {
+            "RelativeContent": [
+              "衣帽间是否男女主人分开挂放衣物？\n\n否\n\n您对以前房屋的设计及装修有何遗憾？\n\n\n\n对设计师的一些期望和要求？\n\n\n\n告诉我们您对户型不满意的地方或改动想法\n\n客厅采光区域不大，希望可以亮一点\n\n以下功能哪些是您想实现的\n\n□独立书房 □书架 □书桌 □衣帽间 ☑晾晒区 ☑浴缸 □茶室 \n\n□亲子休闲区  ☑投影仪  □娱乐区  □健身区   □电竞区  \n\n☑家庭影院 □酒窖   ☑独立阅读室\n\n其他:\n\n宠物情况\n\n暂无\n\n家中是否经常做饭？平时几人用餐？\n\n2\n\n喜欢的厨房类型1.中式  2.西式  3.开放式  4.封闭式 5、中西餐结合\n\n2\n\n冰箱的形式1.单门冰箱  2.双门冰箱 3.冰柜 4、迷你冰柜\n\n2\n\n烹饪方式：中式或者西式？一般厨房是容纳几人同时操作？\n\n中式，2人\n\n厨房使用频率每周几次？想要厨房具有那些功能？\n\n5次\n\n主厨是谁\n\n女主人\n\n主厨身高\n\n165\n\n全屋收纳需求？\n\n\n\n有无特殊体型/身高\n\n无\n\n是否考虑卫生间干湿分离？是否需要蹲便器？是否需要浴缸？\n\n干湿分离+\n\n浴缸\n\n家中成员兴趣爱好？\n\n电影，游戏，看书\n\n有无较大的游戏设备？比如：投篮框，飞镖盘，吊椅，麻将桌，\n\n无\n\n在污染释放期，会添加什么设备1.空气净化器  2.空气净化剂（活性炭）  3.新风系统   4.绿色植物  5.不买，就每天开窗\n\n1\n\n您是否考虑二胎或二胎以上？宝宝性别？宝宝的兴趣爱好？\n\n不考虑\n\n\t宝宝的衣物有多少？玩具有多少？宝宝需要独立衣柜？写字桌吗？\n\n暂无\n\n基装预算\n\n\n\n整装预算\n\n20-25\n\n是否考虑安装以下硬件设备\n\n□中央空调  □地暖 □新风系统 □风管机□智能灯控  □智能家居\n\n□暖气片 □净水系统 □软水系统 ☑垃圾处理器 □洗碗机 ☑烘干机 □背景音乐☑智能马桶 □壁挂式马桶 ☑家庭影院    其他：\n\n施工方式及装修主责人\n\n\n\n□考察满意后交给设计师一起做更有保障 □另找施工\n\n☑尚在考虑中 □朋友推荐施工 □自己负责 \t□父母负责 □自己和父母一起负责\n\n设计需求备注：\n\n1入住后未来几年功能要求？\n\n\n\n2房子入住年限？\n\n\n\n\n\n猫姐设计事务所感谢您的支持！！！",
+              "猫姐设计事务所设计需求问卷\n\n客户姓名\n\n俞孙皓\n\n☑先生\n\n□女士\n\n联系方式\n\n18668189816\n\n职业\n\n程序员\n\n所在城市\n\n杭州\n\n户型面积和楼盘名字\n\n\n\n宗教信仰：      1.无   2.佛教  3.道教  4.基督教  5.天主教  6.伊斯兰教  7.其他\n\n无\n\n您的工作状态：   1.清闲  2.游刃有余  3.按上下班完成工作  4.偶尔加班  5.经常加班   6.不出差   7.偶尔出差  8.经常出差\n\n经常加班\n\n房屋状态：\n\n1.清水毛坯房             2.二手清水房    3.旧房改造       4.精装房\n\n保存option\n\n旧房改造\n\n房屋类型：\n\n1.联排别墅或者 独栋别墅. \n\n2.跃层 复式 LOFT公寓 \n\n3.平层 \n\n4.其他\n\n平层\n\n房屋居住楼层\n\n12\n\n房屋总楼层\n\n18\n\n是否收房\n\n是\n\n常住人口\n\n2\n\n您的居室成员：\n\n1.父母         2.夫（妻）      3.女儿         4.儿子        5.孙子        6.孙女        7.保姆        8.其他\n\n2\n\n喜欢什么装修风格？喜欢什么文化？生活（可多种）1.现代简约风格  2.北欧风格     3.日式风格     4.新中式风格   5.轻奢风格     6.欧式古典风格  7.欧式田园风格 8.美式风格\n\n法式风格\n\n港式风格\n\n其他或者混搭 \n\n3\n\n喜欢那些材质元素？比如：金属.木头.植物.布艺.石材.皮革\n\n木头\n\n居家饰品主要以男主人还是女主人的意见为主？\n\n男主人\n\n喜欢简洁的装饰风格？还是复杂，装饰性强一点的？\n\n简洁一些\n\n需要在卧室看书或上网或办公吗？卧室需要电视剧或投影吗？\n\n卧室看书，需要电视\n\n对地面材料的选择：1.大理石  2.地砖  3.地板   4.自流平5\n\n其他\n\n地板\n\n对灯具材料的选择：1.水晶灯  2.造型吸顶灯 3.普通吸顶灯  5.灯带   6.日光灯 7、其他 \n\n客厅无主灯，其他吸顶灯\n\n对墙面材料的选择：1.乳胶漆  2.墙纸  3.布料  4.饰面石材  5.饰面木材6、其他\n\n\n\n对沙发的选择：   1.布艺沙发  2.真皮沙发 3.按摩沙发  4.实木沙发   5.藤艺沙发6、其他  \n\n布艺沙发",
+              "其他\n\n地板\n\n对灯具材料的选择：1.水晶灯  2.造型吸顶灯 3.普通吸顶灯  5.灯带   6.日光灯 7、其他 \n\n客厅无主灯，其他吸顶灯\n\n对墙面材料的选择：1.乳胶漆  2.墙纸  3.布料  4.饰面石材  5.饰面木材6、其他\n\n\n\n对沙发的选择：   1.布艺沙发  2.真皮沙发 3.按摩沙发  4.实木沙发   5.藤艺沙发6、其他  \n\n布艺沙发\n\n卧室需要梳妆台吗？需要更衣镜吗？\n\n需要梳妆台\n\n对于卧室的采光及私密性要求高吗？\n\n高\n\n家庭成员喜欢的色彩？讨厌绝对不能出现的颜色？\n\n饱和度低一些，耐看\n\n软装配饰是否一起添置购买？还是硬装做好慢慢添置？\n\n一起购买\n\n本次装修后的大概换房周期多少年\n\n5\n\n有无旧家具或特殊物品的安置\n\n\n\n您平时喜欢的饮品：茶 咖啡 红酒 白酒 洋酒 啤酒 奶茶 白开水 其他类别\n\n红酒白酒\n\n您的用餐习惯：\n\n1.经常家里用餐   \n\n2.经常外面用餐或者外卖          \n\n3.以上都有\n\n3\n\n喜欢的旅行地点：1.国内   2.东南亚  3.欧洲  4.非洲  5.美洲  6.其它 \n\n大洋洲\n\n最喜欢的旅游地点：\n\n新西兰\n\n是否有在家吸烟的需求：1.有  2.没有  3.有朋友来会\n\n2\n\n在什么地方吸烟：1.厨房  2.卫生间 3.客厅  4阳台  5.卧室\n\n3\n\n您的作息时间:\n\n1.正常  \n\n2.早睡早起  \n\n3.晚睡晚起  \n\n4.早起晚睡\n\n1\n\n您喜欢的陈设摆列产品？摆设类：1.雕塑   2.玩具     3.酒杯     4.花瓶      5.乐高\n\n壁饰类：1.工艺美术品    2.各类书画作品   3.图片摄影  4.其他\n\n摆设：2，5\n\n壁饰：1，3\n\n房屋朝向及采光\n\n\n\n打算何时动工、入住\n\n\n\n男女主人需要挂放，叠放的衣物大概多少？比如：大衣，西服，裙子，裤装多少？\n\n\n\n衣帽间是否男女主人分开挂放衣物？\n\n否\n\n您对以前房屋的设计及装修有何遗憾？\n\n\n\n对设计师的一些期望和要求？\n\n\n\n告诉我们您对户型不满意的地方或改动想法\n\n客厅采光区域不大，希望可以亮一点\n\n以下功能哪些是您想实现的\n\n□独立书房 □书架 □书桌 □衣帽间 ☑晾晒区 ☑浴缸 □茶室 \n\n□亲子休闲区  ☑投影仪  □娱乐区  □健身区   □电竞区"
+            ]
+          }
+        },
+        "5158a87f-39c4-4c08-91f7-335ffcad76a3": {
+          "messages": [
+            {
+              "role": "user",
+              "content": "Context information is below. \n\n    --------------------- \n    衣帽间是否男女主人分开挂放衣物？\n\n否\n\n您对以前房屋的设计及装修有何遗憾？\n\n\n\n对设计师的一些期望和要求？\n\n\n\n告诉我们您对户型不满意的地方或改动想法\n\n客厅采光区域不大，希望可以亮一点\n\n以下功能哪些是您想实现的\n\n□独立书房 □书架 □书桌 □衣帽间 ☑晾晒区 ☑浴缸 □茶室 \n\n□亲子休闲区  ☑投影仪  □娱乐区  □健身区   □电竞区  \n\n☑家庭影院 □酒窖   ☑独立阅读室\n\n其他:\n\n宠物情况\n\n暂无\n\n家中是否经常做饭？平时几人用餐？\n\n2\n\n喜欢的厨房类型1.中式  2.西式  3.开放式  4.封闭式 5、中西餐结合\n\n2\n\n冰箱的形式1.单门冰箱  2.双门冰箱 3.冰柜 4、迷你冰柜\n\n2\n\n烹饪方式：中式或者西式？一般厨房是容纳几人同时操作？\n\n中式，2人\n\n厨房使用频率每周几次？想要厨房具有那些功能？\n\n5次\n\n主厨是谁\n\n女主人\n\n主厨身高\n\n165\n\n全屋收纳需求？\n\n\n\n有无特殊体型/身高\n\n无\n\n是否考虑卫生间干湿分离？是否需要蹲便器？是否需要浴缸？\n\n干湿分离+\n\n浴缸\n\n家中成员兴趣爱好？\n\n电影，游戏，看书\n\n有无较大的游戏设备？比如：投篮框，飞镖盘，吊椅，麻将桌，\n\n无\n\n在污染释放期，会添加什么设备1.空气净化器  2.空气净化剂（活性炭）  3.新风系统   4.绿色植物  5.不买，就每天开窗\n\n1\n\n您是否考虑二胎或二胎以上？宝宝性别？宝宝的兴趣爱好？\n\n不考虑\n\n\t宝宝的衣物有多少？玩具有多少？宝宝需要独立衣柜？写字桌吗？\n\n暂无\n\n基装预算\n\n\n\n整装预算\n\n20-25\n\n是否考虑安装以下硬件设备\n\n□中央空调  □地暖 □新风系统 □风管机□智能灯控  □智能家居\n\n□暖气片 □净水系统 □软水系统 ☑垃圾处理器 □洗碗机 ☑烘干机 □背景音乐☑智能马桶 □壁挂式马桶 ☑家庭影院    其他：\n\n施工方式及装修主责人\n\n\n\n□考察满意后交给设计师一起做更有保障 □另找施工\n\n☑尚在考虑中 □朋友推荐施工 □自己负责 \t□父母负责 □自己和父母一起负责\n\n设计需求备注：\n\n1入住后未来几年功能要求？\n\n\n\n2房子入住年限？\n\n\n\n\n\n猫姐设计事务所感谢您的支持！！！猫姐设计事务所设计需求问卷\n\n客户姓名\n\n俞孙皓\n\n☑先生\n\n□女士\n\n联系方式\n\n18668189816\n\n职业\n\n程序员\n\n所在城市\n\n杭州\n\n户型面积和楼盘名字\n\n\n\n宗教信仰：      1.无   2.佛教  3.道教  4.基督教  5.天主教  6.伊斯兰教  7.其他\n\n无\n\n您的工作状态：   1.清闲  2.游刃有余  3.按上下班完成工作  4.偶尔加班  5.经常加班   6.不出差   7.偶尔出差  8.经常出差\n\n经常加班\n\n房屋状态：\n\n1.清水毛坯房             2.二手清水房    3.旧房改造       4.精装房\n\n保存option\n\n旧房改造\n\n房屋类型：\n\n1.联排别墅或者 独栋别墅. \n\n2.跃层 复式 LOFT公寓 \n\n3.平层 \n\n4.其他\n\n平层\n\n房屋居住楼层\n\n12\n\n房屋总楼层\n\n18\n\n是否收房\n\n是\n\n常住人口\n\n2\n\n您的居室成员：\n\n1.父母         2.夫（妻）      3.女儿         4.儿子        5.孙子        6.孙女        7.保姆        8.其他\n\n2\n\n喜欢什么装修风格？喜欢什么文化？生活（可多种）1.现代简约风格  2.北欧风格     3.日式风格     4.新中式风格   5.轻奢风格     6.欧式古典风格  7.欧式田园风格 8.美式风格\n\n法式风格\n\n港式风格\n\n其他或者混搭 \n\n3\n\n喜欢那些材质元素？比如：金属.木头.植物.布艺.石材.皮革\n\n木头\n\n居家饰品主要以男主人还是女主人的意见为主？\n\n男主人\n\n喜欢简洁的装饰风格？还是复杂，装饰性强一点的？\n\n简洁一些\n\n需要在卧室看书或上网或办公吗？卧室需要电视剧或投影吗？\n\n卧室看书，需要电视\n\n对地面材料的选择：1.大理石  2.地砖  3.地板   4.自流平5\n\n其他\n\n地板\n\n对灯具材料的选择：1.水晶灯  2.造型吸顶灯 3.普通吸顶灯  5.灯带   6.日光灯 7、其他 \n\n客厅无主灯，其他吸顶灯\n\n对墙面材料的选择：1.乳胶漆  2.墙纸  3.布料  4.饰面石材  5.饰面木材6、其他\n\n\n\n对沙发的选择：   1.布艺沙发  2.真皮沙发 3.按摩沙发  4.实木沙发   5.藤艺沙发6、其他  \n\n布艺沙发其他\n\n地板\n\n对灯具材料的选择：1.水晶灯  2.造型吸顶灯 3.普通吸顶灯  5.灯带   6.日光灯 7、其他 \n\n客厅无主灯，其他吸顶灯\n\n对墙面材料的选择：1.乳胶漆  2.墙纸  3.布料  4.饰面石材  5.饰面木材6、其他\n\n\n\n对沙发的选择：   1.布艺沙发  2.真皮沙发 3.按摩沙发  4.实木沙发   5.藤艺沙发6、其他  \n\n布艺沙发\n\n卧室需要梳妆台吗？需要更衣镜吗？\n\n需要梳妆台\n\n对于卧室的采光及私密性要求高吗？\n\n高\n\n家庭成员喜欢的色彩？讨厌绝对不能出现的颜色？\n\n饱和度低一些，耐看\n\n软装配饰是否一起添置购买？还是硬装做好慢慢添置？\n\n一起购买\n\n本次装修后的大概换房周期多少年\n\n5\n\n有无旧家具或特殊物品的安置\n\n\n\n您平时喜欢的饮品：茶 咖啡 红酒 白酒 洋酒 啤酒 奶茶 白开水 其他类别\n\n红酒白酒\n\n您的用餐习惯：\n\n1.经常家里用餐   \n\n2.经常外面用餐或者外卖          \n\n3.以上都有\n\n3\n\n喜欢的旅行地点：1.国内   2.东南亚  3.欧洲  4.非洲  5.美洲  6.其它 \n\n大洋洲\n\n最喜欢的旅游地点：\n\n新西兰\n\n是否有在家吸烟的需求：1.有  2.没有  3.有朋友来会\n\n2\n\n在什么地方吸烟：1.厨房  2.卫生间 3.客厅  4阳台  5.卧室\n\n3\n\n您的作息时间:\n\n1.正常  \n\n2.早睡早起  \n\n3.晚睡晚起  \n\n4.早起晚睡\n\n1\n\n您喜欢的陈设摆列产品？摆设类：1.雕塑   2.玩具     3.酒杯     4.花瓶      5.乐高\n\n壁饰类：1.工艺美术品    2.各类书画作品   3.图片摄影  4.其他\n\n摆设：2，5\n\n壁饰：1，3\n\n房屋朝向及采光\n\n\n\n打算何时动工、入住\n\n\n\n男女主人需要挂放，叠放的衣物大概多少？比如：大衣，西服，裙子，裤装多少？\n\n\n\n衣帽间是否男女主人分开挂放衣物？\n\n否\n\n您对以前房屋的设计及装修有何遗憾？\n\n\n\n对设计师的一些期望和要求？\n\n\n\n告诉我们您对户型不满意的地方或改动想法\n\n客厅采光区域不大，希望可以亮一点\n\n以下功能哪些是您想实现的\n\n□独立书房 □书架 □书桌 □衣帽间 ☑晾晒区 ☑浴缸 □茶室 \n\n□亲子休闲区  ☑投影仪  □娱乐区  □健身区   □电竞区 \n    \n---------------------\n \n    Given the context information and not prior knowledge, \n    answer the question: hello\n"
+            },
+            "Hello! Thank you for providing me with the information about your preferences and requirements for your dream home. Based on what you've shared, here are my observations and suggestions:\n\n1. Layout: It seems that you want a relatively simple layout with a clear distinction between the living room, dining room, and bedrooms. You also mentioned that you want a spacious master bedroom with enough storage space.\n2. Materials: You prefer natural materials such as wood, stone, and plants for the interior design. You also mentioned that you like the look of metal and appreciate the durability of these materials.\n3. Lighting: You want ample natural light in the living room and bedrooms, and you're open to installing skylights or larger windows to achieve this. Additionally, you mentioned that you want adequate artificial lighting options in case of insufficient natural light.\n4. Color scheme: You seem to prefer a neutral color palette with touches of earthy tones, which is in line with the natural material choices you've made.\n5. Furniture: You want comfortable and durable furniture that can withstand children's playtime and occasional spills. You also mentioned that you prefer furniture with a minimalist aesthetic.\n6. Kitchen: You want an open-plan kitchen that's functional, modern, and spacious enough to accommodate a large island or peninsula. You also mentioned that you prefer stainless steel appliances over black ones.\n7. Outdoor space: You want a backyard with a decent-sized lawn for the children to play on, as well as some outdoor seating areas for relaxation and entertaining purposes.\n8. Smoking area: You mentioned that you don't smoke, but you want a designated smoking area outside the house for your husband's convenience.\n9. Storage: You want ample storage space throughout the house, particularly in the bedrooms and living areas, to keep clutter at bay and maintain a tidy home environment.\n10. Technology integration: You mentioned that you want easy-to-use smart home technology integrations, such as voice-controlled lighting and temperature control, to enhance the convenience and comfort of your dream home.\n\nBased on your preferences and requirements, here are some suggestions for design elements and features that could make your dream home a reality:\n\n* A simple and functional layout with clear distinctions between the living areas, dining area, and bedrooms\n* Natural materials such as wood, stone, plants, metal, and stainless steel appliances to create a warm and inviting atmosphere\n* Ample natural lighting options, including skylights or larger windows, to illuminate the living room and bedrooms\n* A neutral color palette with touches of earthy tones to complement the natural materials used in the interior design\n* Comfortable and durable furniture with a minimalist aesthetic to accommodate children's playtime and occasional spills\n* An open-plan kitchen with stainless steel appliances, ample counter space, and a large island or peninsula for food preparation and entertaining purposes\n* A decent-sized lawn in the backyard for children to play on, as well as some outdoor seating areas for relaxation and entertaining purposes\n* A designated smoking area outside the house for your husband's convenience\n* Ample storage space throughout the house, particularly in the bedrooms and living areas, to keep clutter at bay and maintain a tidy home environment\n* Easy-to-use smart home technology integrations, such as voice-controlled lighting and temperature control, to enhance the convenience and comfort of your dream home.\n\nI hope these suggestions help you visualize your dream home and make it a reality!"
+          ],
+          "outputs": {
+            "answer": "Hello! Thank you for providing me with the information about your preferences and requirements for your dream home. Based on what you've shared, here are my observations and suggestions:\n\n1. Layout: It seems that you want a relatively simple layout with a clear distinction between the living room, dining room, and bedrooms. You also mentioned that you want a spacious master bedroom with enough storage space.\n2. Materials: You prefer natural materials such as wood, stone, and plants for the interior design. You also mentioned that you like the look of metal and appreciate the durability of these materials.\n3. Lighting: You want ample natural light in the living room and bedrooms, and you're open to installing skylights or larger windows to achieve this. Additionally, you mentioned that you want adequate artificial lighting options in case of insufficient natural light.\n4. Color scheme: You seem to prefer a neutral color palette with touches of earthy tones, which is in line with the natural material choices you've made.\n5. Furniture: You want comfortable and durable furniture that can withstand children's playtime and occasional spills. You also mentioned that you prefer furniture with a minimalist aesthetic.\n6. Kitchen: You want an open-plan kitchen that's functional, modern, and spacious enough to accommodate a large island or peninsula. You also mentioned that you prefer stainless steel appliances over black ones.\n7. Outdoor space: You want a backyard with a decent-sized lawn for the children to play on, as well as some outdoor seating areas for relaxation and entertaining purposes.\n8. Smoking area: You mentioned that you don't smoke, but you want a designated smoking area outside the house for your husband's convenience.\n9. Storage: You want ample storage space throughout the house, particularly in the bedrooms and living areas, to keep clutter at bay and maintain a tidy home environment.\n10. Technology integration: You mentioned that you want easy-to-use smart home technology integrations, such as voice-controlled lighting and temperature control, to enhance the convenience and comfort of your dream home.\n\nBased on your preferences and requirements, here are some suggestions for design elements and features that could make your dream home a reality:\n\n* A simple and functional layout with clear distinctions between the living areas, dining area, and bedrooms\n* Natural materials such as wood, stone, plants, metal, and stainless steel appliances to create a warm and inviting atmosphere\n* Ample natural lighting options, including skylights or larger windows, to illuminate the living room and bedrooms\n* A neutral color palette with touches of earthy tones to complement the natural materials used in the interior design\n* Comfortable and durable furniture with a minimalist aesthetic to accommodate children's playtime and occasional spills\n* An open-plan kitchen with stainless steel appliances, ample counter space, and a large island or peninsula for food preparation and entertaining purposes\n* A decent-sized lawn in the backyard for children to play on, as well as some outdoor seating areas for relaxation and entertaining purposes\n* A designated smoking area outside the house for your husband's convenience\n* Ample storage space throughout the house, particularly in the bedrooms and living areas, to keep clutter at bay and maintain a tidy home environment\n* Easy-to-use smart home technology integrations, such as voice-controlled lighting and temperature control, to enhance the convenience and comfort of your dream home.\n\nI hope these suggestions help you visualize your dream home and make it a reality!"
+          }
+        }
+      },
+      "globalContext": {
+        "currentMessage": "hello",
+        "messages": [
+          "hello",
+          "Hello! Thank you for providing me with the information about your preferences and requirements for your dream home. Based on what you've shared, here are my observations and suggestions:\n\n1. Layout: It seems that you want a relatively simple layout with a clear distinction between the living room, dining room, and bedrooms. You also mentioned that you want a spacious master bedroom with enough storage space.\n2. Materials: You prefer natural materials such as wood, stone, and plants for the interior design. You also mentioned that you like the look of metal and appreciate the durability of these materials.\n3. Lighting: You want ample natural light in the living room and bedrooms, and you're open to installing skylights or larger windows to achieve this. Additionally, you mentioned that you want adequate artificial lighting options in case of insufficient natural light.\n4. Color scheme: You seem to prefer a neutral color palette with touches of earthy tones, which is in line with the natural material choices you've made.\n5. Furniture: You want comfortable and durable furniture that can withstand children's playtime and occasional spills. You also mentioned that you prefer furniture with a minimalist aesthetic.\n6. Kitchen: You want an open-plan kitchen that's functional, modern, and spacious enough to accommodate a large island or peninsula. You also mentioned that you prefer stainless steel appliances over black ones.\n7. Outdoor space: You want a backyard with a decent-sized lawn for the children to play on, as well as some outdoor seating areas for relaxation and entertaining purposes.\n8. Smoking area: You mentioned that you don't smoke, but you want a designated smoking area outside the house for your husband's convenience.\n9. Storage: You want ample storage space throughout the house, particularly in the bedrooms and living areas, to keep clutter at bay and maintain a tidy home environment.\n10. Technology integration: You mentioned that you want easy-to-use smart home technology integrations, such as voice-controlled lighting and temperature control, to enhance the convenience and comfort of your dream home.\n\nBased on your preferences and requirements, here are some suggestions for design elements and features that could make your dream home a reality:\n\n* A simple and functional layout with clear distinctions between the living areas, dining area, and bedrooms\n* Natural materials such as wood, stone, plants, metal, and stainless steel appliances to create a warm and inviting atmosphere\n* Ample natural lighting options, including skylights or larger windows, to illuminate the living room and bedrooms\n* A neutral color palette with touches of earthy tones to complement the natural materials used in the interior design\n* Comfortable and durable furniture with a minimalist aesthetic to accommodate children's playtime and occasional spills\n* An open-plan kitchen with stainless steel appliances, ample counter space, and a large island or peninsula for food preparation and entertaining purposes\n* A decent-sized lawn in the backyard for children to play on, as well as some outdoor seating areas for relaxation and entertaining purposes\n* A designated smoking area outside the house for your husband's convenience\n* Ample storage space throughout the house, particularly in the bedrooms and living areas, to keep clutter at bay and maintain a tidy home environment\n* Easy-to-use smart home technology integrations, such as voice-controlled lighting and temperature control, to enhance the convenience and comfort of your dream home.\n\nI hope these suggestions help you visualize your dream home and make it a reality!"
+        ],
+        "latestMessage": "Hello! Thank you for providing me with the information about your preferences and requirements for your dream home. Based on what you've shared, here are my observations and suggestions:\n\n1. Layout: It seems that you want a relatively simple layout with a clear distinction between the living room, dining room, and bedrooms. You also mentioned that you want a spacious master bedroom with enough storage space.\n2. Materials: You prefer natural materials such as wood, stone, and plants for the interior design. You also mentioned that you like the look of metal and appreciate the durability of these materials.\n3. Lighting: You want ample natural light in the living room and bedrooms, and you're open to installing skylights or larger windows to achieve this. Additionally, you mentioned that you want adequate artificial lighting options in case of insufficient natural light.\n4. Color scheme: You seem to prefer a neutral color palette with touches of earthy tones, which is in line with the natural material choices you've made.\n5. Furniture: You want comfortable and durable furniture that can withstand children's playtime and occasional spills. You also mentioned that you prefer furniture with a minimalist aesthetic.\n6. Kitchen: You want an open-plan kitchen that's functional, modern, and spacious enough to accommodate a large island or peninsula. You also mentioned that you prefer stainless steel appliances over black ones.\n7. Outdoor space: You want a backyard with a decent-sized lawn for the children to play on, as well as some outdoor seating areas for relaxation and entertaining purposes.\n8. Smoking area: You mentioned that you don't smoke, but you want a designated smoking area outside the house for your husband's convenience.\n9. Storage: You want ample storage space throughout the house, particularly in the bedrooms and living areas, to keep clutter at bay and maintain a tidy home environment.\n10. Technology integration: You mentioned that you want easy-to-use smart home technology integrations, such as voice-controlled lighting and temperature control, to enhance the convenience and comfort of your dream home.\n\nBased on your preferences and requirements, here are some suggestions for design elements and features that could make your dream home a reality:\n\n* A simple and functional layout with clear distinctions between the living areas, dining area, and bedrooms\n* Natural materials such as wood, stone, plants, metal, and stainless steel appliances to create a warm and inviting atmosphere\n* Ample natural lighting options, including skylights or larger windows, to illuminate the living room and bedrooms\n* A neutral color palette with touches of earthy tones to complement the natural materials used in the interior design\n* Comfortable and durable furniture with a minimalist aesthetic to accommodate children's playtime and occasional spills\n* An open-plan kitchen with stainless steel appliances, ample counter space, and a large island or peninsula for food preparation and entertaining purposes\n* A decent-sized lawn in the backyard for children to play on, as well as some outdoor seating areas for relaxation and entertaining purposes\n* A designated smoking area outside the house for your husband's convenience\n* Ample storage space throughout the house, particularly in the bedrooms and living areas, to keep clutter at bay and maintain a tidy home environment\n* Easy-to-use smart home technology integrations, such as voice-controlled lighting and temperature control, to enhance the convenience and comfort of your dream home.\n\nI hope these suggestions help you visualize your dream home and make it a reality!"
+      }
+    }
+  ],
   "workflows": [
     {
       "id": "1",
@@ -275,6 +1106,274 @@
       "name": "hello world",
       "category": "Draft",
       "lastModified": "2023-07-12 10:42 AM"
+    },
+    {
+      "id": "b6d821f8-a4d6-4d15-9e61-ec63c7192d21",
+      "name": "New Workflow0.4542661603441842",
+      "category": "Draft",
+      "lastModified": "2023-07-12 10:42 AM",
+      "data": {
+        "nodes": [
+          {
+            "id": "b5925368-d7e4-40e2-8611-f8a665ba0982",
+            "type": "internalNodelet",
+            "position": {
+              "x": 61.4453125,
+              "y": 143
+            },
+            "data": {
+              "label": "UserInput",
+              "nodeletId": "UserInput",
+              "config": {}
+            },
+            "width": 96,
+            "height": 80,
+            "positionAbsolute": {
+              "x": 61.4453125,
+              "y": 143
+            }
+          },
+          {
+            "id": "7511ac86-0e61-4d37-a4f5-1c3c816a7d4e",
+            "type": "internalNodelet",
+            "position": {
+              "x": 255.4453125,
+              "y": 222
+            },
+            "data": {
+              "label": "KnowledgeBase",
+              "nodeletId": "KnowledgeBase",
+              "config": {
+                "knowledgeBase": {
+                  "id": "b9d288c5-5adc-4d0b-afa2-c555b5c837e2",
+                  "name": "maojie"
+                }
+              }
+            },
+            "width": 96,
+            "height": 80,
+            "selected": false,
+            "positionAbsolute": {
+              "x": 255.4453125,
+              "y": 222
+            },
+            "dragging": false
+          },
+          {
+            "id": "5158a87f-39c4-4c08-91f7-335ffcad76a3",
+            "type": "internalNodelet",
+            "position": {
+              "x": 566.4453125,
+              "y": 222
+            },
+            "data": {
+              "label": "Ollama",
+              "nodeletId": "Ollama",
+              "config": {
+                "model": "llama2",
+                "temperature": "0.7",
+                "contextCount": "2"
+              }
+            },
+            "width": 96,
+            "height": 80,
+            "positionAbsolute": {
+              "x": 566.4453125,
+              "y": 222
+            },
+            "selected": true,
+            "dragging": false
+          },
+          {
+            "id": "8b239d40-cf73-4135-a888-9f208d6c5e3e",
+            "type": "internalNodelet",
+            "position": {
+              "x": 789.4453125,
+              "y": 277
+            },
+            "data": {
+              "label": "ChatResponse",
+              "nodeletId": "ChatResponse",
+              "config": {}
+            },
+            "width": 96,
+            "height": 80,
+            "positionAbsolute": {
+              "x": 789.4453125,
+              "y": 277
+            }
+          }
+        ],
+        "edges": [
+          {
+            "source": "b5925368-d7e4-40e2-8611-f8a665ba0982",
+            "sourceHandle": "query",
+            "target": "7511ac86-0e61-4d37-a4f5-1c3c816a7d4e",
+            "targetHandle": "query",
+            "id": "reactflow__edge-b5925368-d7e4-40e2-8611-f8a665ba0982query-7511ac86-0e61-4d37-a4f5-1c3c816a7d4equery"
+          },
+          {
+            "source": "b5925368-d7e4-40e2-8611-f8a665ba0982",
+            "sourceHandle": "query",
+            "target": "5158a87f-39c4-4c08-91f7-335ffcad76a3",
+            "targetHandle": "query",
+            "id": "reactflow__edge-b5925368-d7e4-40e2-8611-f8a665ba0982query-5158a87f-39c4-4c08-91f7-335ffcad76a3query"
+          },
+          {
+            "source": "7511ac86-0e61-4d37-a4f5-1c3c816a7d4e",
+            "sourceHandle": "RelativeContent",
+            "target": "5158a87f-39c4-4c08-91f7-335ffcad76a3",
+            "targetHandle": "context",
+            "id": "reactflow__edge-7511ac86-0e61-4d37-a4f5-1c3c816a7d4eRelativeContent-5158a87f-39c4-4c08-91f7-335ffcad76a3context"
+          },
+          {
+            "source": "5158a87f-39c4-4c08-91f7-335ffcad76a3",
+            "sourceHandle": "answer",
+            "target": "8b239d40-cf73-4135-a888-9f208d6c5e3e",
+            "targetHandle": "output",
+            "id": "reactflow__edge-5158a87f-39c4-4c08-91f7-335ffcad76a3answer-8b239d40-cf73-4135-a888-9f208d6c5e3eoutput"
+          }
+        ],
+        "viewport": {
+          "x": -409,
+          "y": -38,
+          "zoom": 1
+        }
+      }
+    },
+    {
+      "id": "b6d821f8-a4d6-4d15-9e61-ec63c7192d21",
+      "name": "New Workflow0.835056126604286",
+      "category": "Draft",
+      "lastModified": "2023-07-12 10:42 AM",
+      "data": {
+        "nodes": [
+          {
+            "id": "b5925368-d7e4-40e2-8611-f8a665ba0982",
+            "type": "internalNodelet",
+            "position": {
+              "x": 61.4453125,
+              "y": 143
+            },
+            "data": {
+              "label": "UserInput",
+              "nodeletId": "UserInput",
+              "config": {}
+            },
+            "width": 96,
+            "height": 80,
+            "positionAbsolute": {
+              "x": 61.4453125,
+              "y": 143
+            }
+          },
+          {
+            "id": "7511ac86-0e61-4d37-a4f5-1c3c816a7d4e",
+            "type": "internalNodelet",
+            "position": {
+              "x": 254.4453125,
+              "y": 222
+            },
+            "data": {
+              "label": "KnowledgeBase",
+              "nodeletId": "KnowledgeBase",
+              "config": {
+                "knowledgeBase": {
+                  "id": "f4d25658-3802-48c7-8f8a-d16765af9553",
+                  "name": "dco"
+                }
+              }
+            },
+            "width": 96,
+            "height": 80,
+            "selected": false,
+            "positionAbsolute": {
+              "x": 254.4453125,
+              "y": 222
+            },
+            "dragging": false
+          },
+          {
+            "id": "5158a87f-39c4-4c08-91f7-335ffcad76a3",
+            "type": "internalNodelet",
+            "position": {
+              "x": 566.4453125,
+              "y": 222
+            },
+            "data": {
+              "label": "Ollama",
+              "nodeletId": "Ollama",
+              "config": {
+                "model": "llama2",
+                "temperature": "0.7",
+                "contextCount": "1"
+              }
+            },
+            "width": 96,
+            "height": 80,
+            "selected": true,
+            "dragging": false,
+            "positionAbsolute": {
+              "x": 566.4453125,
+              "y": 222
+            }
+          },
+          {
+            "id": "8b239d40-cf73-4135-a888-9f208d6c5e3e",
+            "type": "internalNodelet",
+            "position": {
+              "x": 789.4453125,
+              "y": 277
+            },
+            "data": {
+              "label": "ChatResponse",
+              "nodeletId": "ChatResponse",
+              "config": {}
+            },
+            "width": 96,
+            "height": 80,
+            "positionAbsolute": {
+              "x": 789.4453125,
+              "y": 277
+            }
+          }
+        ],
+        "edges": [
+          {
+            "source": "b5925368-d7e4-40e2-8611-f8a665ba0982",
+            "sourceHandle": "query",
+            "target": "7511ac86-0e61-4d37-a4f5-1c3c816a7d4e",
+            "targetHandle": "query",
+            "id": "reactflow__edge-b5925368-d7e4-40e2-8611-f8a665ba0982query-7511ac86-0e61-4d37-a4f5-1c3c816a7d4equery"
+          },
+          {
+            "source": "b5925368-d7e4-40e2-8611-f8a665ba0982",
+            "sourceHandle": "query",
+            "target": "5158a87f-39c4-4c08-91f7-335ffcad76a3",
+            "targetHandle": "query",
+            "id": "reactflow__edge-b5925368-d7e4-40e2-8611-f8a665ba0982query-5158a87f-39c4-4c08-91f7-335ffcad76a3query"
+          },
+          {
+            "source": "7511ac86-0e61-4d37-a4f5-1c3c816a7d4e",
+            "sourceHandle": "RelativeContent",
+            "target": "5158a87f-39c4-4c08-91f7-335ffcad76a3",
+            "targetHandle": "context",
+            "id": "reactflow__edge-7511ac86-0e61-4d37-a4f5-1c3c816a7d4eRelativeContent-5158a87f-39c4-4c08-91f7-335ffcad76a3context"
+          },
+          {
+            "source": "5158a87f-39c4-4c08-91f7-335ffcad76a3",
+            "sourceHandle": "answer",
+            "target": "8b239d40-cf73-4135-a888-9f208d6c5e3e",
+            "targetHandle": "output",
+            "id": "reactflow__edge-5158a87f-39c4-4c08-91f7-335ffcad76a3answer-8b239d40-cf73-4135-a888-9f208d6c5e3eoutput"
+          }
+        ],
+        "viewport": {
+          "x": 0,
+          "y": 0,
+          "zoom": 1
+        }
+      }
     }
   ],
   "nodelets": [

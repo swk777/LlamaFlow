@@ -1,17 +1,17 @@
 import { Box, Button, Group, Modal, Select, Table, TextInput, Textarea } from '@mantine/core';
 import pick from 'ramda/src/pick';
 
-import { EmbeddingModelsSelectOptions, OllamaEmbeddingModels } from '@/constants/models';
+import { EmbeddingModelsSelectOptions, OpenAIEmbeddingModels } from '@/constants/models';
 import { AppContext } from '@/context/AppContext';
 import { IKnowledgeBase } from '@/type/knowledgeBase';
 import { useForm } from '@mantine/form';
-import { useContext, useState } from 'react';
+import { useContext, useMemo, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 type Props = { opened: boolean; close: () => void; files: File[] };
 
 export default function AddKnowledgeModal({ opened, close, files }: Props) {
-	const { refreshKnowledgeBase } = useContext(AppContext);
+	const { refreshKnowledgeBase, integrations } = useContext(AppContext);
 	const navigate = useNavigate();
 	const [loading, setLoading] = useState(false);
 	const form = useForm({
@@ -19,17 +19,21 @@ export default function AddKnowledgeModal({ opened, close, files }: Props) {
 		initialValues: {
 			name: '',
 			description: '',
-			model: OllamaEmbeddingModels.llama2,
+			model: OpenAIEmbeddingModels['text-embedding-3-small'],
 		},
 	});
-	const rows = files.map((file) => (
-		<Table.Tr key={file.name}>
-			<Table.Td w="80%" align="left">
-				{file.name}
-			</Table.Td>
-			<Table.Td align="left">{file.lastModified}</Table.Td>
-		</Table.Tr>
-	));
+	const rows = useMemo(
+		() =>
+			files.map((file) => (
+				<Table.Tr key={file.name}>
+					<Table.Td w="80%" align="left">
+						{file.name}
+					</Table.Td>
+					<Table.Td align="left">{file.lastModified}</Table.Td>
+				</Table.Tr>
+			)),
+		[files],
+	);
 	return (
 		<Modal opened={opened} onClose={close} title="New Knowledge Base">
 			<Box maw={520} mx="auto" p={10}>
@@ -40,7 +44,7 @@ export default function AddKnowledgeModal({ opened, close, files }: Props) {
 						label="Embedding Model"
 						placeholder="Pick value"
 						data={EmbeddingModelsSelectOptions}
-						defaultValue={OllamaEmbeddingModels.llama2}
+						defaultValue={OpenAIEmbeddingModels['text-embedding-3-small']}
 						{...form.getInputProps('model')}
 					/>
 					<div className="mt-6 max-h-60 overflow-y-auto">
@@ -72,6 +76,9 @@ export default function AddKnowledgeModal({ opened, close, files }: Props) {
 										refreshKnowledgeBase();
 										setLoading(false);
 										navigate(`/knowledge-base/${knowledgeBase.id}`);
+									})
+									.catch(() => {
+										setLoading(false);
 									});
 							}}
 						>

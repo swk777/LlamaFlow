@@ -1,18 +1,19 @@
 import { AppContext } from '@/context/AppContext';
+import { Nodelet as INodelet } from '@/type/nodelet';
 import { checkIntegration } from '@/utils/utils';
 import { Avatar, Button, LoadingOverlay, Text } from '@mantine/core';
 import { useHover } from '@mantine/hooks';
 import { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-type Props = {};
+type Props = { nodelet: INodelet };
 
 export default function Nodelet({ nodelet }: Props) {
 	const { hovered, ref } = useHover();
 	const { integrations } = useContext(AppContext);
 	const navigate = useNavigate();
 	const needIntegration = nodelet?.integration && checkIntegration(nodelet, integrations);
-	const onDragStart = (event, nodeId) => {
+	const onDragStart = (event: React.DragEvent<HTMLDivElement>, nodeId: string) => {
 		event.dataTransfer.setData('application/reactflow', nodeId);
 		event.dataTransfer.effectAllowed = 'move';
 	};

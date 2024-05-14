@@ -19,7 +19,6 @@ export function LinksGroup({ icon: Icon, label, initiallyOpened, links }: LinksG
 		<Text<'a'>
 			component="a"
 			className="cursor-pointer text-left max-w-44 block border-l mx-8 font-medium py-2 pl-6 truncate text-gray-500 text-sm hover:text-gray-700"
-			// href={link.link}
 			key={link.label}
 			onClick={() => navigate(link.link)}
 		>

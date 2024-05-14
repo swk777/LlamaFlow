@@ -46,14 +46,6 @@ export function KnowledgeCard({ knowledgeBase }: Props) {
 						words
 					</Text>
 				</Flex>
-				{/* <div>
-            <Text size="xs" color="dimmed">
-              Words count
-            </Text>
-            <Text fw={500} size="sm">
-              {knowledgeBase.fileList.length * 1000}
-            </Text>
-          </div> */}
 			</Card.Section>
 		</Card>
 	);

@@ -26,7 +26,7 @@ export default function KnowledgeBaseBoard({}: Props) {
 						setFiles(files);
 						open();
 					}}
-					accept=".pdf"
+					accept=".pdf,.md,.txt,.json,.html,.csv,.doc,.docx,.ppt,.pptx"
 					multiple
 				>
 					{(props) => (

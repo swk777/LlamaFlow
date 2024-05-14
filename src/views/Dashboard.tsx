@@ -1,7 +1,6 @@
-// import Image from "next/image";
-// import Link from "next/link";
 import { Divider } from '@mantine/core';
 import { Outlet } from 'react-router-dom';
+
 import NavBar from './NavBar';
 
 export function Dashboard() {

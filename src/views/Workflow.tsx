@@ -28,11 +28,11 @@ export default function Workflow({}: Props) {
 			</div>
 			<Space h="sm" />
 			<Space h="sm" />
-			<Card shadow="sm" radius="md" className="px-7 py-4" withBorder>
+			<Card shadow="sm" radius="md" className="px-7 py-4 mb-6" withBorder>
 				<WorkflowList />
-				<div className="text-xs text-muted-foreground">
+				{/* <div className="text-xs text-muted-foreground">
 					Showing <strong>1-10</strong> of <strong>32</strong> products
-				</div>
+				</div> */}
 			</Card>
 		</main>
 	);

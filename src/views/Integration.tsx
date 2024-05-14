@@ -4,13 +4,14 @@ import { IconNotes } from '@tabler/icons-react';
 // import { LinksGroup } from '../NavbarLinksGroup/NavbarLinksGroup';
 // import { Logo } from './Logo';
 import { AppContext } from '@/context/AppContext';
+import { IIntegration } from '@/type/integration';
 import { useContext } from 'react';
 import { useLocation, useParams } from 'react-router-dom';
 import classes from './Integration.module.css';
 import IntegrationConfig from './IntegrationConfig';
 import { LinksGroup } from './components/LinksGroup';
 
-const getIntegrationsLinksData = (integrations) => [
+const getIntegrationsLinksData = (integrations: IIntegration[]) => [
 	{
 		label: 'AI Models',
 		icon: IconNotes,
@@ -27,7 +28,6 @@ export function Integration() {
 	const { integrationId } = useParams();
 	const { integrations } = useContext(AppContext);
 	const links = getIntegrationsLinksData(integrations).map((item) => <LinksGroup {...item} key={item.label} />);
-	console.log(location);
 	return (
 		<Flex direction={'row'}>
 			<nav className="w-44 border-r px-3">
@@ -35,7 +35,7 @@ export function Integration() {
 					<div className={classes.linksInner}>{links}</div>
 				</ScrollArea>
 
-				<div className={classes.footer}>{/* <UserButton /> */}</div>
+				<div className={classes.footer}></div>
 			</nav>
 			<Flex className="flex-1">
 				<IntegrationConfig id={integrationId} />

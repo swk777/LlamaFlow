@@ -1,16 +1,25 @@
 import { useContext } from 'react';
 
 import { AppContext } from '@/context/AppContext';
-import { Badge, Flex, Table } from '@mantine/core';
-import { IconPencil, IconPlayerPlay } from '@tabler/icons-react';
+import { Badge, Container, Flex, Stack, Table, Text } from '@mantine/core';
+import { IconArticle, IconPencil, IconPlayerPlay } from '@tabler/icons-react';
 import { useNavigate } from 'react-router-dom';
 
 type Props = {};
 
 export default function WorkflowList({}: Props) {
-	const { workflows } = useContext(AppContext);
+	const { workflows = [] } = useContext(AppContext);
 	const navigate = useNavigate();
-	return (
+	return workflows.length === 0 ? (
+		<Container>
+			<Stack justify="center" align="center">
+				<IconArticle className="text-gray-600 w-8 h-8" />
+				<Text fw={500} className="text-gray-400">
+					No Workflows
+				</Text>
+			</Stack>
+		</Container>
+	) : (
 		<Table>
 			<Table.Thead>
 				<Table.Tr>
@@ -27,7 +36,7 @@ export default function WorkflowList({}: Props) {
 			</Table.Thead>
 			<Table.Tbody>
 				{(workflows || []).map(({ id, name, category, lastModified }, idx) => (
-					<Table.Tr key={id}>
+					<Table.Tr key={id + name}>
 						<Table.Td className="font-medium hidden sm:table-cell w-1/15" height={50}>
 							{idx + 1}.
 						</Table.Td>

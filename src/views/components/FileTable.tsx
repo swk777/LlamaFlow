@@ -1,4 +1,5 @@
 import { Table } from '@mantine/core';
+import { format } from 'date-fns';
 
 type Props = { files: File[] };
 
@@ -9,8 +10,8 @@ export default function FileTable({ files }: Props) {
 				{file.name}
 			</Table.Td>
 			<Table.Td align="left">{file.path}</Table.Td>
-			<Table.Td align="left">{file.lastModified}</Table.Td>
-			<Table.Td align="left">{`element.mass`}</Table.Td>
+			<Table.Td align="left">{format(new Date(file.lastModified), 'yyyy-MM-dd hh:mm a')}</Table.Td>
+			{/* <Table.Td align="left">{`element.mass`}</Table.Td> */}
 		</Table.Tr>
 	));
 	return (
@@ -20,7 +21,7 @@ export default function FileTable({ files }: Props) {
 					<Table.Th>File Name</Table.Th>
 					<Table.Th>File Path</Table.Th>
 					<Table.Th>Last Modified</Table.Th>
-					<Table.Th>Actions</Table.Th>
+					{/* <Table.Th>Actions</Table.Th> */}
 				</Table.Tr>
 			</Table.Thead>
 			<Table.Tbody>{rows}</Table.Tbody>

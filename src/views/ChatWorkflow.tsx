@@ -12,14 +12,16 @@ type Props = {
 };
 
 export default function ChatWorkflow({ workflow, conversation }: Props) {
-	const { refreshConversations } = useContext(AppContext);
+	const { refreshConversations, conversations } = useContext(AppContext);
+	const id = useMemo(() => conversation?.sessionId ?? `temp-${workflow?.id}-${uuidv4()}`, []);
+	const workflowConversation = conversation ?? conversations.find((c) => c.sessionId === id);
+
 	const messages = useMemo(() => {
-		return conversation?.globalContext?.messages ?? [];
-	}, [conversation]);
-	console.log(workflow);
-	const id = conversation?.sessionId ?? `temp-${workflow?.id}-${uuidv4()}`;
+		return workflowConversation?.globalContext?.messages ?? [];
+	}, [conversation, conversations]);
+	console.log(workflowConversation);
 	useEffect(() => {
-		window.ipcRenderer.getConversationById(id).then((res) => {
+		window.ipcRenderer.getConversationById(id).then(() => {
 			refreshConversations();
 		});
 	}, []);
@@ -28,10 +30,9 @@ export default function ChatWorkflow({ workflow, conversation }: Props) {
 			<Chat
 				messages={messages}
 				onSendMessage={(query) => {
-					window.ipcRenderer.chat(id, workflow?.id, query, workflow).then((res) => {
-						console.log(res);
+					console.log(query);
+					window.ipcRenderer.chat(id, workflow?.id, query, workflow).then(() => {
 						refreshConversations();
-						// setMessages(res);
 					});
 				}}
 			/>

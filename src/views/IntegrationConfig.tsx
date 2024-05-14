@@ -12,16 +12,14 @@ export default function IntegrationConfig({ id }: Props) {
 	const [loading, setLoading] = useState(false);
 	const integration = integrations.find((i) => i.id === id) || integrations[0];
 	const [config, setConfig] = useState(integration?.config || {});
-	console.log(integration);
 	return (
 		<Flex className="flex-1 py-4 px-10" direction={'column'}>
 			<Configuration
 				key={id}
 				definitions={integration?.configDefinitions || []}
-				config={config}
+				config={integration?.config || {}}
 				style={{ padding: '20px 0' }}
 				onChange={(newConfig) => {
-					console.log(newConfig);
 					setConfig(newConfig);
 				}}
 			/>
@@ -32,19 +30,20 @@ export default function IntegrationConfig({ id }: Props) {
 				loading={loading}
 				onClick={() => {
 					setLoading(true);
-					updateIntegration(integration?.id, {
-						...integration,
-						config,
-					}).then(() => {
-						setLoading(false);
-						notifications.show({
-							title: 'Save Successfully',
-							message: '',
-							icon: <IconCheck />,
-							color: 'teal',
-							autoClose: 1000,
+					updateIntegration &&
+						updateIntegration(integration?.id, {
+							...integration,
+							config,
+						}).then(() => {
+							setLoading(false);
+							notifications.show({
+								title: 'Save Successfully',
+								message: '',
+								icon: <IconCheck />,
+								color: 'teal',
+								autoClose: 1000,
+							});
 						});
-					});
 				}}
 			>
 				Save

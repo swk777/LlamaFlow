@@ -1,6 +1,7 @@
 import { IConversation } from '@/type/conversation';
 import { IIntegration } from '@/type/integration';
 import { IKnowledgeBase } from '@/type/knowledgeBase';
+import { ISettings } from '@/type/misc';
 import { ReactElement, createContext, useCallback, useEffect, useState } from 'react';
 import { DefaultData } from '../constants/initialData';
 import { Nodelet } from '../type/nodelet';
@@ -11,6 +12,7 @@ interface IProviderProps {
 }
 
 interface IAppContext {
+	settings: any;
 	integrations: IIntegration[];
 	workflows: IWorkflow[];
 	nodelets: Nodelet[];
@@ -20,13 +22,15 @@ interface IAppContext {
 	setWorkflows?: (newData: IWorkflow[]) => void;
 	setNodelets?: (newData: Nodelet[]) => void;
 	setKnowledgeBases?: (newData: IKnowledgeBase[]) => void;
-	updateWorkflow?: (workflowId: string, newData: IWorkflow) => void;
-	updateIntegration?: (integrationId: string, newData: IIntegration) => void;
+	updateWorkflow?: (workflowId: string, newData: IWorkflow) => Promise<void>;
+	updateIntegration?: (integrationId: string, newData: IIntegration) => Promise<void>;
 	refreshKnowledgeBase: () => void;
 	refreshConversations: () => void;
 	refreshWorkflow: () => void;
+	refreshSettings: () => void;
 }
 export const AppContext = createContext<IAppContext>({
+	settings: DefaultData.settings,
 	integrations: DefaultData.integrations,
 	workflows: DefaultData.workflows,
 	nodelets: DefaultData.nodelets,
@@ -35,6 +39,7 @@ export const AppContext = createContext<IAppContext>({
 	refreshKnowledgeBase: () => {},
 	refreshConversations: () => {},
 	refreshWorkflow: () => {},
+	refreshSettings: () => {},
 });
 
 export function AppContextProvider(props: IProviderProps): ReactElement {
@@ -43,7 +48,7 @@ export function AppContextProvider(props: IProviderProps): ReactElement {
 	const [integrations, setIntegrations] = useState(DefaultData.integrations as any[]);
 	const [nodelets, setNodelets] = useState(DefaultData.nodelets as Nodelet[]);
 	const [conversations, setConversations] = useState(DefaultData.conversations as IConversation[]);
-
+	const [settings, setSettings] = useState(DefaultData.settings as ISettings);
 	const { children } = props;
 	const updateWorkflow = useCallback(
 		async (workflowId: string, newData: IWorkflow) => {
@@ -59,7 +64,7 @@ export function AppContextProvider(props: IProviderProps): ReactElement {
 		[workflows],
 	);
 	const updateIntegration = useCallback(
-		async (integrationId: string, newData) => {
+		async (integrationId: string, newData: IIntegration) => {
 			const IntegrationIdx = integrations.findIndex((wf) => wf.id === integrationId);
 			const newIntegrations = await window.ipcRenderer.saveIntegration(IntegrationIdx, newData);
 			setIntegrations(newIntegrations);
@@ -78,12 +83,16 @@ export function AppContextProvider(props: IProviderProps): ReactElement {
 	const refreshConversations = async () => {
 		setConversations(await window.ipcRenderer.getConversations());
 	};
+	const refreshSettings = async () => {
+		setSettings(await window.ipcRenderer.getSettings());
+	};
 	useEffect(() => {
 		window.ipcRenderer.getNodelets().then(setNodelets);
 		refreshWorkflow();
 		refreshKnowledgeBase();
 		refreshIntegrations();
 		refreshConversations();
+		refreshSettings();
 	}, []);
 	return (
 		<AppContext.Provider
@@ -93,6 +102,7 @@ export function AppContextProvider(props: IProviderProps): ReactElement {
 				nodelets,
 				knowledgeBases,
 				conversations,
+				settings,
 				setConversations,
 				setWorkflows,
 				setNodelets,
@@ -101,6 +111,7 @@ export function AppContextProvider(props: IProviderProps): ReactElement {
 				refreshConversations,
 				updateWorkflow,
 				updateIntegration,
+				refreshSettings,
 				refreshKnowledgeBase,
 			}}
 		>

@@ -1,9 +1,20 @@
 import Configuration from '@/node/config/Configuration';
 import { IconBrandHipchat, IconDeviceFloppy } from '@tabler/icons-react';
-import { useCallback, useContext, useEffect, useMemo, useRef, useState } from 'react';
+import { MouseEvent, useCallback, useContext, useEffect, useMemo, useRef, useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 
-import ReactFlow, { Background, Controls, MiniMap, addEdge, useEdgesState, useNodesState } from 'reactflow';
+import ReactFlow, {
+	Background,
+	Connection,
+	Controls,
+	Edge,
+	MiniMap,
+	Node,
+	ReactFlowInstance,
+	addEdge,
+	useEdgesState,
+	useNodesState,
+} from 'reactflow';
 
 import { getInitialWorkflow } from '@/constants/workflow';
 import { AppContext } from '@/context/AppContext';
@@ -21,20 +32,19 @@ function FlowEdit() {
 	const { workflowId = '' } = useParams();
 	const [configOpened, setConfigOpened] = useState(false);
 	const [chatOpened, setChatOpened] = useState(false);
-	const { nodelets, workflows, updateWorkflow, integrations } = useContext(AppContext);
-	const [reactFlowInstance, setReactFlowInstance] = useState(null);
+	const { nodelets, workflows, updateWorkflow, integrations, refreshWorkflow } = useContext(AppContext);
+	const [reactFlowInstance, setReactFlowInstance] = useState<ReactFlowInstance>();
 	const reactFlowWrapper = useRef(null);
 	const workflow = workflows.find((w) => w.id === workflowId) || getInitialWorkflow(workflowId);
 	const [nodes, setNodes, onNodesChange] = useNodesState(workflow?.data?.nodes || []);
 	const [edges, setEdges, onEdgesChange] = useEdgesState(workflow?.data?.edges || []);
-	const [selectedNode, setSelectedNode] = useState();
+	const [selectedNode, setSelectedNode] = useState<Node>();
 	const integration = integrations.find((intgn) => intgn.id === selectedNode?.data.nodeletId);
-
-	const onDrop = useCallback(
+	console.log(workflows);
+	const onDrop: React.DragEventHandler<HTMLDivElement> = useCallback(
 		(event) => {
 			event.preventDefault();
 			const nodeletId = event.dataTransfer.getData('application/reactflow');
-			// // check if the dropped element is valid
 			if (typeof nodeletId === 'undefined' || !nodeletId) {
 				return;
 			}
@@ -58,19 +68,18 @@ function FlowEdit() {
 					config: buildDefaultConfig(nodelet),
 				},
 			};
-			console.log(newNode);
-			setNodes((nds) => nds.concat(newNode));
+			setNodes((nds) => nds.concat(newNode as Node));
 		},
 		[reactFlowInstance],
 	);
-	const onDragOver = useCallback((event) => {
+	const onDragOver: React.DragEventHandler<HTMLDivElement> = useCallback((event) => {
 		event.preventDefault();
 		event.dataTransfer.dropEffect = 'move';
 	}, []);
-	const onConnect = useCallback((params) => setEdges((eds) => addEdge(params, eds)), [setEdges]);
+	const onConnect = useCallback((params: Edge | Connection) => setEdges((eds) => addEdge(params, eds)), [setEdges]);
 	const selectedNodelet = useMemo(() => nodelets.find((nodelet) => nodelet.id === selectedNode?.data.nodeletId), [selectedNode]);
 
-	const onSelectionChange = useCallback((event, node) => {
+	const onNodeClick = useCallback((_: MouseEvent, node: Node) => {
 		setSelectedNode(node);
 	}, []);
 	useEffect(() => {
@@ -93,8 +102,9 @@ function FlowEdit() {
 								updateWorkflow(workflowId, {
 									...workflow,
 									data: reactFlowInstance && reactFlowInstance.toObject(),
-								}).then(() => {
-									console.log('finish');
+								}).then(async () => {
+									await refreshWorkflow();
+									console.log('refesh');
 								});
 						}}
 					>
@@ -136,7 +146,7 @@ function FlowEdit() {
 						onConnect={onConnect}
 						className="absolute bottom-0 left-0 top-0 right-0"
 						nodeTypes={nodeTypes}
-						onNodeClick={onSelectionChange}
+						onNodeClick={onNodeClick}
 						onPaneClick={() => {
 							setConfigOpened(false);
 						}}
@@ -161,10 +171,8 @@ function FlowEdit() {
 					styles={{
 						inner: { right: 0, margin: '0.8rem' },
 					}}
-					// scrollAreaComponent={ScrollArea.Autosize}
 				>
 					<ChatWorkflow
-						workflowId={workflowId}
 						workflow={{
 							...workflow,
 							data: reactFlowInstance && reactFlowInstance.toObject(),
@@ -183,7 +191,6 @@ function FlowEdit() {
 					styles={{
 						inner: { right: 0, margin: '0.8rem' },
 					}}
-					// scrollAreaComponent={ScrollArea.Autosize}
 				>
 					<Configuration
 						key={selectedNodelet?.id}
@@ -197,14 +204,13 @@ function FlowEdit() {
 								...nodes.slice(0, selectedNodeIndex),
 								{
 									...selectedNode,
-									data: { ...selectedNode.data, config },
+									data: { ...selectedNode?.data, config },
 								},
 								...nodes.slice(selectedNodeIndex + 1),
-							]);
+							] as Node[]);
 						}}
 					/>
 				</Drawer>
-				{/* </div> */}
 			</div>
 		</Flex>
 	);
