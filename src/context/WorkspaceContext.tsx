@@ -16,11 +16,6 @@ export const WorkspaceProvider = ({ children }) => {
 
 		// 设置监听器
 		window.ipcRenderer.on('workspace-set', fetchWorkspace);
-
-		// // 清理监听器
-		// return () => {
-		// 	window.ipcRenderer.removeListener('workspace-set', fetchWorkspace);
-		// };
 	}, []);
 	return <WorkspaceContext.Provider value={{ workspace, setWorkspace }}>{children}</WorkspaceContext.Provider>;
 };

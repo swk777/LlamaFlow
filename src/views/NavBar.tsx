@@ -1,7 +1,6 @@
 import { Flex, Stack, Tooltip, UnstyledButton, rem } from '@mantine/core';
-import { IconCalendarStats, IconDeviceDesktopAnalytics, IconGauge, IconHome2 } from '@tabler/icons-react';
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { IconAdjustments, IconDatabase, IconDeviceDesktopAnalytics, IconHome2, IconMessage } from '@tabler/icons-react';
+import { useLocation, useNavigate } from 'react-router-dom';
 import classes from './NavBar.module.css';
 
 interface NavbarLinkProps {
@@ -22,30 +21,22 @@ function NavbarLink({ icon: Icon, label, active, onClick }: NavbarLinkProps) {
 }
 
 const Links = [
-	{ icon: IconHome2, label: 'Home', link: '/' },
-	{ icon: IconGauge, label: 'Dashboard', link: '/integration' },
+	{ icon: IconDeviceDesktopAnalytics, label: 'Workflow', link: '/' },
+	{ icon: IconMessage, label: 'Conversation', link: '/chat/new' },
 	{
-		icon: IconDeviceDesktopAnalytics,
-		label: 'Analytics',
+		icon: IconDatabase,
+		label: 'Knowledge Base',
 		link: '/knowledgeBaseBoard',
 	},
-	{ icon: IconCalendarStats, label: 'Releases', link: '/chat/new' },
+	{ icon: IconAdjustments, label: 'Integration', link: '/integration' },
 ];
 
 export default function NavBar() {
-	const [active, setActive] = useState(2);
 	const navigate = useNavigate();
+	const location = useLocation();
 
-	const links = Links.map((link, index) => (
-		<NavbarLink
-			{...link}
-			key={link.label}
-			active={index === active}
-			onClick={() => {
-				setActive(index);
-				navigate(link.link);
-			}}
-		/>
+	const links = Links.map((link) => (
+		<NavbarLink {...link} key={link.label} active={location.pathname === link.link} onClick={() => navigate(link.link)} />
 	));
 
 	return (

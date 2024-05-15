@@ -15,13 +15,6 @@ import Workflow from './Workflow';
 type Props = {};
 
 export default function MainRouter({}: Props) {
-	// const [settings, setSettings] = useState();
-	// useEffect(() => {
-	// 	window.ipcRenderer.invoke('get-global').then((res) => {
-	// 		console.log(res);
-	// 		setSettings(res);
-	// 	});
-	// }, []);
 	const { workspace } = useWorkspace();
 	return !workspace ? (
 		<ChooseWorkspace />

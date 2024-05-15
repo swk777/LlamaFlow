@@ -19,7 +19,6 @@ export default function ChatWorkflow({ workflow, conversation }: Props) {
 	const messages = useMemo(() => {
 		return workflowConversation?.globalContext?.messages ?? [];
 	}, [conversation, conversations]);
-	console.log(workflowConversation);
 	useEffect(() => {
 		window.ipcRenderer.getConversationById(id).then(() => {
 			refreshConversations();
@@ -30,8 +29,7 @@ export default function ChatWorkflow({ workflow, conversation }: Props) {
 			<Chat
 				messages={messages}
 				onSendMessage={(query) => {
-					console.log(query);
-					window.ipcRenderer.chat(id, workflow?.id, query, workflow).then(() => {
+					return window.ipcRenderer.chat(id, workflow?.id, query, workflow).then(() => {
 						refreshConversations();
 					});
 				}}
