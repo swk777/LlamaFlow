@@ -42,7 +42,7 @@
 		"electron-store": "8.2.0",
 		"electron-updater": "^6.1.8",
 		"framer-motion": "^11.1.7",
-		"hnswlib-node": "^1.4.2",
+		"hnswlib-node": "^3.0.0",
 		"immer": "9.0.2",
 		"jspdf": "^2.5.1",
 		"langchain": "^0.1.33",
