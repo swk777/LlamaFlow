@@ -102,7 +102,7 @@ jobs:
           prerelease: false
 
       - name: Compress macOS Release Asset
-        run: zip -r macos_release.zip ./maco
+        run: zip -r macos_release.zip ./macos
       - name: Compress Ubuntu Release Asset
         run: zip -r ubuntu_release.zip ./ubuntu
 
