@@ -77,18 +77,6 @@ jobs:
           name: release_on_macos-latest
           path: ./macos
 
-      - name: Download Artifact from Ubuntu
-        uses: actions/download-artifact@v3
-        with:
-          name: release_on_ubuntu-latest
-          path: ./ubuntu
-
-      - name: Download Artifact from Windows
-        uses: actions/download-artifact@v3
-        with:
-          name: release_on_windows-latest
-          path: ./windows
-
       - name: Create Release
         id: create_release
         uses: actions/create-release@v1
@@ -103,8 +91,10 @@ jobs:
 
       - name: Upload macOS Release Asset
         uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
           asset_path: ./macos/0.0.7/VisionFlow_0.0.7.dmg
           asset_name: VisionFlow_0.0.7.dmg
-          asset_content_type: application/x-apple-diskimage
+          asset_content_type: application/octet-stream
