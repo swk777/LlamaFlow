@@ -114,7 +114,7 @@ jobs:
         uses: actions/upload-release-asset@v1
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./macos/macos_release.zip
+          asset_path: ./macos
           asset_name: macos_release.zip
           asset_content_type: application/zip
 
@@ -122,7 +122,7 @@ jobs:
         uses: actions/upload-release-asset@v1
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./ubuntu/ubuntu_release.zip
+          asset_path: ./ubuntu
           asset_name: ubuntu_release.zip
           asset_content_type: application/zip
 
@@ -130,6 +130,6 @@ jobs:
         uses: actions/upload-release-asset@v1
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./windows/windows_release.zip
+          asset_path: ./windows
           asset_name: windows_release.zip
           asset_content_type: application/zip
