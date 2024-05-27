@@ -33,9 +33,6 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: 18
-      - name: Install Snapcraft (Linux Only)
-        if: runner.os == 'Linux'
-        run: sudo snap install snapcraft --classic
 
       - name: Install Dependencies
         run: npm install
