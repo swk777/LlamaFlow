@@ -4,6 +4,12 @@ on:
   push:
     tags:
       - 'v*.*.*'
+permissions:
+  contents: write
+  issues: write
+  deployments: write
+  pull-requests: write
+  statuses: write
 
 jobs:
   build:
