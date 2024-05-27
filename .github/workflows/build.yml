@@ -25,9 +25,17 @@ jobs:
       - name: Install Dependencies
         run: npm install
 
-      - name: Install Snapcraft (Linux Only)
+      - name: Install Snapcraft and gnome-keyring (Linux Only)
         if: runner.os == 'Linux'
-        run: sudo snap install snapcraft --classic
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y snapcraft gnome-keyring
+          sudo mkdir -p /etc/docker
+          echo '{ "experimental": true }' | sudo tee /etc/docker/daemon.json
+          sudo service docker restart
+          echo 'export SNAPCRAFT_BUILD_ENVIRONMENT=host' >> $GITHUB_ENV
+          echo 'export SNAPCRAFT_CONTAINER_BUILDS=1' >> $GITHUB_ENV
+          echo 'export SNAPCRAFT_SETUP_KEYRING=1' >> $GITHUB_ENV
 
       - name: Build Release Files
         run: npm run build
