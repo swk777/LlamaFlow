@@ -2,8 +2,11 @@
 	"name": "VisionFlow",
 	"version": "0.0.7",
 	"main": "dist-electron/main/index.js",
-	"description": "Electron Vite React boilerplate.",
-	"author": "swk777",
+	"description": "LlamaFlow is a local-first, extendable LLM (Large Language Model) orchestration app designed to streamline the running of LLM workflows locally.",
+	"author": {
+		"name": "swk777",
+		"email": "swk777@gmail.com"
+	},
 	"license": "MIT",
 	"private": true,
 	"debug": {
