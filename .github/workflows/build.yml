@@ -18,7 +18,16 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Clear electron-builder cache
+        if: runner.os == 'Linux'
         run: rm -rf /home/runner/.cache/electron-builder
+
+      - name: Clear electron-builder cache
+        if: runner.os == 'Windows'
+        run: Remove-Item -Recurse -Force $env:USERPROFILE\.cache\electron-builder
+
+      - name: Clear electron-builder cache
+        if: runner.os == 'macOS'
+        run: rm -rf /Users/runner/.cache/electron-builder
 
       - name: Setup Node.js
         uses: actions/setup-node@v3
