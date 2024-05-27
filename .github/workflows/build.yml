@@ -2,19 +2,8 @@ name: Build
 
 on:
   push:
-    branches: [main]
-    paths-ignore:
-      - '**.md'
-      - '**.spec.js'
-      - '.idea'
-      - '.vscode'
-      - '.dockerignore'
-      - 'Dockerfile'
-      - '.gitignore'
-      - '.github/**'
-      - '!.github/workflows/build.yml'
-  release:
-    types: [created]
+    tags:
+      - 'v*.*.*'
 
 jobs:
   build:
