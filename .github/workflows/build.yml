@@ -43,6 +43,18 @@ jobs:
       - name: Install Dependencies
         run: npm install
 
+      - name: Install zip on Linux
+        if: runner.os == 'Linux'
+        run: sudo apt-get install -y zip
+
+      - name: Install zip on macOS
+        if: runner.os == 'macOS'
+        run: brew install zip
+
+      - name: Install zip on Windows
+        if: runner.os == 'Windows'
+        run: choco install zip -y
+
       - name: Build Release Files
         run: npm run build
         env:
@@ -89,11 +101,19 @@ jobs:
           draft: false
           prerelease: false
 
+      - name: Compress macOS Release Asset
+        run: zip -r macos_release.zip ./maco
+      - name: Compress Ubuntu Release Asset
+        run: zip -r ubuntu_release.zip ./ubuntu
+
+      - name: Compress Windows Release Asset
+        run: zip -r windows_release.zip ./windows
+
       - name: Upload macOS Release Asset
         uses: actions/upload-release-asset@v1
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./macos
+          asset_path: ./macos_release.zip
           asset_name: macos_release.zip
           asset_content_type: application/zip
 
@@ -101,7 +121,7 @@ jobs:
         uses: actions/upload-release-asset@v1
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./ubuntu
+          asset_path: ./ubuntu_release.zip
           asset_name: ubuntu_release.zip
           asset_content_type: application/zip
 
@@ -109,6 +129,6 @@ jobs:
         uses: actions/upload-release-asset@v1
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./windows
+          asset_path: ./windows_release.zip
           asset_name: windows_release.zip
           asset_content_type: application/zip
