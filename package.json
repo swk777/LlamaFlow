@@ -1,6 +1,6 @@
 {
 	"name": "VisionFlow",
-	"version": "0.0.7",
+	"version": "0.0.8",
 	"main": "dist-electron/main/index.js",
 	"description": "LlamaFlow is a local-first, extendable LLM (Large Language Model) orchestration app designed to streamline the running of LLM workflows locally.",
 	"author": {

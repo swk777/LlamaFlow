@@ -20,6 +20,9 @@ jobs:
         os: [macos-latest, ubuntu-latest, windows-latest]
 
     steps:
+      - name: Extract version from package.json
+        run: echo "VERSION=$(node -p "require('./package.json').version")" >> $GITHUB_ENV
+
       - name: Checkout Code
         uses: actions/checkout@v3
 
@@ -42,18 +45,6 @@ jobs:
 
       - name: Install Dependencies
         run: npm install
-
-      - name: Install zip on Linux
-        if: runner.os == 'Linux'
-        run: sudo apt-get install -y zip
-
-      - name: Install zip on macOS
-        if: runner.os == 'macOS'
-        run: brew install zip
-
-      - name: Install zip on Windows
-        if: runner.os == 'Windows'
-        run: choco install zip -y
 
       - name: Build Release Files
         run: npm run build
@@ -81,7 +72,7 @@ jobs:
         id: create_release
         uses: actions/create-release@v1
         env:
-          GITHUB_TOKEN: ${{ secrets.PAT_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           tag_name: ${{ github.ref }}
           release_name: Release ${{ github.ref }}
@@ -95,6 +86,6 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./macos/0.0.7/VisionFlow_0.0.7.dmg
-          asset_name: VisionFlow_0.0.7.dmg
+          asset_path: ./macos/${{ env.VERSION }}/VisionFlow_${{ env.VERSION }}.dmg
+          asset_name: VisionFlow_${{ env.VERSION }}.dmg
           asset_content_type: application/octet-stream
