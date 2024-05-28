@@ -95,6 +95,6 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./macos/0.0.8/VisionFlow_0.0.8.dmg
-          asset_name: VisionFlow_0.0.8.dmg
+          asset_path: ./macos/0.0.8/VisionFlow_0.0.8.zip
+          asset_name: VisionFlow_0.0.8.zip
           asset_content_type: application/octet-stream
