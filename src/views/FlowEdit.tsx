@@ -37,7 +37,6 @@ const nodeTypes = { internalNodelet: InternalNode };
 function FlowEdit() {
 	const { workflowId = '' } = useParams();
 	let [searchParams] = useSearchParams();
-	const category = searchParams.get('category') as WorkflowCategory;
 	const [configOpened, setConfigOpened] = useState(false);
 	const [chatOpened, setChatOpened] = useState(false);
 	const [inputsModalOpened, { open, close }] = useDisclosure(false);
@@ -46,6 +45,8 @@ function FlowEdit() {
 	const [reactFlowInstance, setReactFlowInstance] = useState<ReactFlowInstance>();
 	const reactFlowWrapper = useRef(null);
 	const workflow = workflows.find((w) => w.id === workflowId) || getInitialWorkflow(workflowId);
+	const category = (searchParams.get('category') ?? workflow.category) as WorkflowCategory;
+
 	const [nodes, setNodes, onNodesChange] = useNodesState(workflow?.data?.nodes || []);
 	const [edges, setEdges, onEdgesChange] = useEdgesState(workflow?.data?.edges || []);
 	const [selectedNode, setSelectedNode] = useState<Node>();
@@ -189,7 +190,7 @@ function FlowEdit() {
 							const nodelet = nodelets.find((nodelet) => nodelet.id === node.data.nodeletId);
 							return {
 								...node,
-								type: nodelet?.internal ? 'internalNodelet' : '',
+								type: 'internalNodelet',
 							};
 						})}
 						edges={edges}

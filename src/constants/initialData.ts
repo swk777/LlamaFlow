@@ -10,4 +10,5 @@ export const DefaultData = {
 	nodelets: Nodelets,
 	settings: {},
 	executions: [],
+	extensions: [],
 };

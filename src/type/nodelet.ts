@@ -34,6 +34,7 @@ export interface Nodelet {
 	inputs: NodeletInput[];
 	outputs: NodeletOutput[];
 	configDefinitions: IConfigBaseExtend<any>;
+	codePath?: string;
 }
 
 export enum WorkflowCategory {

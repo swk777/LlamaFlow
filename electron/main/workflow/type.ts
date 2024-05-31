@@ -1,9 +1,11 @@
+import { Nodelet } from '@/type/nodelet';
+
 export interface InputsObject {
 	[key: string]: any;
 }
 
 export interface NodeletExecuteContextFull {
-	nodeId: string;
+	nodelet: Nodelet;
 	nodeContext: any;
 	globalContext: any;
 	nodeConfig: any;

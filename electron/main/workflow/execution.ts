@@ -10,7 +10,8 @@ import { Edge, Node, ReactFlowJsonObject } from 'reactflow';
 import { v4 as uuidv4 } from 'uuid';
 import { IConversation, IExecution } from '../../../src/type/conversation';
 import { IKnowledgeBase } from '../../../src/type/knowledgeBase';
-import { InternalNodeletExecutor } from './internal';
+import { InternalNodeletExecutor } from './node-executors';
+import { executeCustom } from './node-executors/custom';
 import { getNodeInputObj } from './utils';
 interface IContext {
 	knowledgeBases: IKnowledgeBase[];
@@ -81,7 +82,7 @@ export const chat = async (sessionId: string, workflowId: string, message: strin
 	} else {
 		conversation.conversationContext.currentMessage = message;
 		conversation.conversationContext.messages.push(message);
-		conversation.executions.push(getNewConversationExecution(message, workflowId));
+		conversation.executions.push(getNewConversationExecution(workflowId, message));
 	}
 	const { nodes = [] } = currentWorkflow?.data || {};
 	if (!nodes.length) return;
@@ -169,6 +170,7 @@ async function executeDAG(
 	execution: IExecution,
 	context: IContext,
 ) {
+	console.log('execute dag');
 	const nodeMap = createNodeMap(dagData.nodes);
 	linkNodes(nodeMap, dagData.edges);
 	const inDegrees = new Map(Array.from(nodeMap.values()).map((node) => [node.id, 0]));
@@ -206,7 +208,7 @@ async function executeNode(node: IDAGNode, nodelets: Nodelet[], integrations: II
 	})(node.id);
 	const setGlobalContext = (globalContext: any) => (execution.globalContext = globalContext);
 	const executorContext = {
-		nodeId: node.id,
+		nodelet,
 		nodeConfig: _cloneDeep(node.data?.config),
 		nodeInputs,
 		nodeContext: _cloneDeep(execution.nodeContext[node.id] || {}),
@@ -216,9 +218,13 @@ async function executeNode(node: IDAGNode, nodelets: Nodelet[], integrations: II
 		setGlobalContext,
 		context,
 	};
-	if (InternalNodeletExecutor[nodelet?.id as InternalNodelets]?.isAsync) {
-		await InternalNodeletExecutor[nodelet?.id as InternalNodelets]?.executor(executorContext);
+	if (nodelet.internal) {
+		if (InternalNodeletExecutor[nodelet?.id as InternalNodelets]?.isAsync) {
+			await InternalNodeletExecutor[nodelet?.id as InternalNodelets]?.executor(executorContext);
+		} else {
+			InternalNodeletExecutor[nodelet?.id as InternalNodelets]?.executor(executorContext);
+		}
 	} else {
-		InternalNodeletExecutor[nodelet?.id as InternalNodelets]?.executor(executorContext);
+		executeCustom(executorContext);
 	}
 }

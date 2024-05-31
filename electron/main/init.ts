@@ -1,12 +1,15 @@
 import { DefaultData } from '@/constants/initialData';
 import { JSONFilePreset } from 'lowdb/node';
+import { refreshExtension } from './extension';
 import { addDocuments, createKnowledgeBase } from './knowledgeBase';
 import { chat, newConversation, runAutomation } from './workflow/execution';
 
 export function initStorage(ipcMain, workspacePath) {
 	globalThis.workspacePath = workspacePath;
 	JSONFilePreset(`${workspacePath}/storage.json`, DefaultData)
-		.then((db) => {
+		.then(async (db) => {
+			refreshExtension(db);
+			await db.write();
 			ipcMain.on('add-workflow', async (event, post) => {
 				await db.read();
 				db.data.workflows.push(post);
@@ -33,6 +36,10 @@ export function initStorage(ipcMain, workspacePath) {
 			ipcMain.handle('get-integrations', async () => {
 				await db.read();
 				return db.data.integrations;
+			});
+			ipcMain.handle('get-extensions', async () => {
+				await db.read();
+				return db.data.extensions;
 			});
 			ipcMain.handle('get-conversations', async () => {
 				await db.read();
@@ -68,6 +75,11 @@ export function initStorage(ipcMain, workspacePath) {
 				await db.update(({ integrations }) => (integrations[integrationIdx] = integration));
 				await db.read();
 				return db.data.integrations;
+			});
+			ipcMain.handle('refresh-extensions', async (event, post) => {
+				refreshExtension(db);
+				await db.write();
+				// return db.data.integrations;
 			});
 			ipcMain.handle('chat', async (event, post) => {
 				await db.read();

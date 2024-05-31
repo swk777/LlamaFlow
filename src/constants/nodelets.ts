@@ -53,6 +53,7 @@ export const Nodelets: Nodelet[] = [
 				label: 'text',
 				type: 'INPUT',
 				placeholder: 'Enter text',
+				isDisplayed: true,
 			},
 		],
 	},
