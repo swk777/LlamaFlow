@@ -51,7 +51,7 @@
 		"langchain": "^0.1.33",
 		"lodash": "^4.17.21",
 		"lowdb": "^7.0.1",
-		"lucide-react": "^0.364.0",
+		"lucide-react": "^0.381.0",
 		"mammoth": "^1.7.2",
 		"million": "^3.0.6",
 		"officeparser": "^4.1.1",
