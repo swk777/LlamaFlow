@@ -15,6 +15,8 @@ contextBridge.exposeInMainWorld('ipcRenderer', {
 	getKnowledgeBases: () => ipcRenderer.invoke('get-knowledgeBases'),
 	getConversationById: (id: string) => ipcRenderer.invoke('get-conversation', { id }),
 	getConversations: () => ipcRenderer.invoke('get-conversations'),
+	getExtensions: () => ipcRenderer.invoke('get-extensions'),
+	refreshExtensions: () => ipcRenderer.invoke('refresh-extensions'),
 	saveWorkflows: (workflowIdx: number, workflow: IWorkflow) => ipcRenderer.invoke('save-workflows', { workflowIdx, workflow }),
 	saveIntegration: (integrationIdx: number, integration: IIntegration) =>
 		ipcRenderer.invoke('save-integrations', { integrationIdx, integration }),

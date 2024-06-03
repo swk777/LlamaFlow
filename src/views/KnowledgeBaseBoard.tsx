@@ -4,7 +4,7 @@ import { useDisclosure } from '@mantine/hooks';
 import { IconCloudUpload } from '@tabler/icons-react';
 import { useContext, useState } from 'react';
 import classes from './KnowledgeCard.module.css';
-import AddKnowledgeModal from './components/AddKnowledgeModal';
+import AddFileModal from './components/AddFileModal';
 import { KnowledgeCard } from './components/KnowledgeCard';
 
 type Props = {};
@@ -44,7 +44,7 @@ export default function KnowledgeBaseBoard({}: Props) {
 					<KnowledgeCard knowledgeBase={knowledgeBase} key={knowledgeBase.id} />
 				))}
 			</SimpleGrid>
-			<AddKnowledgeModal opened={opened} close={close} files={files} />
+			<AddFileModal opened={opened} close={close} files={files} />
 		</>
 	);
 }

@@ -19,8 +19,7 @@ import ReactFlow, {
 import { getInitialWorkflow } from '@/constants/workflow';
 import { AppContext } from '@/context/AppContext';
 import InternalNode from '@/node/InternalNode';
-import { WorkflowCategory } from '@/type/nodelet';
-import { IWorkflow } from '@/type/workflow';
+import { IWorkflow, IWorkflowCategory } from '@/type/workflow';
 import { buildDefaultConfig } from '@/utils/utils';
 import { getNodeletsByCategory } from '@/utils/workflow';
 import { Button, Divider, Drawer, Flex, FocusTrap, Group, Modal, TextInput } from '@mantine/core';
@@ -37,7 +36,6 @@ const nodeTypes = { internalNodelet: InternalNode };
 function FlowEdit() {
 	const { workflowId = '' } = useParams();
 	let [searchParams] = useSearchParams();
-	const category = searchParams.get('category') as WorkflowCategory;
 	const [configOpened, setConfigOpened] = useState(false);
 	const [chatOpened, setChatOpened] = useState(false);
 	const [inputsModalOpened, { open, close }] = useDisclosure(false);
@@ -46,6 +44,8 @@ function FlowEdit() {
 	const [reactFlowInstance, setReactFlowInstance] = useState<ReactFlowInstance>();
 	const reactFlowWrapper = useRef(null);
 	const workflow = workflows.find((w) => w.id === workflowId) || getInitialWorkflow(workflowId);
+	const category = (searchParams.get('category') ?? workflow.category) as IWorkflowCategory;
+
 	const [nodes, setNodes, onNodesChange] = useNodesState(workflow?.data?.nodes || []);
 	const [edges, setEdges, onEdgesChange] = useEdgesState(workflow?.data?.edges || []);
 	const [selectedNode, setSelectedNode] = useState<Node>();
@@ -137,6 +137,7 @@ function FlowEdit() {
 									...workflow,
 									name: workflowName,
 									data: reactFlowInstance && reactFlowInstance.toObject(),
+									category,
 								} as IWorkflow).then(() => {
 									refreshWorkflows();
 									notifications.show({
@@ -156,7 +157,7 @@ function FlowEdit() {
 						size="sm"
 						className="h-7 gap-1"
 						onClick={() => {
-							if (category === WorkflowCategory.Chatbot) {
+							if (category === IWorkflowCategory.Chatbot) {
 								setChatOpened(true);
 							} else {
 								// window.ipcRenderer.executeAutomation(workflow?.id, workflow).then(() => {
@@ -166,12 +167,12 @@ function FlowEdit() {
 							}
 						}}
 					>
-						{category === WorkflowCategory.Chatbot ? (
+						{category === IWorkflowCategory.Chatbot ? (
 							<IconBrandHipchat className="h-3.5 w-3.5" />
 						) : (
 							<IconPlayerPlay className="h-3.5 w-3.5" />
 						)}
-						<span className="sr-only sm:not-sr-only sm:whitespace-nowrap">{category === WorkflowCategory.Chatbot ? 'Chat' : 'Run'}</span>
+						<span className="sr-only sm:not-sr-only sm:whitespace-nowrap">{category === IWorkflowCategory.Chatbot ? 'Chat' : 'Run'}</span>
 					</Button>
 				</Flex>
 			</Flex>
@@ -189,7 +190,7 @@ function FlowEdit() {
 							const nodelet = nodelets.find((nodelet) => nodelet.id === node.data.nodeletId);
 							return {
 								...node,
-								type: nodelet?.internal ? 'internalNodelet' : '',
+								type: 'internalNodelet',
 							};
 						})}
 						edges={edges}

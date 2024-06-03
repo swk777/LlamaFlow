@@ -1,8 +1,8 @@
-# VisionFlow
+# LlamaFlow
 
-⚠️ **VisionFlow is currently in Development**: Expect breaking changes and bugs!
+⚠️ **LlamaFlow is currently in Development**: Expect breaking changes and bugs!
 
-VisionFlow is a local-first, extendable LLM (Large Language Model) orchestration app designed to streamline the running of LLM workflows locally.
+LlamaFlow is a local-first, extendable LLM (Large Language Model) orchestration app designed to streamline the running of LLM workflows locally.
 
 ![demo.gif](/demo.gif)
 

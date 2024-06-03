@@ -1,9 +1,13 @@
+import { Nodelet } from '@/type/nodelet';
+import { Node } from 'reactflow';
+
 export interface InputsObject {
 	[key: string]: any;
 }
 
 export interface NodeletExecuteContextFull {
-	nodeId: string;
+	node: Node;
+	nodelet: Nodelet;
 	nodeContext: any;
 	globalContext: any;
 	nodeConfig: any;

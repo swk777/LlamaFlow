@@ -6,6 +6,7 @@ import ChatConversation from './ChatConversation';
 import ChooseWorkspace from './ChooseWorkspace';
 import Conversations from './Conversations';
 import { Dashboard } from './Dashboard';
+import Extensions from './Extensions';
 import FlowEdit from './FlowEdit';
 import { Integration } from './Integration';
 import KnowledgeBase from './KnowledgeBase';
@@ -35,7 +36,7 @@ export default function MainRouter({}: Props) {
 								}
 							/>
 							<Route path="/integration/:integrationId?" element={<Integration />}></Route>
-
+							<Route path="/extensions" element={<Extensions />}></Route>
 							<Route path="/chat" element={<Conversations />}>
 								<Route path="/chat/:conversationId" element={<ChatConversation />} />
 							</Route>

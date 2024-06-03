@@ -2,17 +2,14 @@ name: Build
 
 on:
   push:
-    branches: [main]
-    paths-ignore:
-      - "**.md"
-      - "**.spec.js"
-      - ".idea"
-      - ".vscode"
-      - ".dockerignore"
-      - "Dockerfile"
-      - ".gitignore"
-      - ".github/**"
-      - "!.github/workflows/build.yml"
+    tags:
+      - 'v*.*.*'
+permissions:
+  contents: write
+  issues: write
+  deployments: write
+  pull-requests: write
+  statuses: write
 
 jobs:
   build:
@@ -26,6 +23,18 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v3
 
+      - name: Clear electron-builder cache
+        if: runner.os == 'Linux'
+        run: rm -rf /home/runner/.cache/electron-builder
+
+      - name: Clear electron-builder cache on Windows
+        if: runner.os == 'Windows'
+        run: if (Test-Path $env:USERPROFILE\.cache\electron-builder) { Remove-Item -Recurse -Force $env:USERPROFILE\.cache\electron-builder }
+
+      - name: Clear electron-builder cache
+        if: runner.os == 'macOS'
+        run: rm -rf /Users/runner/.cache/electron-builder
+
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
@@ -34,14 +43,58 @@ jobs:
       - name: Install Dependencies
         run: npm install
 
+      - name: Install zip on Linux
+        if: runner.os == 'Linux'
+        run: sudo apt-get install -y zip
+
+      - name: Install zip on macOS
+        if: runner.os == 'macOS'
+        run: brew install zip
+
+      - name: Install zip on Windows
+        if: runner.os == 'Windows'
+        run: choco install zip -y
+
       - name: Build Release Files
         run: npm run build
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.PAT_TOKEN }}
 
       - name: Upload Artifact
         uses: actions/upload-artifact@v3
         with:
-          name: release_on_${{ matrix. os }}
+          name: release_on_${{ matrix.os }}
           path: release/
           retention-days: 5
+
+  release:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download Artifact from macOS
+        uses: actions/download-artifact@v3
+        with:
+          name: release_on_macos-latest
+          path: ./macos
+
+      - name: Create Release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.PAT_TOKEN }}
+        with:
+          tag_name: ${{ github.ref }}
+          release_name: Release ${{ github.ref }}
+          body: This is the release for ${{ github.ref }}.
+          draft: false
+          prerelease: false
+
+      - name: Upload macOS Release Asset
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./macos/0.0.8/VisionFlow_0.0.8.zip
+          asset_name: VisionFlow_0.0.8.zip
+          asset_content_type: application/octet-stream

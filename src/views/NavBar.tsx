@@ -1,5 +1,5 @@
 import { Flex, Stack, Tooltip, UnstyledButton, rem } from '@mantine/core';
-import { IconAdjustments, IconDatabase, IconDeviceDesktopAnalytics, IconHome2, IconMessage } from '@tabler/icons-react';
+import { IconAdjustments, IconDatabase, IconDeviceDesktopAnalytics, IconHome2, IconMessage, IconPuzzle } from '@tabler/icons-react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import classes from './NavBar.module.css';
 
@@ -29,6 +29,7 @@ const Links = [
 		link: '/knowledgeBaseBoard',
 	},
 	{ icon: IconAdjustments, label: 'Integration', link: '/integration' },
+	{ icon: IconPuzzle, label: 'Extensions', link: '/extensions' },
 ];
 
 export default function NavBar() {

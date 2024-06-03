@@ -6,15 +6,16 @@ import { Button, Card, Stack, Text } from '@mantine/core';
 import { useContext, useMemo, useState } from 'react';
 import { Node } from 'reactflow';
 
-type Props = { nodes: Node[]; workflow: IWorkflow };
+type Props = { nodes?: Node[]; workflow: IWorkflow };
 
 export default function RunAutomation({ nodes, workflow }: Props) {
 	const { nodelets } = useContext(AppContext);
 	const [loading, setLoading] = useState(false);
 	const [inputConfig, setInputConfig] = useState({});
+	const [displayMessages, setDisplayMessages] = useState(null);
 	const inputNodes = useMemo(
 		() =>
-			nodes.filter((node) => {
+			(nodes || workflow?.data?.nodes || []).filter((node) => {
 				const nodelet = nodelets.find((nodelet) => nodelet.id === node.data.nodeletId);
 				return nodelet?.category === NodeletCategory.Input;
 			}),
@@ -45,7 +46,7 @@ export default function RunAutomation({ nodes, workflow }: Props) {
 				onClick={async () => {
 					setLoading(true);
 					try {
-						await window.ipcRenderer.runAutomation(workflow?.id, inputConfig, workflow);
+						setDisplayMessages(await window.ipcRenderer.runAutomation(workflow?.id, inputConfig, workflow));
 					} catch (error) {
 						console.log(error);
 					}
@@ -54,6 +55,16 @@ export default function RunAutomation({ nodes, workflow }: Props) {
 			>
 				Run
 			</Button>
+			{Object.values(displayMessages || []).map((res: { name: string; content: string }) => {
+				return (
+					<Card shadow="sm" padding="xs" radius="xs" withBorder>
+						<Text className="text-primary" fw={600} size="sm">
+							{res.name}
+						</Text>
+						<Text size="sm">{res.content}</Text>
+					</Card>
+				);
+			})}
 		</Stack>
 	);
 }
