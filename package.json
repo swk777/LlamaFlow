@@ -48,7 +48,7 @@
 		"electron-updater": "^6.1.8",
 		"framer-motion": "^11.1.7",
 		"hnswlib-node": "^1.4.2",
-		"immer": "9.0.2",
+		"immer": "10.1.1",
 		"jspdf": "^2.5.1",
 		"langchain": "^0.1.33",
 		"lodash": "^4.17.21",
