@@ -128,15 +128,20 @@ export const runAutomation = async (workflowId: string, inputs: any, workflow: I
 		executions: IExecution[];
 	} = db.data;
 	const currentWorkflow = workflow ?? workflows.find((w) => w.id === workflowId);
-	const { nodes = [] } = currentWorkflow?.data || {};
+	const { nodes = [] } = _cloneDeep(currentWorkflow?.data || { nodes: [] });
 	if (!nodes.length) return;
 	const currentExecution = getNewExecution(workflowId) as IExecution;
+	console.log(inputs);
 	if (inputs) {
-		currentExecution.nodeContext = inputs;
+		// currentExecution.nodeContext = inputs;
+		Object.keys(inputs).forEach((nodeId) => {
+			const node = nodes.find((n) => n.id === nodeId);
+			node.data.config = { ...node.data.config, ...inputs[nodeId] };
+		});
 	}
 	try {
 		//@ts-ignore
-		await executeDAG(currentWorkflow?.data, nodelets, integrations, currentExecution, {
+		await executeDAG({ ...currentWorkflow?.data, nodes }, nodelets, integrations, currentExecution, {
 			knowledgeBases,
 			integrations,
 			settings,

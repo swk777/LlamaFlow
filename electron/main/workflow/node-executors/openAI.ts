@@ -12,9 +12,11 @@ export async function executeOpenAI({
 	const { context = [], query = '' } = nodeInputs as { context: any[]; query: string };
 	const { model, systemPrompt, temperature, contextCount } = nodeConfig;
 	const { messages = [] } = nodeContext;
+	const combinedContext = Array.isArray(context) ? context.join('') : context;
+
 	messages.push({
 		role: 'user',
-		content: context.length ? getContextPrompt(context.join(''), query) : query,
+		content: context.length ? getContextPrompt(combinedContext, query) : query,
 	});
 	const openai = new OpenAI({
 		apiKey: integrationConfig.apiKey, // This is the default and can be omitted

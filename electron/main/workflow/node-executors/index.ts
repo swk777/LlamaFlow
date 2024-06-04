@@ -2,6 +2,7 @@ import { InternalNodelets } from '@/constants/nodelets';
 
 import { executeChatResponse } from './chat-response';
 import { executeDisplayOnScreen } from './display-on-screen';
+import { executeFireCrawlLoader } from './firecrawl-loader';
 import { executeKnowledgeBase } from './knowledge-base';
 import { executeOllama } from './ollama';
 import { executeOpenAI } from './openAI';
@@ -21,4 +22,5 @@ export const InternalNodeletExecutor = {
 	},
 	[InternalNodelets.SaveToFile]: { isAsync: true, executor: saveToFile },
 	[InternalNodelets.DisplayOnScreen]: { isAsync: false, executor: executeDisplayOnScreen },
+	[InternalNodelets.FireCrawl]: { isAsync: true, executor: executeFireCrawlLoader },
 };
