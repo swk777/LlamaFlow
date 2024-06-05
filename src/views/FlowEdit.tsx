@@ -45,7 +45,6 @@ function FlowEdit() {
 	const reactFlowWrapper = useRef(null);
 	const workflow = workflows.find((w) => w.id === workflowId) || getInitialWorkflow(workflowId);
 	const category = (searchParams.get('category') ?? workflow.category) as IWorkflowCategory;
-
 	const [nodes, setNodes, onNodesChange] = useNodesState(workflow?.data?.nodes || []);
 	const [edges, setEdges, onEdgesChange] = useEdgesState(workflow?.data?.edges || []);
 	const [selectedNode, setSelectedNode] = useState<Node>();
@@ -187,7 +186,6 @@ function FlowEdit() {
 				<div className="relative flex flex-1 reactflow-wrapper" ref={reactFlowWrapper}>
 					<ReactFlow
 						nodes={nodes.map((node) => {
-							const nodelet = nodelets.find((nodelet) => nodelet.id === node.data.nodeletId);
 							return {
 								...node,
 								type: 'internalNodelet',
@@ -267,7 +265,7 @@ function FlowEdit() {
 					/>
 				</Drawer>
 				<Modal opened={inputsModalOpened} size="lg" onClose={close} title="Run Automation">
-					<RunAutomation nodes={nodes} workflow={workflow} />
+					<RunAutomation workflow={{ ...workflow, data: { nodes, edges } }} />
 				</Modal>
 			</div>
 		</Flex>

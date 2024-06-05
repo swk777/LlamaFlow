@@ -2,6 +2,7 @@ import { IConversation } from '@/type/conversation';
 import { IIntegration } from '@/type/integration';
 import { IKnowledgeBase } from '@/type/knowledgeBase';
 import { ISettings } from '@/type/misc';
+import { ITemplate } from '@/type/templates';
 import { ReactElement, createContext, useCallback, useEffect, useState } from 'react';
 import { DefaultData } from '../constants/initialData';
 import { Nodelet } from '../type/nodelet';
@@ -13,6 +14,7 @@ interface IProviderProps {
 
 interface IAppContext {
 	settings: any;
+	templates: ITemplate[];
 	integrations: IIntegration[];
 	workflows: IWorkflow[];
 	extensions: any[];
@@ -33,6 +35,8 @@ interface IAppContext {
 	refreshSettings: () => void;
 }
 export const AppContext = createContext<IAppContext>({
+	//@ts-ignore
+	templates: DefaultData.templates,
 	settings: DefaultData.settings,
 	integrations: DefaultData.integrations,
 	workflows: DefaultData.workflows,
@@ -50,6 +54,7 @@ export const AppContext = createContext<IAppContext>({
 export function AppContextProvider(props: IProviderProps): ReactElement {
 	const [workflows, setWorkflows] = useState(DefaultData.workflows as IWorkflow[]);
 	const [knowledgeBases, setKnowledgeBases] = useState(DefaultData.knowledgeBases as IKnowledgeBase[]);
+	const [templates, setTemplates] = useState(DefaultData.templates as ITemplate[]);
 	const [integrations, setIntegrations] = useState(DefaultData.integrations as any[]);
 	const [nodelets, setNodelets] = useState(DefaultData.nodelets as Nodelet[]);
 	const [conversations, setConversations] = useState(DefaultData.conversations as IConversation[]);
@@ -80,6 +85,9 @@ export function AppContextProvider(props: IProviderProps): ReactElement {
 	const refreshKnowledgeBase = useCallback(() => {
 		window.ipcRenderer.getKnowledgeBases().then(setKnowledgeBases);
 	}, []);
+	const refreshTemplates = useCallback(() => {
+		window.ipcRenderer.getTemplates().then(setTemplates);
+	}, []);
 	const refreshWorkflows = async () => {
 		const allWorkflows = await window.ipcRenderer.getWorkflows();
 		setWorkflows(allWorkflows);
@@ -105,10 +113,12 @@ export function AppContextProvider(props: IProviderProps): ReactElement {
 		refreshIntegrations();
 		refreshConversations();
 		refreshSettings();
+		refreshTemplates();
 	}, []);
 	return (
 		<AppContext.Provider
 			value={{
+				templates,
 				integrations,
 				workflows,
 				nodelets,

@@ -6,7 +6,6 @@ import { NodeletExecuteContext } from '../type';
 export async function executeURLLoader({ setNodeContext, nodeConfig }: NodeletExecuteContext) {
 	let content = '';
 	try {
-		console.log(nodeConfig.url);
 		const response = await fetch(nodeConfig.url);
 		const responseText = await response.text();
 		const $ = cheerio.load(responseText);

@@ -11,6 +11,7 @@ import FlowEdit from './FlowEdit';
 import { Integration } from './Integration';
 import KnowledgeBase from './KnowledgeBase';
 import KnowledgeBaseBoard from './KnowledgeBaseBoard';
+import Templates from './Templates';
 import Workflow from './Workflow';
 import ErrorBoundary from './components/ErrorBoundry';
 
@@ -42,6 +43,7 @@ export default function MainRouter({}: Props) {
 							</Route>
 							<Route path="/knowledge-base/:id" element={<KnowledgeBase />} />
 							<Route path="/knowledgeBaseBoard" element={<KnowledgeBaseBoard />} />
+							<Route path="/templates" element={<Templates />} />
 						</Route>
 					</Routes>
 				</HashRouter>

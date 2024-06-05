@@ -6,8 +6,9 @@ import { contextBridge, ipcRenderer } from 'electron';
 
 // --------- Expose some API to the Renderer process ---------
 contextBridge.exposeInMainWorld('ipcRenderer', {
-	addWorkflow: (workflow: IWorkflow) => ipcRenderer.send('add-workflow', workflow),
+	addWorkflow: (workflow: IWorkflow) => ipcRenderer.invoke('add-workflow', workflow),
 	getWorkflows: () => ipcRenderer.invoke('get-workflows'),
+	getTemplates: () => ipcRenderer.invoke('get-templates'),
 	getIntegrations: () => ipcRenderer.invoke('get-integrations'),
 	getSettings: () => ipcRenderer.invoke('get-settings'),
 	getNodelets: () => ipcRenderer.invoke('get-nodelets'),

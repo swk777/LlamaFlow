@@ -1,6 +1,7 @@
 import { Integrations } from './integrations';
 import { KnowledgeBases } from './knowledgeBase';
 import { Nodelets } from './nodelets';
+import { Templates } from './templates';
 
 export const DefaultData = {
 	integrations: Integrations,
@@ -11,4 +12,5 @@ export const DefaultData = {
 	settings: {},
 	executions: [],
 	extensions: [],
+	templates: Templates,
 };

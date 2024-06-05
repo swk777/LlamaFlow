@@ -12,6 +12,7 @@ export enum IWorkflowCategory {
 export interface IWorkflow {
 	id: string;
 	name: string;
+	description: string;
 	category: IWorkflowCategory;
 	lastModified: string;
 	data: { nodes: Node[]; edges: Edge[] };

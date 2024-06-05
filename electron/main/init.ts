@@ -10,7 +10,7 @@ export function initStorage(ipcMain, workspacePath) {
 		.then(async (db) => {
 			refreshExtension(db);
 			await db.write();
-			ipcMain.on('add-workflow', async (event, post) => {
+			ipcMain.handle('add-workflow', async (event, post) => {
 				await db.read();
 				db.data.workflows.push(post);
 				await db.write();
@@ -32,6 +32,10 @@ export function initStorage(ipcMain, workspacePath) {
 			ipcMain.handle('get-knowledgeBases', async () => {
 				await db.read();
 				return db.data.knowledgeBases;
+			});
+			ipcMain.handle('get-templates', async () => {
+				await db.read();
+				return db.data.templates;
 			});
 			ipcMain.handle('get-integrations', async () => {
 				await db.read();

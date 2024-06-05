@@ -131,7 +131,6 @@ export const runAutomation = async (workflowId: string, inputs: any, workflow: I
 	const { nodes = [] } = _cloneDeep(currentWorkflow?.data || { nodes: [] });
 	if (!nodes.length) return;
 	const currentExecution = getNewExecution(workflowId) as IExecution;
-	console.log(inputs);
 	if (inputs) {
 		// currentExecution.nodeContext = inputs;
 		Object.keys(inputs).forEach((nodeId) => {

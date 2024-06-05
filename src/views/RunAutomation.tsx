@@ -8,18 +8,18 @@ import { Node } from 'reactflow';
 
 type Props = { nodes?: Node[]; workflow: IWorkflow };
 
-export default function RunAutomation({ nodes, workflow }: Props) {
+export default function RunAutomation({ workflow }: Props) {
 	const { nodelets } = useContext(AppContext);
 	const [loading, setLoading] = useState(false);
 	const [inputConfig, setInputConfig] = useState({});
 	const [displayMessages, setDisplayMessages] = useState(null);
 	const inputNodes = useMemo(
 		() =>
-			(nodes || workflow?.data?.nodes || []).filter((node) => {
+			(workflow?.data?.nodes || []).filter((node) => {
 				const nodelet = nodelets.find((nodelet) => nodelet.id === node.data.nodeletId);
 				return nodelet?.category === NodeletCategory.Input;
 			}),
-		[nodes],
+		[workflow],
 	);
 	return (
 		<Stack gap={'xs'}>
