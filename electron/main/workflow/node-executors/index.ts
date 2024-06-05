@@ -8,6 +8,7 @@ import { executeOllama } from './ollama';
 import { executeOpenAI } from './openAI';
 import { saveToFile } from './save-to-file';
 import { executeTextInput } from './text-input';
+import { executeURLLoader } from './url-loader';
 import { executeUserInput } from './user-input';
 
 export const InternalNodeletExecutor = {
@@ -23,4 +24,5 @@ export const InternalNodeletExecutor = {
 	[InternalNodelets.SaveToFile]: { isAsync: true, executor: saveToFile },
 	[InternalNodelets.DisplayOnScreen]: { isAsync: false, executor: executeDisplayOnScreen },
 	[InternalNodelets.FireCrawl]: { isAsync: true, executor: executeFireCrawlLoader },
+	[InternalNodelets.URLLoader]: { isAsync: true, executor: executeURLLoader },
 };
