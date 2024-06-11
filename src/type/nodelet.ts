@@ -23,10 +23,11 @@ export interface NodeletOutput {
 	name: string;
 	type: NodeletOutputType;
 }
-export interface Nodelet {
+export interface INodelet {
 	id: string;
 	category: NodeletCategory;
 	workflowCategory: WorkflowCategory;
+	description?: string;
 	name: string;
 	internal: boolean;
 	integration?: boolean;

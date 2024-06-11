@@ -1,6 +1,6 @@
-import { Nodelet } from '@/type/nodelet';
+import { INodelet } from '@/type/nodelet';
 
-export const buildDefaultConfig = (nodelet: Nodelet) => {
+export const buildDefaultConfig = (nodelet: INodelet) => {
 	const defaultConfig = {};
 	nodelet.configDefinitions.forEach((configDefinition) => {
 		if (configDefinition.defaultValue !== undefined) {

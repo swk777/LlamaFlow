@@ -1,4 +1,4 @@
-import { Nodelet } from '@/type/nodelet';
+import { INodelet } from '@/type/nodelet';
 import { Node } from 'reactflow';
 
 export interface InputsObject {
@@ -7,7 +7,7 @@ export interface InputsObject {
 
 export interface NodeletExecuteContextFull {
 	node: Node;
-	nodelet: Nodelet;
+	nodelet: INodelet;
 	nodeContext: any;
 	globalContext: any;
 	nodeConfig: any;

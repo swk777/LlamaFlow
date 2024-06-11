@@ -1,5 +1,5 @@
 import { ConfigurationType } from '@/node/config/configType';
-import { Nodelet, NodeletCategory, NodeletInputType, NodeletOutputType, WorkflowCategory } from '@/type/nodelet';
+import { INodelet, NodeletCategory, NodeletInputType, NodeletOutputType, WorkflowCategory } from '@/type/nodelet';
 
 export enum InternalNodelets {
 	UserInput = 'UserInput',
@@ -12,9 +12,10 @@ export enum InternalNodelets {
 	DisplayOnScreen = 'DisplayOnScreen',
 	FireCrawl = 'FireCrawl',
 	URLLoader = 'URLLoader',
+	YoutubeLoader = 'YoutubeLoader',
 }
 
-export const Nodelets: Nodelet[] = [
+export const Nodelets: INodelet[] = [
 	{
 		id: 'UserInput',
 		category: NodeletCategory.Input,
@@ -422,6 +423,33 @@ export const Nodelets: Nodelet[] = [
 			{
 				id: 'content',
 				name: 'content',
+				type: NodeletOutputType.String,
+			},
+		],
+		configDefinitions: [
+			{
+				name: 'URL',
+				fieldName: 'url',
+				label: 'URL:',
+				type: 'INPUT',
+				required: true,
+			},
+		],
+	},
+	{
+		id: 'YoutubeLoader',
+		category: NodeletCategory.Input,
+		workflowCategory: WorkflowCategory.All,
+		description: 'Loads the transcript of a Youtube video',
+		name: 'Youtube Loader',
+		internal: true,
+		image:
+			'data:image/png;base64,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',
+		inputs: [],
+		outputs: [
+			{
+				id: 'transcript',
+				name: 'transcript',
 				type: NodeletOutputType.String,
 			},
 		],

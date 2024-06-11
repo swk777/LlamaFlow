@@ -1,9 +1,9 @@
 import { IExecution } from '@/type/conversation';
 import { IDAGNode } from '@/type/dag';
-import { Nodelet } from '@/type/nodelet';
+import { INodelet } from '@/type/nodelet';
 import { InputsObject } from './type';
 
-export const getNodeInputObj = (node: IDAGNode, nodelet: Nodelet, execution: IExecution) => {
+export const getNodeInputObj = (node: IDAGNode, nodelet: INodelet, execution: IExecution) => {
 	const inputsObj: InputsObject = {};
 	if ((nodelet?.inputs || []).length === 0) return {};
 

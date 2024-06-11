@@ -2,7 +2,7 @@ import { InternalNodelets } from '@/constants/nodelets';
 import { IDAGNode } from '@/type/dag';
 import { IIntegration } from '@/type/integration';
 import { ISettings } from '@/type/misc';
-import { Nodelet } from '@/type/nodelet';
+import { INodelet } from '@/type/nodelet';
 import { IWorkflow } from '@/type/workflow';
 import _cloneDeep from 'lodash/cloneDeep';
 import { curry } from 'ramda';
@@ -67,7 +67,7 @@ export const chat = async (sessionId: string, workflowId: string, message: strin
 		settings,
 	}: {
 		workflows: IWorkflow[];
-		nodelets: Nodelet[];
+		nodelets: INodelet[];
 		knowledgeBases: IKnowledgeBase[];
 		conversations: IConversation[];
 		integrations: IIntegration[];
@@ -121,7 +121,7 @@ export const runAutomation = async (workflowId: string, inputs: any, workflow: I
 		executions,
 	}: {
 		workflows: IWorkflow[];
-		nodelets: Nodelet[];
+		nodelets: INodelet[];
 		knowledgeBases: IKnowledgeBase[];
 		integrations: IIntegration[];
 		settings: ISettings;
@@ -169,7 +169,7 @@ function linkNodes(nodeMap: Map<string, IDAGNode>, edges: Edge[]) {
 
 async function executeDAG(
 	dagData: ReactFlowJsonObject,
-	nodelets: Nodelet[],
+	nodelets: INodelet[],
 	integrations: IIntegration[],
 	execution: IExecution,
 	context: IContext,
@@ -203,7 +203,7 @@ async function executeDAG(
 	}
 }
 
-async function executeNode(node: IDAGNode, nodelets: Nodelet[], integrations: IIntegration[], execution: IExecution, context: IContext) {
+async function executeNode(node: IDAGNode, nodelets: INodelet[], integrations: IIntegration[], execution: IExecution, context: IContext) {
 	const nodelet = nodelets.find((nl) => nl.id === node.data.nodeletId)!;
 	const integration = integrations.find((integration) => integration.id === nodelet.id);
 	const nodeInputs = getNodeInputObj(node, nodelet, execution);

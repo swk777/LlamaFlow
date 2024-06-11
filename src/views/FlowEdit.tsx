@@ -28,7 +28,7 @@ import { notifications } from '@mantine/notifications';
 import { useParams, useSearchParams } from 'react-router-dom';
 import 'reactflow/dist/style.css';
 import ChatWorkflow from './ChatWorkflow';
-import Nodelet from './Nodelet';
+import NodeletsBar from './NodeletsBar';
 import RunAutomation from './RunAutomation';
 
 const nodeTypes = { internalNodelet: InternalNode };
@@ -177,11 +177,7 @@ function FlowEdit() {
 			</Flex>
 			<Divider />
 			<div className="flex flex-1 relative">
-				<aside className="w-38 py-4 flex flex-col ">
-					{workflowNodelets.map((nodelet) => (
-						<Nodelet nodelet={nodelet} key={nodelet.id} />
-					))}
-				</aside>
+				<NodeletsBar nodelets={workflowNodelets} />
 				<Divider orientation="vertical" />
 				<div className="relative flex flex-1 reactflow-wrapper" ref={reactFlowWrapper}>
 					<ReactFlow

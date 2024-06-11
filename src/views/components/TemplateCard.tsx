@@ -54,7 +54,7 @@ export function TemplateCard({ template }: Props) {
 								});
 						}}
 					>
-						ADD
+						Use
 					</Button>
 				</Card.Section>
 			</Card>

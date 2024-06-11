@@ -1,5 +1,5 @@
 import { AppContext } from '@/context/AppContext';
-import { Nodelet as INodelet } from '@/type/nodelet';
+import { INodelet } from '@/type/nodelet';
 import { checkIntegration } from '@/utils/utils';
 import { Avatar, Button, LoadingOverlay, Modal, Text } from '@mantine/core';
 import { useDisclosure, useHover } from '@mantine/hooks';

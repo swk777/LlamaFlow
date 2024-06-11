@@ -5,7 +5,7 @@ import { ISettings } from '@/type/misc';
 import { ITemplate } from '@/type/templates';
 import { ReactElement, createContext, useCallback, useEffect, useState } from 'react';
 import { DefaultData } from '../constants/initialData';
-import { Nodelet } from '../type/nodelet';
+import { INodelet } from '../type/nodelet';
 import { IWorkflow } from '../type/workflow';
 
 interface IProviderProps {
@@ -18,13 +18,13 @@ interface IAppContext {
 	integrations: IIntegration[];
 	workflows: IWorkflow[];
 	extensions: any[];
-	nodelets: Nodelet[];
+	nodelets: INodelet[];
 	knowledgeBases: IKnowledgeBase[];
 	conversations: IConversation[];
 	setExtensions?: (newData: any[]) => void;
 	setConversations?: (newData: IConversation[]) => void;
 	setWorkflows?: (newData: IWorkflow[]) => void;
-	setNodelets?: (newData: Nodelet[]) => void;
+	setNodelets?: (newData: INodelet[]) => void;
 	setKnowledgeBases?: (newData: IKnowledgeBase[]) => void;
 	updateWorkflow?: (workflowId: string, newData: IWorkflow) => Promise<void>;
 	updateIntegration?: (integrationId: string, newData: IIntegration) => Promise<void>;
@@ -56,7 +56,7 @@ export function AppContextProvider(props: IProviderProps): ReactElement {
 	const [knowledgeBases, setKnowledgeBases] = useState(DefaultData.knowledgeBases as IKnowledgeBase[]);
 	const [templates, setTemplates] = useState(DefaultData.templates as ITemplate[]);
 	const [integrations, setIntegrations] = useState(DefaultData.integrations as any[]);
-	const [nodelets, setNodelets] = useState(DefaultData.nodelets as Nodelet[]);
+	const [nodelets, setNodelets] = useState(DefaultData.nodelets as INodelet[]);
 	const [conversations, setConversations] = useState(DefaultData.conversations as IConversation[]);
 	const [extensions, setExtensions] = useState([] as any[]);
 	const [settings, setSettings] = useState(DefaultData.settings as ISettings);

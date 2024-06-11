@@ -10,6 +10,7 @@ import { saveToFile } from './save-to-file';
 import { executeTextInput } from './text-input';
 import { executeURLLoader } from './url-loader';
 import { executeUserInput } from './user-input';
+import { executeYoutubeLoader } from './youtube-loader';
 
 export const InternalNodeletExecutor = {
 	[InternalNodelets.UserInput]: { isAsync: false, executor: executeUserInput },
@@ -25,4 +26,5 @@ export const InternalNodeletExecutor = {
 	[InternalNodelets.DisplayOnScreen]: { isAsync: false, executor: executeDisplayOnScreen },
 	[InternalNodelets.FireCrawl]: { isAsync: true, executor: executeFireCrawlLoader },
 	[InternalNodelets.URLLoader]: { isAsync: true, executor: executeURLLoader },
+	[InternalNodelets.YoutubeLoader]: { isAsync: true, executor: executeYoutubeLoader },
 };
