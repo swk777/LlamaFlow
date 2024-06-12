@@ -16,6 +16,7 @@ export const Integrations: IIntegration[] = [
 		],
 		config: {},
 	},
+
 	{
 		id: 'FireCrawl',
 		label: 'FireCrawl',
@@ -48,6 +49,20 @@ export const Integrations: IIntegration[] = [
 				type: 'TAGS',
 				placeholder: 'ollama models',
 				description: 'press Enter to add',
+				required: true,
+			},
+		],
+		config: {},
+	},
+	{
+		id: 'DeepSeek',
+		label: 'DeepSeek',
+		configDefinitions: [
+			{
+				label: 'API Key:',
+				fieldName: 'apiKey',
+				type: ConfigurationType.INPUT,
+				placeholder: 'sk-xxxx',
 				required: true,
 			},
 		],

@@ -1,6 +1,7 @@
 import { InternalNodelets } from '@/constants/nodelets';
 
 import { executeChatResponse } from './chat-response';
+import { executeDeepSeek } from './deep-seek';
 import { executeDisplayOnScreen } from './display-on-screen';
 import { executeEmail } from './email';
 import { executeFireCrawlLoader } from './firecrawl-loader';
@@ -29,4 +30,5 @@ export const InternalNodeletExecutor = {
 	[InternalNodelets.URLLoader]: { isAsync: true, executor: executeURLLoader },
 	[InternalNodelets.YoutubeLoader]: { isAsync: true, executor: executeYoutubeLoader },
 	[InternalNodelets.Email]: { isAsync: false, executor: executeEmail },
+	[InternalNodelets.DeepSeek]: { isAsync: true, executor: executeDeepSeek },
 };

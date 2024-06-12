@@ -14,6 +14,7 @@ export default function WorkflowList({}: Props) {
 	const navigate = useNavigate();
 	const [inputsModalOpened, { open, close }] = useDisclosure(false);
 	const currentWorkflowId = useRef('');
+	console.log(workflows);
 	return workflows.length === 0 ? (
 		<Container>
 			<Stack justify="center" align="center">
@@ -56,8 +57,13 @@ export default function WorkflowList({}: Props) {
 										size={16}
 										className="text-primary cursor-pointer"
 										onClick={async () => {
-											currentWorkflowId.current = id;
-											open();
+											if (category === 'Chatbot') {
+												const conversation = await window.ipcRenderer.newConversation(id);
+												navigate(`/chat/${conversation?.sessionId}`);
+											} else {
+												currentWorkflowId.current = id;
+												open();
+											}
 										}}
 									/>
 									<IconPencil
