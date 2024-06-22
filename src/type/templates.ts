@@ -1,4 +1,3 @@
-import { Edge } from 'reactflow';
 import { IWorkflowCategory } from './workflow';
 
 export interface ITemplate {
@@ -6,5 +5,5 @@ export interface ITemplate {
 	name: string;
 	category: IWorkflowCategory;
 	description: string;
-	data: { nodes: Node[]; edges: Edge[] };
+	data: any;
 }

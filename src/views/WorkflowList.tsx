@@ -14,7 +14,6 @@ export default function WorkflowList({}: Props) {
 	const navigate = useNavigate();
 	const [inputsModalOpened, { open, close }] = useDisclosure(false);
 	const currentWorkflowId = useRef('');
-	console.log(workflows);
 	return workflows.length === 0 ? (
 		<Container>
 			<Stack justify="center" align="center">

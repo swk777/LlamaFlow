@@ -64,6 +64,23 @@ if (store.get('workspacePath')) {
 
 // const db = new Low(adapter);
 async function createWindow() {
+	const args = (process.argv || []).length > 0 ? process.argv.slice(1) : '';
+	if (args.includes('--open-modal')) {
+		let modalWindow = new BrowserWindow({
+			parent: win,
+			show: false,
+			width: 600,
+			height: 500,
+			webPreferences: {
+				preload,
+			},
+		});
+		modalWindow.loadFile(indexHtml);
+
+		modalWindow.once('ready-to-show', () => {
+			modalWindow.show();
+		});
+	}
 	win = new BrowserWindow({
 		title: 'Main window',
 		icon: join(process.env.VITE_PUBLIC, 'favicon.ico'),
@@ -110,7 +127,22 @@ app.on('window-all-closed', () => {
 	win = null;
 	if (process.platform !== 'darwin') app.quit();
 });
+ipcMain.on('open-modal', (event, route) => {
+	let modalWindow = new BrowserWindow({
+		parent: win,
+		show: false,
+		width: 600,
+		height: 500,
+		webPreferences: {
+			preload,
+		},
+	});
+	modalWindow.loadFile(indexHtml);
 
+	modalWindow.once('ready-to-show', () => {
+		modalWindow.show();
+	});
+});
 app.on('second-instance', () => {
 	if (win) {
 		// Focus on the main window if the user tried to open another

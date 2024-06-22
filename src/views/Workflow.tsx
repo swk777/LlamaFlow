@@ -13,7 +13,14 @@ export default function Workflow({}: Props) {
 		<main className="flex-1 items-start gap-4 p-4 sm:px-6 sm:py-0 md:gap-8">
 			<div className="flex items-center mt-3">
 				<div className="ml-auto flex items-center gap-2 mt-4">
-					<Button variant="outline" size="sm" className="h-7">
+					<Button
+						variant="outline"
+						size="sm"
+						className="h-7"
+						onClick={() => {
+							window.ipcRenderer.openNewWindow();
+						}}
+					>
 						<ListFilter className="h-3.5 w-3.5 mr-1" />
 						<span className="sr-only sm:not-sr-only sm:whitespace-nowrap">Filter</span>
 					</Button>

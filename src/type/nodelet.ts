@@ -11,6 +11,7 @@ export enum NodeletInputType {
 }
 export enum NodeletOutputType {
 	String = 'String',
+	StringArray = 'StringArray',
 	Context = 'Context',
 }
 export interface NodeletInput {

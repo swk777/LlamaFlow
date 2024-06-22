@@ -14,6 +14,7 @@ import ReactFlow, {
 	addEdge,
 	useEdgesState,
 	useNodesState,
+	useReactFlow,
 } from 'reactflow';
 
 import { getInitialWorkflow } from '@/constants/workflow';
@@ -39,6 +40,7 @@ function FlowEdit() {
 	const [configOpened, setConfigOpened] = useState(false);
 	const [chatOpened, setChatOpened] = useState(false);
 	const [inputsModalOpened, { open, close }] = useDisclosure(false);
+	const { getEdges, getNodes } = useReactFlow();
 
 	const { nodelets, workflows, updateWorkflow, integrations, refreshWorkflows } = useContext(AppContext);
 	const [reactFlowInstance, setReactFlowInstance] = useState<ReactFlowInstance>();
@@ -135,7 +137,7 @@ function FlowEdit() {
 								updateWorkflow(workflowId, {
 									...workflow,
 									name: workflowName,
-									data: reactFlowInstance && reactFlowInstance.toObject(),
+									data: { nodes: getNodes(), edges: getEdges() },
 									category,
 								} as IWorkflow).then(() => {
 									refreshWorkflows();

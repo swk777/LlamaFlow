@@ -15,6 +15,7 @@ export enum InternalNodelets {
 	YoutubeLoader = 'YoutubeLoader',
 	Email = 'Email',
 	DeepSeek = 'DeepSeek',
+	SplitText = 'SplitText',
 }
 
 export const Nodelets: INodelet[] = [
@@ -134,6 +135,15 @@ export const Nodelets: INodelet[] = [
 				placeholder: 'System Prompt',
 			},
 			{
+				name: 'prompt',
+				fieldName: 'prompt',
+				label: 'Prompt',
+				type: 'TEXT_AREA',
+				placeholder: 'Prompt',
+				defaultValue: '{query}',
+				description: 'use {xxx} to quote variables and use {query} to quote the input',
+			},
+			{
 				name: 'model',
 				fieldName: 'model',
 				label: 'Model:',
@@ -240,6 +250,15 @@ export const Nodelets: INodelet[] = [
 				placeholder: 'System Prompt',
 			},
 			{
+				name: 'prompt',
+				fieldName: 'prompt',
+				label: 'Prompt',
+				type: 'TEXT_AREA',
+				placeholder: 'Prompt',
+				defaultValue: '{query}',
+				description: 'use {xxx} to quote variables and use {query} to quote the input',
+			},
+			{
 				name: 'model',
 				fieldName: 'model',
 				label: 'Model:',
@@ -339,6 +358,15 @@ export const Nodelets: INodelet[] = [
 				label: 'System Prompt',
 				type: 'TEXT_AREA',
 				placeholder: 'System Prompt',
+			},
+			{
+				name: 'prompt',
+				fieldName: 'prompt',
+				label: 'Prompt',
+				type: 'TEXT_AREA',
+				placeholder: 'Prompt',
+				defaultValue: '{query}',
+				description: 'use {xxx} to quote variables and use {query} to quote the input',
 			},
 			{
 				name: 'model',
@@ -597,6 +625,40 @@ export const Nodelets: INodelet[] = [
 				label: 'URL:',
 				type: 'INPUT',
 				required: true,
+			},
+		],
+	},
+	{
+		id: 'SplitText',
+		category: NodeletCategory.Processor,
+		workflowCategory: WorkflowCategory.All,
+		description: 'Split text into multiple chunks',
+		name: 'Split Text',
+		internal: true,
+		image:
+			'data:image/png;base64,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',
+		inputs: [
+			{
+				id: 'inputText',
+				name: 'inputText',
+				type: NodeletInputType.String,
+			},
+		],
+		outputs: [
+			{
+				id: 'splitText',
+				name: 'split text',
+				type: NodeletOutputType.StringArray,
+			},
+		],
+		configDefinitions: [
+			{
+				name: 'Chunk Size',
+				fieldName: 'chunkSize',
+				label: 'Token limit per text chunk:',
+				type: 'NUMBER',
+				defaultValue: 1000,
+				isDisplayed: true,
 			},
 		],
 	},

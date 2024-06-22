@@ -1,16 +1,21 @@
 import { AppContext } from '@/context/AppContext';
-import { ActionIcon, Flex, LoadingOverlay, Text } from '@mantine/core';
+import { getNewState } from '@/utils/state';
+import { ActionIcon, CloseButton, Flex, Input, LoadingOverlay, Popover, Text } from '@mantine/core';
 import { useHover } from '@mantine/hooks';
 import _get from 'lodash/get';
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 
 import { getRandomColor } from '@/utils/utils';
-import { IconSettings } from '@tabler/icons-react';
-import { Handle, Position } from 'reactflow';
-type Props = { data: any };
+import EditableText from '@/views/components/EditableText';
+import { IconCheck, IconCirclePlus, IconSettings } from '@tabler/icons-react';
+import { Handle, Node, Position, useReactFlow } from 'reactflow';
+type Props = { data: any; id: string };
 
-export default function InternalNode({ data, ...others }: Props) {
+export default function InternalNode({ data, id, ...others }: Props) {
 	const { nodelets } = useContext(AppContext);
+	const { setNodes, getNodes } = useReactFlow();
+	const [opened, setOpened] = useState(false);
+	const [variables, setVariables] = useState(data?.config?.variables ?? {});
 	const { hovered, ref } = useHover();
 	const nodelet = nodelets.find((nodelet) => nodelet.id === data?.nodeletId);
 	const hasConfiguration = !!(nodelet?.configDefinitions || []).length;
@@ -28,10 +33,6 @@ export default function InternalNode({ data, ...others }: Props) {
 				ref={ref}
 			>
 				<div className="w-full h-3 shrink-0" style={{ backgroundColor: getRandomColor(nodelet?.id ?? '') }}></div>
-				{/* <div
-          className="absolute w-2 h-2 rounded-full top-1 right-1"
-          style={{ backgroundColor: getRandomColor() }}
-        ></div> */}
 				<Flex direction={'column'} className="flex-1 overflow-hidden" align={'center'} justify={'center'} pos="relative">
 					<LoadingOverlay
 						visible={hovered && hasConfiguration}
@@ -44,20 +45,65 @@ export default function InternalNode({ data, ...others }: Props) {
 						}}
 						overlayProps={{ blur: 4 }}
 					/>
-					{/* {hovered ? (
-            <IconSettings className="w-6 h-6 mb-1 font-semibold" />
-          ) : ( */}
 					<img src={nodelet?.image} className="w-6 h-6 mb-1" />
-					{/* )} */}
 					{displayContent && (
 						<Text fz={13} px={4} className="max-w-24 truncate text-gray-600 hover:text-clip">
 							{displayContent}
 						</Text>
 					)}
 				</Flex>
-				<Text fz={14} fw={600} mx={4} className="absolute max-w-40 truncate" style={{ bottom: -26 }}>
-					{nodelet?.name}
-				</Text>
+				<EditableText
+					initialName={data.label}
+					onChange={async (v: string) => {
+						const nodes = getNodes();
+						console.log(
+							getNewState(nodes, (draft) => {
+								const currentNodeIndex = draft.findIndex((node) => node.id === id);
+								const currentNode = nodes[currentNodeIndex];
+								console.log(v);
+								console.log([
+									...nodes.slice(0, currentNodeIndex),
+									{
+										...currentNode,
+										data: { ...currentNode?.data, label: v },
+									},
+									...nodes.slice(currentNodeIndex + 1),
+								]);
+								setNodes([
+									...nodes.slice(0, currentNodeIndex),
+									{
+										...currentNode,
+										data: { ...currentNode?.data, label: v },
+									},
+									...nodes.slice(currentNodeIndex + 1),
+								] as Node[]);
+							}) as Node<any>[],
+						);
+						setNodes(
+							getNewState(nodes, (draft) => {
+								const currentNodeIndex = draft.findIndex((node) => node.id === id);
+								const currentNode = nodes[currentNodeIndex];
+								console.log(currentNode);
+								currentNode.data.label = v;
+								// setNodes([
+								// 	...nodes.slice(0, currentNodeIndex),
+								// 	{
+								// 		...currentNode,
+								// 		data: { ...currentNode?.data, label: v },
+								// 	},
+								// 	...nodes.slice(currentNodeIndex + 1),
+								// ] as Node[]);
+							}) as Node<any>[],
+						);
+					}}
+					className="absolute max-w-80 truncate"
+					style={{ bottom: -32 }}
+					showElement={
+						<Text fz="14" key={data?.label} className="flex-1 truncate cursor-pointer hover:text-primary text-left " maw={144} fw={600}>
+							{data?.label}
+						</Text>
+					}
+				/>
 			</Flex>
 			{inputs.map((input, index) => (
 				<Handle
@@ -70,7 +116,7 @@ export default function InternalNode({ data, ...others }: Props) {
 						width: '10px',
 						height: '10px',
 						backgroundColor: 'white',
-						border: '1px solid #ccc',
+						border: '1px solid hsl(208 80% 52%)',
 					}}
 				>
 					<div
@@ -96,18 +142,62 @@ export default function InternalNode({ data, ...others }: Props) {
 						width: '10px',
 						height: '10px',
 						backgroundColor: 'white',
-						border: '1px solid #ccc',
+						border: '1px solid hsl(208 80% 52%)',
+					}}
+					onClick={(e) => {
+						e.stopPropagation();
 					}}
 				>
 					<div
 						style={{
 							position: 'absolute',
+							display: 'flex',
 							transform: 'translate(12px, -38%)',
 							color: 'grey',
 							fontSize: '12px',
+							alignItems: 'center',
 						}}
 					>
 						{output.id}
+						<Popover width={200} position="top" withArrow shadow="md" opened={opened} closeOnClickOutside>
+							<Popover.Target>
+								<IconCirclePlus size="13" className="text-zinc-600 cursor-pointer ml-0.5" onClick={() => setOpened(true)} />
+							</Popover.Target>
+							<Popover.Dropdown>
+								<Input.Wrapper label="Global Variable" description="use '{name}' as a placeholder in prompts">
+									<CloseButton className="absolute" style={{ top: 10, right: 10 }} onClick={() => setOpened(false)} />
+									<Flex align={'center'} pos="relative">
+										<Input
+											placeholder="name"
+											value={variables[output.id]}
+											onChange={(e) => setVariables({ ...variables, [output.id]: e.target.value })}
+										/>
+										<ActionIcon variant="filled" aria-label="Settings" size="sm" className="ml-3 mt-1">
+											<IconCheck
+												className="cursor-pointer"
+												width={30}
+												height={30}
+												size={32}
+												onClick={() => {
+													const nodes = getNodes();
+													const currentNodeIndex = nodes.findIndex((node) => node.id === id);
+													const currentNode = nodes[currentNodeIndex];
+													setNodes([
+														...nodes.slice(0, currentNodeIndex),
+														{
+															...currentNode,
+															data: { ...currentNode?.data, config: { ...currentNode?.data?.config, variables } },
+														},
+														...nodes.slice(currentNodeIndex + 1),
+													] as Node[]);
+													setOpened(false);
+												}}
+											/>
+										</ActionIcon>
+									</Flex>
+								</Input.Wrapper>
+							</Popover.Dropdown>
+						</Popover>
 					</div>
 				</Handle>
 			))}

@@ -6,7 +6,6 @@ export const Templates = [
 		name: 'Summarize Web Content',
 		category: IWorkflowCategory.Automation,
 		description: 'Summarize web content',
-		lastModified: '2024-06-05 04:46 PM',
 		data: {
 			nodes: [
 				{

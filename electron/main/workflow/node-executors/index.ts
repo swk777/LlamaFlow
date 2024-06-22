@@ -9,6 +9,7 @@ import { executeKnowledgeBase } from './knowledge-base';
 import { executeOllama } from './ollama';
 import { executeOpenAI } from './openAI';
 import { saveToFile } from './save-to-file';
+import { executeSplitText } from './split-text';
 import { executeTextInput } from './text-input';
 import { executeURLLoader } from './url-loader';
 import { executeUserInput } from './user-input';
@@ -31,4 +32,5 @@ export const InternalNodeletExecutor = {
 	[InternalNodelets.YoutubeLoader]: { isAsync: true, executor: executeYoutubeLoader },
 	[InternalNodelets.Email]: { isAsync: false, executor: executeEmail },
 	[InternalNodelets.DeepSeek]: { isAsync: true, executor: executeDeepSeek },
+	[InternalNodelets.SplitText]: { isAsync: false, executor: executeSplitText },
 };

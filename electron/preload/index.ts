@@ -39,7 +39,7 @@ contextBridge.exposeInMainWorld('ipcRenderer', {
 	saveConversation: (sessionId: string, conversation: IConversation) =>
 		ipcRenderer.invoke('save-conversation', { sessionId, conversation }),
 	openDialog: () => ipcRenderer.invoke('open-directory-dialog'),
-
+	openNewWindow: () => ipcRenderer.send('open-modal'),
 	on(...args: Parameters<typeof ipcRenderer.on>) {
 		const [channel, listener] = args;
 		return ipcRenderer.on(channel, (event, ...args) => listener(event, ...args));

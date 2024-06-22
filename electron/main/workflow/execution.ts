@@ -24,7 +24,7 @@ const getNewExecution = (workflowId: string) => ({
 	createDate: new Date().toLocaleString(),
 	updateDate: new Date().toLocaleString(),
 	nodeContext: {},
-	globalContext: {},
+	globalContext: { variables: {} },
 });
 const getNewConversationExecution = (workflowId: string, message: string) => ({
 	executionId: uuidv4(),
@@ -32,7 +32,7 @@ const getNewConversationExecution = (workflowId: string, message: string) => ({
 	createDate: new Date().toLocaleString(),
 	updateDate: new Date().toLocaleString(),
 	nodeContext: {},
-	globalContext: { userInput: message },
+	globalContext: { userInput: message, variables: {} },
 });
 const getInitialConversation = (sessionId: string, workflowId: string, message: string): IConversation => ({
 	sessionId,
@@ -232,4 +232,14 @@ async function executeNode(node: IDAGNode, nodelets: INodelet[], integrations: I
 	} else {
 		executeCustom(executorContext);
 	}
+	postProcess(node, nodelet, execution, context);
+}
+
+function postProcess(node: IDAGNode, nodelet: INodelet, execution: IExecution, context: IContext) {
+	const { variables = {} } = node.data.config;
+	nodelet.outputs.forEach((output) => {
+		if (variables[output.id]) {
+			execution.globalContext.variables[variables[output.id]] = execution.nodeContext[node.id].outputs[output.id];
+		}
+	});
 }

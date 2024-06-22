@@ -13,6 +13,13 @@ export const Integrations: IIntegration[] = [
 				placeholder: 'sk-xxxx',
 				required: true,
 			},
+			{
+				label: 'Organization:',
+				fieldName: 'organization',
+				type: ConfigurationType.INPUT,
+				placeholder: '',
+				required: false,
+			},
 		],
 		config: {},
 	},

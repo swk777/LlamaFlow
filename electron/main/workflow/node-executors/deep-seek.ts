@@ -25,7 +25,6 @@ export async function executeDeepSeek({
 	});
 	const completeMessages = messages.filter((message) => message.role !== 'system').slice(-(parseInt(contextCount) * 2 + 1));
 	(systemPrompt || '').trim() && completeMessages.unshift({ role: 'system', content: systemPrompt });
-	console.log(model);
 
 	const chatCompletion = await openai.chat.completions.create({
 		messages: completeMessages,

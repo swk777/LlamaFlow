@@ -5,36 +5,46 @@ import { useState } from 'react';
 type Props = {
 	showElement: JSX.Element;
 	initialName: string;
+	className?: string;
 	onChange: (v: string) => void;
+	style?: React.CSSProperties;
 };
 
-export default function EditableText({ showElement, initialName, onChange }: Props) {
+export default function EditableText({ showElement, initialName, onChange, className, style }: Props) {
 	const [isEditingName, setIsEditingName] = useState(false);
-	const [name, setName] = useState(initialName);
 	return (
-		<Group gap={0} className="flex-1">
+		<Group
+			gap={0}
+			className={`flex-1 ${className}`}
+			onClick={(e) => {
+				e.stopPropagation();
+			}}
+			style={style}
+		>
 			{isEditingName ? (
 				<FocusTrap active={isEditingName}>
 					<TextInput
 						size="xs"
-						w={144}
-						value={name}
-						onChange={(e) => setName(e.target.value)}
-						onBlur={() => {
+						maw={144}
+						defaultValue={initialName}
+						className="w-full"
+						onBlur={(e) => {
 							setIsEditingName(false);
-							onChange(name);
+							onChange(e.target.value);
 						}}
 					></TextInput>
 				</FocusTrap>
 			) : (
 				showElement
 			)}
-			<IconPencil
-				className="text-primary h-4 cursor-pointer"
-				onClick={() => {
-					setIsEditingName(true);
-				}}
-			/>
+			{!isEditingName && (
+				<IconPencil
+					className="text-primary h-4 cursor-pointer"
+					onClick={() => {
+						setIsEditingName(true);
+					}}
+				/>
+			)}
 		</Group>
 	);
 }
