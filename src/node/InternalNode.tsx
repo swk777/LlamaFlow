@@ -33,7 +33,7 @@ export default function InternalNode({ data, id, ...others }: Props) {
 				ref={ref}
 			>
 				<div className="w-full h-3 shrink-0" style={{ backgroundColor: getRandomColor(nodelet?.id ?? '') }}></div>
-				<Flex direction={'column'} className="flex-1 overflow-hidden" align={'center'} justify={'center'} pos="relative">
+				<Flex direction={'column'} className="flex-1 overflow-hidden" align={'center'} justify={'center'}>
 					<LoadingOverlay
 						visible={hovered && hasConfiguration}
 						loaderProps={{
@@ -56,50 +56,19 @@ export default function InternalNode({ data, id, ...others }: Props) {
 					initialName={data.label}
 					onChange={async (v: string) => {
 						const nodes = getNodes();
-						console.log(
-							getNewState(nodes, (draft) => {
-								const currentNodeIndex = draft.findIndex((node) => node.id === id);
-								const currentNode = nodes[currentNodeIndex];
-								console.log(v);
-								console.log([
-									...nodes.slice(0, currentNodeIndex),
-									{
-										...currentNode,
-										data: { ...currentNode?.data, label: v },
-									},
-									...nodes.slice(currentNodeIndex + 1),
-								]);
-								setNodes([
-									...nodes.slice(0, currentNodeIndex),
-									{
-										...currentNode,
-										data: { ...currentNode?.data, label: v },
-									},
-									...nodes.slice(currentNodeIndex + 1),
-								] as Node[]);
-							}) as Node<any>[],
-						);
 						setNodes(
 							getNewState(nodes, (draft) => {
 								const currentNodeIndex = draft.findIndex((node) => node.id === id);
 								const currentNode = nodes[currentNodeIndex];
 								console.log(currentNode);
 								currentNode.data.label = v;
-								// setNodes([
-								// 	...nodes.slice(0, currentNodeIndex),
-								// 	{
-								// 		...currentNode,
-								// 		data: { ...currentNode?.data, label: v },
-								// 	},
-								// 	...nodes.slice(currentNodeIndex + 1),
-								// ] as Node[]);
 							}) as Node<any>[],
 						);
 					}}
-					className="absolute max-w-80 truncate"
-					style={{ bottom: -32 }}
+					className="absolute w-36 flex-row flex-nowrap"
+					style={{ bottom: -34 }}
 					showElement={
-						<Text fz="14" key={data?.label} className="flex-1 truncate cursor-pointer hover:text-primary text-left " maw={144} fw={600}>
+						<Text fz="13" key={data?.label} className="truncate cursor-pointer hover:text-primary text-left " maw={144} fw={600}>
 							{data?.label}
 						</Text>
 					}

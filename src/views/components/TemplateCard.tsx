@@ -1,7 +1,7 @@
 import { AppContext } from '@/context/AppContext';
 import InternalNode from '@/node/InternalNode';
 import { ITemplate } from '@/type/templates';
-import { Button, Card, Flex, Modal, Text } from '@mantine/core';
+import { Button, Card, Flex, Modal, Text, Tooltip } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 import { IconFiles, IconPhoto } from '@tabler/icons-react';
 import { format } from 'date-fns';
@@ -25,14 +25,16 @@ export function TemplateCard({ template }: Props) {
 	return (
 		<>
 			<Card withBorder padding="lg" className={classes.card} miw={250}>
-				<Flex justify="left" gap="xs">
-					<IconFiles className="text-primary" />
-					<Text fw={600} truncate="end">
-						{template.name}
-					</Text>
+				<Flex justify="left">
+					<IconFiles className="text-primary mr-1" />
+					<Tooltip label={template.name}>
+						<Text fw={600} truncate>
+							{template.name}
+						</Text>
+					</Tooltip>
 				</Flex>
 				<Text mt="sm" mb="xs" c="dimmed" fz="xs" className="text-left" ml="6">
-					{template.description || ''}
+					{template.description || '-'}
 				</Text>
 				<Card.Section className={classes.footer}>
 					<Button leftSection={<IconPhoto size={14} />} variant="default" w={100} onClick={open}>

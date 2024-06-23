@@ -15,7 +15,7 @@ export default function EditableText({ showElement, initialName, onChange, class
 	return (
 		<Group
 			gap={0}
-			className={`flex-1 ${className}`}
+			className={`flex-1 ${className} justify-center `}
 			onClick={(e) => {
 				e.stopPropagation();
 			}}
@@ -39,7 +39,7 @@ export default function EditableText({ showElement, initialName, onChange, class
 			)}
 			{!isEditingName && (
 				<IconPencil
-					className="text-primary h-4 cursor-pointer"
+					className="text-primary h-4 cursor-pointer shrink-0"
 					onClick={() => {
 						setIsEditingName(true);
 					}}

@@ -202,6 +202,7 @@ function FlowEdit() {
 						onDrop={onDrop}
 						onInit={setReactFlowInstance}
 						onDragOver={onDragOver}
+						defaultViewport={{ x: 100, y: 0, zoom: 0.8 }}
 					>
 						<MiniMap />
 						<Controls />
