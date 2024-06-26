@@ -1,17 +1,17 @@
 import { AppContext } from '@/context/AppContext';
 import { getNewState } from '@/utils/state';
-import { ActionIcon, CloseButton, Flex, Input, LoadingOverlay, Popover, Text } from '@mantine/core';
+import { ActionIcon, CloseButton, Flex, HoverCard, Input, LoadingOverlay, Popover, Text } from '@mantine/core';
 import { useHover } from '@mantine/hooks';
 import _get from 'lodash/get';
 import { useContext, useState } from 'react';
 
 import { getRandomColor } from '@/utils/utils';
 import EditableText from '@/views/components/EditableText';
-import { IconCheck, IconCirclePlus, IconSettings } from '@tabler/icons-react';
+import { IconCheck, IconCirclePlus, IconExclamationCircle, IconSettings } from '@tabler/icons-react';
 import { Handle, Node, Position, useReactFlow } from 'reactflow';
 type Props = { data: any; id: string };
 
-export default function InternalNode({ data, id, ...others }: Props) {
+export default function InternalNode({ data, id }: Props) {
 	const { nodelets } = useContext(AppContext);
 	const { setNodes, getNodes } = useReactFlow();
 	const [opened, setOpened] = useState(false);
@@ -60,7 +60,6 @@ export default function InternalNode({ data, id, ...others }: Props) {
 							getNewState(nodes, (draft) => {
 								const currentNodeIndex = draft.findIndex((node) => node.id === id);
 								const currentNode = nodes[currentNodeIndex];
-								console.log(currentNode);
 								currentNode.data.label = v;
 							}) as Node<any>[],
 						);
@@ -68,9 +67,24 @@ export default function InternalNode({ data, id, ...others }: Props) {
 					className="absolute w-36 flex-row flex-nowrap"
 					style={{ bottom: -34 }}
 					showElement={
-						<Text fz="13" key={data?.label} className="truncate cursor-pointer hover:text-primary text-left " maw={144} fw={600}>
-							{data?.label}
-						</Text>
+						<Flex direction={'row'} align={'center'} justify={'center'} maw={144}>
+							{(data.error || []).length !== 0 && (
+								<HoverCard shadow="md">
+									<HoverCard.Target>
+										<IconExclamationCircle color="red" className="h-4" />
+									</HoverCard.Target>
+									<HoverCard.Dropdown style={{ pointerEvents: 'none' }}>
+										{data.error.map((err) => (
+											<Text size="sm">{`・ ${err.type} field "${err.fieldName}" is required`}</Text>
+										))}
+									</HoverCard.Dropdown>
+								</HoverCard>
+							)}
+
+							<Text fz="13" key={data?.label} className="truncate cursor-pointer hover:text-primary text-left " fw={600}>
+								{data?.label}
+							</Text>
+						</Flex>
 					}
 				/>
 			</Flex>

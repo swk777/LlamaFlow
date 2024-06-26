@@ -10,6 +10,7 @@ import { Edge, Node, ReactFlowJsonObject } from 'reactflow';
 import { v4 as uuidv4 } from 'uuid';
 import { IConversation, IExecution } from '../../../src/type/conversation';
 import { IKnowledgeBase } from '../../../src/type/knowledgeBase';
+import ExecutionError from '../error/ExecutionError';
 import { InternalNodeletExecutor } from './node-executors';
 import { executeCustom } from './node-executors/custom';
 import { getNodeInputObj } from './utils';
@@ -24,7 +25,7 @@ const getNewExecution = (workflowId: string) => ({
 	createDate: new Date().toLocaleString(),
 	updateDate: new Date().toLocaleString(),
 	nodeContext: {},
-	globalContext: { variables: {} },
+	globalContext: { variables: {}, errors: [] },
 });
 const getNewConversationExecution = (workflowId: string, message: string) => ({
 	executionId: uuidv4(),
@@ -190,7 +191,14 @@ async function executeDAG(
 		try {
 			await executeNode(currentNode, nodelets, integrations, execution, context);
 		} catch (e) {
-			console.log(e);
+			if (e instanceof ExecutionError) {
+				console.log('error');
+				// execution.globalContext = { ...execution.globalContext, error: { id: e.id, message: e.message } };
+				execution.globalContext.errors.push({ id: e.id, message: e.message, nodeName: currentNode.data.label });
+				// break;
+			} else {
+				console.log(e);
+			}
 		}
 
 		currentNode.nextNodes.forEach((nextNode: IDAGNode) => {

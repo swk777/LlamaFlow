@@ -2,7 +2,8 @@ import { AppContext } from '@/context/AppContext';
 import Configuration from '@/node/config/Configuration';
 import { NodeletCategory } from '@/type/nodelet';
 import { IWorkflow } from '@/type/workflow';
-import { Button, Card, Stack, Text } from '@mantine/core';
+import { Alert, Button, Card, Group, Stack, Text } from '@mantine/core';
+import { IconInfoCircle } from '@tabler/icons-react';
 import { useContext, useMemo, useState } from 'react';
 import { Node } from 'reactflow';
 
@@ -12,7 +13,7 @@ export default function RunAutomation({ workflow }: Props) {
 	const { nodelets } = useContext(AppContext);
 	const [loading, setLoading] = useState(false);
 	const [inputConfig, setInputConfig] = useState({});
-	const [displayMessages, setDisplayMessages] = useState(null);
+	const [execution, setExecution] = useState(null);
 	const inputNodes = useMemo(
 		() =>
 			(workflow?.data?.nodes || []).filter((node) => {
@@ -46,7 +47,7 @@ export default function RunAutomation({ workflow }: Props) {
 				onClick={async () => {
 					setLoading(true);
 					try {
-						setDisplayMessages(await window.ipcRenderer.runAutomation(workflow?.id, inputConfig, workflow));
+						setExecution(await window.ipcRenderer.runAutomation(workflow?.id, inputConfig, workflow));
 					} catch (error) {
 						console.log(error);
 					}
@@ -55,7 +56,22 @@ export default function RunAutomation({ workflow }: Props) {
 			>
 				Run
 			</Button>
-			{Object.values(displayMessages || []).map((res: { name: string; content: string }) => {
+			{(execution?.globalContext?.errors || []).length !== 0 && (
+				<Alert variant="light" color="red" title="Execution Error" icon={<IconInfoCircle />}>
+					{(execution?.globalContext?.errors || []).map((err) => {
+						return (
+							<Group gap="sm" key={err?.nodeName + err?.message}>
+								<Text fw={600}>{err?.nodeName}:</Text>
+								<Text size="md">{err?.message ?? ''}</Text>
+							</Group>
+						);
+					})}
+				</Alert>
+			)}
+			{execution && (execution?.globalContext?.errors || []).length === 0 && (
+				<Alert className="p-1" variant="light" color="green" title="Execute Successfully" icon={<IconInfoCircle />}></Alert>
+			)}
+			{Object.values(execution?.globalContext?.outputMessage || []).map((res: { name: string; content: string }) => {
 				return (
 					<Card shadow="sm" padding="xs" radius="xs" withBorder>
 						<Text className="text-primary" fw={600} size="sm">

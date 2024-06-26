@@ -95,7 +95,7 @@ export function initStorage(ipcMain, workspacePath) {
 				await db.read();
 				const { workflowId, inputs, workflow } = post;
 				const execution = await runAutomation(workflowId, inputs, workflow, db);
-				return execution.globalContext?.outputMessage;
+				return execution;
 			});
 			ipcMain.handle('new-conversation', async (event, post) => {
 				await db.read();

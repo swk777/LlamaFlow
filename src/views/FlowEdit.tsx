@@ -19,6 +19,7 @@ import ReactFlow, {
 
 import { getInitialWorkflow } from '@/constants/workflow';
 import { AppContext } from '@/context/AppContext';
+import useValidate from '@/hooks/useValidate';
 import InternalNode from '@/node/InternalNode';
 import { IWorkflow, IWorkflowCategory } from '@/type/workflow';
 import { buildDefaultConfig } from '@/utils/utils';
@@ -41,7 +42,6 @@ function FlowEdit() {
 	const [chatOpened, setChatOpened] = useState(false);
 	const [inputsModalOpened, { open, close }] = useDisclosure(false);
 	const { getEdges, getNodes } = useReactFlow();
-
 	const { nodelets, workflows, updateWorkflow, integrations, refreshWorkflows } = useContext(AppContext);
 	const [reactFlowInstance, setReactFlowInstance] = useState<ReactFlowInstance>();
 	const reactFlowWrapper = useRef(null);
@@ -54,7 +54,7 @@ function FlowEdit() {
 	const [workflowName, setWorkflowName] = useState(workflow?.name);
 	const integration = integrations.find((intgn) => intgn.id === selectedNode?.data.nodeletId);
 	const workflowNodelets = useMemo(() => getNodeletsByCategory(nodelets, category), [nodelets, category]);
-
+	const validatesResult = useValidate(nodes, nodelets, integrations);
 	const onDrop: React.DragEventHandler<HTMLDivElement> = useCallback(
 		(event) => {
 			event.preventDefault();
@@ -161,9 +161,6 @@ function FlowEdit() {
 							if (category === IWorkflowCategory.Chatbot) {
 								setChatOpened(true);
 							} else {
-								// window.ipcRenderer.executeAutomation(workflow?.id, workflow).then(() => {
-								// 	// refreshConversations();
-								// });
 								open();
 							}
 						}}
@@ -187,6 +184,10 @@ function FlowEdit() {
 							return {
 								...node,
 								type: 'internalNodelet',
+								data: {
+									...node.data,
+									error: validatesResult.filter((result) => result.id === node.id),
+								},
 							};
 						})}
 						edges={edges}

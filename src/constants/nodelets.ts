@@ -91,6 +91,7 @@ export const Nodelets: INodelet[] = [
 				name: 'Knowledge Base',
 				fieldName: 'knowledgeBase',
 				label: 'string',
+				required: true,
 				isDisplayed: true,
 				displayPath: 'name',
 				type: ConfigurationType.KNOWLEDGE_BASE,
@@ -521,7 +522,8 @@ export const Nodelets: INodelet[] = [
 				type: 'SELECT',
 				placeholder: '',
 				isDisplayed: true,
-				defaultValue: 'TXT',
+				defaultValue: 'txt',
+				required: true,
 				misc: {
 					values: [
 						{ value: 'txt', label: 'TXT' },
@@ -535,8 +537,8 @@ export const Nodelets: INodelet[] = [
 				fieldName: 'fileName',
 				label: 'File Name:',
 				type: 'INPUT',
-				placeholder: 'Enter File Name',
 				required: true,
+				placeholder: 'Enter File Name',
 			},
 			{
 				name: 'folderPath',

@@ -1,11 +1,13 @@
 import OpenAI from 'openai';
 import { ChatCompletionMessageParam } from 'openai/resources';
+import ExecutionError from '../../error/ExecutionError';
 import { NodeletExecuteContext } from '../type';
 import { getContextPrompt } from '../utils';
 
 export async function executeOpenAI({
 	nodeContext = {},
 	nodeConfig,
+	node,
 	integrationConfig,
 	nodeInputs,
 	globalContext,
@@ -18,6 +20,10 @@ export async function executeOpenAI({
 	const openaiParams: { apiKey: string; organization?: string } = {
 		apiKey: integrationConfig.apiKey,
 	};
+	console.log(openaiParams.apiKey);
+	if (!openaiParams.apiKey) {
+		throw new ExecutionError(node.id, 'OpenAI API key is required');
+	}
 	if (integrationConfig.organization) {
 		openaiParams.organization = integrationConfig.organization;
 	}
