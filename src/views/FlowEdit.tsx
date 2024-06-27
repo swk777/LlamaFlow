@@ -187,6 +187,7 @@ function FlowEdit() {
 								data: {
 									...node.data,
 									error: validatesResult.filter((result) => result.id === node.id),
+									onClick: onNodeClick,
 								},
 							};
 						})}

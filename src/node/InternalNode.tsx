@@ -1,11 +1,12 @@
 import { AppContext } from '@/context/AppContext';
 import { getNewState } from '@/utils/state';
-import { ActionIcon, CloseButton, Flex, HoverCard, Input, LoadingOverlay, Popover, Text } from '@mantine/core';
-import { useHover } from '@mantine/hooks';
+import { ActionIcon, CloseButton, Flex, Group, HoverCard, Input, LoadingOverlay, Modal, Popover, Text } from '@mantine/core';
+import { useDisclosure, useHover } from '@mantine/hooks';
 import _get from 'lodash/get';
 import { useContext, useState } from 'react';
 
 import { getRandomColor } from '@/utils/utils';
+import { Integration } from '@/views/Integration';
 import EditableText from '@/views/components/EditableText';
 import { IconCheck, IconCirclePlus, IconExclamationCircle, IconSettings } from '@tabler/icons-react';
 import { Handle, Node, Position, useReactFlow } from 'reactflow';
@@ -23,6 +24,8 @@ export default function InternalNode({ data, id }: Props) {
 	const displayContent =
 		displayAttr && _get(data?.config, `${displayAttr.fieldName}${displayAttr.displayPath ? '.' + displayAttr.displayPath : ''}`);
 	const { inputs = [], outputs = [] } = nodelet || {};
+	const [integrationOpened, { open, close }] = useDisclosure(false);
+
 	return (
 		<>
 			<Flex
@@ -32,6 +35,20 @@ export default function InternalNode({ data, id }: Props) {
 				justify={'start'}
 				ref={ref}
 			>
+				<CloseButton
+					className="absolute"
+					size="sm"
+					style={{ top: -2, right: -2, zIndex: 1000, visibility: hovered ? 'visible' : 'hidden' }}
+					onClick={(e) => {
+						e.stopPropagation();
+						setNodes(
+							getNewState(getNodes(), (draft) => {
+								return draft.filter((node) => node.id !== id);
+							}) as Node<any>[],
+						);
+					}}
+				/>
+
 				<div className="w-full h-3 shrink-0" style={{ backgroundColor: getRandomColor(nodelet?.id ?? '') }}></div>
 				<Flex direction={'column'} className="flex-1 overflow-hidden" align={'center'} justify={'center'}>
 					<LoadingOverlay
@@ -73,9 +90,30 @@ export default function InternalNode({ data, id }: Props) {
 									<HoverCard.Target>
 										<IconExclamationCircle color="red" className="h-4" />
 									</HoverCard.Target>
-									<HoverCard.Dropdown style={{ pointerEvents: 'none' }}>
+									<HoverCard.Dropdown>
 										{data.error.map((err) => (
-											<Text size="sm">{`・ ${err.type} field "${err.fieldName}" is required`}</Text>
+											<Group
+												onClick={(e) => {
+													e.stopPropagation();
+												}}
+											>
+												<Text size="sm">{`・ ${err.type} field "${err.fieldName}" is required`}</Text>
+												<ActionIcon variant="subtle" aria-label="Settings" size="sm">
+													<IconSettings
+														size={15}
+														onClick={(e) => {
+															if (err.type === 'Config') {
+																const nodes = getNodes();
+																const currentNodeIndex = nodes.findIndex((node) => node.id === id);
+																const currentNode = nodes[currentNodeIndex];
+																data.onClick(e, currentNode);
+															} else if (err.type === 'Integration') {
+																open();
+															}
+														}}
+													/>
+												</ActionIcon>
+											</Group>
 										))}
 									</HoverCard.Dropdown>
 								</HoverCard>
@@ -100,6 +138,7 @@ export default function InternalNode({ data, id }: Props) {
 						height: '10px',
 						backgroundColor: 'white',
 						border: '1px solid hsl(208 80% 52%)',
+						zIndex: 1000,
 					}}
 				>
 					<div
@@ -126,6 +165,7 @@ export default function InternalNode({ data, id }: Props) {
 						height: '10px',
 						backgroundColor: 'white',
 						border: '1px solid hsl(208 80% 52%)',
+						zIndex: 1000,
 					}}
 					onClick={(e) => {
 						e.stopPropagation();
@@ -144,7 +184,11 @@ export default function InternalNode({ data, id }: Props) {
 						{output.id}
 						<Popover width={200} position="top" withArrow shadow="md" opened={opened} closeOnClickOutside>
 							<Popover.Target>
-								<IconCirclePlus size="13" className="text-zinc-600 cursor-pointer ml-0.5" onClick={() => setOpened(true)} />
+								<IconCirclePlus
+									size="13"
+									className={` cursor-pointer ml-0.5 ${!variables[output.id] ? 'text-zinc-600' : 'text-primary'}`}
+									onClick={() => setOpened(true)}
+								/>
 							</Popover.Target>
 							<Popover.Dropdown>
 								<Input.Wrapper label="Global Variable" description="use '{name}' as a placeholder in prompts">
@@ -184,6 +228,9 @@ export default function InternalNode({ data, id }: Props) {
 					</div>
 				</Handle>
 			))}
+			<Modal opened={integrationOpened} size="lg" onClose={close} title="Integration" onClick={(e) => e.stopPropagation()}>
+				<Integration id={nodelet.id} />
+			</Modal>
 		</>
 	);
 }
