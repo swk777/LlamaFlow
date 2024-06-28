@@ -111,7 +111,7 @@ export const Templates = [
 					},
 					data: {
 						label: 'Translation Content',
-						nodeletId: 'TextInput',
+						nodeletId: 'TextAreaInput',
 						config: {},
 					},
 					width: 96,
@@ -131,7 +131,7 @@ export const Templates = [
 						y: 710.0528351795367,
 					},
 					data: {
-						label: 'sourceLang',
+						label: 'source language',
 						nodeletId: 'TextInput',
 						config: {
 							variables: {
@@ -156,7 +156,7 @@ export const Templates = [
 						y: 709.2426079491609,
 					},
 					data: {
-						label: 'targetLang',
+						label: 'target language',
 						nodeletId: 'TextInput',
 						config: {
 							variables: {

@@ -67,7 +67,6 @@ export async function executeOllama({
 			returnCompletions.push(await completion);
 		}
 		const returnMessages = returnCompletions.map((response) => response.message.content).join('');
-		console.log(returnMessages);
 		setNodeContext &&
 			setNodeContext({
 				...nodeContext,

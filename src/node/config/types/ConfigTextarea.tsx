@@ -40,7 +40,6 @@ function ConfigTextarea(props: IConfigBaseProps<IConfigTextarea>) {
 				autosize
 				minRows={4}
 				maxRows={10}
-				maxLength={2000}
 			/>
 		</Input.Wrapper>
 	);

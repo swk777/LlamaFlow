@@ -26,7 +26,6 @@ export function Integration({ id }: { id?: string }) {
 	const { integrations } = useContext(AppContext);
 	const { integrationId = integrations[0].id } = useParams();
 	const links = getIntegrationsLinksData(integrations, integrationId).map((item) => <LinksGroup {...item} key={item.label} />);
-	console.log(links);
 	return (
 		<Flex direction={'row'}>
 			{!id && (

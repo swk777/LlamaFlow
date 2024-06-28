@@ -19,6 +19,7 @@ import ReactFlow, {
 
 import { getInitialWorkflow } from '@/constants/workflow';
 import { AppContext } from '@/context/AppContext';
+import { WorkflowContextProvider } from '@/context/WorkflowContext';
 import useValidate from '@/hooks/useValidate';
 import InternalNode from '@/node/InternalNode';
 import { IWorkflow, IWorkflowCategory } from '@/type/workflow';
@@ -93,7 +94,7 @@ function FlowEdit() {
 	const onConnect = useCallback((params: Edge | Connection) => setEdges((eds) => addEdge(params, eds)), [setEdges]);
 	const selectedNodelet = useMemo(() => nodelets.find((nodelet) => nodelet.id === selectedNode?.data.nodeletId), [selectedNode]);
 
-	const onNodeClick = useCallback((_: MouseEvent, node: Node) => {
+	const onNodeClick = useCallback((e: MouseEvent, node: Node) => {
 		setSelectedNode(node);
 	}, []);
 	useEffect(() => {
@@ -104,172 +105,172 @@ function FlowEdit() {
 		}
 	}, [selectedNode]);
 	return (
-		<Flex className="flex-col flex-1">
-			<Flex className="flex-row justify-between mx-10 my-5 align-middle">
-				<Group>
-					{isEditingName ? (
-						<FocusTrap active={isEditingName}>
-							<TextInput
-								size="xs"
-								value={workflowName}
-								onChange={(e) => setWorkflowName(e.target.value)}
-								onBlur={() => {
-									setIsEditingName(false);
-								}}
-							></TextInput>
-						</FocusTrap>
-					) : (
-						<div>{workflowName}</div>
-					)}
-					<IconPencil
-						className="text-primary h-4 cursor-pointer"
-						onClick={() => {
-							setIsEditingName(true);
-						}}
-					/>
-				</Group>
-				<Flex direction={'row'} gap="md">
-					<Button
-						size="sm"
-						className="h-7 gap-1"
-						onClick={() => {
-							updateWorkflow &&
-								updateWorkflow(workflowId, {
-									...workflow,
-									name: workflowName,
-									data: { nodes: getNodes(), edges: getEdges() },
-									category,
-								} as IWorkflow).then(() => {
-									refreshWorkflows();
-									notifications.show({
-										title: 'Save Successfully',
-										message: '',
-										icon: <IconCheck />,
-										color: 'teal',
-										autoClose: 1000,
-									});
-								});
-						}}
-					>
-						<IconDeviceFloppy className="h-3.5 w-3.5" />
-						<span className="sr-only sm:not-sr-only sm:whitespace-nowrap">Save</span>
-					</Button>
-					<Button
-						size="sm"
-						className="h-7 gap-1"
-						onClick={() => {
-							if (category === IWorkflowCategory.Chatbot) {
-								setChatOpened(true);
-							} else {
-								open();
-							}
-						}}
-					>
-						{category === IWorkflowCategory.Chatbot ? (
-							<IconBrandHipchat className="h-3.5 w-3.5" />
+		<WorkflowContextProvider onNodeClick={onNodeClick} nodes={nodes} nodelets={nodelets} integrations={integrations} validatesResult={[]}>
+			<Flex className="flex-col flex-1">
+				<Flex className="flex-row justify-between mx-10 my-5 align-middle">
+					<Group>
+						{isEditingName ? (
+							<FocusTrap active={isEditingName}>
+								<TextInput
+									size="xs"
+									value={workflowName}
+									onChange={(e) => setWorkflowName(e.target.value)}
+									onBlur={() => {
+										setIsEditingName(false);
+									}}
+								></TextInput>
+							</FocusTrap>
 						) : (
-							<IconPlayerPlay className="h-3.5 w-3.5" />
+							<div>{workflowName}</div>
 						)}
-						<span className="sr-only sm:not-sr-only sm:whitespace-nowrap">{category === IWorkflowCategory.Chatbot ? 'Chat' : 'Run'}</span>
-					</Button>
+						<IconPencil
+							className="text-primary h-4 cursor-pointer"
+							onClick={() => {
+								setIsEditingName(true);
+							}}
+						/>
+					</Group>
+					<Flex direction={'row'} gap="md">
+						<Button
+							size="sm"
+							className="h-7 gap-1"
+							onClick={() => {
+								updateWorkflow &&
+									updateWorkflow(workflowId, {
+										...workflow,
+										name: workflowName,
+										data: { nodes: getNodes(), edges: getEdges() },
+										category,
+									} as IWorkflow).then(() => {
+										refreshWorkflows();
+										notifications.show({
+											title: 'Save Successfully',
+											message: '',
+											icon: <IconCheck />,
+											color: 'teal',
+											autoClose: 1000,
+										});
+									});
+							}}
+						>
+							<IconDeviceFloppy className="h-3.5 w-3.5" />
+							<span className="sr-only sm:not-sr-only sm:whitespace-nowrap">Save</span>
+						</Button>
+						<Button
+							size="sm"
+							className="h-7 gap-1"
+							onClick={() => {
+								if (category === IWorkflowCategory.Chatbot) {
+									setChatOpened(true);
+								} else {
+									open();
+								}
+							}}
+						>
+							{category === IWorkflowCategory.Chatbot ? (
+								<IconBrandHipchat className="h-3.5 w-3.5" />
+							) : (
+								<IconPlayerPlay className="h-3.5 w-3.5" />
+							)}
+							<span className="sr-only sm:not-sr-only sm:whitespace-nowrap">{category === IWorkflowCategory.Chatbot ? 'Chat' : 'Run'}</span>
+						</Button>
+					</Flex>
 				</Flex>
-			</Flex>
-			<Divider />
-			<div className="flex flex-1 relative">
-				<NodeletsBar nodelets={workflowNodelets} />
-				<Divider orientation="vertical" />
-				<div className="relative flex flex-1 reactflow-wrapper" ref={reactFlowWrapper}>
-					<ReactFlow
-						nodes={nodes.map((node) => {
-							return {
-								...node,
-								type: 'internalNodelet',
-								data: {
-									...node.data,
-									error: validatesResult.filter((result) => result.id === node.id),
-									onClick: onNodeClick,
-								},
-							};
-						})}
-						edges={edges}
-						onNodesChange={onNodesChange}
-						onEdgesChange={onEdgesChange}
-						onConnect={onConnect}
-						className="absolute bottom-0 left-0 top-0 right-0"
-						nodeTypes={nodeTypes}
-						onNodeClick={onNodeClick}
-						onPaneClick={() => {
+				<Divider />
+				<div className="flex flex-1 relative">
+					<NodeletsBar nodelets={workflowNodelets} />
+					<Divider orientation="vertical" />
+					<div className="relative flex flex-1 reactflow-wrapper" ref={reactFlowWrapper}>
+						<ReactFlow
+							nodes={nodes.map((node) => {
+								return {
+									...node,
+									type: 'internalNodelet',
+									data: {
+										...node.data,
+									},
+								};
+							})}
+							edges={edges}
+							onNodesChange={onNodesChange}
+							onEdgesChange={onEdgesChange}
+							onConnect={onConnect}
+							className="absolute bottom-0 left-0 top-0 right-0"
+							nodeTypes={nodeTypes}
+							onNodeClick={onNodeClick}
+							onPaneClick={() => {
+								setConfigOpened(false);
+							}}
+							onDrop={onDrop}
+							onInit={setReactFlowInstance}
+							onDragOver={onDragOver}
+							defaultViewport={{ x: 100, y: 0, zoom: 0.8 }}
+						>
+							<MiniMap />
+							<Controls />
+							<Background />
+						</ReactFlow>
+					</div>
+					<Drawer
+						opened={chatOpened}
+						onClose={() => {
+							setChatOpened(false);
+						}}
+						title="Chat"
+						position="right"
+						withOverlay={false}
+						size="sm"
+						styles={{
+							inner: { right: 0, margin: '0.8rem' },
+						}}
+					>
+						<ChatWorkflow
+							workflow={
+								{
+									...workflow,
+									data: reactFlowInstance && reactFlowInstance.toObject(),
+								} as IWorkflow
+							}
+						/>
+					</Drawer>
+					<Drawer
+						opened={configOpened}
+						onClose={() => {
 							setConfigOpened(false);
 						}}
-						onDrop={onDrop}
-						onInit={setReactFlowInstance}
-						onDragOver={onDragOver}
-						defaultViewport={{ x: 100, y: 0, zoom: 0.8 }}
-					>
-						<MiniMap />
-						<Controls />
-						<Background />
-					</ReactFlow>
-				</div>
-				<Drawer
-					opened={chatOpened}
-					onClose={() => {
-						setChatOpened(false);
-					}}
-					title="Chat"
-					position="right"
-					withOverlay={false}
-					size="sm"
-					styles={{
-						inner: { right: 0, margin: '0.8rem' },
-					}}
-				>
-					<ChatWorkflow
-						workflow={
-							{
-								...workflow,
-								data: reactFlowInstance && reactFlowInstance.toObject(),
-							} as IWorkflow
-						}
-					/>
-				</Drawer>
-				<Drawer
-					opened={configOpened}
-					onClose={() => {
-						setConfigOpened(false);
-					}}
-					title={`${selectedNodelet?.name} Configuration`}
-					position="right"
-					withOverlay={false}
-					size="sm"
-					styles={{
-						inner: { right: 0, margin: '0.8rem' },
-					}}
-				>
-					<Configuration
-						key={selectedNodelet?.id}
-						definitions={selectedNodelet?.configDefinitions || []}
-						config={selectedNode?.data.config || {}}
-						integrationConfig={integration?.config}
-						style={{ padding: '20px 0' }}
-						onChange={(config) => {
-							const selectedNodeIndex = nodes.findIndex((node) => node.id === selectedNode?.id);
-							setNodes([
-								...nodes.slice(0, selectedNodeIndex),
-								{
-									...selectedNode,
-									data: { ...selectedNode?.data, config },
-								},
-								...nodes.slice(selectedNodeIndex + 1),
-							] as Node[]);
+						title={`${selectedNodelet?.name} Configuration`}
+						position="right"
+						withOverlay={false}
+						size="sm"
+						styles={{
+							inner: { right: 0, margin: '0.8rem' },
 						}}
-					/>
-				</Drawer>
-				<Modal opened={inputsModalOpened} size="lg" onClose={close} title="Run Automation">
-					<RunAutomation workflow={{ ...workflow, data: { nodes, edges } }} />
-				</Modal>
-			</div>
-		</Flex>
+					>
+						<Configuration
+							key={selectedNodelet?.id}
+							definitions={selectedNodelet?.configDefinitions || []}
+							config={selectedNode?.data.config || {}}
+							integrationConfig={integration?.config}
+							style={{ padding: '20px 0' }}
+							onChange={(config) => {
+								const selectedNodeIndex = nodes.findIndex((node) => node.id === selectedNode?.id);
+								setNodes([
+									...nodes.slice(0, selectedNodeIndex),
+									{
+										...selectedNode,
+										data: { ...selectedNode?.data, config },
+									},
+									...nodes.slice(selectedNodeIndex + 1),
+								] as Node[]);
+							}}
+						/>
+					</Drawer>
+					<Modal opened={inputsModalOpened} size="lg" onClose={close} title="Run Automation">
+						<RunAutomation workflow={{ ...workflow, data: { nodes, edges } }} />
+					</Modal>
+				</div>
+			</Flex>
+		</WorkflowContextProvider>
 	);
 }
 

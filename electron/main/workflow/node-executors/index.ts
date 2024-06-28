@@ -11,6 +11,7 @@ import { executeOpenAI } from './openAI';
 import { saveToFile } from './save-to-file';
 import { executeSplitText } from './split-text';
 import { executeTextInput } from './text-input';
+import { executeTextAreaInput } from './textarea-input';
 import { executeURLLoader } from './url-loader';
 import { executeUserInput } from './user-input';
 import { executeYoutubeLoader } from './youtube-loader';
@@ -18,6 +19,7 @@ import { executeYoutubeLoader } from './youtube-loader';
 export const InternalNodeletExecutor = {
 	[InternalNodelets.UserInput]: { isAsync: false, executor: executeUserInput },
 	[InternalNodelets.TextInput]: { isAsync: false, executor: executeTextInput },
+	[InternalNodelets.TextAreaInput]: { isAsync: false, executor: executeTextAreaInput },
 	[InternalNodelets.OpenAI]: { isAsync: true, executor: executeOpenAI },
 	[InternalNodelets.Ollama]: { isAsync: true, executor: executeOllama },
 	[InternalNodelets.KnowledgeBase]: { isAsync: true, executor: executeKnowledgeBase },

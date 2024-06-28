@@ -5,6 +5,7 @@ import { useDisclosure, useHover } from '@mantine/hooks';
 import _get from 'lodash/get';
 import { useContext, useState } from 'react';
 
+import { WorkflowContext } from '@/context/WorkflowContext';
 import { getRandomColor } from '@/utils/utils';
 import { Integration } from '@/views/Integration';
 import EditableText from '@/views/components/EditableText';
@@ -25,7 +26,8 @@ export default function InternalNode({ data, id }: Props) {
 		displayAttr && _get(data?.config, `${displayAttr.fieldName}${displayAttr.displayPath ? '.' + displayAttr.displayPath : ''}`);
 	const { inputs = [], outputs = [] } = nodelet || {};
 	const [integrationOpened, { open, close }] = useDisclosure(false);
-
+	const { validatesResult, onNodeClick } = useContext(WorkflowContext);
+	const error = validatesResult.filter((result) => result.id === id);
 	return (
 		<>
 			<Flex
@@ -85,17 +87,18 @@ export default function InternalNode({ data, id }: Props) {
 					style={{ bottom: -34 }}
 					showElement={
 						<Flex direction={'row'} align={'center'} justify={'center'} maw={144}>
-							{(data.error || []).length !== 0 && (
+							{(error || []).length !== 0 && (
 								<HoverCard shadow="md">
 									<HoverCard.Target>
 										<IconExclamationCircle color="red" className="h-4" />
 									</HoverCard.Target>
 									<HoverCard.Dropdown>
-										{data.error.map((err) => (
+										{(error || []).map((err) => (
 											<Group
 												onClick={(e) => {
 													e.stopPropagation();
 												}}
+												key={err.type + err.fieldName}
 											>
 												<Text size="sm">{`・ ${err.type} field "${err.fieldName}" is required`}</Text>
 												<ActionIcon variant="subtle" aria-label="Settings" size="sm">
@@ -106,7 +109,7 @@ export default function InternalNode({ data, id }: Props) {
 																const nodes = getNodes();
 																const currentNodeIndex = nodes.findIndex((node) => node.id === id);
 																const currentNode = nodes[currentNodeIndex];
-																data.onClick(e, currentNode);
+																onNodeClick(e, currentNode);
 															} else if (err.type === 'Integration') {
 																open();
 															}

@@ -17,10 +17,9 @@ export async function executeOpenAI({
 	const { model, systemPrompt, temperature, contextCount, prompt } = nodeConfig;
 	const { messages = [] } = nodeContext;
 	const combinedContext = Array.isArray(context) ? context.join('') : context;
-	const openaiParams: { apiKey: string; organization?: string } = {
+	const openaiParams: { apiKey: string; organization?: string; baseURL?: string } = {
 		apiKey: integrationConfig.apiKey,
 	};
-	console.log(openaiParams.apiKey);
 	if (!openaiParams.apiKey) {
 		throw new ExecutionError(node.id, 'OpenAI API key is required');
 	}
@@ -40,7 +39,6 @@ export async function executeOpenAI({
 		});
 		const completeMessages = messages.filter((message) => message.role !== 'system').slice(-(parseInt(contextCount) * 2 + 1));
 		(replacedSystemPrompt || '').trim() && completeMessages.unshift({ role: 'system', content: replacedSystemPrompt });
-
 		const chatCompletion = await openai.chat.completions.create({
 			messages: completeMessages,
 			model,
